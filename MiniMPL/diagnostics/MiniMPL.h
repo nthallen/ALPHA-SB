@@ -60,4 +60,13 @@ class MMPL_UDP {
     char time_string[10];
 };
 
+class MMPL_Send {
+  public:
+    MMPL_Send(const char *hostname, int port);
+    ~MMPL_Send();
+    void transmit(const char *);
+  private:
+    int fd;
+    int port;
+};
 #endif
