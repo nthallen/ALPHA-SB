@@ -1,8 +1,8 @@
-CXXFLAGS=-Wall -I/usr/local/include
-LDFLAGS=-Wl,-rpath -Wl,/usr/local/lib -L/usr/local/lib
+CXXFLAGS=-Wall -I/usr/local/include -g
+LDFLAGS=-Wl,-rpath -Wl,/usr/local/lib -L/usr/local/lib -g
 LIBS=-lsocket -lnort
 .PHONY : all clean
-all : UDPrcrv UDPsend
+all : UDPrcvr UDPsend
 
 UDPrcvr : UDPrcvr.o
 	$(LINK.cc) -o UDPrcvr UDPrcvr.o $(LIBS)

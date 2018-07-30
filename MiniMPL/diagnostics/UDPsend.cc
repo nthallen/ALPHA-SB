@@ -16,35 +16,29 @@ MMPL_Send::MMPL_Send(const char *hostname, int port) {
   struct addrinfo hints, *p;
   int err;
 
+  fd = -1;
   if (port == 0)
-    nl_error( 3, "Invalid port in Bind: 0" );
+    nl_error( 3, "Invalid port in MMPL_Send: 0" );
   snprintf(service, 10, "%d", port);
   this->port = port;
 
   memset(&hints, 0, sizeof(hints));	
-  hints.ai_family = AF_UNSPEC;		// don't care IPv4 or v6
+  hints.ai_family = AF_INET;		// don't care IPv4 or v6
   hints.ai_socktype = SOCK_DGRAM;
   hints.ai_flags = AI_PASSIVE;
 
   err = getaddrinfo(hostname, 
                     service,
                     &hints,
-                    addrs);
+                    &addrs);
   if (err)
-    nl_error( 3, "Bind: getaddrinfo error: %s", gai_strerror(err) );
+    nl_error( 3, "MMPL_Send: getaddrinfo error: %s", gai_strerror(err) );
   if (addrs->ai_next)
     nl_error( 1, "More than one address found for %s:%d", hostname, port);
-  p = results;
+  p = addrs;
   fd = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
   if (fd < 0)
     nl_error( 2, "MMPL_Send socket error: %s", strerror(errno) );
-    
-  // ioflags = fcntl(fd, F_GETFL, 0);
-  // if (ioflags != -1)
-    // ioflags = fcntl(fd, F_SETFL, ioflags | O_NONBLOCK);
-  // if (ioflags == -1)
-    // nl_error( 3, "Error setting O_NONBLOCK on UDP socket: %s",
-      // strerror(errno));
 }
 
 MMPL_Send::~MMPL_Send() {}
@@ -64,7 +58,7 @@ void MMPL_Send::transmit(const char *cmd) {
   msg.MsgType = cmdtype;
   msg.Size = 0;
   nc = sendto(fd, &msg, sizeof(msg), 0,
-            addr, sizeof(struct addrinfo));
+            (const sockaddr *)addrs[0].ai_addr, addrs[0].ai_addrlen);
   // nc = write(fd, &msg, sizeof(msg));
   if (nc < 0) {
     nl_error(2, "Error %d on sendto: %s", errno, strerror(errno));
