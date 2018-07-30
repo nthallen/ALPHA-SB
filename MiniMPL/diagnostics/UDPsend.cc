@@ -13,7 +13,7 @@
 
 MMPL_Send::MMPL_Send(const char *hostname, int port) {
   char service[10];
-  struct addrinfo hints, *results, *p;
+  struct addrinfo hints, *p;
   int err;
 
   if (port == 0)
@@ -29,19 +29,15 @@ MMPL_Send::MMPL_Send(const char *hostname, int port) {
   err = getaddrinfo(hostname, 
                     service,
                     &hints,
-                    &results);
+                    addrs);
   if (err)
     nl_error( 3, "Bind: getaddrinfo error: %s", gai_strerror(err) );
-  for(p=results; p!= NULL; p=p->ai_next) {
-    fd = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
-    if (fd < 0)
-      nl_error( 2, "MMPL_Send socket error: %s", strerror(errno) );
-    else if ( bind(fd, p->ai_addr, p->ai_addrlen) < 0 )
-      nl_error( 2, "MMPL_Send: bind error: %s", strerror(errno) );
-    else break;
-  }
+  if (addrs->ai_next)
+    nl_error( 1, "More than one address found for %s:%d", hostname, port);
+  p = results;
+  fd = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
   if (fd < 0)
-    nl_error(3, "Unable to bind UDP socket");
+    nl_error( 2, "MMPL_Send socket error: %s", strerror(errno) );
     
   // ioflags = fcntl(fd, F_GETFL, 0);
   // if (ioflags != -1)
@@ -67,9 +63,11 @@ void MMPL_Send::transmit(const char *cmd) {
   msg.Sync[1] = 'P';
   msg.MsgType = cmdtype;
   msg.Size = 0;
-  nc = write(fd, &msg, sizeof(msg));
+  nc = sendto(fd, &msg, sizeof(msg), 0,
+            addr, sizeof(struct addrinfo));
+  // nc = write(fd, &msg, sizeof(msg));
   if (nc < 0) {
-    nl_error(2, "Error %d on write: %s", errno, strerror(errno));
+    nl_error(2, "Error %d on sendto: %s", errno, strerror(errno));
   } else if (nc != sizeof(msg)) {
     nl_error(2, "write returned %d, not %d", nc, sizeof(msg));
   }

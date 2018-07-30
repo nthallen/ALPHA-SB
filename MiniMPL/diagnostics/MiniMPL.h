@@ -2,6 +2,10 @@
 #define MINIMPL_H_INCLUDED
 #include <stdint.h>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <arpa/inet.h>
 
 enum MMPL_MsgType {
   Msg_MMPL_NRB=1,
@@ -68,5 +72,6 @@ class MMPL_Send {
   private:
     int fd;
     int port;
+    struct addrinfo *addrs;
 };
 #endif
