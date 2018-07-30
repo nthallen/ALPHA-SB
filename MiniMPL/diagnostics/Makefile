@@ -5,4 +5,4 @@ LIBS=-lsocket -lnort
 UDPrcvr : UDPrcvr.o
 	$(LINK.cc) -o UDPrcvr UDPrcvr.o $(LIBS)
 #	usemsg UDPrcvr UDPrcvroui.c
-UDPrcvr.o : UDPrcvr.cc UDPrcvr.h
+UDPrcvr.o : UDPrcvr.cc MiniMPL.h

@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
@@ -13,7 +14,7 @@
 MMPL_UDP::MMPL_UDP(int port) {
   char service[10];
   struct addrinfo hints, *results, *p;
-  int err, ioflags;
+  int err;
 
   if (port == 0)
     nl_error( 3, "Invalid port in Bind: 0" );

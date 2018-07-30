@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include <time.h>
 
-enum MMPL_MsgType (
+enum MMPL_MsgType {
   Msg_MMPL_NRB=1,
   Msg_MMPL_Status,
   Msg_MMPL_Open=100,
   Msg_MMPL_Start,
-  Msg_MMPL_Stop);
+  Msg_MMPL_Stop};
 
 typedef struct {
   char Sync[2]; // 'M', 'P'
@@ -55,7 +55,7 @@ class MMPL_UDP {
     int fd;
     int port; // may not need it.
     MMPL_Data_t ibuf;
-    MMPL_Cmd_t obuf;
+    MMPL_Command_t obuf;
     struct timespec now;
     char time_string[10];
 };
