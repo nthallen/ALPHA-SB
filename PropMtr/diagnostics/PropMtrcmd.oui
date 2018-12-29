@@ -1,0 +1,5 @@
+<package> PropMtrcmd
+<include> "dasio/appid.h"
+
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("PropMtrcmd", "Propeller Motor Controller Command Server", "V1.0");
