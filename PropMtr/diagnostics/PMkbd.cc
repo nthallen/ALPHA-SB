@@ -23,12 +23,12 @@ int main(int argc, char **argv) {
   sleep(4);
   nl_error(0, "Sending Log command");
   ci_sendcmd(DAS_IO::Cmd_Send, "Log Testing a log command\n");
-  sleep(4);
-  nl_error(0, "Sending unlogged Log command");
-  ci_sendcmd(DAS_IO::Cmd_Send_Quiet, "Log Testing a log command\n");
-  sleep(4);
-  nl_error(0, "Sending Quit syntax error");
-  ci_sendcmd(DAS_IO::Cmd_Send, "Quite\n");
+ //  sleep(4);
+ //  nl_error(0, "Sending unlogged Log command");
+ //  ci_sendcmd(DAS_IO::Cmd_Send_Quiet, "Log Testing a log command\n");
+ //  sleep(4);
+ //  nl_error(0, "Sending Quit syntax error");
+ //  ci_sendcmd(DAS_IO::Cmd_Send, "Quite\n");
   sleep(4);
   nl_error(0, "Sending Quit command");
   ci_sendcmd(DAS_IO::Cmd_Send, "Quit\n");

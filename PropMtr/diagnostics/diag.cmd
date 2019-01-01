@@ -1,3 +1,6 @@
+%INTERFACE <PropMtr>
+%INTERFACE <Quit>
+
 &start
   : &commands Quit * { nl_error(0, "Shutting down"); }
   : &commands &&Exit

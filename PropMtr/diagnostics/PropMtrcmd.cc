@@ -1,5 +1,5 @@
 /* cmdgen output.
- * Fri Dec 28 20:03:56 2018
+ * Tue Jan  1 10:31:43 2019
  */
 /* cmdgen.skel skeleton file */
 #include <stdlib.h>
@@ -41,12 +41,22 @@ static short iomode;
 #define IOF_INTERACTIVE 0x10
 static short ioflags;
 
+#ifdef SERVER
+  cmdif_rd if_PropMtr("PropMtr");
+#endif
+#ifdef SERVER
+  cmdif_rd if_Quit("Quit");
+#endif
 
 #ifdef SERVER
   void cis_interfaces(void) {
+    if_PropMtr.Setup();
+    if_Quit.Setup();
   };
 
   void cis_interfaces_close(void) {
+    if_PropMtr.Shutdown();
+    if_Quit.Shutdown();
   }
 #endif
 
@@ -422,7 +432,7 @@ static int ibufidx;
   int cgc_exit_code = 0;
 #endif
 
-char ci_version[] = "$CGID: PropMtrcmd.cc: Fri Dec 28 20:03:56 2018 $";
+char ci_version[] = "$CGID: PropMtrcmd.cc: Tue Jan  1 10:31:43 2019 $";
 #define VTP_STR vu00
 #define VAR_s 0
 typedef union {
