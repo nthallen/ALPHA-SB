@@ -31,7 +31,7 @@ PMkbd : PMkbd.o /usr/local/lib/libdasio.a
 	$(CXX) -o PMkbd $(CPPFLAGS) $(CXXFLAGS) PMkbd.o $(LDFLAGS)
 
 PROPMTRCOLOBJ = tmsrvr.o
-OBJ += tmsrvr
+OBJ += PropMtrcol
 PropMtrcol : $(PROPMTRCOLOBJ) /usr/local/lib/libdasio.a
 	$(CXX) -o PropMtrcol $(CPPFLAGS) $(CXXFLAGS) $(PROPMTRCOLOBJ) $(LDFLAGS)
 
