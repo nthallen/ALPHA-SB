@@ -4,7 +4,7 @@ LDFLAGS = -L/usr/local/lib -ldasio -lnl -ltm
 all : PropMtrsrvr PMkbd PropMtr PropMtrcol
 OBJ = *.stackdump *.o
 
-PROPMTROBJ = PropMtr.o PropMtroui.o
+PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
 OBJ += PropMtr PropMtroui.cc
 PropMtr : $(PROPMTROBJ) /usr/local/lib/libdasio.a
 	$(CXX) -o PropMtr $(CPPFLAGS) $(CXXFLAGS) $(PROPMTROBJ) $(LDFLAGS)

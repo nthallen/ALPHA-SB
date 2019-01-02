@@ -4,6 +4,7 @@
 #include "dasio/loop.h"
 #include "dasio/quit.h"
 #include "dasio/appid.h"
+#include "pmc.h"
 #include "oui.h"
 #include "nl.h"
 
@@ -16,11 +17,14 @@ int main(int argc, char **argv) {
   Loop ELoop;
   Client Cmd("Cmd", 40, "cmd", "PropMtr");
   TM_data_sndr TM("TM", "PropMtr", (const char *)&PropMtr, sizeof(PropMtr));
-  // Modbus::RTU("RTU", 80, "/dev/ser1");
+  Modbus::RTU MB("RTU", 80, "/dev/ser1");
+  MB.add_device(new Modbus::PMC_dev("PMC1", 0x01));
+  MB.add_device(new Modbus::PMC_dev("PMC2", 0x02));
   Cmd.connect();
   TM.connect();
   ELoop.add_child(&Cmd);
   ELoop.add_child(&TM);
+  ELoop.add_child(&MB);
   nl_error(0, "%s %s Starting", DAS_IO::AppID.fullname, DAS_IO::AppID.rev);
   ELoop.event_loop();
   nl_error(0, "%s Terminating", DAS_IO::AppID.name);
