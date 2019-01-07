@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
   Client Cmd("Cmd", 40, "cmd", "PropMtr");
   TM_data_sndr TM("TM", "PropMtr", (const char *)&PropMtr, sizeof(PropMtr));
   Modbus::RTU MB("RTU", 80, "/dev/ser1");
-  MB.add_device(new Modbus::PMC_dev("PMC1", 0x01));
-  MB.add_device(new Modbus::PMC_dev("PMC2", 0x02));
+  MB.add_device(new Modbus::PMC_dev("PMC1", 0x01, &(PropMtr.Ctrl[0])));
+  MB.add_device(new Modbus::PMC_dev("PMC2", 0x02, &(PropMtr.Ctrl[1])));
   Cmd.connect();
   TM.connect();
   ELoop.add_child(&Cmd);

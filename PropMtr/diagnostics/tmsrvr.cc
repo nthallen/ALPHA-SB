@@ -40,7 +40,9 @@ TM_data_rcvr *my_tm_data_rcvr::new_my_tm_data_rcvr(Authenticator *auth, SubServi
 bool my_tm_data_rcvr::protocol_input() {
   if (nc < sizeof(PropMtr)) return false;
   if (TM_data_rcvr::protocol_input()) return true;
-  nl_error(0, "reg1: %04X", PropMtr.reg1);
+  nl_error(0, "msg_count: %5u %5u CW0:%04X CW1:%04X",
+    PropMtr.Ctrl[0].msg_count, PropMtr.Ctrl[1].msg_count
+    PropMtr.Ctrl[0].CtrlWord0, PropMtr.Ctrl[1].CtrlWord1);
   // nl_error(0, "TO: %s, flags: %d",
     // TO.Expired() ? "Expired" : TO.Set() ? "Pending" : "Clear", flags);
   return false;
