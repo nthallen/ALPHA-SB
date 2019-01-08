@@ -11,7 +11,9 @@ typedef struct __attribute__((__packed__)) {
   int32_t PositionTarget;
   int32_t PositionDemand;
   int32_t SetPoint;
-  uint16_t Status[9];
+  // Status through AI1 must be in this order to match def
+  // in PMC_dev::enqueue_polls()
+  uint16_t Status[7];
   uint16_t BusVoltage;
   uint16_t CurrentDemand;
   uint16_t CurrentMeasured;

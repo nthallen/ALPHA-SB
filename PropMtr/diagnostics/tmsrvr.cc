@@ -40,9 +40,10 @@ TM_data_rcvr *my_tm_data_rcvr::new_my_tm_data_rcvr(Authenticator *auth, SubServi
 bool my_tm_data_rcvr::protocol_input() {
   if (nc < sizeof(PropMtr)) return false;
   if (TM_data_rcvr::protocol_input()) return true;
-  nl_error(0, "msg_count: %5u %5u CW0:%04X CW1:%04X",
-    PropMtr.Ctrl[0].msg_count, PropMtr.Ctrl[1].msg_count
-    PropMtr.Ctrl[0].CtrlWord0, PropMtr.Ctrl[1].CtrlWord1);
+  uint16_t *S = &PropMtr.Ctrl[0].Status[0];
+  nl_error(0, "S:%04X %04X %04X %04X %04X %04X %04X %.2lf",
+    S[0], S[1], S[2], S[3], S[4], S[5], S[6],
+    PropMtr.Ctrl[0].BusVoltage * 1.05 * 195. / 16384);
   // nl_error(0, "TO: %s, flags: %d",
     // TO.Expired() ? "Expired" : TO.Set() ? "Pending" : "Clear", flags);
   return false;
