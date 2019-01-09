@@ -6,7 +6,7 @@
   : &commands &&Exit
   ;
 &&Exit
-  : Exit * {cgc_forwarding = 0; }
+  : Exit * { /* cgc_forwarding = 0; */ }
   ;
 &commands
   :

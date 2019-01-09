@@ -2,4 +2,5 @@
 *.exe
 *.stackdump
 *oui.cc
-
+PropMtrcmd.cc
+dev_*.txt
