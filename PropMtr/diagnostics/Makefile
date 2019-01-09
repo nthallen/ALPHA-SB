@@ -1,7 +1,7 @@
 CXXFLAGS = -g -Wall
 LDFLAGS = -L/usr/local/lib -ldasio -lnl -ltm
 .PHONY : all
-all : PropMtrsrvr PMkbd PropMtr PropMtrcol
+all : PropMtrsrvr PMkbd PropMtr PropMtrcol PropMtrclt
 OBJ = *.stackdump *.o
 
 PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
@@ -34,6 +34,16 @@ PROPMTRCOLOBJ = tmsrvr.o
 OBJ += PropMtrcol
 PropMtrcol : $(PROPMTRCOLOBJ) /usr/local/lib/libdasio.a
 	$(CXX) -o PropMtrcol $(CPPFLAGS) $(CXXFLAGS) $(PROPMTRCOLOBJ) $(LDFLAGS)
+
+PROPMTRCLTOBJ = PropMtrclt.o PropMtrcltoui.o
+OBJ += PropMtrclt PropMtrcltoui.cc
+PropMtrclt.o : PropMtrcmd.cc
+	$(CXX) -c -o PropMtrclt.o $(CPPFLAGS) $(CXXFLAGS) -DCLIENT PropMtrcmd.cc
+PropMtrcltoui.o : PropMtrcltoui.cc
+PropMtrcltoui.cc : PropMtrclt.oui
+	oui -o PropMtrcltoui.cc PropMtrclt.oui
+PropMtrclt : $(PROPMTRCLTOBJ) /usr/local/lib/libdasio.a
+	$(CXX) -o PropMtrclt $(CPPFLAGS) $(CXXFLAGS) $(PROPMTRCLTOBJ) $(LDFLAGS) -lncurses
 
 clean :
 	rm -f $(OBJ)
