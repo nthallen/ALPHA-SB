@@ -12,7 +12,10 @@ namespace DAS_IO::Modbus {
       PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl);
       ~PMC_dev();
       void enqueue_polls();
-      void my_RH_uint16(RTU::modbus_req *req);
+      static void RH_bits(RTU::modbus_req *req, RTU::modbus_device *dev,
+          RTU *MB);
+      static void my_RH_uint32(RTU::modbus_req *req, RTU::modbus_device *dev,
+          RTU *MB);
     protected:
       PMC_t *Ctrl;
   };

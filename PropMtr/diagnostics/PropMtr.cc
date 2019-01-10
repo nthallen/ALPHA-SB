@@ -15,13 +15,13 @@ using namespace DAS_IO;
 int main(int argc, char **argv) {
   oui_init_options(argc, argv);
   Loop ELoop;
-  Client Cmd("Cmd", 40, "cmd", "PropMtr");
   TM_data_sndr TM("TM", "PropMtr", (const char *)&PropMtr, sizeof(PropMtr));
   Modbus::RTU MB("RTU", 80, "/dev/ttyS5");
   MB.setup(115200, 8, 'n', 1, 5, 1);
   MB.flush_input();
   MB.add_device(new Modbus::PMC_dev("PMC1", 63, &(PropMtr.Ctrl[0])));
   // MB.add_device(new Modbus::PMC_dev("PMC2", 0x02, &(PropMtr.Ctrl[1])));
+  PropMtrCmd Cmd(&MB);
   Cmd.connect();
   TM.connect();
   ELoop.add_child(&Cmd);
