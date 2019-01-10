@@ -4,9 +4,13 @@
   #ifdef SERVER
   #include <stdint.h>
   
-  void PMC_coil(uint8_t devID, uint8_t func, uint16_t addr, bool value) {
+  void PMC_state(uint8_t devID, uint8_t state, bool value) {
+    if_PropMtr.Turf("W%02X:0F:00:8:%02X\n", devID, value ? state : 0);
+  }
+  
+  void PMC_coil(uint8_t devID, uint16_t addr, bool value) {
     if_PropMtr.Turf("W%02X:%02X:%04X:%04X:%04X\n",
-      devID, func, addr, 1, value ? 0xFF00 : 0);
+      devID, 15, addr, 1, value ? 1 : 0);
   }
   
   void PMC_setpoint(uint8_t devID, uint16_t addr, double setpoint) {
@@ -37,14 +41,20 @@
   ;
  
 &command
+  : PMC &pmc_drive &pmc_state &pmc_enable * {
+      PMC_state($2, $3, $4);
+    }
   : PMC &pmc_drive &pmc_en_coil &pmc_enable * {
-      PMC_coil($2, 5, $3, $4);
+      PMC_coil($2, $3, $4);
+    }
+  : PMC &pmc_drive &pmc_dis_coil &pmc_enable * {
+      PMC_coil($2, $3, !$4);
     }
   : PMC &pmc_drive Select &pmc_cfg * {
-      PMC_coil($2, 5, 32, $4);
+      PMC_coil($2, 32, $4);
     }
-  : PMC &pmc_drive Velocity Set %f (RPM) * {
-      PMC_setpoint($2, 321, $5 * 48. * 65536.);
+  : PMC &pmc_drive Velocity Set %f (Specify RPM) RPM * {
+      PMC_setpoint($2, 321, $5 * 65536. / 75.);
     }
   : PMC &pmc_drive Move to %f (Counts) * {
       PMC_setpoint($2, 321, $5);
@@ -56,12 +66,20 @@
 # : Right { $0 = 2; }
   ;
 
+&pmc_state <uint8_t>
+# : Drive Bridge { $0 = 1; }
+  : Home Execute { $0 = 0x20; }
+# : Stop { $0 = 0x40; }
+  ;
+&pmc_dis_coil <uint16_t>
+  : Drive Bridge { $0 = 0; }
+  : External Brake { $0 = 64; }
+  ;
+
 &pmc_en_coil <uint16_t>
-  : Drive { $0 = 0; }
-  : Home Execute { $0 = 5; }
+# : Home Execute { $0 = 5; }
   : Stop { $0 = 6; }
   : Reset Events { $0 = 12; }
-  : External Brake { $0 = 64; }
   ;
 
 &pmc_enable <bool>

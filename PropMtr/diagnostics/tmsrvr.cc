@@ -41,11 +41,11 @@ bool my_tm_data_rcvr::protocol_input() {
   if (nc < sizeof(PropMtr)) return false;
   if (TM_data_rcvr::protocol_input()) return true;
   uint16_t *S = &PropMtr.Ctrl[0].Status[0];
-  nl_error(0, "S:%04X %04X %04X %04X %04X %04X %04X %6.2lf %6.2lf %6.1lf %8d %8d %8d",
+  nl_error(0, "S:%04X %04X %04X %04X %04X %04X %04X %6.2lf %8.3lf %8.3lf %8d %8d %8d",
     S[0], S[1], S[2], S[3], S[4], S[5], S[6],
     PropMtr.Ctrl[0].BusVoltage * 1.05 * 195. / 16384,
-    PropMtr.Ctrl[0].VelocityDemand / (48. * 65536.),
-    PropMtr.Ctrl[0].VelocityMeasured / (48. * 65536.),
+    PropMtr.Ctrl[0].VelocityDemand * 75. / 65536.,
+    PropMtr.Ctrl[0].VelocityMeasured * 74. / 65536.,
     PropMtr.Ctrl[0].PositionTarget,
     PropMtr.Ctrl[0].PositionDemand,
     PropMtr.Ctrl[0].PositionMeasured);
