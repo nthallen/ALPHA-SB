@@ -5,7 +5,7 @@
 #include "PropMtr.h"
 #include "dasio/modbus_rtu.h"
 
-namespace DAS_IO::Modbus {
+namespace DAS_IO { namespace Modbus {
 
   class PMC_dev : public RTU::modbus_device {
     public:
@@ -24,6 +24,6 @@ namespace DAS_IO::Modbus {
       PMC_t *Ctrl;
   };
 
-}
+} }
 
 #endif

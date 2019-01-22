@@ -1,5 +1,7 @@
-CXXFLAGS = -g -Wall
-LDFLAGS = -L/usr/local/lib -ldasio -lnl -ltm
+CPPFLAGS += -I/opt/linkeng/am335x/include
+CXXFLAGS += -g -Wall -std=c++11
+# LDFLAGS = -L/usr/local/lib -ldasio -lnl -ltm
+LDFLAGS += -L/opt/linkeng/am335x/lib -ldasio -lnl -ltm
 .PHONY : all
 all : PropMtrsrvr PMkbd PropMtr PropMtrcol PropMtrclt
 OBJ = *.stackdump *.o
@@ -18,6 +20,7 @@ OBJ += PropMtrsrvr PropMtrcmdoui.cc
 PropMtrcmd.cc : diag.cmd
 	cmdgen -o PropMtrcmd.cc diag.cmd
 PropMtrcmdoui.o : PropMtrcmdoui.cc
+	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) PropMtrcmdoui.cc
 PropMtrcmdoui.cc : PropMtrcmd.oui
 	oui -o PropMtrcmdoui.cc PropMtrcmd.oui
 PropMtrsrvr.o : PropMtrcmd.cc
