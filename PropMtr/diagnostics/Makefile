@@ -5,9 +5,11 @@ LDFLAGS += -L/opt/linkeng/am335x/lib -ldasio -lnl -ltm
 .PHONY : all
 all : PropMtrsrvr PMkbd PropMtr PropMtrcol PropMtrclt
 OBJ = *.stackdump *.o
+TGT = root@10.245.83.12:.
 
 PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
 OBJ += PropMtr PropMtroui.cc
+DIST += PropMtr
 PropMtr : $(PROPMTROBJ) /usr/local/lib/libdasio.a
 	$(CXX) -o PropMtr $(CPPFLAGS) $(CXXFLAGS) $(PROPMTROBJ) $(LDFLAGS)
 PropMtr.o : PropMtr.cc
@@ -17,6 +19,7 @@ PropMtroui.cc : PropMtr.oui
 
 PROPMTRCMDOBJ = PropMtrsrvr.o PropMtrcmdoui.o
 OBJ += PropMtrsrvr PropMtrcmdoui.cc
+DIST += PropMtrsrvr
 PropMtrcmd.cc : diag.cmd
 	cmdgen -o PropMtrcmd.cc diag.cmd
 PropMtrcmdoui.o : PropMtrcmdoui.cc
@@ -35,11 +38,13 @@ PMkbd : PMkbd.o /usr/local/lib/libdasio.a
 
 PROPMTRCOLOBJ = tmsrvr.o
 OBJ += PropMtrcol
+DIST += PropMtrcol
 PropMtrcol : $(PROPMTRCOLOBJ) /usr/local/lib/libdasio.a
 	$(CXX) -o PropMtrcol $(CPPFLAGS) $(CXXFLAGS) $(PROPMTRCOLOBJ) $(LDFLAGS)
 
 PROPMTRCLTOBJ = PropMtrclt.o PropMtrcltoui.o
 OBJ += PropMtrclt PropMtrcltoui.cc
+DIST += PropMtrclt
 PropMtrclt.o : PropMtrcmd.cc
 	$(CXX) -c -o PropMtrclt.o $(CPPFLAGS) $(CXXFLAGS) -DCLIENT PropMtrcmd.cc
 PropMtrcltoui.o : PropMtrcltoui.cc
@@ -50,3 +55,6 @@ PropMtrclt : $(PROPMTRCLTOBJ) /usr/local/lib/libdasio.a
 
 clean :
 	rm -f $(OBJ)
+
+distribution : $(DIST)
+	scp $(DIST) $(TGT)

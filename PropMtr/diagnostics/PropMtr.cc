@@ -9,6 +9,7 @@
 #include "nl.h"
 
 PropMtr_t PropMtr;
+const char *PropMtr_port = "/dev/ttyUSB0";
 
 using namespace DAS_IO;
 
@@ -16,7 +17,7 @@ int main(int argc, char **argv) {
   oui_init_options(argc, argv);
   Loop ELoop;
   TM_data_sndr TM("TM", "PropMtr", (const char *)&PropMtr, sizeof(PropMtr));
-  Modbus::RTU MB("RTU", 80, "/dev/ttyS5");
+  Modbus::RTU MB("RTU", 80, PropMtr_port);
   MB.setup(115200, 8, 'n', 1, 5, 1);
   MB.flush_input();
   MB.add_device(new Modbus::PMC_dev("PMC1", 63, &(PropMtr.Ctrl[0])));

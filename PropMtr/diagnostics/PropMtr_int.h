@@ -15,4 +15,6 @@ class PropMtrCmd : public DAS_IO::Client {
     DAS_IO::Modbus::RTU *MB;
 };
 
+extern const char *PropMtr_port;
+
 #endif
