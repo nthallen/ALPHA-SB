@@ -1,0 +1,3 @@
+<package> bmm
+<include> msg oui
+<follow> msg

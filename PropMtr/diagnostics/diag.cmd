@@ -25,7 +25,7 @@
 %}
 
 &start
-  : &commands Quit * { nl_error(0, "Shutting down"); }
+  : &commands Quit * { msg(0, "Shutting down"); }
   : &commands &&Exit
   ;
 &&Exit

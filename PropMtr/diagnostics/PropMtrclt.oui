@@ -1,6 +1,7 @@
 <package> PropMtrclt
 <include> cmd_writer
 <include> nctable
+<include> msg oui
 
 <package> appid
 <include> "dasio/appid.h"

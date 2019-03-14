@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
   ELoop.add_child(&Cmd);
   ELoop.add_child(&TM);
   ELoop.add_child(&MB);
-  nl_error(0, "%s %s Starting", DAS_IO::AppID.fullname, DAS_IO::AppID.rev);
+  msg(0, "%s %s Starting", DAS_IO::AppID.fullname, DAS_IO::AppID.rev);
   ELoop.event_loop();
-  nl_error(0, "%s Terminating", DAS_IO::AppID.name);
+  msg(0, "%s Terminating", DAS_IO::AppID.name);
   return 0;
 }

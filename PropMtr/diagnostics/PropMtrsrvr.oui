@@ -1,0 +1,11 @@
+<package> PropMtrcmd
+<include> "dasio/appid.h"
+<include> "scopex_can.h"
+<include> msg oui
+<follow> msg oui
+
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("PropMtrsrvr", "Propeller Motor Controller Command Server", "V1.0");
+
+<init>
+  CAN = new subbuspp("subbusd", "CAN");

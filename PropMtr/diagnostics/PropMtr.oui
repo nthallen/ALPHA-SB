@@ -1,6 +1,7 @@
 <package> PropMtr
 <include> "dasio/appid.h"
 <include> "PropMtr_int.h"
+<include> msg oui
 
 <opts> "p:"
 <sort>

@@ -62,8 +62,8 @@ namespace DAS_IO { namespace Modbus {
   void PMC_dev::my_RH_uint32(RTU::modbus_req *req, RTU::modbus_device *dev,
           RTU *MB) {
     RTU::modbus_device::RH_uint32(req, dev, MB);
-    // nl_error(0, "Req: %s", req->ascii_escape());
-    nl_error(0, "%s", MB->ascii_escape());
+    // msg(0, "Req: %s", req->ascii_escape());
+    msg(0, "%s", MB->ascii_escape());
   }
 
   void PMC_dev::enqueue_polls() {
@@ -166,10 +166,10 @@ bool PropMtrCmd::app_input() {
       req->setup_data(&data[0]);
     }
     if (count == 1)
-      nl_error(0, "%s: Recd %02X:%02X:%04X:%04X:%04X",
+      msg(0, "%s: Recd %02X:%02X:%04X:%04X:%04X",
         iname, devID, func, addr, count, data[0]);
     else
-      nl_error(0, "%s: Recd %02X:%02X:%04X:%04X:%04X:%04X",
+      msg(0, "%s: Recd %02X:%02X:%04X:%04X:%04X:%04X",
         iname, devID, func, addr, count, data[0], data[1]);
     MB->enqueue_command(req);
     report_ok(nc);
