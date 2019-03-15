@@ -1,0 +1,70 @@
+#! /bin/sh
+export Experiment=SCoPEx
+
+launch_error=''
+
+function waitfor {
+  name=$1
+  delay=$2
+  while [ $delay -gt 0 ]; do
+    [ -e $name ] && return 0
+    sleep 1
+    let delay=delay-1
+  done
+  return 1
+}
+
+memo_launched=no
+
+function report {
+  if [ $memo_launched = yes ]; then
+    msg $*
+  else
+    echo "`date +%T` $*"
+  fi
+}
+
+function Launch {
+  name=$1
+  shift
+  [ -n "$launch_error" ] && return 1
+  [ -n "$VERBOSE" ] && report "[DEBUG] Launch: $*"
+  if { $* & }; then
+    Launch_pid=$!
+    report "Launch: $Launch_pid $*"
+    if [ "$name" != "-" ]; then
+      [ "$name" = "-DC-" ] && name="/var/run/linkeng/$Experiment/$!"
+      [ "${name#/}" = "$name" ] && name="/var/run/linkeng/$Experiment/$name"
+      [ -n "$VERBOSE" ] &&
+        report "[DEBUG] Launch: Waiting for $Launch_pid:$name"
+      waitfor $name 10 || {
+        report "[ERROR] Launch: namewait failure: $*"
+        launch_error=yes
+        return 1
+      }
+    fi
+  else
+    report "[ERROR] Launch: $*"
+    launch_error=yes
+    return 1
+  fi
+  return 0
+}
+
+[ -d /var/run/linkeng ] || ./setup.sh
+PIDs=''
+
+Launch memo    memo -l2 -o $Experiment.log
+               msg "Running doit script"
+Launch subbusd ./subbusd_CAN
+               PIDs="$PIDs $!"
+               memo_launched=yes
+Launch cmd     ./PropMtrsrvr
+Launch DG      ./PropMtrcol
+               PIDs="$! $PIDs"
+Launch -       ./PropMtr
+Launch -       ./bmmdrv
+               PIDs="$! $PIDs"
+               ./PropMtrclt `tty`
+               sleep 1
+               kill $PIDs

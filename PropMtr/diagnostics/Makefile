@@ -11,7 +11,7 @@ LDFLAGS = -L$(LIBDIR) -ldasio -lnl -ltm
 .PHONY : all
 all : PropMtrsrvr PMkbd PropMtr PropMtrcol PropMtrclt bmmdrv
 OBJ = *.stackdump *.o
-TGT = root@10.245.83.12:/home/flight
+TGT = $(tgt):/home/flight
 
 PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
 OBJ += PropMtr PropMtroui.cc
@@ -65,6 +65,7 @@ PropMtrclt : $(PROPMTRCLTOBJ) $(LIBDIR)/libdasio.a
 
 BMMDRVOBJ = bmm.o bmmoui.o
 OBJ += bmmdrv bmmoui.cc
+DIST += bmmdrv
 bmmoui.cc : bmm.oui
 	oui -o bmmoui.cc bmm.oui
 bmmdrv : $(BMMDRVOBJ)
