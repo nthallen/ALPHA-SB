@@ -1,0 +1,30 @@
+%{
+  #include "PropMtr.h"
+  #define pmc_ref(idx,name) PropMtr.Ctrl[idx].name
+%}
+TM 1 Hz PMC_RPM_Setpoint PMC_Left_RPM_SP;
+TM 1 Hz PMC_RPM_Sensor PMC_Left_RPM;
+TM 1 Hz PMC_Position_t PMC_Left_Pos_SP;
+TM 1 Hz PMC_Position_t PMC_Left_Pos_Demand;
+TM 1 Hz PMC_Position_t PMC_Left_Pos_Target;
+TM 1 Hz PMC_Position_t PMC_Left_Pos_Measured;
+TM 1 Hz PMC_Bus_Voltage_t PMC_Left_BusV;
+TM 1 Hz PMC_Status_Word PMC_Left_Status[7];
+/* Need to collect current, AI1? */
+TM "Receive" PropMtr 1;
+
+Group PMC_Left (PMC_Left_RPM_SP, PMC_Left_RPM, PMC_Left_Pos_SP,
+    PMC_Left_Pos_Demand, PMC_Left_Pos_Target, PMC_Left_Pos_Measured,
+    PMC_Left_BusV, PMC_Left_Status) {
+  int i;
+  PMC_Left_RPM_SP = pmc_ref(0,VelocityDemand);
+  PMC_Left_RPM = pmc_ref(0,VelocityMeasured);
+  PMC_Left_Pos_SP = pmc_ref(0,SetPoint);
+  PMC_Left_Pos_Demand = pmc_ref(0,PositionDemand);
+  PMC_Left_Pos_Target = pmc_ref(0,PositionTarget);
+  PMC_Left_Pos_Measured = pmc_ref(0,PositionMeasured);
+  PMC_Left_BusV = pmc_ref(0,BusVoltage);
+  for (i = 0; i < 7; ++i) {
+    PMC_Left_Status[i] = pmc_ref(0,Status[i]);
+  }
+}

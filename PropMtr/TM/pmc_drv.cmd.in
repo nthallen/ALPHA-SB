@@ -1,0 +1,3 @@
+&pmc_drive <uint8_t>
+  : @ID@ { $0 = @ADDR@; }
+  ;

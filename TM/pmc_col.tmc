@@ -1,0 +1,4 @@
+%{
+  #include "PropMtr.h"
+  PropMtr_t PropMtr;
+%}

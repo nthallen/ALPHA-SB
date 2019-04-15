@@ -1,3 +1,6 @@
 .cproject
 .project
 testfile.dat
+*.o
+*oui.cc
+*.exe

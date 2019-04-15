@@ -1,0 +1,15 @@
+<package> PropMtr
+<include> "dasio/appid.h"
+<include> "PropMtr_int.h"
+<include> msg oui
+
+<opts> "p:"
+<sort>
+        -p <port> Specify RS485 port
+
+<switch>
+  case 'p':
+    PropMtr_port = optarg; break;
+
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("PropMtr", "Propeller Motor Controller Driver", "V1.0");

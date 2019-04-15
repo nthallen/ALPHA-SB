@@ -1,0 +1,2 @@
+TM typedef unsigned short USHORT { text "%5u"; }
+TM 0 Hz USHORT MFCtr, Synch;

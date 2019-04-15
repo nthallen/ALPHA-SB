@@ -1,0 +1,33 @@
+TM typedef double PMC_RPM { text "%9.3lf"; }
+TM typedef double PMC_VOLTS { text "%6.2lf"; }
+TM typedef double PMC_AMPS { text "%6.3lf"; }
+
+TM typedef long PMC_RPM_Setpoint {
+  Convert PMC_RPM; text "%9.3lf";
+}
+Calibration (PMC_RPM_Setpoint, PMC_RPM) {
+      0,  0,
+  65536, 75
+}
+
+TM typedef long PMC_RPM_Sensor {
+  Convert PMC_RPM; text "%9.3lf";
+}
+Calibration (PMC_RPM_Sensor, PMC_RPM) {
+      0,  0,
+  65536, 74
+}
+
+TM typedef unsigned short PMC_Bus_Voltage_t {
+  Convert PMC_VOLTS;
+  text "%6.2lf";
+}
+Calibration (PMC_Bus_Voltage_t, PMC_VOLTS) {
+      0,   0,
+  16384, 204.75
+}
+
+TM typedef long PMC_Position_t { text "%8d"; }
+TM typedef unsigned short PMC_Amp_t { text "%5u"; }
+
+TM typedef unsigned short PMC_Status_Word { text "%16b"; }

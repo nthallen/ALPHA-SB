@@ -1,0 +1,15 @@
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 ] {
+  ID specifies which motor
+}
+
+mode (types) {
+  tmcbase = pmc_types.tmc:pmc_types.tmc.in
+  cmdbase = pmc_base.cmd:pmc_base.cmd.in
+  colbase = pmc_col.tmc:pmc_col.tmc.in
+  CPPFLAGS = -I @MODDIR@/..
+}
+
+mode (default,types) {
+  tmcbase = pmc_@ID@.tmc:pmc_drv.tmc.in
+  cmdbase = pmc_@ID@.cmd:pmc_drv.cmd.in
+}

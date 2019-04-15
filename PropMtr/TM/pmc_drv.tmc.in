@@ -1,0 +1,30 @@
+%{
+  #include "PropMtr.h"
+  #define pmc_ref(idx,name) PropMtr.Ctrl[idx].name
+%}
+TM 1 Hz PMC_RPM_Setpoint PMC_@ID@_RPM_SP;
+TM 1 Hz PMC_RPM_Sensor PMC_@ID@_RPM;
+TM 1 Hz PMC_Position_t PMC_@ID@_Pos_SP;
+TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Demand;
+TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Target;
+TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Measured;
+TM 1 Hz PMC_Bus_Voltage_t PMC_@ID@_BusV;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status[7];
+/* Need to collect current, AI1? */
+TM "Receive" PropMtr 1;
+
+Group PMC_@ID@ (PMC_@ID@_RPM_SP, PMC_@ID@_RPM, PMC_@ID@_Pos_SP,
+    PMC_@ID@_Pos_Demand, PMC_@ID@_Pos_Target, PMC_@ID@_Pos_Measured,
+    PMC_@ID@_BusV, PMC_@ID@_Status) {
+  int i;
+  PMC_@ID@_RPM_SP = pmc_ref(@IDX@,VelocityDemand);
+  PMC_@ID@_RPM = pmc_ref(@IDX@,VelocityMeasured);
+  PMC_@ID@_Pos_SP = pmc_ref(@IDX@,SetPoint);
+  PMC_@ID@_Pos_Demand = pmc_ref(@IDX@,PositionDemand);
+  PMC_@ID@_Pos_Target = pmc_ref(@IDX@,PositionTarget);
+  PMC_@ID@_Pos_Measured = pmc_ref(@IDX@,PositionMeasured);
+  PMC_@ID@_BusV = pmc_ref(@IDX@,BusVoltage);
+  for (i = 0; i < 7; ++i) {
+    PMC_@ID@_Status[i] = pmc_ref(@IDX@,Status[i]);
+  }
+}
