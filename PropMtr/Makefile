@@ -1,12 +1,14 @@
-ifdef CROSS_COMPILING
-CPPFLAGS += -I/opt/linkeng/am335x/include
-LIBDIR = /opt/linkeng/am335x/lib
+# This condition assumes CROSS_COMPILE is defined in
+# ~/yocto-varsom33/SDK/environment-setup-cortexa8hf-neon-linux
+ifdef CROSS_COMPILE
+CPPFLAGS+=-I/opt/linkeng/am335x/include
+LIBDIR=/opt/linkeng/am335x/lib
 else
-LIBDIR = /usr/local/lib
+LIBDIR=/usr/local/lib
 endif
 
-CXXFLAGS += -g -Wall -std=c++11
-LDFLAGS = -L$(LIBDIR) -ldasio -lnl -ltm
+CXXFLAGS+=-g -Wall -std=c++11 $(CPPFLAGS)
+LDFLAGS=-L$(LIBDIR) -ldasio -lnl -ltm
 
 .PHONY : all
 all : PropMtr

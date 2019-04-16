@@ -6,14 +6,14 @@ colbase =
 Module PropMtr mode=types ID=Left IDX=0
 # Module PropMtr ID=Right IDX=1
 
-TGTDIR = $(PWD)/../..
+TGTDIR = $(FLIGHT_NODE)/home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-SCRIPT = doscopexclt.sh cyg_nc.sh
-IDISTRIB = interact.sh cleanup.sh
+# SCRIPT = doscopexclt.sh cyg_nc.sh
+IDISTRIB = interact.sh
 
 scopexcol :
 scopexsrvr :
 scopexclt :
 scopexdisp : scopex.tbl
 %%
-CXXFLAGS=-g
+CXXFLAGS+=-g

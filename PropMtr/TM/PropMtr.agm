@@ -6,7 +6,15 @@ mode (types) {
   tmcbase = pmc_types.tmc:pmc_types.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   colbase = pmc_col.tmc:pmc_col.tmc.in
+  DISTRIB = @MODDIR@/../PropMtr
   CPPFLAGS = -I @MODDIR@/..
+  %%
+.PHONY : clean-PropMtr
+@MODDIR@/../PropMtr :
+	cd @MODDIR@/.. && make
+clean-dist : clean-PropMtr
+clean-PropMtr :
+	cd @MODDIR@/.. && make clean
 }
 
 mode (default,types) {
