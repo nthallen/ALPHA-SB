@@ -1,0 +1,18 @@
+PropMtr_@ID@ {
+  HBox { +-; @ID@; -+ };
+  RPM_Set: (PMC_@ID@_RPM_SP,9) RPM;
+  RPM_RB:  (PMC_@ID@_RPM,9)    RPM;
+  Pos_Set: (PMC_@ID@_Pos_SP,8);
+  " Demand:" (PMC_@ID@_Pos_Demand,8);
+  " Target:" (PMC_@ID@_Pos_Target,8);
+  " Meas:"   (PMC_@ID@_Pos_Measured,8);
+  BusV:      (PMC_@ID@_BusV,6) V;
+  Status:    (PMC_@ID@_Status0,16);
+  ""         (PMC_@ID@_Status1,16);
+  ""         (PMC_@ID@_Status2,16);
+  ""         (PMC_@ID@_Status3,16);
+  ""         (PMC_@ID@_Status4,16);
+  ""         (PMC_@ID@_Status5,16);
+  ""         (PMC_@ID@_Status6,16);
+}
+

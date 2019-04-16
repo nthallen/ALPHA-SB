@@ -1,4 +1,14 @@
-{
+Input "PropMtr_Left.tbl";
+
+Status {
+  HBox { +-; Status; -+ };
   MFCtr: (MFCtr,5);
    (flttime,9);
 }
+
+{ HBox { |+;
+  { [PropMtr_Left];
+    [Status];
+  };
+  -;
+} }

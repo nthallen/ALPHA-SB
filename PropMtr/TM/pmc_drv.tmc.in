@@ -9,13 +9,21 @@ TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Demand;
 TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Target;
 TM 1 Hz PMC_Position_t PMC_@ID@_Pos_Measured;
 TM 1 Hz PMC_Bus_Voltage_t PMC_@ID@_BusV;
-TM 1 Hz PMC_Status_Word PMC_@ID@_Status[7];
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status0;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status1;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status2;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status3;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status4;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status5;
+TM 1 Hz PMC_Status_Word PMC_@ID@_Status6;
 /* Need to collect current, AI1? */
 TM "Receive" PropMtr 1;
 
 Group PMC_@ID@ (PMC_@ID@_RPM_SP, PMC_@ID@_RPM, PMC_@ID@_Pos_SP,
     PMC_@ID@_Pos_Demand, PMC_@ID@_Pos_Target, PMC_@ID@_Pos_Measured,
-    PMC_@ID@_BusV, PMC_@ID@_Status) {
+    PMC_@ID@_BusV, PMC_@ID@_Status0, PMC_@ID@_Status1, PMC_@ID@_Status2,
+    PMC_@ID@_Status3, PMC_@ID@_Status4, PMC_@ID@_Status5, PMC_@ID@_Status6
+    ) {
   int i;
   PMC_@ID@_RPM_SP = pmc_ref(@IDX@,VelocityDemand);
   PMC_@ID@_RPM = pmc_ref(@IDX@,VelocityMeasured);
@@ -24,7 +32,11 @@ Group PMC_@ID@ (PMC_@ID@_RPM_SP, PMC_@ID@_RPM, PMC_@ID@_Pos_SP,
   PMC_@ID@_Pos_Target = pmc_ref(@IDX@,PositionTarget);
   PMC_@ID@_Pos_Measured = pmc_ref(@IDX@,PositionMeasured);
   PMC_@ID@_BusV = pmc_ref(@IDX@,BusVoltage);
-  for (i = 0; i < 7; ++i) {
-    PMC_@ID@_Status[i] = pmc_ref(@IDX@,Status[i]);
-  }
+  PMC_@ID@_Status0 = pmc_ref(@IDX@,Status[0]);
+  PMC_@ID@_Status1 = pmc_ref(@IDX@,Status[1]);
+  PMC_@ID@_Status2 = pmc_ref(@IDX@,Status[2]);
+  PMC_@ID@_Status3 = pmc_ref(@IDX@,Status[3]);
+  PMC_@ID@_Status4 = pmc_ref(@IDX@,Status[4]);
+  PMC_@ID@_Status5 = pmc_ref(@IDX@,Status[5]);
+  PMC_@ID@_Status6 = pmc_ref(@IDX@,Status[6]);
 }

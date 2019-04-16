@@ -20,4 +20,5 @@ clean-PropMtr :
 mode (default,types) {
   tmcbase = pmc_@ID@.tmc:pmc_drv.tmc.in
   cmdbase = pmc_@ID@.cmd:pmc_drv.cmd.in
+  - : PropMtr_@ID@.tbl:PropMtr.tbl.in
 }

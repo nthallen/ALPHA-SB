@@ -9,13 +9,21 @@ TM 1 Hz PMC_Position_t PMC_Left_Pos_Demand;
 TM 1 Hz PMC_Position_t PMC_Left_Pos_Target;
 TM 1 Hz PMC_Position_t PMC_Left_Pos_Measured;
 TM 1 Hz PMC_Bus_Voltage_t PMC_Left_BusV;
-TM 1 Hz PMC_Status_Word PMC_Left_Status[7];
+TM 1 Hz PMC_Status_Word PMC_Left_Status0;
+TM 1 Hz PMC_Status_Word PMC_Left_Status1;
+TM 1 Hz PMC_Status_Word PMC_Left_Status2;
+TM 1 Hz PMC_Status_Word PMC_Left_Status3;
+TM 1 Hz PMC_Status_Word PMC_Left_Status4;
+TM 1 Hz PMC_Status_Word PMC_Left_Status5;
+TM 1 Hz PMC_Status_Word PMC_Left_Status6;
 /* Need to collect current, AI1? */
 TM "Receive" PropMtr 1;
 
 Group PMC_Left (PMC_Left_RPM_SP, PMC_Left_RPM, PMC_Left_Pos_SP,
     PMC_Left_Pos_Demand, PMC_Left_Pos_Target, PMC_Left_Pos_Measured,
-    PMC_Left_BusV, PMC_Left_Status) {
+    PMC_Left_BusV, PMC_Left_Status0, PMC_Left_Status1, PMC_Left_Status2,
+    PMC_Left_Status3, PMC_Left_Status4, PMC_Left_Status5, PMC_Left_Status6
+    ) {
   int i;
   PMC_Left_RPM_SP = pmc_ref(0,VelocityDemand);
   PMC_Left_RPM = pmc_ref(0,VelocityMeasured);
@@ -24,7 +32,11 @@ Group PMC_Left (PMC_Left_RPM_SP, PMC_Left_RPM, PMC_Left_Pos_SP,
   PMC_Left_Pos_Target = pmc_ref(0,PositionTarget);
   PMC_Left_Pos_Measured = pmc_ref(0,PositionMeasured);
   PMC_Left_BusV = pmc_ref(0,BusVoltage);
-  for (i = 0; i < 7; ++i) {
-    PMC_Left_Status[i] = pmc_ref(0,Status[i]);
-  }
+  PMC_Left_Status0 = pmc_ref(0,Status[0]);
+  PMC_Left_Status1 = pmc_ref(0,Status[1]);
+  PMC_Left_Status2 = pmc_ref(0,Status[2]);
+  PMC_Left_Status3 = pmc_ref(0,Status[3]);
+  PMC_Left_Status4 = pmc_ref(0,Status[4]);
+  PMC_Left_Status5 = pmc_ref(0,Status[5]);
+  PMC_Left_Status6 = pmc_ref(0,Status[6]);
 }
