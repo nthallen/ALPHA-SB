@@ -1,5 +1,5 @@
 Input "PropMtr_Left.tbl";
-Input "BMM.tbl";
+Input "bmm.tbl";
 
 Status {
   HBox { +-; Status; -+ };
