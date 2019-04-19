@@ -1,0 +1,9 @@
+TM typedef uint16_t I2CStat_28 { text ""; } //currently not defined
+TM typedef double PM0I_28 { text "%6.3lf"; }
+TM typedef uint16_t PM0V1_28 { text "6.2lf"; }
+TM typedef double PM0V2_28 { text "%6.3lf"; }
+TM typedef uint16_t PM0_N_28 { text "%5u"; }
+TM typedef uint16_t PM0_Status_28 { text "%4d"; }
+TM typedef uint16_t T1_28 { text "%4d"; }
+TM typedef uint16_t T2_28 { text "%4d"; }
+TM typedef uint16_t ADS_N_28 { text "%5u"; }

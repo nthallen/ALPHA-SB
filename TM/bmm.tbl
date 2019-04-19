@@ -1,0 +1,32 @@
+V28 {
+  HBox { +-; Title: "28.8V"; -+ };
+
+  I2CStat_28:    (I2CStat_28,6) V; //currently not defined
+  PM0I_28:       (PM0I1_28,6)   A;
+  PM0V1_28:      (PM0V1_28,6)   V;
+  PM0V2_28:      (PM0V2_28,6)   mV;
+  PM0_N_28:      (PM0_N_28,6);
+  PM0_Status_28: (PM0_Status_28,4);
+  T1_28:         (T1_28,5)      °C;
+  T2_28:         (T2_28,5)      °C;
+  ADS_N_28:      (ADS_N_28,6);
+}
+
+V50 {
+  HBox { +-; Title: "50.4V"; -+ };
+  
+  I2CStat_50:    (I2CStat_50,6) V;
+  PM0I_50:       (PM0I1_50,6)   A;
+  PM0V1_50:      (PM0V1_50,6)   V;
+  PM0V2_50:      (PM0V2_50,6)   mV;
+  PM0_N_50:      (PM0_N_50,6);
+  PM0_Status_50: (PM0_Status_50,4);
+  T1_50:         (T1_50,4)      °C;
+  T2_50:         (T2_50,4)      °C;
+  ADS_N_50:      (ADS_N_50,4);
+}
+
+Table {
+  HBox { |+; { [V28]; [V50] }; |+ };
+  -;
+}
