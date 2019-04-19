@@ -1,32 +1,43 @@
 V28 {
   HBox { +-; Title: "28.8V"; -+ };
 
-  I2CStat_28:    (I2CStat_28,6) V; //currently not defined
-  PM0I_28:       (PM0I1_28,6)   A;
-  PM0V1_28:      (PM0V1_28,6)   V;
-  PM0V2_28:      (PM0V2_28,6)   mV;
-  PM0_N_28:      (PM0_N_28,6);
-  PM0_Status_28: (PM0_Status_28,4);
-  T1_28:         (T1_28,5)      °C;
-  T2_28:         (T2_28,5)      °C;
-  ADS_N_28:      (ADS_N_28,6);
+  I:      (PM28I,6)    A;
+  V1:     (PM28V1,6)   V;
+  V2:     (PM28V2,6)   V;
+  N:      (PM28N,6);
+  Status: (PM28_Status,4);
+  T1:     (BMM28T1,5)  C;
+  T2:     (BMM28T2,5)  C;
+  ADS_N:  (BMM28_ADS_N,6);
 }
 
-V50 {
-  HBox { +-; Title: "50.4V"; -+ };
-  
-  I2CStat_50:    (I2CStat_50,6) V;
-  PM0I_50:       (PM0I1_50,6)   A;
-  PM0V1_50:      (PM0V1_50,6)   V;
-  PM0V2_50:      (PM0V2_50,6)   mV;
-  PM0_N_50:      (PM0_N_50,6);
-  PM0_Status_50: (PM0_Status_50,4);
-  T1_50:         (T1_50,4)      °C;
-  T2_50:         (T2_50,4)      °C;
-  ADS_N_50:      (ADS_N_50,4);
+V50Lo {
+  HBox { +-; Title: "50.4V Lo"; -+ };
+ 
+  I:      (PM50LoI,6)    A;
+  V1:     (PM50LoV1,6)   V;
+  V2:     (PM50LoV2,6)   V;
+  N:      (PM50LoN,6);
+  Status: (PM50Lo_Status,4);
+  T1:     (BMM50LoT1,5)  C;
+  T2:     (BMM50LoT2,5)  C;
+  ADS_N:  (BMM50Lo_ADS_N,6);
 }
 
-Table {
-  HBox { |+; { [V28]; [V50] }; |+ };
+V50Hi {
+  HBox { +-; Title: "50.4V Hi"; -+ };
+ 
+  I:      (PM50HiI,6)    A;
+  V1:     (PM50HiV1,6)   V;
+  V2:     (PM50HiV2,6)   V;
+  N:      (PM50HiN,6);
+  Status: (PM50Hi_Status,4);
+  T1:     (BMM50HiT1,5)  C;
+  T2:     (BMM50HiT2,5)  C;
+  ADS_N:  (BMM50Hi_ADS_N,6);
+}
+
+BMM {
+  HBox { |+; [V28]; |+; [V50Lo]; |+; [V50Hi]; |+ };
   -;
 }

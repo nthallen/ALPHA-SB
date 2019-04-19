@@ -1,0 +1,55 @@
+%{
+  subbuspp *CAN;
+  subbus_mread_req *BMM_mreq1;
+  subbus_mread_req *BMM_mreq2;
+  subbus_mread_req *BMM_mreq3;
+  uint16_t BMM_rvals[8];
+
+  subbus_mread_req *CAN_sequential_mread(subbuspp *P, uint16_t bdid, uint16_t start, uint16_t n_reads) {
+    uint16_t bdid_hi = bdid<<8;
+    char mreqstr[30];
+    snprintf(mreqstr, 30, "%X:1:%X", bdid_hi | start, bdid_hi | (start+n_reads-1));
+    subbus_mread_req *mreq = P->pack_mread_request(n_reads, mreqstr);
+    return mreq;
+  }
+
+  typedef struct {
+    uint16_t n_words;
+    char name[0x50];
+  } device_name_t;
+  
+  void identify_board(subbuspp *P, uint8_t bdid) {
+    uint16_t bdid_hi = bdid<<8;
+    // msg(0,"read_ack(0x%02X03)", bdid);
+    uint16_t values[4];
+    uint16_t nread;
+    subbus_mread_req *mreq = CAN_sequential_mread(CAN, bdid, 0x05, 4);
+    P->mread_subbus_nw(mreq, values, &nread);
+    msg(0, "  Board ID:%d Build:%d S/N:%d Instrument:%d", values[0], values[1], values[2], values[3]);
+    free_memory(mreq);
+    
+    char mreqstr[30];
+    snprintf(mreqstr, 30, "%X|28@%X", bdid_hi|8, bdid_hi|9);
+    mreq = P->pack_mread_request(0x29, mreqstr);
+    device_name_t devname;
+    int rv = P->mread_subbus_nw(mreq, (uint16_t*)&devname, &nread);
+    if (rv < 0) {
+      msg(2, "Error %d from mread", rv);
+    } else {
+      msg(0, "nr:%u/%u '%s'", nread, devname.n_words, &devname.name[0]);
+    }
+    free_memory(mreq);
+  }
+  
+  void CAN_init() {
+    CAN = new subbuspp("subbusd", "CAN");
+    CAN->load();
+    identify_board(CAN, 1);
+    identify_board(CAN, 2);
+    identify_board(CAN, 3);
+    BMM_mreq1 = CAN_sequential_mread(CAN, 1, 0x21, 8);
+    BMM_mreq2 = CAN_sequential_mread(CAN, 2, 0x21, 8);
+    BMM_mreq3 = CAN_sequential_mread(CAN, 3, 0x21, 8);
+  }
+%}
+TM INITFUNC CAN_init();

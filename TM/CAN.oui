@@ -1,0 +1,8 @@
+<package> CAN
+<include> "scopex_can.h"
+
+<defs>
+  subbuspp *CAN;
+<init>
+  CAN = new subbuspp("subbusd", "CAN");
+  CAN->load();

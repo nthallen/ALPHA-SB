@@ -1,12 +1,12 @@
 PropMtr_Left {
   HBox { +-; Left; -+ };
-  RPM_Set: (PMC_Left_RPM_SP,9) RPM;
-  RPM_RB:  (PMC_Left_RPM,9)    RPM;
-  Pos_Set: (PMC_Left_Pos_SP,8);
-  " Demand:" (PMC_Left_Pos_Demand,8);
-  " Target:" (PMC_Left_Pos_Target,8);
-  " Meas:"   (PMC_Left_Pos_Measured,8);
-  BusV:      (PMC_Left_BusV,6) V;
+  RPM_Set:   (PMC_Left_RPM_SP,7)    RPM;
+  RPM_RB:    (PMC_Left_RPM,7)       RPM;
+  Pos_Set:   (PMC_Left_Pos_SP,11);
+  " Demand:" (PMC_Left_Pos_Demand,11);
+  " Target:" (PMC_Left_Pos_Target,11);
+  " Meas:"   (PMC_Left_Pos_Measured,11);
+  BusV:      (PMC_Left_BusV,6)      V;
   Status:    (PMC_Left_Status0,16);
   ""         (PMC_Left_Status1,16);
   ""         (PMC_Left_Status2,16);

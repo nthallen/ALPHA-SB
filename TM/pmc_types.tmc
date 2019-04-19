@@ -3,20 +3,34 @@ TM typedef double PMC_VOLTS { text "%6.2lf"; }
 TM typedef double PMC_AMPS { text "%6.3lf"; }
 
 TM typedef int32_t PMC_RPM_Setpoint {
-  Convert PMC_RPM; text "%9.3lf";
+  Convert PMC_RPM; text "%7.1lf";
 }
 Calibration (PMC_RPM_Setpoint, PMC_RPM) {
-      0,  0,
-  65536, 75
+  -8738134.000, -10000,
+  -8738133.000, -10000,
+  -8738132.460, -9999.999,
+   8738132.460,  9999.999,
+   8738133.000,  10000,
+   8738134.000,  10000
 }
 
 TM typedef int32_t PMC_RPM_Sensor {
-  Convert PMC_RPM; text "%9.3lf";
+  Convert PMC_RPM; text "%7.1lf";
 }
+/*
 Calibration (PMC_RPM_Sensor, PMC_RPM) {
       0,  0,
   65536, 74
+} */
+Calibration (PMC_RPM_Sensor, PMC_RPM) {
+  -8856217.000, -100000,
+  -8856216.000, -100000,
+  -8856215.331, -9999.999,
+   8856215.331,  9999.999,
+   8856216.000, 100000,
+   8856217.000, 100000
 }
+
 
 TM typedef uint16_t PMC_Bus_Voltage_t {
   Convert PMC_VOLTS;
@@ -27,7 +41,7 @@ Calibration (PMC_Bus_Voltage_t, PMC_VOLTS) {
   16384, 204.75
 }
 
-TM typedef int32_t PMC_Position_t { text "%8d"; }
+TM typedef int32_t PMC_Position_t { text "%11ld"; }
 TM typedef uint16_t PMC_Amp_t { text "%5u"; }
 
 TM typedef uint16_t PMC_Status_Word { text "%16b"; }
