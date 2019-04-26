@@ -8,7 +8,7 @@ LIBDIR=/usr/local/lib
 endif
 
 CXXFLAGS+=-g -Wall -std=c++11 $(CPPFLAGS)
-LDFLAGS=-L$(LIBDIR) -ldasio -lnl -ltm
+LDFLAGS=-L$(LIBDIR) -ldasio -lnl -ltm -lpthread
 
 .PHONY : all
 all : PropMtr

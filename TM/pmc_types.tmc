@@ -44,4 +44,4 @@ Calibration (PMC_Bus_Voltage_t, PMC_VOLTS) {
 TM typedef int32_t PMC_Position_t { text "%11ld"; }
 TM typedef uint16_t PMC_Amp_t { text "%5u"; }
 
-TM typedef uint16_t PMC_Status_Word { text "%16b"; }
+TM typedef uint16_t PMC_Status_Word { text "%016b"; }

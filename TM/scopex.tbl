@@ -8,9 +8,10 @@ Status {
 }
 
 { HBox { |+;
-  { [PropMtr_Left];
-    [BMM];
-    [Status];
+    { [PropMtr_Left];
+      [BMM];
+      [Status];
+    }; |+;
   };
   -;
-} }
+}
