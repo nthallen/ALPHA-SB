@@ -1,6 +1,13 @@
 %{
   #include "scopex_can.h"
+
+  #ifdef SERVER
+    int subbus_quit() {
+      return CAN->subbus_quit();
+    }
+  #endif
 %}
+%INTERFACE <subbus>
 
 &command
  : BMM &BMM_ID &BMM_Switch &BMM_On_Off * {

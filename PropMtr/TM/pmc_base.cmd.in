@@ -34,7 +34,7 @@
       PMC_coil($2, $3, !$4);
     }
   : PMC &pmc_drive &pmc_brake_coil &pmc_brake_action * {
-      PMC_coil($2, $3, !$4);
+      PMC_coil($2, $3, $4);
     }
   : PMC &pmc_drive Select &pmc_cfg * {
       PMC_coil($2, 32, $4);

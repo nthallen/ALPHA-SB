@@ -39,4 +39,5 @@ Group PMC_@ID@ (PMC_@ID@_RPM_SP, PMC_@ID@_RPM, PMC_@ID@_Pos_SP,
   PMC_@ID@_Status4 = pmc_ref(@IDX@,Status[4]);
   PMC_@ID@_Status5 = pmc_ref(@IDX@,Status[5]);
   PMC_@ID@_Status6 = pmc_ref(@IDX@,Status[6]);
+  PropMtr_obj->synch();
 }

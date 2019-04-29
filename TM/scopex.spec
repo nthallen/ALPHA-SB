@@ -18,6 +18,7 @@ IDISTRIB = interact.sh
 
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
+#scopexsrvr :
 scopexclt :
 scopexdisp : scopex.tbl
 %%

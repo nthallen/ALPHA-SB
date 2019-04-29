@@ -49,7 +49,10 @@ TM 1 Hz BMM_ADS_N_t     BMM28_ADS_N;
 Group BMM1 (PM28I, PM28V1, PM28V2, PM28N, PM28_Status,
             BMM28T1, BMM28T2, BMM28_ADS_N) {
   uint16_t nwords;
-  if (CAN->mread_subbus_nw(BMM_mreq1, &BMM_rvals[0], &nwords) == 0 && nwords == 8) {
+  int rv;
+
+  rv = CAN->mread_subbus_nw(BMM_mreq1, &BMM_rvals[0], &nwords);
+  if (rv == 1 && nwords == 8) {
     PM28I = BMM_rvals[0];
     PM28V1 = BMM_rvals[1];
     PM28V2 = BMM_rvals[2];
@@ -58,6 +61,8 @@ Group BMM1 (PM28I, PM28V1, PM28V2, PM28N, PM28_Status,
     BMM28T1 = BMM_rvals[5];
     BMM28T2 = BMM_rvals[6];
     BMM28_ADS_N = BMM_rvals[7];
+  } else {
+    msg(0, "BMM mread rv = %d nwords = %d", rv, nwords);
   }
 }
 

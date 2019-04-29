@@ -39,4 +39,5 @@ Group PMC_Left (PMC_Left_RPM_SP, PMC_Left_RPM, PMC_Left_Pos_SP,
   PMC_Left_Status4 = pmc_ref(0,Status[4]);
   PMC_Left_Status5 = pmc_ref(0,Status[5]);
   PMC_Left_Status6 = pmc_ref(0,Status[6]);
+  PropMtr_obj->synch();
 }
