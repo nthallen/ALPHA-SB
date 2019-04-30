@@ -48,11 +48,7 @@ TM 1 Hz BMM_ADS_N_t     BMM28_ADS_N;
 
 Group BMM1 (PM28I, PM28V1, PM28V2, PM28N, PM28_Status,
             BMM28T1, BMM28T2, BMM28_ADS_N) {
-  uint16_t nwords;
-  int rv;
-
-  rv = CAN->mread_subbus_nw(BMM_mreq1, &BMM_rvals[0], &nwords);
-  if (rv == 1 && nwords == 8) {
+  if (bmm_mread(BMM_mreq1)) {
     PM28I = BMM_rvals[0];
     PM28V1 = BMM_rvals[1];
     PM28V2 = BMM_rvals[2];
@@ -61,8 +57,6 @@ Group BMM1 (PM28I, PM28V1, PM28V2, PM28N, PM28_Status,
     BMM28T1 = BMM_rvals[5];
     BMM28T2 = BMM_rvals[6];
     BMM28_ADS_N = BMM_rvals[7];
-  } else {
-    msg(0, "BMM mread rv = %d nwords = %d", rv, nwords);
   }
 }
 
@@ -77,8 +71,7 @@ TM 1 Hz BMM_ADS_N_t     BMM50Lo_ADS_N;
 
 Group BMM2 (PM50LoI, PM50LoV1, PM50LoV2, PM50LoN, PM50Lo_Status,
             BMM50LoT1, BMM50LoT2, BMM50Lo_ADS_N) {
-  uint16_t nwords;
-  if (CAN->mread_subbus_nw(BMM_mreq2, &BMM_rvals[0], &nwords) == 0 && nwords == 8) {
+  if (bmm_mread(BMM_mreq2)) {
     PM50LoI = BMM_rvals[0];
     PM50LoV1 = BMM_rvals[1];
     PM50LoV2 = BMM_rvals[2];
@@ -101,8 +94,7 @@ TM 1 Hz BMM_ADS_N_t     BMM50Hi_ADS_N;
 
 Group BMM3 (PM50HiI, PM50HiV1, PM50HiV2, PM50HiN, PM50Hi_Status,
             BMM50HiT1, BMM50HiT2, BMM50Hi_ADS_N) {
-  uint16_t nwords;
-  if (CAN->mread_subbus_nw(BMM_mreq3, &BMM_rvals[0], &nwords) == 0 && nwords == 8) {
+  if (bmm_mread(BMM_mreq3)) {
     PM50HiI = BMM_rvals[0];
     PM50HiV1 = BMM_rvals[1];
     PM50HiV2 = BMM_rvals[2];
