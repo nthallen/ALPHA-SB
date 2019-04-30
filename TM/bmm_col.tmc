@@ -29,6 +29,7 @@
     bmm->nwords = n_reads;
     bmm->saw_nack = false;
     bmm->reason = "success";
+    return bmm;
   }
   
   bool bmm_mread(bmm_mread_t *bmm) {
