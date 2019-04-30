@@ -56,7 +56,7 @@
         return true;
       case SBS_NOACK:
         if (!bmm->saw_nack) {
-          msg(2, "BMM ID:%d reported NACK on read from %d-%d",
+          msg(2, "BMM reported NACK on read from ID:%d %d-%d",
               bmm->bdid, bmm->start, bmm->start+bmm->nwords-1);
           bmm->saw_nack = true;
           bmm->reason = "NACK";
