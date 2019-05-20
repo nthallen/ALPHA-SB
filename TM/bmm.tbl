@@ -2,39 +2,39 @@ V28 {
   HBox { +-; Title: "28.8V"; -+ };
 
   I:      (PM28I,6)    A;
-  V1:     (PM28V1,6)   V;
+  V1:     (PM28V1,7)   V;
   V2:     (PM28V2,6)   V;
-  N:      (PM28N,6);
+  N:      (PM28N,5);
   Status: (PM28_Status,4);
-  T1:     (BMM28T1,5)  C;
-  T2:     (BMM28T2,5)  C;
-  ADS_N:  (BMM28_ADS_N,6);
+  T1:     (BMM28T1,6)  C;
+  T2:     (BMM28T2,6)  C;
+  ADS_N:  (BMM28_ADS_N,5);
 }
 
 V50Lo {
   HBox { +-; Title: "50.4V Lo"; -+ };
  
   I:      (PM50LoI,6)    A;
-  V1:     (PM50LoV1,6)   V;
+  V1:     (PM50LoV1,7)   V;
   V2:     (PM50LoV2,6)   V;
-  N:      (PM50LoN,6);
+  N:      (PM50LoN,5);
   Status: (PM50Lo_Status,4);
-  T1:     (BMM50LoT1,5)  C;
-  T2:     (BMM50LoT2,5)  C;
-  ADS_N:  (BMM50Lo_ADS_N,6);
+  T1:     (BMM50LoT1,6)  C;
+  T2:     (BMM50LoT2,6)  C;
+  ADS_N:  (BMM50Lo_ADS_N,5);
 }
 
 V50Hi {
   HBox { +-; Title: "50.4V Hi"; -+ };
  
   I:      (PM50HiI,6)    A;
-  V1:     (PM50HiV1,6)   V;
+  V1:     (PM50HiV1,7)   V;
   V2:     (PM50HiV2,6)   V;
-  N:      (PM50HiN,6);
+  N:      (PM50HiN,5);
   Status: (PM50Hi_Status,4);
-  T1:     (BMM50HiT1,5)  C;
-  T2:     (BMM50HiT2,5)  C;
-  ADS_N:  (BMM50Hi_ADS_N,6);
+  T1:     (BMM50HiT1,6)  C;
+  T2:     (BMM50HiT2,6)  C;
+  ADS_N:  (BMM50Hi_ADS_N,5);
 }
 
 BMM {
