@@ -17,6 +17,7 @@
 &BMM_ID <int>
   : 1 { $0 = 1; }
   : 2 { $0 = 2; }
+  : 3 { $0 = 3; }
   ;
 &BMM_Switch <int>
   : LED Status { $0 = 0; }
