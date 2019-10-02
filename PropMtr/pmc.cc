@@ -117,7 +117,7 @@ namespace DAS_IO { namespace Modbus {
 } } // closeout DAS_IO::Modbus namespace
 
 PropMtrCmd::PropMtrCmd(DAS_IO::Modbus::RTU *MB)
-    : DAS_IO::Client("Cmd", 40, "cmd", "PropMtr"),
+    : DAS_IO::Client("Cmd", 40, 0, "cmd", "PropMtr"),
       MB(MB) {
 }
 
