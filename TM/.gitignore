@@ -5,6 +5,7 @@ scopexcol.o
 scopexcoloui.o
 scopexcmd.cc
 scopexcmd.dat
+scopexcmd.h
 scopexsrvr.o
 scopexsrvroui.cc
 scopexsrvroui.o
