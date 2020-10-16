@@ -15,8 +15,7 @@ namespace DAS_IO { namespace Modbus {
        * @param bufsz The input buffer size
        * @param path Path to the device
        */
-      inline PMC(const char *iname, int bufsz, const char *path)
-        : RTU(iname, bufsz, path);
+      PMC(const char *iname, int bufsz, const char *path);
       void enqueue_poll(modbus_req *req, int gflag_no = 0);
       std::deque<modbus_req *> fast_polls;
       std::deque<modbus_req *>::const_iterator cur_fast_poll;
@@ -28,7 +27,8 @@ namespace DAS_IO { namespace Modbus {
 
   class PMC_dev : public RTU::modbus_device {
     public:
-      PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl);
+      PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl,
+              PMC_fast_t *Ctrl1);
       ~PMC_dev();
       void enqueue_polls();
       static void RH_cfg(RTU::modbus_req *req, RTU::modbus_device *dev,
@@ -41,6 +41,7 @@ namespace DAS_IO { namespace Modbus {
           RTU *MB);
     protected:
       PMC_t *Ctrl;
+      PMC_fast_t *Ctrl1;
   };
 
 } }

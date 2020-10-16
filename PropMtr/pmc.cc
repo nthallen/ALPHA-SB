@@ -6,7 +6,7 @@
 
 namespace DAS_IO { namespace Modbus {
 
-  PMC(const char *iname, int bufsz, const char *path)
+  PMC::PMC(const char *iname, int bufsz, const char *path)
         : RTU(iname, bufsz, path) {
     cur_fast_poll = fast_polls.begin();
   }
@@ -17,7 +17,7 @@ namespace DAS_IO { namespace Modbus {
         case 0: polls.push_back(req); break;
         case 1: fast_polls.push_back(req); break;
         default:
-          nl_error(MSG_ERROR, "Invalid gflag number: %d", gflag_no);
+          msg(MSG_ERROR, "Invalid gflag number: %d", gflag_no);
           return;
       }
       req->persistent = true;
@@ -33,22 +33,27 @@ namespace DAS_IO { namespace Modbus {
     }
   }
   
-  modbus_req *PMC::next_poll() {
+  RTU::modbus_req *PMC::next_poll() {
+    RTU::modbus_req *rv = 0;
     nl_assert(!pending);
     if (!cmds.empty()) {
-      pending = cmds.front();
+      rv = cmds.front();
       cmds.pop_front();
     } else if (cur_fast_poll != fast_polls.end()) {
-      pending = *cur_fast_poll;
+      rv = *cur_fast_poll;
       ++cur_fast_poll;
     } else if (cur_poll != polls.end()) {
-      pending = *cur_poll;
+      rv = *cur_poll;
       ++cur_poll;
     }
+    return rv;
   }
 
-  PMC_dev::PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl) :
-    RTU::modbus_device(dev_name, devID), Ctrl(Ctrl) {}
+  PMC_dev::PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl,
+          PMC_fast_t *Ctrl1)
+    : RTU::modbus_device(dev_name, devID),
+      Ctrl(Ctrl),
+      Ctrl1(Ctrl1) {}
 
   PMC_dev::~PMC_dev() {}
 
@@ -111,48 +116,76 @@ namespace DAS_IO { namespace Modbus {
     nl_assert(MB);
     RTU::modbus_req *req;
     
-    // Status words
-    req = MB->new_modbus_req();
-    req->setup(this, 4, 5, 11, (void*)&(Ctrl->Status[0]));
-    MB->enqueue_poll(req);
-    
-    // Configuration selection mapped to Status[6] bit 0x10
-    req = MB->new_modbus_req();
-    req->setup(this, 2, 192, 1, (void*)&(Ctrl->Status[6]), RH_cfg);
-    MB->enqueue_poll(req);
-    
-    // Brake command User Bit 1, mapped to Status[6] bit 0x20
-    req = MB->new_modbus_req();
-    req->setup(this, 3, 0, 1, (void*)&(Ctrl->Status[6]), RH_userbit);
-    MB->enqueue_poll(req);
-    
-    // Digital outputs 1 and 2 mapped to Status[6]
-    req = MB->new_modbus_req();
-    req->setup(this, 2, 128, 2, (void*)&(Ctrl->Status[6]), RH_digout);
-    MB->enqueue_poll(req);
-    
-    // Voltage and current
-    req = MB->new_modbus_req();
-    req->setup(this, 4, 12, 4, (void*)&(Ctrl->BusVoltage));
-    MB->enqueue_poll(req);
-    
     // Velocity
     req = MB->new_modbus_req();
-    req->setup(this, 4, 251, 4, (void*)&(Ctrl->VelocityMeasured),
+    req->setup(this, 4, 253, 2, (void*)&(Ctrl->VelocityDemand),
       RTU::modbus_device::RH_uint32);
-    MB->enqueue_poll(req);
+    MB->enqueue_poll(req, 0);
     
     // Position
     req = MB->new_modbus_req();
     req->setup(this, 4, 257, 6, (void*)&(Ctrl->PositionMeasured),
       RTU::modbus_device::RH_uint32);
-    MB->enqueue_poll(req);
+    MB->enqueue_poll(req, 0);
+    
+    // Max Accel/Decel
+    req = MB->new_modbus_req();
+    req->setup(this, 3, 28, 4, (void*)&(Ctrl->MaxAccel));
+    MB->enqueue_poll(req, 0);
+    
+    // Velocity Loop Gains
+    req = MB->new_modbus_req();
+    req->setup(this, 3, 251, 6, (void*)&(Ctrl->VL_Kp),
+      RTU::modbus_device::RH_uint32);
+    MB->enqueue_poll(req, 0);
     
     // SetPoint: Interface Input 1. 32-bit holding register
     req = MB->new_modbus_req();
     req->setup(this, 3, 321, 2, (void*)&(Ctrl->SetPoint),
       RTU::modbus_device::RH_uint32);
-    MB->enqueue_poll(req);
+    MB->enqueue_poll(req, 0);
+    
+    // Torque Current Loop Gains
+    req = MB->new_modbus_req();
+    req->setup(this, 3, 46, 2, (void*)&(Ctrl->TCL_Kp));
+    MB->enqueue_poll(req, 0);
+    
+    // Status words
+    req = MB->new_modbus_req();
+    req->setup(this, 4, 5, 7, (void*)&(Ctrl->Status[0]));
+    MB->enqueue_poll(req, 0);
+    
+    // Configuration selection mapped to Status[6] bit 0x10
+    req = MB->new_modbus_req();
+    req->setup(this, 2, 192, 1, (void*)&(Ctrl->Status[6]), RH_cfg);
+    MB->enqueue_poll(req, 0);
+    
+    // Brake command User Bit 1, mapped to Status[6] bit 0x20
+    req = MB->new_modbus_req();
+    req->setup(this, 3, 0, 1, (void*)&(Ctrl->Status[6]), RH_userbit);
+    MB->enqueue_poll(req, 0);
+    
+    // Digital outputs 1 and 2 mapped to Status[6]
+    req = MB->new_modbus_req();
+    req->setup(this, 2, 128, 2, (void*)&(Ctrl->Status[6]), RH_digout);
+    MB->enqueue_poll(req, 0);
+    
+    // Bus Voltage and Current Demand
+    req = MB->new_modbus_req();
+    req->setup(this, 4, 12, 2, (void*)&(Ctrl->BusVoltage));
+    MB->enqueue_poll(req, 0);
+    
+    // Velocity
+    req = MB->new_modbus_req();
+    req->setup(this, 4, 251, 2, (void*)&(Ctrl1->VelocityMeasured),
+      RTU::modbus_device::RH_uint32);
+    MB->enqueue_poll(req, 1);
+    
+    // Current Measured
+    req = MB->new_modbus_req();
+    req->setup(this, 4, 14, 1, (void*)&(Ctrl1->CurrentMeasured),
+      RTU::modbus_device::RH_uint32);
+    MB->enqueue_poll(req, 1);
   }
 
 } } // closeout DAS_IO::Modbus namespace

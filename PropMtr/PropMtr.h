@@ -38,27 +38,26 @@
 #include <stdint.h>
 
 typedef struct __attribute__((__packed__)) {
-  int32_t VelocityDemand;   // 4/251/2(32)
-  int32_t PositionMeasured; // 4/257/2(32)
-  int32_t PositionTarget;   // 4/259/2(32)
-  int32_t PositionDemand;   // 4/261/2(32)
-  int32_t SetPoint;         // 3/321/2(32)
-  int32_t MaxAccel;         // 3/28/2(16)
-  int32_t MaxDecel;         // 3/30/2(16)
-  int32_t VL_Kp;            // 3/251/2(32)
-  int32_t VL_Ki;            // 3/253/2(32)
-  int32_t VL_Kd;            // 3/255/2(32)
-  int16_t TCL_Kp;           // 3/46/1(16)
-  int16_t TCL_Ki;           // 3/47/1(16)
-  
-  uint16_t Status[7];       // 4/5/7(16)
-  uint16_t CurrentDemand;   // 4/13/2(16)
+  int32_t  VelocityDemand;   // 4/253/2(32) -
+  int32_t  PositionMeasured; // 4/257/2(32) /6
+  int32_t  PositionTarget;   // 4/259/2(32)
+  int32_t  PositionDemand;   // 4/261/2(32)
+  int32_t  MaxAccel;         // 3/28/2(16) /4
+  int32_t  MaxDecel;         // 3/30/2(16)
+  int32_t  VL_Kp;            // 3/251/2(32) /6
+  int32_t  VL_Ki;            // 3/253/2(32)
+  int32_t  VL_Kd;            // 3/255/2(32)
+  int32_t  SetPoint;         // 3/321/2(32) -
+  int16_t  TCL_Kp;           // 3/46/1(16) /2
+  int16_t  TCL_Ki;           // 3/47/1(16)
+  uint16_t Status[7];        // 4/5/7(16) -
+  uint16_t BusVoltage;       // 4/12/1(16) /2
+  uint16_t CurrentDemand;    // 4/13/1(16)
 } PMC_t;
 
 typedef struct __attribute__((__packed__)) {
-  int32_t VelocityMeasured; // 4/251/4(32)
-  uint16_t BusVoltage;      // 4/12/1(16)
-  uint16_t CurrentMeasured; // 4/14/1(16)
+  int32_t  VelocityMeasured; // 4/251/2(32) -
+  uint16_t CurrentMeasured;  // 4/14/1(16) -
 } PMC_fast_t;
 
 typedef struct __attribute__((__packed__)) {
@@ -70,5 +69,6 @@ typedef struct __attribute__((__packed__)) {
 } PropMtr_fast_t;
 
 extern PropMtr_t PropMtr;
+extern PropMtr_fast_t PropMtr_fast;
 
 #endif
