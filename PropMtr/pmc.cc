@@ -6,6 +6,47 @@
 
 namespace DAS_IO { namespace Modbus {
 
+  PMC(const char *iname, int bufsz, const char *path)
+        : RTU(iname, bufsz, path) {
+    cur_fast_poll = fast_polls.begin();
+  }
+
+  void PMC::enqueue_poll(modbus_req *req, int gflag_no) {
+    if (req->get_req_state() == RTU::modbus_req::Req_ready) {
+      switch (gflag_no) {
+        case 0: polls.push_back(req); break;
+        case 1: fast_polls.push_back(req); break;
+        default:
+          nl_error(MSG_ERROR, "Invalid gflag number: %d", gflag_no);
+          return;
+      }
+      req->persistent = true;
+    }
+  }
+  
+  void PMC::update_polls(int flag) {
+    if ((flag & gflag(1)) && (cur_fast_poll == fast_polls.end())) {
+      cur_fast_poll = fast_polls.begin();
+    }
+    if ((flag & gflag(0)) && (cur_poll == polls.end())) {
+      cur_poll = polls.begin();
+    }
+  }
+  
+  modbus_req *PMC::next_poll() {
+    nl_assert(!pending);
+    if (!cmds.empty()) {
+      pending = cmds.front();
+      cmds.pop_front();
+    } else if (cur_fast_poll != fast_polls.end()) {
+      pending = *cur_fast_poll;
+      ++cur_fast_poll;
+    } else if (cur_poll != polls.end()) {
+      pending = *cur_poll;
+      ++cur_poll;
+    }
+  }
+
   PMC_dev::PMC_dev(const char *dev_name, uint8_t devID, PMC_t *Ctrl) :
     RTU::modbus_device(dev_name, devID), Ctrl(Ctrl) {}
 
@@ -107,7 +148,7 @@ namespace DAS_IO { namespace Modbus {
       RTU::modbus_device::RH_uint32);
     MB->enqueue_poll(req);
     
-    // SetPoint
+    // SetPoint: Interface Input 1. 32-bit holding register
     req = MB->new_modbus_req();
     req->setup(this, 3, 321, 2, (void*)&(Ctrl->SetPoint),
       RTU::modbus_device::RH_uint32);
