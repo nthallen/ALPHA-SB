@@ -1,20 +1,22 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 ] {
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=20 SLOW=1 ] {
   ID specifies which motor
+  IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
 }
 
 mode (types) {
   tmcbase = pmc_types.tmc:pmc_types.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   colbase = pmc_col.tmc:pmc_col.tmc.in
-  DISTRIB = @MODDIR@/../PropMtr
+  DISTRIB = PropMtr
   CPPFLAGS = -I @MODDIR@/..
   %%
 .PHONY : clean-PropMtr
-@MODDIR@/../PropMtr :
-	cd @MODDIR@/.. && make
+PropMtr :
+	$(MAKE) --directory=@MODDIR@/..
+	cp @MODDIR@/../PropMtr PropMtr
 clean-dist : clean-PropMtr
 clean-PropMtr :
-	cd @MODDIR@/.. && make clean
+	$(MAKE) --directory=@MODDIR@/.. clean
 }
 
 mode (default,types) {

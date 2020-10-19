@@ -1,11 +1,22 @@
 TM typedef double PMC_RPM { text "%9.3lf"; }
 TM typedef double PMC_VOLTS { text "%6.2lf"; }
 TM typedef double PMC_AMPS { text "%6.3lf"; }
+TM typedef double PMC_RPMPS { text "%6.1lf"; }
 
-TM typedef int32_t PMC_RPM_Setpoint {
+/*
+ * RPM conversions use DS1 units in Table A.1
+ * The physical unit is counts/sec
+ * The scaling factor is 2^17/(K_I K_S)
+ * K_I = 1 (No Sin/Cos Encoder)
+ * K_S = Switching Freq = 20 KHz
+ * Note: The velocity setpoint and readback should
+ * use the same units. Not clear why these were
+ * different!
+ */
+TM typedef int32_t PMC_RPM_t {
   Convert PMC_RPM; text "%7.1lf";
 }
-Calibration (PMC_RPM_Setpoint, PMC_RPM) {
+Calibration (PMC_RPM_t, PMC_RPM) {
   -8738134.000, -10000,
   -8738133.000, -10000,
   -8738132.460, -9999.999,
@@ -14,34 +25,75 @@ Calibration (PMC_RPM_Setpoint, PMC_RPM) {
    8738134.000,  10000
 }
 
-TM typedef int32_t PMC_RPM_Sensor {
-  Convert PMC_RPM; text "%7.1lf";
-}
-/*
-Calibration (PMC_RPM_Sensor, PMC_RPM) {
-      0,  0,
-  65536, 74
-} */
-Calibration (PMC_RPM_Sensor, PMC_RPM) {
-  -8856217.000, -100000,
-  -8856216.000, -100000,
-  -8856215.331, -9999.999,
-   8856215.331,  9999.999,
-   8856216.000, 100000,
-   8856217.000, 100000
-}
-
-
 TM typedef uint16_t PMC_Bus_Voltage_t {
   Convert PMC_VOLTS;
   text "%6.2lf";
 }
+/*
+ * Bus voltage conversion: cts = V * 2^14/(1.05*K_OV) = V*2^14/(1.05*193)
+ * K_OV = 193 V (DC Bus Over Voltage Limit)
+ * Hence 2^14 cts is equal to 1.05*193 V
+ */
 Calibration (PMC_Bus_Voltage_t, PMC_VOLTS) {
       0,   0,
-  16384, 204.75
+  16384, 202.65
+}
+
+TM typedef uint16_t PMC_Amp_t { text "%6.2lf"; Convert PMC_AMPS; }
+/* cts = A * 2^13 / K_P
+ * K_P = Max Peak Drive Current = 25A for DZRALTE_025L200
+ */
+Calibration (PMC_Amp_t, PMC_AMPS) {
+     0,   0,
+  8192,  25
+}
+
+TM typedef uint32_t PMC_DA5_t { text "%6.1lf"; Convert PCM_RPMPS; }
+Calibration (PMC_DA5_t, PCM_RPMPS) {
+      0,     0,
+  76696, 10000,
+  76697, 10000
+}
+
+TM typedef double PMC_VL_Kp_t { text "%8.5lf"; }
+TM typedef uint32_t PMC_VL_Kp_raw_t { text "%8.5lf"; convert PMC_VL_Kp_t; }
+Calibration (PMC_VL_Kp_raw_t, PMC_VL_Kp_t) {
+         0, 0,
+  1288437760, 98.3,
+  1288437760, 98.3 /* clamp at 98.3, abs max */
+}
+
+TM typedef double PMC_VL_Ki_t { text "%8.5lf"; }
+TM typedef uint32_t PMC_VL_Ki_raw_t { text "%8.5lf"; convert PMC_VL_Ki_t; }
+Calibration (PMC_VL_Ki_raw_t, PMC_VL_Ki_t) {
+           0,    -100,
+    85899345,    -100,
+    85899345.92,    1,
+  1288490189,      15,
+  1288490190,     100,
+  1288490191,     100
+}
+
+TM typedef double PMC_VL_Kd_t { text "%7.5lf"; }
+TM typedef uint32_t PMC_VL_Kd_raw_t { text "%7.5lf"; convert PMC_VL_Kd_t; }
+/* This is in units of 1e-7 */
+Calibration (PMC_VL_Kd_raw_t, PMC_VL_Kd_t) {
+          0,    0,
+    13107,      0,
+    13107.2,    1,
+    78643.2,    6,
+    78644.0,   10
+}
+
+/* Works for both Kp and Ki for current loop */
+TM typedef double PMC_Itau_K_t { text "%8.3lf"; }
+TM typedef uint16_t PMC_Itau_K_raw_t {
+  text "%8.3lf"; Convert PMC_Itau_K_t; }
+Calibration (PMC_Itau_K_raw_t, PMC_Itau_K_t) {
+    0, 0,
+  512, 1
 }
 
 TM typedef int32_t PMC_Position_t { text "%11ld"; }
-TM typedef uint16_t PMC_Amp_t { text "%5u"; }
 
 TM typedef uint16_t PMC_Status_Word { text "%016b"; }

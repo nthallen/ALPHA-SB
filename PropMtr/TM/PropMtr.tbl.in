@@ -3,6 +3,7 @@ PropMtr_@ID@ {
   HBox {
     { RPM_Set:   (PMC_@ID@_RPM_SP,7)    RPM;
       RPM_RB:    (PMC_@ID@_RPM,7)       RPM;
+      Current:   (PMC_@ID@_I_Measured,6) Amps;
       Pos_Set:   (PMC_@ID@_Pos_SP,11);
       " Demand:" (PMC_@ID@_Pos_Demand,11);
       " Target:" (PMC_@ID@_Pos_Target,11);
@@ -16,6 +17,14 @@ PropMtr_@ID@ {
       ""         (PMC_@ID@_Status4,16);
       ""         (PMC_@ID@_Status5,16);
       ""         (PMC_@ID@_Status6,16);
+    }; |+; {
+      MaxAcc:    (PMC_@ID@_MaxAccel,6) RPM/s;
+      MaxDec:    (PMC_@ID@_MaxDecel,6) RPM/s;
+      VL_Kp:     (PMC_@ID@_VL_Kp,8);
+      VL_Ki:     (PMC_@ID@_VL_Ki,8);
+      VL_Kd:     (PMC_@ID@_VL_Kd,7) "e-7";
+      TCL_Kp:    (PMC_@ID@_TCL_Kp,8);
+      TCL_Ki:    (PMC_@ID@_TCL_Ki,8);
     }
   }
 }

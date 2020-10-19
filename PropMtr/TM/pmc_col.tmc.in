@@ -1,4 +1,7 @@
 %{
   #include "PropMtr.h"
   PropMtr_t PropMtr;
+  PropMtr_fast_t PropMtr_fast;
 %}
+TM "Receive" PropMtr 1;
+TM "Receive" PropMtr_fast 1;
