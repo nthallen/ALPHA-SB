@@ -1,2 +1,2 @@
 TM typedef uint16_t USHORT { text "%5u"; }
-TM 0 Hz USHORT MFCtr, Synch;
+TM 2 Hz USHORT MFCtr, Synch;

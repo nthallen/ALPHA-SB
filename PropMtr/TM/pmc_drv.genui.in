@@ -1,0 +1,101 @@
+@SLOW@ PMC_@ID@_RPM_SP       PMC_@ID@ RPM
+@FAST@ PMC_@ID@_RPM          PMC_@ID@ RPM
+
+@SLOW@ PMC_@ID@_I_Demand     PMC_@ID@ Current
+@FAST@ PMC_@ID@_I_Measured   PMC_@ID@ Current
+
+@SLOW@ PMC_@ID@_BusV         PMC_@ID@ Voltage
+
+@SLOW@ PMC_@ID@_Pos_SP       PMC_@ID@ Position
+@SLOW@ PMC_@ID@_Pos_Demand   PMC_@ID@ Position
+@SLOW@ PMC_@ID@_Pos_Target   PMC_@ID@ Position
+@SLOW@ PMC_@ID@_Pos_Measured PMC_@ID@ Position
+
+@SLOW@ Bridge_En:PMC_@ID@_Status0:0 PMC_@ID@_S Status0
+@SLOW@ DynBrk_En:PMC_@ID@_Status0:1 PMC_@ID@_S Status0
+@SLOW@ Stop_En:PMC_@ID@_Status0:2 PMC_@ID@_S Status0
+@SLOW@ PosStop_En:PMC_@ID@_Status0:3 PMC_@ID@_S Status0
+@SLOW@ NegStop_En:PMC_@ID@_Status0:4 PMC_@ID@_S Status0
+@SLOW@ PosTrqInh_In:PMC_@ID@_Status0:5 PMC_@ID@_S Status0
+@SLOW@ NegTrqInh_En:PMC_@ID@_Status0:6 PMC_@ID@_S Status0
+@SLOW@ ExtBrk_En:PMC_@ID@_Status0:7 PMC_@ID@_S Status0
+@SLOW@ DrvReset:PMC_@ID@_Status1:0 PMC_@ID@_S Status1
+@SLOW@ DrvIntErr:PMC_@ID@_Status1:1 PMC_@ID@_S Status1
+@SLOW@ ShortCir:PMC_@ID@_Status1:2 PMC_@ID@_S Status1
+@SLOW@ CurOverShoot:PMC_@ID@_Status1:3 PMC_@ID@_S Status1
+@SLOW@ DrvUnderV:PMC_@ID@_Status1:4 PMC_@ID@_S Status1
+@SLOW@ DrvOverV:PMC_@ID@_Status1:5 PMC_@ID@_S Status1
+@SLOW@ DrvOverT:PMC_@ID@_Status1:6 PMC_@ID@_S Status1
+
+@SLOW@ ParRestoreErr:PMC_@ID@_Status2:0 PMC_@ID@_S Status2
+@SLOW@ ParStoreErr:PMC_@ID@_Status2:1 PMC_@ID@_S Status2
+@SLOW@ InvHallState:PMC_@ID@_Status2:2 PMC_@ID@_S Status2
+@SLOW@ PhaseSyncErr:PMC_@ID@_Status2:3 PMC_@ID@_S Status2
+@SLOW@ MotorOverT:PMC_@ID@_Status2:4 PMC_@ID@_S Status2
+@SLOW@ PhaseDetFault:PMC_@ID@_Status2:5 PMC_@ID@_S Status2
+@SLOW@ FBSensorErr:PMC_@ID@_Status2:6 PMC_@ID@_S Status2
+@SLOW@ MotorOverSpeed:PMC_@ID@_Status2:7 PMC_@ID@_S Status2
+@SLOW@ MaxMeasuredPos:PMC_@ID@_Status2:8 PMC_@ID@_S Status2
+@SLOW@ MinMeasuredPos:PMC_@ID@_Status2:9 PMC_@ID@_S Status2
+@SLOW@ CommError:PMC_@ID@_Status2:10 PMC_@ID@_S Status2
+@SLOW@ PWMBrokenWire:PMC_@ID@_Status2:11 PMC_@ID@_S Status2
+@SLOW@ MotionEngErr:PMC_@ID@_Status2:12 PMC_@ID@_S Status2
+@SLOW@ MotionEngAbrt:PMC_@ID@_Status2:13 PMC_@ID@_S Status2
+
+@SLOW@ LogEntryMissed:PMC_@ID@_Status3:0 PMC_@ID@_S Status3
+@SLOW@ SWDisable:PMC_@ID@_Status3:1 PMC_@ID@_S Status3
+@SLOW@ UserDisable:PMC_@ID@_Status3:2 PMC_@ID@_S Status3
+@SLOW@ UserPosInh:PMC_@ID@_Status3:3 PMC_@ID@_S Status3
+@SLOW@ UserNegInh:PMC_@ID@_Status3:4 PMC_@ID@_S Status3
+@SLOW@ CurLimiting:PMC_@ID@_Status3:5 PMC_@ID@_S Status3
+@SLOW@ ContCurFoldback:PMC_@ID@_Status3:6 PMC_@ID@_S Status3
+@SLOW@ CurLoopSat:PMC_@ID@_Status3:7 PMC_@ID@_S Status3
+@SLOW@ UserUnderV:PMC_@ID@_Status3:8 PMC_@ID@_S Status3
+@SLOW@ UserOverV:PMC_@ID@_Status3:9 PMC_@ID@_S Status3
+@SLOW@ NonSinComm:PMC_@ID@_Status3:10 PMC_@ID@_S Status3
+@SLOW@ PhaseDetectActive:PMC_@ID@_Status3:11 PMC_@ID@_S Status3
+@SLOW@ MotionEngActive:PMC_@ID@_Status3:12 PMC_@ID@_S Status3
+@SLOW@ UserAuxDisable:PMC_@ID@_Status3:13 PMC_@ID@_S Status3
+@SLOW@ ShuntRegActive:PMC_@ID@_Status3:14 PMC_@ID@_S Status3
+@SLOW@ PhaseDetectDone:PMC_@ID@_Status3:15 PMC_@ID@_S Status3
+
+@SLOW@ ZeroVel:PMC_@ID@_Status4:0 PMC_@ID@_S Status4
+@SLOW@ AtCommand:PMC_@ID@_Status4:1 PMC_@ID@_S Status4
+@SLOW@ VelFollErr:PMC_@ID@_Status4:2 PMC_@ID@_S Status4
+@SLOW@ PosTargVelLim:PMC_@ID@_Status4:3 PMC_@ID@_S Status4
+@SLOW@ NegTargVelLim:PMC_@ID@_Status4:4 PMC_@ID@_S Status4
+@SLOW@ CmdLimiterAct:PMC_@ID@_Status4:5 PMC_@ID@_S Status4
+@SLOW@ InHomPos:PMC_@ID@_Status4:6 PMC_@ID@_S Status4
+@SLOW@ PosFollErr:PMC_@ID@_Status4:7 PMC_@ID@_S Status4
+@SLOW@ MaxTargPosLim:PMC_@ID@_Status4:8 PMC_@ID@_S Status4
+@SLOW@ MinTargPosLim:PMC_@ID@_Status4:9 PMC_@ID@_S Status4
+@SLOW@ SetPosActive:PMC_@ID@_Status4:10 PMC_@ID@_S Status4
+@SLOW@ HomingActive:PMC_@ID@_Status4:12 PMC_@ID@_S Status4
+@SLOW@ SafeTrqOff:PMC_@ID@_Status4:13 PMC_@ID@_S Status4
+@SLOW@ HomingDone:PMC_@ID@_Status4:14 PMC_@ID@_S Status4
+@SLOW@ ZeroPos:PMC_@ID@_Status4:15 PMC_@ID@_S Status4
+
+@SLOW@ CmddStop:PMC_@ID@_Status5:6 PMC_@ID@_S Status5
+@SLOW@ UserStop:PMC_@ID@_Status5:7 PMC_@ID@_S Status5
+@SLOW@ Cap1Active:PMC_@ID@_Status5:8 PMC_@ID@_S Status5
+@SLOW@ Cap2Active:PMC_@ID@_Status5:9 PMC_@ID@_S Status5
+@SLOW@ Cap3Active:PMC_@ID@_Status5:10 PMC_@ID@_S Status5
+@SLOW@ CmddPosLim:PMC_@ID@_Status5:11 PMC_@ID@_S Status5
+@SLOW@ CmddNegLim:PMC_@ID@_Status5:12 PMC_@ID@_S Status5
+
+@SLOW@ AbsPosValid:PMC_@ID@_Status6:0 PMC_@ID@_S Status6
+@SLOW@ PosStopActive:PMC_@ID@_Status6:1 PMC_@ID@_S Status6
+@SLOW@ NegStopActive:PMC_@ID@_Status6:2 PMC_@ID@_S Status6
+@SLOW@ ConfigSelect:PMC_@ID@_Status6:4 PMC_@ID@_S Status6
+@SLOW@ BrakeCommand:PMC_@ID@_Status6:5 PMC_@ID@_S Status6
+@SLOW@ DigOut1:PMC_@ID@_Status6:6 PMC_@ID@_S Status6
+@SLOW@ DigOut2:PMC_@ID@_Status6:7 PMC_@ID@_S Status6
+
+@SLOW@ PMC_@ID@_MaxAccel     PMC_@ID@ Accel
+@SLOW@ PMC_@ID@_MaxDecel     PMC_@ID@ Accel
+
+@SLOW@ PMC_@ID@_VL_Kp        PMC_@ID@_G Gains
+@SLOW@ PMC_@ID@_VL_Ki        PMC_@ID@_G Gains
+@SLOW@ PMC_@ID@_VL_Kd        PMC_@ID@_G Gains
+@SLOW@ PMC_@ID@_TCL_Kp       PMC_@ID@_G Gains
+@SLOW@ PMC_@ID@_TCL_Ki       PMC_@ID@_G Gains

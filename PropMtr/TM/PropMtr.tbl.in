@@ -10,16 +10,17 @@ PropMtr_@ID@ {
       " Meas:"   (PMC_@ID@_Pos_Measured,11);
       BusV:      (PMC_@ID@_BusV,6)      V;
     }; |+; {
-      Status:    (PMC_@ID@_Status0,16);
-      ""         (PMC_@ID@_Status1,16);
-      ""         (PMC_@ID@_Status2,16);
-      ""         (PMC_@ID@_Status3,16);
-      ""         (PMC_@ID@_Status4,16);
-      ""         (PMC_@ID@_Status5,16);
-      ""         (PMC_@ID@_Status6,16);
+      >Status<;
+      (PMC_@ID@_Status0,16);
+      (PMC_@ID@_Status1,16);
+      (PMC_@ID@_Status2,16);
+      (PMC_@ID@_Status3,16);
+      (PMC_@ID@_Status4,16);
+      (PMC_@ID@_Status5,16);
+      (PMC_@ID@_Status6,16);
     }; |+; {
-      MaxAcc:    (PMC_@ID@_MaxAccel,6) RPM/s;
-      MaxDec:    (PMC_@ID@_MaxDecel,6) RPM/s;
+      MaxAcc:    (PMC_@ID@_MaxAccel,6) "RPM/s";
+      MaxDec:    (PMC_@ID@_MaxDecel,6) "RPM/s";
       VL_Kp:     (PMC_@ID@_VL_Kp,8);
       VL_Ki:     (PMC_@ID@_VL_Ki,8);
       VL_Kd:     (PMC_@ID@_VL_Kd,7) "e-7";

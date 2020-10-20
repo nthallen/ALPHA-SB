@@ -17,6 +17,13 @@ scopexdispnc.cc
 scopexdispncoui.cc
 scopexdispnc.o
 scopexdispncoui.o
+scopexengext.cdf
+scopexengextcdf.oui
+scopexengextcdf.tmc
+scopexengext.cc
+scopexengextoui.cc
+scopexengext.o
+scopexengextoui.o
 scopextblnc.tmc.dep
 *.err
 *.o
@@ -27,3 +34,4 @@ scopexcol
 scopexsrvr
 scopexcltnc
 scopexdispnc
+scopexengext

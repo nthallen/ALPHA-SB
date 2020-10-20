@@ -1,4 +1,4 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=20 SLOW=1 ] {
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ ] {
   ID specifies which motor
   IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
 }
@@ -22,5 +22,6 @@ clean-PropMtr :
 mode (default,types) {
   tmcbase = pmc_@ID@.tmc:pmc_drv.tmc.in
   cmdbase = pmc_@ID@.cmd:pmc_drv.cmd.in
+  genuibase = pmc_@ID@.genui:pmc_drv.genui.in
   - : PropMtr_@ID@.tbl:PropMtr.tbl.in
 }

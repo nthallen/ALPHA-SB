@@ -96,7 +96,7 @@ namespace DAS_IO { namespace Modbus {
     // This will be used for two random status bits. They should both
     // appear at bit 0 in the corresponding data
     // dest will point to a uint16_t word, (status[6]) and the single bits
-    // will be mapped in to bits 4 and 5 respectively
+    // will be mapped in to bits 6 and 7 respectively
     uint8_t temp;
     MB->read_pdu(&temp, 1);
     uint16_t temp16 = temp << 6;

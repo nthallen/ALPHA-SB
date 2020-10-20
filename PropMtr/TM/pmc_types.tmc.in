@@ -2,6 +2,7 @@ TM typedef double PMC_RPM { text "%9.3lf"; }
 TM typedef double PMC_VOLTS { text "%6.2lf"; }
 TM typedef double PMC_AMPS { text "%6.3lf"; }
 TM typedef double PMC_RPMPS { text "%6.1lf"; }
+TM typedef uint8_t PMC_Stale_t { text "%3u"; }
 
 /*
  * RPM conversions use DS1 units in Table A.1
@@ -48,23 +49,27 @@ Calibration (PMC_Amp_t, PMC_AMPS) {
   8192,  25
 }
 
-TM typedef uint32_t PMC_DA5_t { text "%6.1lf"; Convert PCM_RPMPS; }
-Calibration (PMC_DA5_t, PCM_RPMPS) {
+TM typedef int32_t PMC_DA5_t { text "%6.1lf"; Convert PMC_RPMPS; }
+Calibration (PMC_DA5_t, PMC_RPMPS) {
+     -1,     0,
       0,     0,
   76696, 10000,
   76697, 10000
 }
 
-TM typedef double PMC_VL_Kp_t { text "%8.5lf"; }
-TM typedef uint32_t PMC_VL_Kp_raw_t { text "%8.5lf"; convert PMC_VL_Kp_t; }
+TM typedef double PMC_VL_Kp_t { text "%8.4lf"; }
+TM typedef int32_t PMC_VL_Kp_raw_t { text "%8.4lf"; convert PMC_VL_Kp_t; }
 Calibration (PMC_VL_Kp_raw_t, PMC_VL_Kp_t) {
+        -1, 0,
          0, 0,
-  1288437760, 98.3,
-  1288437760, 98.3 /* clamp at 98.3, abs max */
+  131072000, 10,
+  131072001, 10
+/*  1288437760, 98.3,
+  1288437761, 98.3 clamp at 98.3, abs max */
 }
 
-TM typedef double PMC_VL_Ki_t { text "%8.5lf"; }
-TM typedef uint32_t PMC_VL_Ki_raw_t { text "%8.5lf"; convert PMC_VL_Ki_t; }
+TM typedef double PMC_VL_Ki_t { text "%8.4lf"; }
+TM typedef int32_t PMC_VL_Ki_raw_t { text "%8.4lf"; convert PMC_VL_Ki_t; }
 Calibration (PMC_VL_Ki_raw_t, PMC_VL_Ki_t) {
            0,    -100,
     85899345,    -100,
@@ -75,14 +80,15 @@ Calibration (PMC_VL_Ki_raw_t, PMC_VL_Ki_t) {
 }
 
 TM typedef double PMC_VL_Kd_t { text "%7.5lf"; }
-TM typedef uint32_t PMC_VL_Kd_raw_t { text "%7.5lf"; convert PMC_VL_Kd_t; }
+TM typedef int32_t PMC_VL_Kd_raw_t { text "%7.5lf"; convert PMC_VL_Kd_t; }
 /* This is in units of 1e-7 */
 Calibration (PMC_VL_Kd_raw_t, PMC_VL_Kd_t) {
           0,    0,
     13107,      0,
     13107.2,    1,
     78643.2,    6,
-    78644.0,   10
+    78644.0,   10,
+    78645.0,   10
 }
 
 /* Works for both Kp and Ki for current loop */
@@ -97,3 +103,6 @@ Calibration (PMC_Itau_K_raw_t, PMC_Itau_K_t) {
 TM typedef int32_t PMC_Position_t { text "%11ld"; }
 
 TM typedef uint16_t PMC_Status_Word { text "%016b"; }
+
+TM @SLOW@ Hz PMC_Stale_t PMC_Stale;
+TM @FAST@ Hz PMC_Stale_t PMC_StaleF;

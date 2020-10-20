@@ -1,8 +1,3 @@
-%{
-  #include "PropMtr.h"
-  #define pmc_ref(idx,name) PropMtr.Ctrl[idx].name
-  #define pmcf_ref(idx,name) PropMtr_fast.Ctrl[idx].name
-%}
 TM @SLOW@ Hz PMC_RPM_t PMC_@ID@_RPM_SP;
 TM @SLOW@ Hz PMC_Position_t PMC_@ID@_Pos_SP;
 TM @SLOW@ Hz PMC_Position_t PMC_@ID@_Pos_Demand;
@@ -16,8 +11,8 @@ TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status3;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status4;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status5;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status6;
-TM @SLOW@ Hz PMC_DA5 PMC_@ID@_MaxAccel;
-TM @SLOW@ Hz PMC_DA5 PMC_@ID@_MaxDecel;
+TM @SLOW@ Hz PMC_DA5_t PMC_@ID@_MaxAccel;
+TM @SLOW@ Hz PMC_DA5_t PMC_@ID@_MaxDecel;
 TM @SLOW@ Hz PMC_VL_Kp_raw_t PMC_@ID@_VL_Kp;
 TM @SLOW@ Hz PMC_VL_Ki_raw_t PMC_@ID@_VL_Ki;
 TM @SLOW@ Hz PMC_VL_Kd_raw_t PMC_@ID@_VL_Kd;
@@ -27,42 +22,3 @@ TM @SLOW@ Hz PMC_Amp_t PMC_@ID@_I_Demand;
 
 TM @FAST@ Hz PMC_RPM_t PMC_@ID@_RPM;
 TM @FAST@ Hz PMC_Amp_t PMC_@ID@_I_Measured;
-
-Group PMC_@ID@ (PMC_@ID@_RPM_SP,
-    PMC_@ID@_Pos_Measured, PMC_@ID@_Pos_Target, PMC_@ID@_Pos_Demand,
-    PMC_@ID@_MaxAccel, PMC_@ID@_MaxDecel,
-    PMC_@ID@_VL_Kp, PMC_@ID@_VL_Ki, PMC_@ID@_VL_Kd,
-    PMC_@ID@_Pos_SP, PMC_@ID@_Status0, PMC_@ID@_Status1, PMC_@ID@_Status2,
-    PMC_@ID@_Status3, PMC_@ID@_Status4, PMC_@ID@_Status5, PMC_@ID@_Status6,
-    PMC_@ID@_TCL_Kp, PMC_@ID@_TCL_Ki,
-    PMC_@ID@_BusV, PMC_@ID@_I_Demand
-    ) {
-  PMC_@ID@_RPM_SP = pmc_ref(@IDX@,VelocityDemand);
-  PMC_@ID@_Pos_Measured = pmc_ref(@IDX@,PositionMeasured);
-  PMC_@ID@_Pos_Target = pmc_ref(@IDX@,PositionTarget);
-  PMC_@ID@_Pos_Demand = pmc_ref(@IDX@,PositionDemand);
-  PMC_@ID@_MaxAccel = pmc_ref(@IDX@,MaxAccel);
-  PMC_@ID@_MaxDecel = pmc_ref(@IDX@,MaxDecel);
-  PMC_@ID@_VL_Kp = pmc_ref(@IDX@,VL_Kp);
-  PMC_@ID@_VL_Ki = pmc_ref(@IDX@,VL_Ki);
-  PMC_@ID@_VL_Kd = pmc_ref(@IDX@,VL_Kd);
-  PMC_@ID@_Pos_SP = pmc_ref(@IDX@,SetPoint);
-  PMC_@ID@_TCL_Kp = pmc_ref(@IDX@,TCL_Kp);
-  PMC_@ID@_TCL_Ki = pmc_ref(@IDX@,TCL_Ki);
-  PMC_@ID@_Status0 = pmc_ref(@IDX@,Status[0]);
-  PMC_@ID@_Status1 = pmc_ref(@IDX@,Status[1]);
-  PMC_@ID@_Status2 = pmc_ref(@IDX@,Status[2]);
-  PMC_@ID@_Status3 = pmc_ref(@IDX@,Status[3]);
-  PMC_@ID@_Status4 = pmc_ref(@IDX@,Status[4]);
-  PMC_@ID@_Status5 = pmc_ref(@IDX@,Status[5]);
-  PMC_@ID@_Status6 = pmc_ref(@IDX@,Status[6]);
-  PMC_@ID@_BusV = pmc_ref(@IDX@,BusVoltage);
-  PMC_@ID@_I_Demand = pmc_ref(@IDX@,CurrentDemand);
-  PropMtr_obj->synch();
-}
-
-Group PMCF_@ID@ (PMC_@ID@_RPM, PMC_@ID@_I_Measured) {
-  PMC_@ID@_RPM = pmcf_ref(@IDX@,VelocityMeasured);
-  PMC_@ID@_I_Measured = pmcf_ref(@IDX@,CurrentMeasured);
-  PropMtr_fast_obj->synch();
-}

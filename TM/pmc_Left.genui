@@ -1,0 +1,101 @@
+1 PMC_Left_RPM_SP       PMC_Left RPM
+2 PMC_Left_RPM          PMC_Left RPM
+
+1 PMC_Left_I_Demand     PMC_Left Current
+2 PMC_Left_I_Measured   PMC_Left Current
+
+1 PMC_Left_BusV         PMC_Left Voltage
+
+1 PMC_Left_Pos_SP       PMC_Left Position
+1 PMC_Left_Pos_Demand   PMC_Left Position
+1 PMC_Left_Pos_Target   PMC_Left Position
+1 PMC_Left_Pos_Measured PMC_Left Position
+
+1 Bridge_En:PMC_Left_Status0:0 PMC_Left_S Status0
+1 DynBrk_En:PMC_Left_Status0:1 PMC_Left_S Status0
+1 Stop_En:PMC_Left_Status0:2 PMC_Left_S Status0
+1 PosStop_En:PMC_Left_Status0:3 PMC_Left_S Status0
+1 NegStop_En:PMC_Left_Status0:4 PMC_Left_S Status0
+1 PosTrqInh_In:PMC_Left_Status0:5 PMC_Left_S Status0
+1 NegTrqInh_En:PMC_Left_Status0:6 PMC_Left_S Status0
+1 ExtBrk_En:PMC_Left_Status0:7 PMC_Left_S Status0
+1 DrvReset:PMC_Left_Status1:0 PMC_Left_S Status1
+1 DrvIntErr:PMC_Left_Status1:1 PMC_Left_S Status1
+1 ShortCir:PMC_Left_Status1:2 PMC_Left_S Status1
+1 CurOverShoot:PMC_Left_Status1:3 PMC_Left_S Status1
+1 DrvUnderV:PMC_Left_Status1:4 PMC_Left_S Status1
+1 DrvOverV:PMC_Left_Status1:5 PMC_Left_S Status1
+1 DrvOverT:PMC_Left_Status1:6 PMC_Left_S Status1
+
+1 ParRestoreErr:PMC_Left_Status2:0 PMC_Left_S Status2
+1 ParStoreErr:PMC_Left_Status2:1 PMC_Left_S Status2
+1 InvHallState:PMC_Left_Status2:2 PMC_Left_S Status2
+1 PhaseSyncErr:PMC_Left_Status2:3 PMC_Left_S Status2
+1 MotorOverT:PMC_Left_Status2:4 PMC_Left_S Status2
+1 PhaseDetFault:PMC_Left_Status2:5 PMC_Left_S Status2
+1 FBSensorErr:PMC_Left_Status2:6 PMC_Left_S Status2
+1 MotorOverSpeed:PMC_Left_Status2:7 PMC_Left_S Status2
+1 MaxMeasuredPos:PMC_Left_Status2:8 PMC_Left_S Status2
+1 MinMeasuredPos:PMC_Left_Status2:9 PMC_Left_S Status2
+1 CommError:PMC_Left_Status2:10 PMC_Left_S Status2
+1 PWMBrokenWire:PMC_Left_Status2:11 PMC_Left_S Status2
+1 MotionEngErr:PMC_Left_Status2:12 PMC_Left_S Status2
+1 MotionEngAbrt:PMC_Left_Status2:13 PMC_Left_S Status2
+
+1 LogEntryMissed:PMC_Left_Status3:0 PMC_Left_S Status3
+1 SWDisable:PMC_Left_Status3:1 PMC_Left_S Status3
+1 UserDisable:PMC_Left_Status3:2 PMC_Left_S Status3
+1 UserPosInh:PMC_Left_Status3:3 PMC_Left_S Status3
+1 UserNegInh:PMC_Left_Status3:4 PMC_Left_S Status3
+1 CurLimiting:PMC_Left_Status3:5 PMC_Left_S Status3
+1 ContCurFoldback:PMC_Left_Status3:6 PMC_Left_S Status3
+1 CurLoopSat:PMC_Left_Status3:7 PMC_Left_S Status3
+1 UserUnderV:PMC_Left_Status3:8 PMC_Left_S Status3
+1 UserOverV:PMC_Left_Status3:9 PMC_Left_S Status3
+1 NonSinComm:PMC_Left_Status3:10 PMC_Left_S Status3
+1 PhaseDetectActive:PMC_Left_Status3:11 PMC_Left_S Status3
+1 MotionEngActive:PMC_Left_Status3:12 PMC_Left_S Status3
+1 UserAuxDisable:PMC_Left_Status3:13 PMC_Left_S Status3
+1 ShuntRegActive:PMC_Left_Status3:14 PMC_Left_S Status3
+1 PhaseDetectDone:PMC_Left_Status3:15 PMC_Left_S Status3
+
+1 ZeroVel:PMC_Left_Status4:0 PMC_Left_S Status4
+1 AtCommand:PMC_Left_Status4:1 PMC_Left_S Status4
+1 VelFollErr:PMC_Left_Status4:2 PMC_Left_S Status4
+1 PosTargVelLim:PMC_Left_Status4:3 PMC_Left_S Status4
+1 NegTargVelLim:PMC_Left_Status4:4 PMC_Left_S Status4
+1 CmdLimiterAct:PMC_Left_Status4:5 PMC_Left_S Status4
+1 InHomPos:PMC_Left_Status4:6 PMC_Left_S Status4
+1 PosFollErr:PMC_Left_Status4:7 PMC_Left_S Status4
+1 MaxTargPosLim:PMC_Left_Status4:8 PMC_Left_S Status4
+1 MinTargPosLim:PMC_Left_Status4:9 PMC_Left_S Status4
+1 SetPosActive:PMC_Left_Status4:10 PMC_Left_S Status4
+1 HomingActive:PMC_Left_Status4:12 PMC_Left_S Status4
+1 SafeTrqOff:PMC_Left_Status4:13 PMC_Left_S Status4
+1 HomingDone:PMC_Left_Status4:14 PMC_Left_S Status4
+1 ZeroPos:PMC_Left_Status4:15 PMC_Left_S Status4
+
+1 CmddStop:PMC_Left_Status5:6 PMC_Left_S Status5
+1 UserStop:PMC_Left_Status5:7 PMC_Left_S Status5
+1 Cap1Active:PMC_Left_Status5:8 PMC_Left_S Status5
+1 Cap2Active:PMC_Left_Status5:9 PMC_Left_S Status5
+1 Cap3Active:PMC_Left_Status5:10 PMC_Left_S Status5
+1 CmddPosLim:PMC_Left_Status5:11 PMC_Left_S Status5
+1 CmddNegLim:PMC_Left_Status5:12 PMC_Left_S Status5
+
+1 AbsPosValid:PMC_Left_Status6:0 PMC_Left_S Status6
+1 PosStopActive:PMC_Left_Status6:1 PMC_Left_S Status6
+1 NegStopActive:PMC_Left_Status6:2 PMC_Left_S Status6
+1 ConfigSelect:PMC_Left_Status6:4 PMC_Left_S Status6
+1 BrakeCommand:PMC_Left_Status6:5 PMC_Left_S Status6
+1 DigOut1:PMC_Left_Status6:6 PMC_Left_S Status6
+1 DigOut2:PMC_Left_Status6:7 PMC_Left_S Status6
+
+1 PMC_Left_MaxAccel     PMC_Left Accel
+1 PMC_Left_MaxDecel     PMC_Left Accel
+
+1 PMC_Left_VL_Kp        PMC_Left_G Gains
+1 PMC_Left_VL_Ki        PMC_Left_G Gains
+1 PMC_Left_VL_Kd        PMC_Left_G Gains
+1 PMC_Left_TCL_Kp       PMC_Left_G Gains
+1 PMC_Left_TCL_Ki       PMC_Left_G Gains
