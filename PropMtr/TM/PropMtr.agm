@@ -7,6 +7,7 @@ mode (types) {
   tmcbase = pmc_types.tmc:pmc_types.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   colbase = pmc_col.tmc:pmc_col.tmc.in
+  genuibase = pmc.genui:pmc.genui.in
   DISTRIB = PropMtr
   CPPFLAGS = -I @MODDIR@/..
   %%
