@@ -19,7 +19,7 @@ Group PMC_Left (
     PMC_Left_TCL_Kp, PMC_Left_TCL_Ki,
     PMC_Left_BusV, PMC_Left_I_Demand,
     /*
-    PMC_Left_RPM_SP,
+    PMC_Right_RPM_SP,
     PMC_Right_Pos_Measured, PMC_Right_Pos_Target, PMC_Right_Pos_Demand,
     PMC_Right_MaxAccel, PMC_Right_MaxDecel,
     PMC_Right_VL_Kp, PMC_Right_VL_Ki, PMC_Right_VL_Kd,

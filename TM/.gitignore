@@ -17,6 +17,12 @@ scopexdispnc.cc
 scopexdispncoui.cc
 scopexdispnc.o
 scopexdispncoui.o
+scopexalgoa.tmc
+scopexalgo.cc
+scopexalgooui.cc
+scopexalgo.o
+scopexalgooui.o
+doit.dep
 scopexengext.cdf
 scopexengextcdf.oui
 scopexengextcdf.tmc
@@ -34,4 +40,6 @@ scopexcol
 scopexsrvr
 scopexcltnc
 scopexdispnc
+scopexalgo
+doit
 scopexengext

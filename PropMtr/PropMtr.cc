@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
   
   // Setup Telemetry
   TM_data_sndr *TM =
-    new TM_data_sndr("TM", "PropMtr", 0, (void *)&PropMtr, sizeof(PropMtr));
+    new TM_data_sndr("TM", 0, "PropMtr", (void *)&PropMtr, sizeof(PropMtr));
   TM_data_sndr *TMf =
-    new TM_data_sndr("TMf", "PropMtr_fast", 0, (void *)&PropMtr_fast,
+    new TM_data_sndr("TMf", 0, "PropMtr_fast", (void *)&PropMtr_fast,
       sizeof(PropMtr_fast));
   TMf->set_gflag_no(1);
   

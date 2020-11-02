@@ -1,7 +1,19 @@
 Input "PropMtr_Left.tbl";
 Input "TMBase.tbl";
 
+PropStale {
+  HBox { +-; Title: "PMC Stale"; -+ };
+  HBox {
+    { Slow: (PMC_Stale,3);
+      Fast: (PMC_StaleF,3);
+    }; HGlue 0+10;
+  }
+}
+
 {
-  HBox { |+; [PropMtr_Left]; |+; [TMbaseB]; |+ };
+  HBox { |+; {
+      [PropMtr_Left];
+      HBox { [PropStale]; |; [TMbaseB] };
+    }; |+ };
   -;
 }

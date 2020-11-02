@@ -5,16 +5,18 @@ genuibase = scopex.genui
 Module TMbase
 Module PropMtr mode=types ID=Left IDX=0 ADDR=63 FAST=2 SLOW=1
 # Module PropMtr ID=Right ADDR=64 IDX=1 FAST=2 SLOW=1
+Module PropMtr mode=groups
 
-TGTDIR = $(FLIGHT_NODE)/home/scopex
+TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-# SCRIPT = doscopexclt.sh cyg_nc.sh
-IDISTRIB = interact.sh
+DISTRIB = interact services
 
 scopexcol : -lsubbuspp
-scopexsrvr : CAN.oui -lsubbuspp
-#scopexsrvr :
+scopexsrvr :
+# scopexsrvr : CAN.oui -lsubbuspp
 scopexclt :
 scopexdisp : scopex.tbl
+scopexalgo : scopex.tma
+doit : scopex.doit
 %%
 CXXFLAGS+=-g
