@@ -1,5 +1,5 @@
 Input "PropMtr_Left.tbl";
-Input "TMBase.tbl";
+Input "TMbase.tbl";
 
 PropStale {
   HBox { +-; Title: "PMC Stale"; -+ };
