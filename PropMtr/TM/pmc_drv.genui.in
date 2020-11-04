@@ -91,9 +91,6 @@
 @SLOW@ DigOut1:PMC_@ID@_Status6:6 PMC_@ID@_S Status6
 @SLOW@ DigOut2:PMC_@ID@_Status6:7 PMC_@ID@_S Status6
 
-@SLOW@ PMC_@ID@_MaxAccel     PMC_@ID@ Accel
-@SLOW@ PMC_@ID@_MaxDecel     PMC_@ID@ Accel
-
 @SLOW@ PMC_@ID@_VL_Kp        PMC_@ID@_G Gains
 @SLOW@ PMC_@ID@_VL_Ki        PMC_@ID@_G Gains
 @SLOW@ PMC_@ID@_VL_Kd        PMC_@ID@_G Gains

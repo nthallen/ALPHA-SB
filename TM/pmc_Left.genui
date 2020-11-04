@@ -91,9 +91,6 @@
 1 DigOut1:PMC_Left_Status6:6 PMC_Left_S Status6
 1 DigOut2:PMC_Left_Status6:7 PMC_Left_S Status6
 
-1 PMC_Left_MaxAccel     PMC_Left Accel
-1 PMC_Left_MaxDecel     PMC_Left Accel
-
 1 PMC_Left_VL_Kp        PMC_Left_G Gains
 1 PMC_Left_VL_Ki        PMC_Left_G Gains
 1 PMC_Left_VL_Kd        PMC_Left_G Gains

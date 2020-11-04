@@ -129,11 +129,6 @@ namespace DAS_IO { namespace Modbus {
       RTU::modbus_device::RH_uint32);
     MB->enqueue_poll(req, 0);
     
-    // Max Accel/Decel
-    req = MB->new_modbus_req();
-    req->setup(this, 3, 28, 4, (void*)&(Ctrl->MaxAccel));
-    MB->enqueue_poll(req, 0);
-    
     // Velocity Loop Gains
     req = MB->new_modbus_req();
     req->setup(this, 3, 251, 6, (void*)&(Ctrl->VL_Kp),

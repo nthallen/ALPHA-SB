@@ -11,8 +11,6 @@ TM 1 Hz PMC_Status_Word PMC_Left_Status3;
 TM 1 Hz PMC_Status_Word PMC_Left_Status4;
 TM 1 Hz PMC_Status_Word PMC_Left_Status5;
 TM 1 Hz PMC_Status_Word PMC_Left_Status6;
-TM 1 Hz PMC_DA5_t PMC_Left_MaxAccel;
-TM 1 Hz PMC_DA5_t PMC_Left_MaxDecel;
 TM 1 Hz PMC_VL_Kp_raw_t PMC_Left_VL_Kp;
 TM 1 Hz PMC_VL_Ki_raw_t PMC_Left_VL_Ki;
 TM 1 Hz PMC_VL_Kd_raw_t PMC_Left_VL_Kd;

@@ -5,6 +5,7 @@ Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ ] {
 
 mode (types) {
   tmcbase = pmc_types.tmc:pmc_types.tmc.in
+  colbase = pmc_col.tmc:pmc_col.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   genuibase = pmc.genui:pmc.genui.in
   DISTRIB = PropMtr

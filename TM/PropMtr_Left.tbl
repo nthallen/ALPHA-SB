@@ -19,8 +19,6 @@ PropMtr_Left {
       (PMC_Left_Status5,16);
       (PMC_Left_Status6,16);
     }; |+; {
-      MaxAcc:    (PMC_Left_MaxAccel,6) "RPM/s";
-      MaxDec:    (PMC_Left_MaxDecel,6) "RPM/s";
       VL_Kp:     (PMC_Left_VL_Kp,8);
       VL_Ki:     (PMC_Left_VL_Ki,8);
       VL_Kd:     (PMC_Left_VL_Kd,7) "e-7";

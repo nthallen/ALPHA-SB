@@ -11,8 +11,6 @@ TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status3;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status4;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status5;
 TM @SLOW@ Hz PMC_Status_Word PMC_@ID@_Status6;
-TM @SLOW@ Hz PMC_DA5_t PMC_@ID@_MaxAccel;
-TM @SLOW@ Hz PMC_DA5_t PMC_@ID@_MaxDecel;
 TM @SLOW@ Hz PMC_VL_Kp_raw_t PMC_@ID@_VL_Kp;
 TM @SLOW@ Hz PMC_VL_Ki_raw_t PMC_@ID@_VL_Ki;
 TM @SLOW@ Hz PMC_VL_Kd_raw_t PMC_@ID@_VL_Kd;

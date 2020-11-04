@@ -1,13 +1,13 @@
 
 --------Frame Statistics-----------
 Major Frame: 2 minor frames, 1 Hz
-Minor Frame: 48 bytes, 2 Hz
+Minor Frame: 44 bytes, 2 Hz
 Effective Frame Dimensions:
-  2 Rows 48 Columns
+  2 Rows 44 Columns
   2 rows/sec
-  768 bits/sec
-  Data:  696 bits/sec  91 %
-  Synch: 64 bits/sec  8 %
+  704 bits/sec
+  Data:  632 bits/sec  90 %
+  Synch: 64 bits/sec  9 %
   Empty: 8 bits/sec  1 %
 -------End of Frame Statistics-----
 
@@ -18,8 +18,8 @@ Effective Frame Dimensions:
 2/1 Hz 1 bytes Member PMC_StaleF (1,0,2,1)
 2/1 Hz 2 bytes Member PMC_Left_I_Measured (1,0,3,2)
 2/1 Hz 4 bytes Member PMC_Left_RPM (1,0,5,4)
-2/1 Hz 2 bytes Datum Synch (1,0,46,2)
-1/1 Hz 63 bytes Group PMC_Left (2,0,9,37) (2,1,9,26)
+2/1 Hz 2 bytes Datum Synch (1,0,42,2)
+1/1 Hz 55 bytes Group PMC_Left (2,0,9,33) (2,1,9,22)
 1/1 Hz 1 bytes Member PMC_Stale (2,0,9,1)
 1/1 Hz 2 bytes Member PMC_Left_I_Demand (2,0,10,2)
 1/1 Hz 2 bytes Member PMC_Left_BusV (2,0,12,2)
@@ -34,17 +34,15 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Member PMC_Left_Status0 (2,0,30,2)
 1/1 Hz 4 bytes Member PMC_Left_Pos_SP (2,0,32,4)
 1/1 Hz 4 bytes Member PMC_Left_VL_Kd (2,0,36,4)
-1/1 Hz 4 bytes Member PMC_Left_VL_Ki (2,0,40,4)
-1/1 Hz 4 bytes Member PMC_Left_VL_Kp (2,0,44,2) (2,1,9,2)
-1/1 Hz 4 bytes Member PMC_Left_MaxDecel (2,1,11,4)
-1/1 Hz 4 bytes Member PMC_Left_MaxAccel (2,1,15,4)
-1/1 Hz 4 bytes Member PMC_Left_Pos_Demand (2,1,19,4)
-1/1 Hz 4 bytes Member PMC_Left_Pos_Target (2,1,23,4)
-1/1 Hz 4 bytes Member PMC_Left_Pos_Measured (2,1,27,4)
-1/1 Hz 4 bytes Member PMC_Left_RPM_SP (2,1,31,4)
-1/1 Hz 4 bytes Datum SysTDrift (2,1,35,4)
-1/1 Hz 2 bytes Datum CPU_Pct (2,1,39,2)
-1/1 Hz 2 bytes Datum Disk (2,1,41,2)
-1/1 Hz 2 bytes Datum memused (2,1,43,2)
+1/1 Hz 4 bytes Member PMC_Left_VL_Ki (2,0,40,2) (2,1,9,2)
+1/1 Hz 4 bytes Member PMC_Left_VL_Kp (2,1,11,4)
+1/1 Hz 4 bytes Member PMC_Left_Pos_Demand (2,1,15,4)
+1/1 Hz 4 bytes Member PMC_Left_Pos_Target (2,1,19,4)
+1/1 Hz 4 bytes Member PMC_Left_Pos_Measured (2,1,23,4)
+1/1 Hz 4 bytes Member PMC_Left_RPM_SP (2,1,27,4)
+1/1 Hz 4 bytes Datum SysTDrift (2,1,31,4)
+1/1 Hz 2 bytes Datum CPU_Pct (2,1,35,2)
+1/1 Hz 2 bytes Datum Disk (2,1,37,2)
+1/1 Hz 2 bytes Datum memused (2,1,39,2)
 -------End of PCM Definition-------
 

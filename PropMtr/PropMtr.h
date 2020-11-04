@@ -25,8 +25,6 @@
   // uint16_t AI1;          // 4/15/- (analog input)
 
 
-  uint32_t // 3/28/2 Max Acceleration words 0, 1 (2X16-bit)
-  uint32_t // 3/30/2 Max Deceleration words 0, 1 (2X16-bit
   uint16_t // 3/46/1 Torque Current Loop Proportional Gain (16-bit)
   uint16_t // 3/47/1 Torque Current Loop Integral Gain (16-bit)
   uint32_t // 3/251/2 Velocity Loop Proportional Gain: Set 0 (32-bit)
@@ -42,8 +40,6 @@ typedef struct __attribute__((__packed__)) {
   int32_t  PositionMeasured; // 4/257/2(32) /6
   int32_t  PositionTarget;   // 4/259/2(32)
   int32_t  PositionDemand;   // 4/261/2(32)
-  int32_t  MaxAccel;         // 3/28/2(16) /4
-  int32_t  MaxDecel;         // 3/30/2(16)
   int32_t  VL_Kp;            // 3/251/2(32) /6
   int32_t  VL_Ki;            // 3/253/2(32)
   int32_t  VL_Kd;            // 3/255/2(32)
