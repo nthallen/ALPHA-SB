@@ -19,18 +19,19 @@ int main(int argc, char **argv) {
   Loop ELoop;
   
   // Setup Telemetry
-/*
+
   TM_data_sndr *TM =
     new TM_data_sndr("TM", 0, "PropMtr", (void *)&PropMtr, sizeof(PropMtr));
-*/
+
   TM_data_sndr *TMf =
     new TM_data_sndr("TMf", 0, "PropMtr_fast", (void *)&PropMtr_fast,
       sizeof(PropMtr_fast));
   TMf->set_gflag_no(1);
   
   // Setup Modbus
-/*   Modbus::RTU *MB = new Modbus::PMC("RTU", 80, PropMtr_port);
+  Modbus::RTU *MB = new Modbus::PMC("RTU", 80, PropMtr_port);
   MB->setup(115200, 8, 'n', 1, 5, 1);
+  // MB->setup(9600, 8, 'n', 1, 5, 1);
   MB->flush_input();
   
   // Setup Modbus Devices
@@ -42,18 +43,19 @@ int main(int argc, char **argv) {
   PropMtrCmd *Cmd = new PropMtrCmd(MB);
   Cmd->connect();
   ELoop.add_child(Cmd);
- */
- /*
+
   TM->connect();
   ELoop.add_child(TM);
- */
+
   TMf->connect();
   ELoop.add_child(TMf);
 
-  // ELoop.add_child(MB);
+  ELoop.add_child(MB);
+
   msg(0, "%s %s Starting", DAS_IO::AppID.fullname, DAS_IO::AppID.rev);
   ELoop.event_loop();
   ELoop.delete_children();
   msg(0, "%s Terminating", DAS_IO::AppID.name);
   return 0;
 }
+

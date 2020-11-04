@@ -6,5 +6,5 @@
   Launch      tm_gen scopexcol -v
   Launch      cmd    scopexsrvr -v
   Launch      -      tmdf
-# Launch      -      PropMtr -p /dev/ttyS7 -v
+  Launch      -      PropMtr -p /dev/ttyUSB0 -v
   Launch      -TMC-  scopexalgo -v
