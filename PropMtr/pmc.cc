@@ -9,6 +9,7 @@ namespace DAS_IO { namespace Modbus {
   PMC::PMC(const char *iname, int bufsz, const char *path)
         : RTU(iname, bufsz, path) {
     cur_fast_poll = fast_polls.begin();
+    flags |= gflag(1);
   }
 
   void PMC::enqueue_poll(modbus_req *req, int gflag_no) {

@@ -91,6 +91,6 @@ Group PMCF_Left (
   PMC_Right_RPM = pmcf_ref(1,VelocityMeasured);
   PMC_Right_I_Measured = pmcf_ref(1,CurrentMeasured);
   */
-  PMC_StaleF = PropMtr_obj->Stale(255);
+  PMC_StaleF = PropMtr_fast_obj->Stale(255);
   PropMtr_fast_obj->synch();
 }
