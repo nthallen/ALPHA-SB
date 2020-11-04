@@ -179,8 +179,7 @@ namespace DAS_IO { namespace Modbus {
     
     // Current Measured
     req = MB->new_modbus_req();
-    req->setup(this, 4, 14, 1, (void*)&(Ctrl1->CurrentMeasured),
-      RTU::modbus_device::RH_uint32);
+    req->setup(this, 4, 14, 1, (void*)&(Ctrl1->CurrentMeasured));
     MB->enqueue_poll(req, 1);
   }
 
