@@ -8,13 +8,12 @@ mode (types) {
   colbase = pmc_col.tmc:pmc_col.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   genuibase = pmc.genui:pmc.genui.in
-  DISTRIB = PropMtr
+  DISTRIB = @MODDIR@/../PropMtr
   CPPFLAGS = -I @MODDIR@/..
   %%
-.PHONY : clean-PropMtr
-PropMtr :
+.PHONY : clean-PropMtr @MODDIR@/../PropMtr
+@MODDIR@/../PropMtr :
 	$(MAKE) --directory=@MODDIR@/..
-	cp @MODDIR@/../PropMtr PropMtr
 clean-dist : clean-PropMtr
 clean-PropMtr :
 	$(MAKE) --directory=@MODDIR@/.. clean
