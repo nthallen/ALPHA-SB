@@ -40,7 +40,7 @@ Calibration (PMC_Bus_Voltage_t, PMC_VOLTS) {
   16384, 202.65
 }
 
-TM typedef uint16_t PMC_Amp_t { text "%6.2lf"; Convert PMC_AMPS; }
+TM typedef int16_t PMC_Amp_t { text "%6.2lf"; Convert PMC_AMPS; }
 /* cts = A * 2^13 / K_P
  * K_P = Max Peak Drive Current = 25A for DZRALTE_025L200
  */
