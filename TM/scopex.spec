@@ -17,6 +17,7 @@ scopexsrvr :
 scopexclt :
 scopexdisp : scopex.tbl
 scopexalgo : scopex.tma
+scopexjsonext : $genuibase
 doit : scopex.doit
 %%
 CXXFLAGS+=-g

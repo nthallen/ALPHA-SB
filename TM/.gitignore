@@ -22,6 +22,13 @@ scopexalgo.cc
 scopexalgooui.cc
 scopexalgo.o
 scopexalgooui.o
+scopexjsonext.cdf
+scopexjsonextcdf.oui
+scopexjsonextcdf.tmc
+scopexjsonext.cc
+scopexjsonextoui.cc
+scopexjsonext.o
+scopexjsonextoui.o
 doit.dep
 scopexengext.cdf
 scopexengextcdf.oui
@@ -41,5 +48,6 @@ scopexsrvr
 scopexcltnc
 scopexdispnc
 scopexalgo
+scopexjsonext
 doit
 scopexengext

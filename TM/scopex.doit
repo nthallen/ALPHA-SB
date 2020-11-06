@@ -1,4 +1,5 @@
-display scopexdisp
+display scopexdisp -n disp
 client scopexclt
+extraction scopexjsonext -n json
 memo
 batchfile interact
