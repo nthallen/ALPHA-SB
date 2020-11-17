@@ -1,5 +1,6 @@
 tmcbase = base.tmc
-
+swsbase = scopex.sws
+swsbase = pmc.sws
 genuibase = scopex.genui
 
 Module TMbase
@@ -16,7 +17,7 @@ scopexsrvr :
 # scopexsrvr : CAN.oui -lsubbuspp
 scopexclt :
 scopexdisp : scopex.tbl
-scopexalgo : scopex.tma
+scopexalgo : scopex.tma pmc_left.tma
 scopexjsonext : $genuibase
 doit : scopex.doit
 %%

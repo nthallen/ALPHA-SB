@@ -94,14 +94,14 @@ namespace DAS_IO { namespace Modbus {
 
   void PMC_dev::RH_digout(RTU::modbus_req *req, RTU::modbus_device *dev,
           RTU *MB) {
-    // This will be used for two random status bits. They should both
-    // appear at bit 0 in the corresponding data
+    // This will be used for two random status bits. They should
+    // appear as the two least significant bits in the corresponding data.
     // dest will point to a uint16_t word, (status[6]) and the single bits
-    // will be mapped in to bits 6 and 7 respectively
+    // 0 and 1 will be mapped in to bits 6 and 7 respectively.
     uint8_t temp;
     MB->read_pdu(&temp, 1);
     uint16_t temp16 = temp << 6;
-    uint16_t mask = 0xC0;
+    uint16_t mask   = 0x03 << 6; // 0xC0;
     uint16_t *dest = (uint16_t*)(req->dest);
     *dest = (*dest & ~mask) | (temp16 & mask);
   }
@@ -151,17 +151,17 @@ namespace DAS_IO { namespace Modbus {
     req->setup(this, 4, 5, 7, (void*)&(Ctrl->Status[0]));
     MB->enqueue_poll(req, 0);
     
-    // Configuration selection mapped to Status[6] bit 0x10
+    // Configuration selection mapped to Status[6] bit 4 (0x10)
     req = MB->new_modbus_req();
     req->setup(this, 2, 192, 1, (void*)&(Ctrl->Status[6]), RH_cfg);
     MB->enqueue_poll(req, 0);
     
-    // Brake command User Bit 1, mapped to Status[6] bit 0x20
+    // Brake command User Bit 0, mapped to Status[6] bit 0x20
     req = MB->new_modbus_req();
     req->setup(this, 3, 0, 1, (void*)&(Ctrl->Status[6]), RH_userbit);
     MB->enqueue_poll(req, 0);
     
-    // Digital outputs 1 and 2 mapped to Status[6]
+    // Digital outputs 1 and 2 mapped to Status[6] 6 and 7
     req = MB->new_modbus_req();
     req->setup(this, 2, 128, 2, (void*)&(Ctrl->Status[6]), RH_digout);
     MB->enqueue_poll(req, 0);

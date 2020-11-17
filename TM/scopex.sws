@@ -1,0 +1,2 @@
+SW_Variable: <uint8_t,UCHAR> SWStat SW Status
+  SWS_SHUTDOWN       255 Shutdown Full:          Validate Shutdown; break;

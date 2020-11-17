@@ -1,0 +1,82 @@
+Partition
+
+State PMC_Idle {}
+State PMC_Activate {}
+State PMC_Stop {}
+State PMC_Lock {}
+
+Partition
+
+State PMC_Left_Init {
+   +5 Validate PMC_Left_Stop;
+}
+
+State PMC_Left_Stop {
+  # If bridge is enabled and in velocity mode and not at zero velocity goto spin down
+   +1 { if ((!(PMC_Left_Status6 & 0x10)) && (PMC_Left_Status0 & 0x01) &&
+            (PMC_Left_Status4 & 0x01)) {
+          Validate PMC_Left_Spin_Down;
+        }
+      }
+   +1 Validate PMC_Left_Idle;
+}
+
+State PMC_Left_Spin_Down {
+      > PMC Left Velocity Set 0 RPM
+      Hold until (PMC_Left_Status0 & 0x01) or 10;
+   +1 Validate PMC_Left_Idle;
+}
+
+State PMC_Left_Idle {
+  > PMC Left Brake Apply
+  > PMC Left Bridge Disable
+  depending on (PMC_Activate) {
+    Validate PMC_Left_Activate;
+  }
+  depending on (PMC_Lock) {
+    Validate PMC_Left_Lock;
+  }
+}
+
+State PMC_Left_Activate {
+      > PMC Left Bridge Disable
+   +1 > PMC Left Select Velocity Control
+   +1 > PMC Left Velocity Set 0 RPM
+   +1 > PMC Left Bridge Enable
+   +2 > PMC Left Brake Release
+   +1 Validate PMC_Left_Ready;
+}
+
+State PMC_Left_Ready {
+  depending on (PMC_Stop) {
+    Validate PMC_Left_Stop;
+  }
+  depending on (PMC_Lock) {
+    Validate PMC_Left_Stop;
+  }
+}
+
+State PMC_Left_Lock {
+  # If bridge is enabled and in velocity mode and not at zero velocity goto spin down
+   +1 { if ((!(PMC_Left_Status6 & 0x10)) && (PMC_Left_Status0 & 0x01) &&
+            (PMC_Left_Status4 & 0x01)) {
+          Validate PMC_Left_Spin_Down;
+        }
+      }
+   +1 > PMC Left Bridge Disable
+   +1 > PMC Left Select Position Control
+   +1 > PMC Left Move to 0
+   +1 > PMC Left Bridge Enable
+   +1 > PMC Left Brake Release
+   +1 > PMC Left Home Execute Enable
+      Hold until (PMC_Left_Status4 & 0x1000) or 5; # Home Active
+      Hold until (PMC_Left_Status4 & 0x4000) or 10; # Homing Complete
+   +1 > PMC Left Home Execute Disable
+      > PMC Left Move to 1800
+      Hold until ((PMC_Left_Status4 & 0x0003) == 0x3) or 5; # Zero Vel & At
+   +1 > PMC Left Brake Apply
+   +1 > PMC Left Bridge Disable
+      Validate PMC_Left_Locked;
+}
+
+State PMC_Left_Locked {}
