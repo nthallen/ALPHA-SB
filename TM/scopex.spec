@@ -17,7 +17,7 @@ scopexsrvr :
 # scopexsrvr : CAN.oui -lsubbuspp
 scopexclt :
 scopexdisp : scopex.tbl
-scopexalgo : scopex.tma pmc_left.tma
+scopexalgo : scopex.tma pmc_Left.tma
 scopexjsonext : $genuibase
 doit : scopex.doit
 %%
