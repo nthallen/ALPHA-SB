@@ -17,6 +17,7 @@ scopexdispnc.cc
 scopexdispncoui.cc
 scopexdispnc.o
 scopexdispncoui.o
+scopexalgosws.tma
 scopexalgoa.tmc
 scopexalgo.cc
 scopexalgooui.cc

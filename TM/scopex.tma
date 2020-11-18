@@ -1,3 +1,6 @@
 State Init {
   > Telemetry Start
 }
+
+State Shutdown {
+}

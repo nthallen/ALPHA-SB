@@ -1,0 +1,122 @@
+#! /bin/bash
+function nl_error {
+  echo "getrun: $*" >&2
+  exit 1
+}
+
+flt=''
+gse=dpi1
+HomeDir=/home/scopex
+StartupScript=SCoPEx_startup
+# Exp is used for retrieve the log file $Exp.log
+Exp=scopex
+# ANAL_Dir is the directory where run-specific analysis directories
+# are located. Can be '.'.
+ANAL_Dir=Analysis
+RAW_Dir=RAW
+RunType=''
+Copy_CSV=yes
+Copy_SSP=no
+Decimate=no
+Matlab=yes
+SCPOPTS=-Cp
+
+function usage {
+  echo "./getrun [options] [axis] [ [runtype] <run> ]+"
+  echo " options:"
+  echo "   nocsv: Don't copy csv files or start matlab"
+  echo "   nomatlab: Don't start matlab"
+  echo "   decimate: Retrieve only every 10th scan"
+  echo "   gse=<addr>: Override gse (default: $gse)"
+  echo " runtype: flight, preflt, cal, data, junk"
+  echo "   runtype selection stays in effect until another runtype is selected"
+  echo " axis: SSP"
+  echo "   copy SSP data for the specified axis"
+  echo "   axis selections are 'sticky' and apply to all runs"
+  exit 0
+}
+
+function do_scp {
+  eval time scp $SCPOPTS $*
+}
+
+function do_tar {
+  # do_tar $run $dir
+  # Accesses globals:
+  #   use_relay gse relay flt HomeDir RunType Decimate
+  run=$1
+  src=$2
+  PC="ProxyCommand /usr/bin/ssh $relay /usr/bin/nc $gse 22"
+  DC=''
+  [ $Decimate = yes ] && DC='--exclude="*[1-9].dat"'
+  echo Retrieving $HomeDir/raw/$RunType/$run/$src
+  eval time ssh $gse tar -czf- -C $HomeDir/raw/$RunType/$run $DC $src | tar -C $RAW_Dir/$run$flt -xzf-
+}
+
+for run in $*; do
+  case $run in
+    -f) flt=F; RunType=flight;;
+    nocsv) Copy_CSV=no;;
+    [Ss][Ss][Pp]) Copy_SSP=yes;;
+    gse=*) gse=${run#gse=};;
+    decimate) Decimate=yes;;
+    nomatlab) Matlab=no;;
+    help) usage;;
+    --help) usage;;
+    cal) flt=''; RunType=cal;;
+    flight) flt=F; RunType=flight;;
+    data) flt=''; RunType=data;;
+    junk) flt=''; RunType=junk;;
+    preflt) flt=''; RunType=preflt;;
+    [1-9][0-9][0-9][0-9][0-9][0-9].[0-9]*)
+      echo $run
+      [ $Copy_SSP = yes -a -z "$RunType" ] &&
+        nl_error "Cannot retrieve SSP scans without RunType (cal/flight/data/junk/preflt)"
+      [ -d $RAW_Dir ] || mkdir $RAW_Dir
+      [ -d $RAW_Dir/$run$flt ] || mkdir $RAW_Dir/$run$flt
+      gsecolon=''
+      [ -n "$gse" ] && gsecolon="$gse:"
+      if [ $Copy_CSV = yes ]; then
+        do_scp $gsecolon$HomeDir/anal/$run/*.csv $RAW_Dir/$run$flt
+        [ $Matlab = yes ] && echo "$RAW_Dir/$run$flt" >>runs.dat
+      fi
+      if [ -n "$RunType" ]; then
+        [ -f $RAW_Dir/$run$flt/$Exp.log ] ||
+          do_scp $gsecolon$HomeDir/raw/$RunType/$run/$Exp.log $RAW_Dir/$run$flt/$Exp.log
+        [ -f $RAW_Dir/$run$flt/saverun.log ] ||
+          do_scp $gsecolon$HomeDir/raw/$RunType/$run/saverun.log $RAW_Dir/$run$flt/saverun.log
+      fi;;
+    *) nl_error "Unrecognized option: '$run'";;
+  esac
+done
+
+[ -f runs.dat ] && [ "$Matlab" = "yes" ] && matlab -sd `cygpath -w $PWD` -r $StartupScript
+for run in $*; do
+  case $run in
+    -f) :;;
+    [Ss][Ss][Pp]) :;;
+    gse=*) :;;
+    nocsv) :;;
+    decimate) :;;
+    nomatlab) :;;
+    cal) flt=''; RunType=cal;;
+    flight) flt=F; RunType=flight;;
+    data) flt=''; RunType=data;;
+    junk) flt=''; RunType=junk;;
+    preflt) flt=''; RunType=preflt;;
+    [1-9][0-9][0-9][0-9][0-9][0-9].[0-9]*)
+      echo $run
+      if [ -n "$RunType" ]; then
+        if [ $Copy_SSP = yes ]; then
+          [ -f $RAW_Dir/$run$flt/waves.m ] ||
+            do_scp $gsecolon$HomeDir/raw/$RunType/$run/Base/waves.m $RAW_Dir/$run$flt/waves.m
+          [ -d $ANAL_Dir ] || mkdir $ANAL_Dir
+          [ -d $ANAL_Dir/$run$flt ] || mkdir $ANAL_Dir/$run$flt
+        fi
+        if [ $Copy_SSP = yes ]; then
+          do_tar $run SSP
+        fi
+      fi;;
+    *) nl_error "Unrecognized option in second pass: '$run'";;
+  esac
+done
