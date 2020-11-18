@@ -13,6 +13,7 @@ class PropMtrCmd : public DAS_IO::Client {
     bool app_input();
   protected:
     DAS_IO::Modbus::RTU *MB;
+    void clear_to_newline();
 };
 
 extern const char *PropMtr_port;

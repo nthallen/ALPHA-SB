@@ -202,21 +202,26 @@ bool PropMtrCmd::app_input() {
         not_hex(func) || not_str(":") ||
         not_hex(addr) || not_str(":") ||
         not_hex(count)) {
-      if (cp < nc)
-        consume(nc);
+      if (cp<nc) {
+        clear_to_newline();
+      }
       return false;
     }
     arg_count = (func == 15) ? (count+7)/8 : count;
     if (arg_count < 1 || arg_count > 2) {
       report_err("%s: Unsupported count %d for function %d", iname, count, func);
-      consume(nc);
+      clear_to_newline();
       return false;
     }
     for (int i = 0; i < arg_count; ++i) {
       if (not_str(":") || not_hex(data[i])) {
-        if (cp < nc) consume(nc);
+        if (cp < nc) clear_to_newline();
         return false;
       }
+    }
+    if (not_str("\n")) { // The final newline
+      if (cp < nc) clear_to_newline();
+      return false;
     }
     if (func == 15 && arg_count == 2) {
       data[0] = (data[0] & 0xFF) | ((data[1] << 8) & 0xFF00);
@@ -224,7 +229,7 @@ bool PropMtrCmd::app_input() {
     DAS_IO::Modbus::RTU::modbus_device *dev = MB->find_device(devID);
     if (devID > 0xFF || !dev) {
       report_err("%s: Invalid device ID %d", iname, devID);
-      consume(nc);
+      clear_to_newline();
       return false;
     }
     DAS_IO::Modbus::RTU::modbus_req *req = MB->new_modbus_req();
@@ -241,7 +246,19 @@ bool PropMtrCmd::app_input() {
       msg(0, "%s: Recd %02X:%02X:%04X:%04X:%04X:%04X",
         iname, devID, func, addr, count, data[0], data[1]);
     MB->enqueue_command(req);
-    report_ok(nc);
+    report_ok(cp);
   }
   return false;
+}
+
+void PropMtrCmd::clear_to_newline() {
+  while (cp < nc) {
+    if (buf[cp] == '\n') {
+      ++cp;
+      break;
+    } else {
+      ++cp;
+    }
+  }
+  consume(cp);
 }
