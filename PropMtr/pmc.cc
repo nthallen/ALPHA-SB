@@ -240,10 +240,10 @@ bool PropMtrCmd::app_input() {
       req->setup_data(&data[0]);
     }
     if (count == 1)
-      msg(0, "%s: Recd %02X:%02X:%04X:%04X:%04X",
+      msg(MSG_DEBUG, "%s: Recd %02X:%02X:%04X:%04X:%04X",
         iname, devID, func, addr, count, data[0]);
     else
-      msg(0, "%s: Recd %02X:%02X:%04X:%04X:%04X:%04X",
+      msg(MSG_DEBUG, "%s: Recd %02X:%02X:%04X:%04X:%04X:%04X",
         iname, devID, func, addr, count, data[0], data[1]);
     MB->enqueue_command(req);
     report_ok(cp);
