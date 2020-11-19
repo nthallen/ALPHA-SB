@@ -1,4 +1,5 @@
 @SLOW@ PMC_@ID@_RPM_SP       PMC_@ID@ RPM
+@SLOW@ PMC_@ID@_RPM_Demand   PMC_@ID@ RPM
 @FAST@ PMC_@ID@_RPM          PMC_@ID@ RPM
 
 @SLOW@ PMC_@ID@_I_Demand     PMC_@ID@ Current

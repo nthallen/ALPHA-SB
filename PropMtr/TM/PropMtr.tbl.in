@@ -1,10 +1,11 @@
 PropMtr_@ID@ {
   HBox { +-; @ID@; -+ };
   HBox {
-    { RPM_Set:   (PMC_@ID@_RPM_SP,7)    RPM;
-      " Meas:"   (PMC_@ID@_RPM,7)       RPM;
+    { RPM_Set:   (PMC_@ID@_RPM_SP,7)     RPM;
+      " Demand:" (PMC_@ID@_RPM_Demand,7) RPM;
+      " Meas:"   (PMC_@ID@_RPM,7)        RPM;
       Current:;
-      " Demand:" (PMC_@ID@_I_Demand,6)  Amps;
+      " Demand:" (PMC_@ID@_I_Demand,6)   Amps;
       " Meas:"   (PMC_@ID@_I_Measured,6) Amps;
       Pos_Set:   (PMC_@ID@_Pos_SP,11);
       " Demand:" (PMC_@ID@_Pos_Demand,11);

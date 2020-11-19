@@ -1,10 +1,11 @@
 PropMtr_Left {
   HBox { +-; Left; -+ };
   HBox {
-    { RPM_Set:   (PMC_Left_RPM_SP,7)    RPM;
-      " Meas:"   (PMC_Left_RPM,7)       RPM;
+    { RPM_Set:   (PMC_Left_RPM_SP,7)     RPM;
+      " Demand:" (PMC_Left_RPM_Demand,7) RPM;
+      " Meas:"   (PMC_Left_RPM,7)        RPM;
       Current:;
-      " Demand:" (PMC_Left_I_Demand,6)  Amps;
+      " Demand:" (PMC_Left_I_Demand,6)   Amps;
       " Meas:"   (PMC_Left_I_Measured,6) Amps;
       Pos_Set:   (PMC_Left_Pos_SP,11);
       " Demand:" (PMC_Left_Pos_Demand,11);

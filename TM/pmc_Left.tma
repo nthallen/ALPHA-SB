@@ -78,10 +78,6 @@ State PMC_Left_Lock {
       Hold until (!(PMC_Left_Status0&1) && (PMC_Left_Status6 & 0x10)) or 3
       else Validate PMC_Left_Lock;
 
-#  +1 > PMC Left Move to 0
-#     Hold until (!(PMC_Left_Status0&1) && (PMC_Left_Status6 & 0x10) && (PMC_Left_Pos_Demand == 0)) or 3
-#     else Validate PMC_Left_Lock;
-
    +1 > PMC Left Bridge Enable
       Hold until (PMC_Left_Status0&1) or 3
       else Validate PMC_Left_Lock;
