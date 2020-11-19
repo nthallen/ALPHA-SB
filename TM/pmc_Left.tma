@@ -29,7 +29,7 @@ State PMC_Left_Spin_Down {
 
 State PMC_Left_Ready {
   depending on (PMC_Stop) {
-    Validate PMC_Left_Stop;
+    Validate PMC_Left_Idle;
   }
   depending on (PMC_Lock) {
     Validate PMC_Left_Stop;
