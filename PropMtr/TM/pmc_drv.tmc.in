@@ -22,14 +22,14 @@ TM @FAST@ Hz PMC_RPM_t PMC_@ID@_RPM;
 TM @FAST@ Hz PMC_Amp_t PMC_@ID@_I_Measured;
 
 PMC_Position_t PMC_@ID@_Pos_SP; Invalidate PMC_@ID@_Pos_SP;
-{ if (PMC_@ID@_Status4&0x1) {
+{ if (PMC_@ID@_Status6 & 0x10) {
     PMC_@ID@_Pos_SP = PMC_@ID@_Setpoint;
   }
   Validate PMC_@ID@_Pos_SP;
 }
 
 PMC_RPM_t PMC_@ID@_RPM_SP; Invalidate PMC_@ID@_RPM_SP;
-{ if (!(PMC_@ID@_Status4&0x1)) {
+{ if (!(PMC_@ID@_Status6 & 0x10)) {
     PMC_@ID@_RPM_SP = PMC_@ID@_Setpoint;
   }
   Validate PMC_@ID@_RPM_SP;
