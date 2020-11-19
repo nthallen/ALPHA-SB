@@ -18,18 +18,18 @@ State PMC_Left_Stop {
           Validate PMC_Left_Spin_Down;
         }
       }
-   +1 Validate PMC_Left_Ready;
+   +1 Validate PMC_Left_Idle;
 }
 
 State PMC_Left_Spin_Down {
       > PMC Left Velocity Set 0 RPM
       Hold until (PMC_Left_Status4 & 0x01) or 10;
-   +1 Validate PMC_Left_Ready;
+   +1 Validate PMC_Left_Idle;
 }
 
 State PMC_Left_Ready {
   depending on (PMC_Stop) {
-    Validate PMC_Left_Idle;
+    Validate PMC_Left_Stop;
   }
   depending on (PMC_Lock) {
     Validate PMC_Left_Stop;
