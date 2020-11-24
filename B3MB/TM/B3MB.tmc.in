@@ -1,0 +1,45 @@
+/* Common types for all the B3MB instances */
+TM typedef double B3MB_VOLTS { text "%7.3lf"; }
+TM typedef double B3MB_AMPS { text "%7.3lf"; }
+TM typedef double B3MB_CELCIUS { text "%6.2lf"; }
+
+/* Voltages are passed through a 200K over 2K divider, then
+ * fed into 16-bit signed ADC with +/- 1.024 V range.
+ * Volts = Raw * (2.048 / 32768) * ((200 + 2) / 2)
+ * Resolution is ~6mV
+ * Range is +/- 206.848V
+ */
+TM typedef int16_t B3MB_Volts_t { text "%7.3lf"; Convert B3MB_VOLTS; }
+Calibration (B3MB_Volts_t, B3MB_VOLTS) {
+      0,   0,
+  32768, 206.848
+}
+
+/* Currents are measured across a 1.5 mOhm shunt, then amplified
+ * by 20 in the LTC7000, then fed to the 16-bit signed ADC with
+ * +/- 1.024V range.
+ * Amps = Raw * (1.024/32768) / (20 * 1.5e-3)
+ * Resolution is ~1mA
+ * Range is +/- 34.133A
+ */
+TM typedef int16_t B3MB_Amps_t { text "%7.3lf"; Convert B3MB_AMPS; }
+Calibration (B3MB_Amps_t, B3MB_AMPS) {
+      0,   0,
+  32768,  34.1333
+}
+
+/* Bus Voltages are passed through a 200K over 2K divider, then
+ * fed into 16-bit signed ADC with +/- 4.096 V range.
+ * Volts = Raw * (4.096 / 32768) * ((200 + 2) / 2)
+ * Resolution is 12.625mV
+ * Range is +/- 413.696V
+ */
+TM typedef int16_t B3MB_BusV_t { text "%6.2lf"; Convert B3MB_VOLTS; }
+Calibration (B3MB_Volts_t, B3MB_VOLTS) {
+      0,   0,
+  32768, 413.696
+}
+
+TM typedef uint16_t B3MB_T30K75KU { text "%6.2lf"; Convert B3MB_CELCIUS; }
+
+TM typedef uint16_t B3MB_Status_t { text "%04X"; }

@@ -1,0 +1,9 @@
+%{
+  /* Board-specific collection for @ID@ B3MB */
+  B3MB_mread_t *B3MB_mreq@CAN_ID@;
+  static void B3MB_mreq@CAN_ID@_init() {
+    B3MB_mreq@CAN_ID@ = B3MB_mread_setup(@CAN_ID@, 0x20);
+  }
+%}
+TM INITFUNC CAN_identify_board(@CAN_ID@);
+TM INITFUNC B3MB_mreq@CAN_ID@_init();

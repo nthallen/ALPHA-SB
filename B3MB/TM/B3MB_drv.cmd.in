@@ -1,0 +1,7 @@
+%{
+  /* Commands for @ID@ B3MB, CAN ID #@CAN_ID@ */
+%}
+
+&B3MB_ID <int>
+  : @ID@ { $0 = @CAN_ID@; }
+  ;

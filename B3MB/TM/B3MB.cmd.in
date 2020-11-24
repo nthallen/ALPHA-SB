@@ -1,0 +1,37 @@
+%{
+  /* Common B3MB Command Framework */
+  #include "scopex_can.h"
+
+  #ifdef SERVER
+    int subbus_quit() {
+      return CAN->subbus_quit();
+    }
+  #endif
+%}
+%INTERFACE <subbus>
+
+&command
+  : B3MB &B3MB_ID &B3MB_Switch &B3MB_On_Off * {
+      CAN->write_ack(($2<<8)+0x40, $3+$4);
+    }
+  ;
+
+&B3MB_On_Off <int>
+  : Off { $0 = 0; }
+  : On { $0 = 1; }
+  ;
+
+&B3MB_Switch <int>
+  : Battery 1 { $0 = 0; }
+  : Battery 2 { $0 = 2; }
+  : Battery 3 { $0 = 4; }
+  : Battery 4 { $0 = 6; }
+  : Load 1 { $0 = 8; }
+  : Load 2 { $0 = 10; }
+  : Load 3 { $0 = 12; }
+  : Load 4 { $0 = 14; }
+  : All Loads { $0 = 16; }
+  : All Batteries { $0 = 18; }
+  : Status LED { $0 = 20; }
+  : Alert LED { $0 = 22; }
+  ;

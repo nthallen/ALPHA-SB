@@ -3,6 +3,17 @@
 
 <defs>
   subbuspp *CAN;
+  bool CAN_initialized = false;
+  void CAN_init() {
+    int subfunc;
+    CAN = new subbuspp("subbusd", "CAN");
+    subfunc = CAN->load();
+    if (subfunc > 0) {
+      msg(0, "CAN subbusd reported subfunction %d", subfunc);
+      CAN_Initialized = true;
+    } else {
+      msg(MSG_ERROR, "CAN subbusd load failed: %d", subfunc);
+    }
+  }
 <init>
-  CAN = new subbuspp("subbusd", "CAN");
-  CAN->load();
+  CAN_init();
