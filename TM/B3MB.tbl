@@ -1,0 +1,14 @@
+Input "TMbase.tbl";
+Input "B3MB_100V1.tbl";
+
+{
+  HBox {
+    |+; [B3MB1_VI]; |+;
+    { [B3MB1_T];
+      [B3MB1_S];
+      +-+;
+      [TMbase_times] };
+    |+
+  };
+  -
+}

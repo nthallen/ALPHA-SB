@@ -3,5 +3,6 @@
 #include "subbuspp.h"
 
 extern subbuspp *CAN;
+extern bool CAN_Initialized;
 
 #endif

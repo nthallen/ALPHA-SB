@@ -4,6 +4,10 @@
  *    Common collection subroutines
  */
 %{
+  #include "subbuspp.h"
+  #define disarm_sic()
+  #define tick_sic()
+
   subbuspp *CAN;
   bool CAN_Initialized = false;
   typedef struct {
@@ -23,7 +27,7 @@
   static subbus_mread_req *B3MB_mread_setup(subbuspp *P, uint16_t bdid) {
     uint16_t start = 0x20;
     uint16_t n_reads1 = 22;
-    uint16_t n_read = n_reads1 + 2;
+    uint16_t n_reads = n_reads1 + 2;
     uint16_t bdid_hi = bdid<<8;
     char mreqstr[30];
     snprintf(mreqstr, 30, "%X:1:%X,%X,%X", bdid_hi | start,
@@ -31,21 +35,30 @@
     subbus_mread_req *mreq = P->pack_mread_request(n_reads, mreqstr);
     return mreq;
   }
-  
-  B3MB_mread_t *B3MB_mread_init(uint16_t bdid, uint16_t start, uint16_t n_reads) {
+
+  subbus_mread_req *CAN_sequential_mread(subbuspp *P, uint16_t bdid,
+          uint16_t start, uint16_t n_reads) {
+    uint16_t bdid_hi = bdid<<8;
+    char mreqstr[30];
+    snprintf(mreqstr, 30, "%X:1:%X", bdid_hi | start, bdid_hi | (start+n_reads-1));
+    subbus_mread_req *mreq = P->pack_mread_request(n_reads, mreqstr);
+    return mreq;
+  }
+
+  static B3MB_mread_t *B3MB_mread_init(uint16_t bdid, uint16_t start) {
     B3MB_mread_t *B3MB = (B3MB_mread_t*)new_memory(sizeof(B3MB_mread_t));
     B3MB->req = B3MB_mread_setup(CAN, bdid);
     B3MB->bdid = bdid;
     B3MB->start = start;
-    B3MB->nwords = n_reads;
+    B3MB->nwords = B3MB->req->n_reads;
     B3MB->saw_nack = false;
-    B3MB->reason = "success";d
-    B3MB->rvals = (uint16_t)new_memory(n_reads * sizeof(uint16_t));
+    B3MB->reason = "success";
+    B3MB->rvals = (uint16_t*)new_memory(B3MB->nwords * sizeof(uint16_t));
     return B3MB;
   }
   
-  bool B3MB_mread(B3MB_mread_t *B3MB) {
-    if (!CAN_initalized) return false;
+  static bool B3MB_mread(B3MB_mread_t *B3MB) {
+    if (!CAN_Initialized) return false;
     uint16_t nwords;
     int rv = CAN->mread_subbus_nw(B3MB->req, &(B3MB->rvals[0]), &nwords);
     if (rv < 0) {
@@ -90,6 +103,11 @@
         return true;
     }
   }
+  
+  typedef struct {
+    uint16_t n_words;
+    char name[0x50];
+  } device_name_t;
 
   void CAN_identify_board(uint8_t bdid) {
     uint16_t bdid_hi = bdid<<8;

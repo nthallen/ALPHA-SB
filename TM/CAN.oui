@@ -3,7 +3,7 @@
 
 <defs>
   subbuspp *CAN;
-  bool CAN_initialized = false;
+  bool CAN_Initialized = false;
   void CAN_init() {
     int subfunc;
     CAN = new subbuspp("subbusd", "CAN");
