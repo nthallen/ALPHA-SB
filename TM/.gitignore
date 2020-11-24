@@ -13,6 +13,7 @@ scopexcltnc.o
 scopexcltncoui.cc
 scopexcltncoui.o
 scopextblnc.tmc
+B3MBtblnc.tmc
 scopexdispnc.cc
 scopexdispncoui.cc
 scopexdispnc.o
@@ -39,6 +40,7 @@ scopexengextoui.cc
 scopexengext.o
 scopexengextoui.o
 scopextblnc.tmc.dep
+B3MBtblnc.tmc.dep
 *.err
 *.o
 *.exe

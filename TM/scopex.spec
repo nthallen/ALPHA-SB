@@ -16,7 +16,7 @@ DISTRIB = interact services
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
 scopexclt :
-scopexdisp : scopex.tbl
+scopexdisp : scopex.tbl B3MB.tbl
 scopexalgo : scopex.tma pmc_Left.tma $swsbase
 scopexjsonext : $genuibase
 doit : scopex.doit
