@@ -2,10 +2,10 @@
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
   Launch      subbusd subbusd_slcan -n CAN -p /dev/ttyUSB1 -v
-  Launch      tm_bfr bfr -s Both -v
+  Launch      tm_bfr bfr -s Both
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
-  Launch      tm_gen scopexcol -v
-  Launch      cmd    scopexsrvr -s Both -v
+  Launch      tm_gen scopexcol
+  Launch      cmd    scopexsrvr -s Both
   Launch      -      tmdf
-  Launch      -      PropMtr -p /dev/ttyUSB0 -v
-  Launch      -TMC-  scopexalgo -v
+  Launch      -      PropMtr -p /dev/ttyUSB0
+  Launch      -TMC-  scopexalgo
