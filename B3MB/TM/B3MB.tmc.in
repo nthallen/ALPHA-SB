@@ -17,15 +17,15 @@ Calibration (B3MB_Volts_t, B3MB_VOLTS) {
 
 /* Currents are measured across a 1.5 mOhm shunt, then amplified
  * by 20 in the LTC7000, then fed to the 16-bit signed ADC with
- * +/- 1.024V range.
- * Amps = Raw * (1.024/32768) / (20 * 1.5e-3)
- * Resolution is ~1mA
- * Range is +/- 34.133A
+ * +/- 2.048V range.
+ * Amps = Raw * (2.048/32768) / (20 * 1.5e-3)
+ * Resolution is ~2mA
+ * Range is +/- 68.266A
  */
 TM typedef int16_t B3MB_Amps_t { text "%7.3lf"; Convert B3MB_AMPS; }
 Calibration (B3MB_Amps_t, B3MB_AMPS) {
       0,   0,
-  32768,  34.1333
+  32768,  26.2666
 }
 
 /* Bus Voltages are passed through a 200K over 2K divider, then
