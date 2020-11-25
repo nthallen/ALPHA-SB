@@ -30,6 +30,7 @@ f = ne_dialg(f, 'add', 1, 0, 'pscopexbmbvv', 'Volts' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexbmbva', 'Amps' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexbmbvt', 'Temp' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexbmbvs', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pscopexbmbvf', 'Fault' );
 f = ne_listdirs(f, 'SCoPEx_Data_Dir', 15);
 f = ne_dialg(f, 'newcol');
 ne_dialg(f, 'resize');

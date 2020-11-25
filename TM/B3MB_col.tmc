@@ -31,7 +31,7 @@
     uint16_t bdid_hi = bdid<<8;
     char mreqstr[30];
     snprintf(mreqstr, 30, "%X:1:%X,%X,%X", bdid_hi | start,
-      bdid_hi | (start+n_reads1-1), 0x40, 0x41);
+      bdid_hi | (start+n_reads1-1), bdid_hi|0x40, bdid_hi|0x41);
     subbus_mread_req *mreq = P->pack_mread_request(n_reads, mreqstr);
     return mreq;
   }
