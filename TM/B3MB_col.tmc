@@ -104,12 +104,26 @@
     }
   }
   
+  void CAN_init() {
+    if (!CAN) {
+      CAN = new subbuspp("subbusd", "CAN");
+      int subfunc = CAN->load();
+      if (subfunc > 0) {
+        msg(0, "CAN subbusd reported subfunction %d", subfunc);
+        CAN_Initialized = true;
+      } else {
+        msg(MSG_ERROR, "CAN subbusd load failed: %d", subfunc);
+      }
+    }
+  }
+
   typedef struct {
     uint16_t n_words;
     char name[0x50];
   } device_name_t;
 
   void CAN_identify_board(uint8_t bdid) {
+    if (!CAN_Initialized) CAN_init();
     uint16_t bdid_hi = bdid<<8;
     // msg(0,"read_ack(0x%02X03)", bdid);
     uint16_t values[4];
@@ -131,18 +145,5 @@
       msg(0, "nr:%u/%u '%s'", nread, devname.n_words, &devname.name[0]);
     }
     free_memory(mreq);
-  }
-  
-  void CAN_init() {
-    if (!CAN) {
-      CAN = new subbuspp("subbusd", "CAN");
-      int subfunc = CAN->load();
-      if (subfunc > 0) {
-        msg(0, "CAN subbusd reported subfunction %d", subfunc);
-        CAN_Initialized = true;
-      } else {
-        msg(MSG_ERROR, "CAN subbusd load failed: %d", subfunc);
-      }
-    }
   }
 %}
