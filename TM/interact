@@ -1,11 +1,22 @@
+  case `hostname` in
+    easwhlpt3425080)
+      propmtrdev=/dev/ttyS3
+      slcandev=/dev/ttyS5;;
+    *)
+      propmtrdev=/dev/ttyUSB0
+      slcandev=/dev/ttyACM0;;
+  esac
+
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
-  Launch      -      subbusd_slcan -n CAN -p /dev/ttyACM0
+[ -c "$slcandev" ] &&
+  Launch      -      subbusd_slcan -n CAN -p $slcandev
   Launch      tm_bfr bfr -s Both
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen scopexcol
   Launch      cmd    scopexsrvr -s Both
   Launch      -      tmdf
-  Launch      -      PropMtr -p /dev/ttyUSB0
+[ -c "$propmtrdev" ] &&
+  Launch      -      PropMtr -p $propmtrdev
   Launch      -TMC-  scopexalgo
