@@ -1,4 +1,13 @@
 /* Telemetry Channels for a single B3MB Instance, namely @ID@ */
+TM typedef B3MB_Amps_t B3MB_@ID@_B1I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_B2I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_B3I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_B4I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_L1I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_L2I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_L3I_t;
+TM typedef B3MB_Amps_t B3MB_@ID@_L4I_t;
+
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt1_V;
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt2_V;
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt3_V;
@@ -7,14 +16,14 @@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load1_V;
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load2_V;
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load3_V;
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load4_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt1_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt2_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt3_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt4_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load1_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load2_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load3_I;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load4_I;
+TM @SLOW@ Hz B3MB_@ID@_B1I_t  B3MB_@ID@_Batt1_I;
+TM @SLOW@ Hz B3MB_@ID@_B2I_t  B3MB_@ID@_Batt2_I;
+TM @SLOW@ Hz B3MB_@ID@_B3I_t  B3MB_@ID@_Batt3_I;
+TM @SLOW@ Hz B3MB_@ID@_B4I_t  B3MB_@ID@_Batt4_I;
+TM @SLOW@ Hz B3MB_@ID@_L1I_t  B3MB_@ID@_Load1_I;
+TM @SLOW@ Hz B3MB_@ID@_L2I_t  B3MB_@ID@_Load2_I;
+TM @SLOW@ Hz B3MB_@ID@_L3I_t  B3MB_@ID@_Load3_I;
+TM @SLOW@ Hz B3MB_@ID@_L4I_t  B3MB_@ID@_Load4_I;
 TM @SLOW@ Hz B3MB_BusV_t   B3MB_@ID@_Bus_V;
 TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T1;
 TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T2;

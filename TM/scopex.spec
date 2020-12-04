@@ -8,6 +8,7 @@ Module PropMtr mode=types ID=Left IDX=0 ADDR=63 FAST=2 SLOW=1
 # Module PropMtr ID=Right ADDR=64 IDX=1 FAST=2 SLOW=1
 Module PropMtr mode=groups
 Module B3MB mode=types ID=100V1 CAN_ID=1
+tmcbase = B3MB_100V1_cal.tmc
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
