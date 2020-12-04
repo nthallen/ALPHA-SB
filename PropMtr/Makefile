@@ -9,7 +9,7 @@
 include /usr/local/share/monarch/appgen.mk
 
 CXXFLAGS+=-g -Wall -std=c++11 $(CPPFLAGS)
-LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -ltm -lpthread
+LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -lpthread
 
 .PHONY : all
 all : PropMtr
