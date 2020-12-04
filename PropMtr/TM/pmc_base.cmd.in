@@ -14,7 +14,7 @@
   
   void PMC_setpoint(uint8_t devID, uint16_t addr, double setpoint) {
     uint16_t data[2];
-    int32_t isp = setpoint;
+    int32_t isp = setpoint * (devID&1 ? 1 : -1);
     data[0] = isp & 0xFFFF;
     data[1] = (isp >> 16) & 0xFFFF;
     if_PropMtr.Turf("W%02X:%02X:%04X:%04X:%04X:%04X\n",

@@ -18,7 +18,7 @@ scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
 scopexclt :
 scopexdisp : scopex.tbl B3MB.tbl Housekeeping.tbl
-scopexalgo : scopex.tma pmc_Left.tma $swsbase
+scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $genuibase
 doit : scopex.doit
 %%

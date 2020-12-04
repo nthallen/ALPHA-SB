@@ -1,4 +1,4 @@
-PropMtr_Left_Full {
+PMC_Left_Full {
   RPM_Set:   (PMC_Left_RPM_SP,7)     RPM;
   " Demand:" (PMC_Left_RPM_Demand,7) RPM;
   " Meas:"   (PMC_Left_RPM,7)        RPM;
@@ -12,12 +12,12 @@ PropMtr_Left_Full {
   BusV:      (PMC_Left_BusV,6)      V;
 }
 
-PropMtr_Left_Full_Hdr {
+PMC_Left_Full_Hdr {
   HBox { +-; Left; -+ };
-  [PropMtr_Left_Full]
+  [PMC_Left_Full]
 }
 
-PropMtr_Left_Stat {
+PMC_Left_Stat {
   HBox { +-; Status; -+ };
   (PMC_Left_Status0,16);
   (PMC_Left_Status1,16);
@@ -28,7 +28,7 @@ PropMtr_Left_Stat {
   (PMC_Left_Status6,16);
 }
 
-PropMtr_Left_Gain {
+PMC_Left_Gain {
   VL_Kp:     (PMC_Left_VL_Kp,8);
   VL_Ki:     (PMC_Left_VL_Ki,8);
   VL_Kd:     (PMC_Left_VL_Kd,7);
@@ -36,13 +36,13 @@ PropMtr_Left_Gain {
   TCL_Ki:    (PMC_Left_TCL_Ki,8);
 }
 
-PropMtr_Left {
+PMC_Left {
   HBox { +-; Left; -+ };
   HBox {
-    [PropMtr_Left_Full];
+    [PMC_Left_Full];
     |+;
-    [PropMtr_Left_Stat];
+    [PMC_Left_Stat];
     |+;
-    [PropMtr_Left_Gain]
+    [PMC_Left_Gain]
   }
 }

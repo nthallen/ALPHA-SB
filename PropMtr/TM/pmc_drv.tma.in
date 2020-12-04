@@ -1,0 +1,114 @@
+Partition
+
+State PMC_@ID@_Init {
+   +5 Validate PMC_@ID@_Stop;
+}
+
+State PMC_@ID@_Stop {
+  # If bridge is enabled and in velocity mode and not at zero velocity goto spin down
+   +1 { if ((!(PMC_@ID@_Status6 & 0x10)) && (PMC_@ID@_Status0 & 0x01) &&
+            (!(PMC_@ID@_Status4 & 0x01))) {
+          Validate PMC_@ID@_Spin_Down;
+        }
+      }
+   +1 Validate PMC_@ID@_Idle;
+}
+
+State PMC_@ID@_Spin_Down {
+      > PMC @ID@ Velocity Set 0 RPM
+      Hold until (PMC_@ID@_Status4 & 0x01) or 10;
+   +1 Validate PMC_@ID@_Idle;
+}
+
+State PMC_@ID@_Ready {
+  depending on (PMC_Stop) {
+    Validate PMC_@ID@_Stop;
+  }
+  depending on (PMC_Lock) {
+    Validate PMC_@ID@_Stop;
+  }
+  depending on (PMC_Idle) {
+    Validate PMC_@ID@_Idle;
+  }
+}
+
+State PMC_@ID@_Idle {
+  > PMC @ID@ Brake Apply
+  > PMC @ID@ Bridge Disable
+  depending on (PMC_Activate) {
+    Validate PMC_@ID@_Activate;
+  }
+  depending on (PMC_Lock) {
+    Validate PMC_@ID@_Lock;
+  }
+}
+
+State PMC_@ID@_Activate {
+      > PMC @ID@ Bridge Disable
+   +1 > PMC @ID@ Select Velocity Control
+   +1 > PMC @ID@ Velocity Set 0 RPM
+      Hold until (!(PMC_@ID@_Status0&1) && (!(PMC_@ID@_Status6 & 0x10)) && (PMC_@ID@_RPM_SP == 0)) or 3
+      else {
+        msg(2, "PMC_@ID@ bridge disable & Vel config & RPM_SP == 0 not observed");
+        Validate PMC_@ID@_Activate;
+      }
+      
+   +1 > PMC @ID@ Bridge Enable
+   +1 > PMC @ID@ Brake Release
+      Hold until ((PMC_@ID@_Status0&1) && (PMC_@ID@_Status6 & 0x20)) or 3
+      else {
+        msg(2, "PMC_@ID@ bridge disable & Brake release not observed");
+        Validate PMC_@ID@_Activate;
+      }
+
+   +1 Validate PMC_@ID@_Ready;
+}
+
+State PMC_@ID@_Lock {
+  # If bridge is enabled and in velocity mode and not at zero velocity goto spin down
+   +1 { if ((!(PMC_@ID@_Status6 & 0x10)) && (PMC_@ID@_Status0 & 0x01) &&
+            (!(PMC_@ID@_Status4 & 0x01))) {
+          Validate PMC_@ID@_Spin_Down;
+        }
+      }
+   +1 > PMC @ID@ Bridge Disable
+      Hold until (!(PMC_@ID@_Status0&1)) or 3
+      else {
+        msg(2, "PMC_@ID@ Bridge disable not observed");
+        Validate PMC_@ID@_Lock; }
+
+   +1 > PMC @ID@ Select Position Control
+      Hold until (!(PMC_@ID@_Status0&1) && (PMC_@ID@_Status6 & 0x10)) or 3
+      else {
+        msg(2, "PMC_@ID@ Bridge disable && Position Config not observed");
+        Validate PMC_@ID@_Lock; }
+
+   +1 > PMC @ID@ Bridge Enable
+      Hold until (PMC_@ID@_Status0&1) or 3
+      else {
+        msg(2, "PMC_@ID@ Bridge enable not observed");
+        Validate PMC_@ID@_Lock; }
+
+   +1 > PMC @ID@ Brake Release
+      > PMC @ID@ Home Execute Enable
+      Hold until (PMC_@ID@_Status4 & 0x1000) or 3
+      else Validate PMC_@ID@_Lock;
+      Hold until (PMC_@ID@_Status4 & 0x4000) or 10; # Homing Complete
+   +1 > PMC @ID@ Home Execute Disable
+      Hold until (!(PMC_@ID@_Status4 & 0x1000)) or 3
+      else {
+        msg(2, "PMC @ID@ Home Active not observed");
+        Validate PMC_@ID@_Lock; }
+
+   +1 > PMC @ID@ Move to @HOME@
+      Hold until ((PMC_@ID@_Status4 & 0x0001) == 0x1) or 5; # Zero Vel & At?
+   +1 > PMC @ID@ Brake Apply
+      > PMC @ID@ Bridge Disable
+      Validate PMC_@ID@_Locked;
+}
+
+State PMC_@ID@_Locked {
+  depending on (PMC_Activate) {
+    Validate PMC_@ID@_Activate;
+  }
+}

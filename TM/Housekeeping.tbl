@@ -1,8 +1,8 @@
-Input "PropMtr_Left.tbl";
-Input "PropMtr_Right.tbl";
+Input "pmc_Left.tbl";
+Input "pmc_Right.tbl";
 Input "TMbase.tbl";
 
-PropStale {
+PMC_Stale {
   HBox { +-; Title: "PMC Stale"; -+ };
   HBox {
     { Slow: (PMC_Stale,3);
@@ -15,10 +15,10 @@ PropStale {
   HBox {
     |+;
     { HBox { +-; Title: "PMC Left Gains"; -+ };
-      [PropMtr_Left_Gain];
+      [PMC_Left_Gain];
       HBox { +-; Title: "PMC Right Gains"; -+ };
-      [PropMtr_Right_Gain];
-      [PropStale];
+      [PMC_Right_Gain];
+      [PMC_Stale];
     };
     |+;
     [TMbaseB];

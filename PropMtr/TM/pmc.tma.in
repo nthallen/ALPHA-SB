@@ -1,0 +1,6 @@
+Partition
+
+State PMC_Idle {}
+State PMC_Activate {}
+State PMC_Stop {}
+State PMC_Lock {}

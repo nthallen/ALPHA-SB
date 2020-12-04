@@ -1,4 +1,4 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> ] {
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> HOME=1700 ] {
   ID is a mnemonic for the motor
   ADDR is the Modbus address of the motor controller
   IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
@@ -14,6 +14,7 @@ Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8
     once, so on the second invocation of either mode types or mode default,
     it must be cleared:
       Module PropMtr ID=Right ... DAT=
+  HOME is the home position when locking the props.
   
   If any invocations occur, at least two are required. The first must be
   declared with mode=types to define everything that is common to both
@@ -26,6 +27,7 @@ mode (types) {
   colbase = pmc_col.tmc:pmc_col.tmc.in
   cmdbase = pmc_base.cmd:pmc_base.cmd.in
   genuibase = pmc.genui:pmc.genui.in
+  - : pmc.tma:pmc.tma.in
   DISTRIB = @MODDIR@/../PropMtr
   CPPFLAGS = -I @MODDIR@/..
   %%
@@ -41,7 +43,8 @@ mode (default,types) {
   tmcbase = pmc_@ID@.tmc:pmc_drv.tmc.in
   cmdbase = pmc_@ID@.cmd:pmc_drv.cmd.in
   genuibase = pmc_@ID@.genui:pmc_drv.genui.in
-  - : PropMtr_@ID@.tbl:PropMtr.tbl.in
+  - : pmc_@ID@.tma:pmc_drv.tma.in
+  - : pmc_@ID@.tbl:pmc.tbl.in
 }
 
 mode (groups) {

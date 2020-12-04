@@ -1,4 +1,4 @@
-PropMtr_@ID@_Full {
+PMC_@ID@_Full {
   RPM_Set:   (PMC_@ID@_RPM_SP,7)     RPM;
   " Demand:" (PMC_@ID@_RPM_Demand,7) RPM;
   " Meas:"   (PMC_@ID@_RPM,7)        RPM;
@@ -12,12 +12,12 @@ PropMtr_@ID@_Full {
   BusV:      (PMC_@ID@_BusV,6)      V;
 }
 
-PropMtr_@ID@_Full_Hdr {
+PMC_@ID@_Full_Hdr {
   HBox { +-; @ID@; -+ };
-  [PropMtr_@ID@_Full]
+  [PMC_@ID@_Full]
 }
 
-PropMtr_@ID@_Stat {
+PMC_@ID@_Stat {
   HBox { +-; Status; -+ };
   (PMC_@ID@_Status0,16);
   (PMC_@ID@_Status1,16);
@@ -28,7 +28,7 @@ PropMtr_@ID@_Stat {
   (PMC_@ID@_Status6,16);
 }
 
-PropMtr_@ID@_Gain {
+PMC_@ID@_Gain {
   VL_Kp:     (PMC_@ID@_VL_Kp,8);
   VL_Ki:     (PMC_@ID@_VL_Ki,8);
   VL_Kd:     (PMC_@ID@_VL_Kd,7);
@@ -36,13 +36,13 @@ PropMtr_@ID@_Gain {
   TCL_Ki:    (PMC_@ID@_TCL_Ki,8);
 }
 
-PropMtr_@ID@ {
+PMC_@ID@ {
   HBox { +-; @ID@; -+ };
   HBox {
-    [PropMtr_@ID@_Full];
+    [PMC_@ID@_Full];
     |+;
-    [PropMtr_@ID@_Stat];
+    [PMC_@ID@_Stat];
     |+;
-    [PropMtr_@ID@_Gain]
+    [PMC_@ID@_Gain]
   }
 }

@@ -1,12 +1,5 @@
 Partition
 
-State PMC_Idle {}
-State PMC_Activate {}
-State PMC_Stop {}
-State PMC_Lock {}
-
-Partition
-
 State PMC_Left_Init {
    +5 Validate PMC_Left_Stop;
 }
