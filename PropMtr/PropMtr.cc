@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
   // Setup Modbus Devices
   MB->add_device(new Modbus::PMC_dev("PMC1", 63,
         &(PropMtr.Ctrl[0]), &(PropMtr_fast.Ctrl[0])));
-  // MB->add_device(new Modbus::PMC_dev("PMC2", 0x02,
-  //    &(PropMtr.Ctrl[1]), &(PropMtr_fast.Ctrl[1]));
+  MB->add_device(new Modbus::PMC_dev("PMC2", 62,
+        &(PropMtr.Ctrl[1]), &(PropMtr_fast.Ctrl[1])));
 
   PropMtrCmd *Cmd = new PropMtrCmd(MB);
   Cmd->connect();
