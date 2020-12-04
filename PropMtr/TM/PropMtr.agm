@@ -1,6 +1,24 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ ] {
-  ID specifies which motor
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> ] {
+  ID is a mnemonic for the motor
+  ADDR is the Modbus address of the motor controller
   IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
+  FAST is the rate of the fast data
+  SLOW is the rate of the slow data
+  RT1 is text that preceeds the declaration of the Right channel variables
+  RT2 is text that follows the declaration of the Right channel variables
+    The defaults for these two serve to comment out that declaration in
+    pmc.tmc.in. Hence, if you have both drives, you need to redefine these
+    in the 'groups' mode:
+      Module PropMtr mode=groups RT1= RT2=
+  DAT is the device address type for pmc_drv.cmd.in. It can only be defined
+    once, so on the second invocation of either mode types or mode default,
+    it must be cleared:
+      Module PropMtr ID=Right ... DAT=
+  
+  If any invocations occur, at least two are required. The first must be
+  declared with mode=types to define everything that is common to both
+  drives. The last invocation must be with mode=groups along with the
+  definitions of RT1 and RT2 as noted above.
 }
 
 mode (types) {

@@ -1,33 +1,48 @@
+PropMtr_@ID@_Full {
+  RPM_Set:   (PMC_@ID@_RPM_SP,7)     RPM;
+  " Demand:" (PMC_@ID@_RPM_Demand,7) RPM;
+  " Meas:"   (PMC_@ID@_RPM,7)        RPM;
+  Current:;
+  " Demand:" (PMC_@ID@_I_Demand,6)   Amps;
+  " Meas:"   (PMC_@ID@_I_Measured,6) Amps;
+  Pos_Set:   (PMC_@ID@_Pos_SP,11);
+  " Demand:" (PMC_@ID@_Pos_Demand,11);
+  " Target:" (PMC_@ID@_Pos_Target,11);
+  " Meas:"   (PMC_@ID@_Pos_Measured,11);
+  BusV:      (PMC_@ID@_BusV,6)      V;
+}
+
+PropMtr_@ID@_Full_Hdr {
+  HBox { +-; @ID@; -+ };
+  [PropMtr_@ID@_Full]
+}
+
+PropMtr_@ID@_Stat {
+  HBox { +-; Status; -+ };
+  (PMC_@ID@_Status0,16);
+  (PMC_@ID@_Status1,16);
+  (PMC_@ID@_Status2,16);
+  (PMC_@ID@_Status3,16);
+  (PMC_@ID@_Status4,16);
+  (PMC_@ID@_Status5,16);
+  (PMC_@ID@_Status6,16);
+}
+
+PropMtr_@ID@_Gain {
+  VL_Kp:     (PMC_@ID@_VL_Kp,8);
+  VL_Ki:     (PMC_@ID@_VL_Ki,8);
+  VL_Kd:     (PMC_@ID@_VL_Kd,7);
+  TCL_Kp:    (PMC_@ID@_TCL_Kp,8);
+  TCL_Ki:    (PMC_@ID@_TCL_Ki,8);
+}
+
 PropMtr_@ID@ {
   HBox { +-; @ID@; -+ };
   HBox {
-    { RPM_Set:   (PMC_@ID@_RPM_SP,7)     RPM;
-      " Demand:" (PMC_@ID@_RPM_Demand,7) RPM;
-      " Meas:"   (PMC_@ID@_RPM,7)        RPM;
-      Current:;
-      " Demand:" (PMC_@ID@_I_Demand,6)   Amps;
-      " Meas:"   (PMC_@ID@_I_Measured,6) Amps;
-      Pos_Set:   (PMC_@ID@_Pos_SP,11);
-      " Demand:" (PMC_@ID@_Pos_Demand,11);
-      " Target:" (PMC_@ID@_Pos_Target,11);
-      " Meas:"   (PMC_@ID@_Pos_Measured,11);
-      BusV:      (PMC_@ID@_BusV,6)      V;
-    }; |+; {
-      >Status<;
-      (PMC_@ID@_Status0,16);
-      (PMC_@ID@_Status1,16);
-      (PMC_@ID@_Status2,16);
-      (PMC_@ID@_Status3,16);
-      (PMC_@ID@_Status4,16);
-      (PMC_@ID@_Status5,16);
-      (PMC_@ID@_Status6,16);
-    }; |+; {
-      VL_Kp:     (PMC_@ID@_VL_Kp,8);
-      VL_Ki:     (PMC_@ID@_VL_Ki,8);
-      VL_Kd:     (PMC_@ID@_VL_Kd,7);
-      TCL_Kp:    (PMC_@ID@_TCL_Kp,8);
-      TCL_Ki:    (PMC_@ID@_TCL_Ki,8);
-    }
+    [PropMtr_@ID@_Full];
+    |+;
+    [PropMtr_@ID@_Stat];
+    |+;
+    [PropMtr_@ID@_Gain]
   }
 }
-

@@ -1,19 +1,22 @@
 Input "PropMtr_Left.tbl";
+Input "PropMtr_Right.tbl";
 Input "TMbase.tbl";
 
-PropStale {
-  HBox { +-; Title: "PMC Stale"; -+ };
-  HBox {
-    { Slow: (PMC_Stale,3);
-      Fast: (PMC_StaleF,3);
-    }; HGlue 0+10;
-  }
-}
-
-{
-  HBox { |+; {
-      [PropMtr_Left];
-      HBox { [PropStale]; |; [TMbaseB] };
-    }; |+ };
-  -;
+{ HBox {
+    |;
+    { HBox {
+        { [PropMtr_Left_Full_Hdr];
+          [PropMtr_Left_Stat];
+        };
+        |+;
+        { [PropMtr_Right_Full_Hdr];
+          [PropMtr_Right_Stat];
+        };
+      };
+      +-+;
+      [TMbase_times];
+      +-+;
+    };
+    |;
+  };
 }

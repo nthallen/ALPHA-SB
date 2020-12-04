@@ -9,7 +9,7 @@ Group PMC_Left (
     PMC_Left_Status3, PMC_Left_Status4, PMC_Left_Status5, PMC_Left_Status6,
     PMC_Left_TCL_Kp, PMC_Left_TCL_Ki,
     PMC_Left_BusV, PMC_Left_I_Demand,
-    /*
+    
     PMC_Right_RPM_Demand,
     PMC_Right_Pos_Measured, PMC_Right_Pos_Target, PMC_Right_Pos_Demand,
     PMC_Right_VL_Kp, PMC_Right_VL_Ki, PMC_Right_VL_Kd,
@@ -17,7 +17,7 @@ Group PMC_Left (
     PMC_Right_Status3, PMC_Right_Status4, PMC_Right_Status5, PMC_Right_Status6,
     PMC_Right_TCL_Kp, PMC_Right_TCL_Ki,
     PMC_Right_BusV, PMC_Right_I_Demand,
-    */
+    
     PMC_Stale
     ) {
   PMC_Left_RPM_Demand = pmc_ref(0,VelocityDemand);
@@ -39,7 +39,7 @@ Group PMC_Left (
   PMC_Left_Status6 = pmc_ref(0,Status[6]);
   PMC_Left_BusV = pmc_ref(0,BusVoltage);
   PMC_Left_I_Demand = pmc_ref(0,CurrentDemand);
-  /*
+  
   PMC_Right_RPM_Demand = pmc_ref(1,VelocityDemand);
   PMC_Right_Pos_Measured = pmc_ref(1,PositionMeasured);
   PMC_Right_Pos_Target = pmc_ref(1,PositionTarget);
@@ -59,24 +59,24 @@ Group PMC_Left (
   PMC_Right_Status6 = pmc_ref(1,Status[6]);
   PMC_Right_BusV = pmc_ref(1,BusVoltage);
   PMC_Right_I_Demand = pmc_ref(1,CurrentDemand);
-  */
+  
   PMC_Stale = PropMtr_obj->Stale(255);
   PropMtr_obj->synch();
 }
 
 Group PMCF_Left (
         PMC_Left_RPM, PMC_Left_I_Measured,
-        /*
+        
         PMC_Right_RPM, PMC_Right_I_Measured,
-        */
+        
         PMC_StaleF
       ) {
   PMC_Left_RPM = pmcf_ref(0,VelocityMeasured);
   PMC_Left_I_Measured = pmcf_ref(0,CurrentMeasured);
-  /*
+  
   PMC_Right_RPM = pmcf_ref(1,VelocityMeasured);
   PMC_Right_I_Measured = pmcf_ref(1,CurrentMeasured);
-  */
+  
   PMC_StaleF = PropMtr_fast_obj->Stale(255);
   PropMtr_fast_obj->synch();
 }

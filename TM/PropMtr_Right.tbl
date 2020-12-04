@@ -1,0 +1,48 @@
+PropMtr_Right_Full {
+  RPM_Set:   (PMC_Right_RPM_SP,7)     RPM;
+  " Demand:" (PMC_Right_RPM_Demand,7) RPM;
+  " Meas:"   (PMC_Right_RPM,7)        RPM;
+  Current:;
+  " Demand:" (PMC_Right_I_Demand,6)   Amps;
+  " Meas:"   (PMC_Right_I_Measured,6) Amps;
+  Pos_Set:   (PMC_Right_Pos_SP,11);
+  " Demand:" (PMC_Right_Pos_Demand,11);
+  " Target:" (PMC_Right_Pos_Target,11);
+  " Meas:"   (PMC_Right_Pos_Measured,11);
+  BusV:      (PMC_Right_BusV,6)      V;
+}
+
+PropMtr_Right_Full_Hdr {
+  HBox { +-; Right; -+ };
+  [PropMtr_Right_Full]
+}
+
+PropMtr_Right_Stat {
+  HBox { +-; Status; -+ };
+  (PMC_Right_Status0,16);
+  (PMC_Right_Status1,16);
+  (PMC_Right_Status2,16);
+  (PMC_Right_Status3,16);
+  (PMC_Right_Status4,16);
+  (PMC_Right_Status5,16);
+  (PMC_Right_Status6,16);
+}
+
+PropMtr_Right_Gain {
+  VL_Kp:     (PMC_Right_VL_Kp,8);
+  VL_Ki:     (PMC_Right_VL_Ki,8);
+  VL_Kd:     (PMC_Right_VL_Kd,7);
+  TCL_Kp:    (PMC_Right_TCL_Kp,8);
+  TCL_Ki:    (PMC_Right_TCL_Ki,8);
+}
+
+PropMtr_Right {
+  HBox { +-; Right; -+ };
+  HBox {
+    [PropMtr_Right_Full];
+    |+;
+    [PropMtr_Right_Stat];
+    |+;
+    [PropMtr_Right_Gain]
+  }
+}
