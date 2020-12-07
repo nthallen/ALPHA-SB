@@ -16,8 +16,8 @@ State PMC_Right_Stop {
 
 State PMC_Right_Spin_Down {
       > PMC Right Velocity Set 0 RPM
-      Hold until (PMC_Right_Status4 & 0x01) or 10;
-   +1 Validate PMC_Right_Idle;
+      Hold until (PMC_Right_Status4 & 0x01) or 20;
+   +5 Validate PMC_Right_Idle;
 }
 
 State PMC_Right_Ready {

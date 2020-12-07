@@ -16,8 +16,8 @@ State PMC_@ID@_Stop {
 
 State PMC_@ID@_Spin_Down {
       > PMC @ID@ Velocity Set 0 RPM
-      Hold until (PMC_@ID@_Status4 & 0x01) or 10;
-   +1 Validate PMC_@ID@_Idle;
+      Hold until (PMC_@ID@_Status4 & 0x01) or 20;
+   +5 Validate PMC_@ID@_Idle;
 }
 
 State PMC_@ID@_Ready {
