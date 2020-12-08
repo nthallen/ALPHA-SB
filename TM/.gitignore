@@ -32,6 +32,12 @@ scopexjsonext.cc
 scopexjsonextoui.cc
 scopexjsonext.o
 scopexjsonextoui.o
+B3MBrawextcdf.oui
+B3MBrawcdf.tmc
+B3MBrawext.cc
+B3MBrawextoui.cc
+B3MBrawext.o
+B3MBrawextoui.o
 doit.dep
 scopexengext.cdf
 scopexengextcdf.oui
@@ -54,5 +60,6 @@ scopexcltnc
 scopexdispnc
 scopexalgo
 scopexjsonext
+B3MBrawext
 doit
 scopexengext

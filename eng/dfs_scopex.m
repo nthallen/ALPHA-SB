@@ -23,8 +23,19 @@ dfs.field(rec1,'PMC_Left_I_Demand','%6.2f');
 dfs.field(rec2,'PMC_Left_RPM','%7.1f');
 dfs.field(rec1,'PMC_Left_RPM_Demand','%7.1f');
 dfs.field(rec1,'PMC_Left_RPM_SP','%7.1f');
+dfs.end_col();
+dfs.start_col();
+dfs.field(rec2,'PMC_Right_I_Measured','%6.2f');
+dfs.field(rec1,'PMC_Right_I_Demand','%6.2f');
+dfs.field(rec2,'PMC_Right_RPM','%7.1f');
+dfs.field(rec1,'PMC_Right_RPM_Demand','%7.1f');
+dfs.field(rec1,'PMC_Right_RPM_SP','%7.1f');
+dfs.end_col();
 %
-dfs.new_graph(rec1, 'CPU_Pct', 'new_fig');
+%dfs.new_graph(rec2, 'PMC_Left_I_Measured', 'new_fig');
+%dfs.new_graph(rec2, 'PMC_Left_I_Measured', 'cur_axes', 1, 1);
+%%
+
 %%
 %dfs.new_graph(rec2,'PMC_Left_RPM','new_axes',
 %%

@@ -20,6 +20,7 @@ scopexclt :
 scopexdisp : scopex.tbl B3MB.tbl Housekeeping.tbl
 scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $genuibase
+B3MBrawext : B3MBraw.cdf
 doit : scopex.doit
 %%
 CXXFLAGS+=-g
