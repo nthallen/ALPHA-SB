@@ -2,6 +2,9 @@
     easwhlpt3425080)
       propmtrdev=/dev/ttyS3
       slcandev=/dev/ttyS5;;
+    EASWHLPT3425022)
+      propmtrdev=
+      slcandev=/dev/ttyS12;;
     *)
       propmtrdev=/dev/ttyUSB0
       slcandev=/dev/ttyACM0;;
