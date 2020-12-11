@@ -20,12 +20,12 @@ Calibration (B3MB_Volts_t, B3MB_VOLTS) {
  * +/- 2.048V range.
  * Amps = Raw * (2.048/32768) / (20 * 1.5e-3)
  * Resolution is ~2mA
- * Range is +/- 68.266A
+ * Range is +/- 68.2667A
  */
 TM typedef int16_t B3MB_Amps_t { text "%7.3lf"; Convert B3MB_AMPS; }
 Calibration (B3MB_Amps_t, B3MB_AMPS) {
       0,   0,
-  32768,  26.2666
+  32768,  68.2667
 }
 
 /* Bus Voltages are passed through a 200K over 2K divider, then
