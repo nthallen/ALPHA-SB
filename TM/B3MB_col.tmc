@@ -146,4 +146,15 @@
     }
     free_memory(mreq);
   }
+  
+  bool B3MB_update_int(uint16_t *LV, B3MB_mread_t *R, int idx) {
+    int16_t val = R->rvals[idx];
+    if (val || (!R->saw_nack)) {
+      *LV = val;
+      return true;
+    }
+    return false;
+  }
+  
+  #define B3MB_update(LV,R,I) B3MB_update_int((uint16_t *)&LV,R,I)
 %}

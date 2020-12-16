@@ -6,11 +6,11 @@ B3MB1_VI {
   B2:  (B3MB_100V1_Batt2_V,7) (B3MB_100V1_Batt2_I,7);
   B3:  (B3MB_100V1_Batt3_V,7) (B3MB_100V1_Batt3_I,7);
   B4:  (B3MB_100V1_Batt4_V,7) (B3MB_100V1_Batt4_I,7);
+  Bus: (B3MB_100V1_Bus_V,7);
   L1:  (B3MB_100V1_Load1_V,7) (B3MB_100V1_Load1_I,7);
   L2:  (B3MB_100V1_Load2_V,7) (B3MB_100V1_Load2_I,7);
   L3:  (B3MB_100V1_Load3_V,7) (B3MB_100V1_Load3_I,7);
   L4:  (B3MB_100V1_Load4_V,7) (B3MB_100V1_Load4_I,7);
-  Bus: (B3MB_100V1_Bus_V,7);
 }
 
 B3MB1_T {
