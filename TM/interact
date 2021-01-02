@@ -14,7 +14,7 @@
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
 [ -c "$slcandev" ] &&
-  Launch      -      subbusd_slcan -n CAN -p $slcandev
+  Launch      -      subbusd_slcan -n CAN -p $slcandev -v
   Launch      tm_bfr bfr -s Both
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen scopexcol

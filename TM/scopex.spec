@@ -7,7 +7,7 @@ Module TMbase
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types
 Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT=
 Module PropMtr mode=groups RT1= RT2=
-Module B3MB mode=types ID=100V1 CAN_ID=1
+Module B3MB mode=types ID=100V1 CAN_ID=1 SLOW=10
 tmcbase = B3MB_100V1_cal.tmc
 
 TGTDIR = /home/scopex
