@@ -1,0 +1,17 @@
+Moduledef SpatialDual {
+}
+
+mode (default) {
+  tmcbase = SpatialDual.tmc:SpatialDual.tmc.in
+  colbase = SpatialDual_col.tmc:SpatialDual_col.tmc.in
+  genuibase = SpatialDual.genui:SpatialDual.genui.in
+  DISTRIB = @MODDIR@/../SpatialDual
+  CPPFLAGS = -I @MODDIR@/..
+  %%
+.PHONY : clean-SpatialDual @MODDIR@/../SpatialDual
+@MODDIR@/../SpatialDual :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-SpatialDual
+clean-SpatialDual :
+	$(MAKE) --directory=@MODDIR@/.. clean
+}

@@ -1,0 +1,18 @@
+<package> SpatialDual
+<include> "dasio/appid.h"
+<include> "SpatialDual.h"
+<include> msg oui
+
+<opts> "p:b:"
+<sort>
+        -p <port> Specify RS485 port (/dev/ttyS0)
+        -b <baud> Specify baud rate (115200)
+
+<switch>
+  case 'p':
+    SDual_port = optarg; break;
+  case 'b':
+    SDual_baud = atoi(optarg); break;
+
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("SDual", "Spatial Dual Driver", "V1.0");
