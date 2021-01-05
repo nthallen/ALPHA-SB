@@ -1,6 +1,6 @@
 <package> SpatialDual
 <include> "dasio/appid.h"
-<include> "SpatialDual.h"
+<include> "SDual_int.h"
 <include> msg oui
 
 <opts> "p:b:"

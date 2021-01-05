@@ -7,7 +7,7 @@ LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -lpthread
 all : SpatialDual
 OBJ = *.stackdump *.o
 
-SPATIALDUALOBJ = SpatialDual.o SpatialDualoui.o pmc.o
+SPATIALDUALOBJ = SpatialDual.o SpatialDualoui.o
 OBJ += SpatialDual SpatialDualoui.cc
 DIST += SpatialDual
 SpatialDual : $(SPATIALDUALOBJ)
