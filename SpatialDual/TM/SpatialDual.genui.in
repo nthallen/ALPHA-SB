@@ -1,4 +1,4 @@
- @FAST@ system_status       GNSS System
+ @FAST@ system_status       GNSS System %.0lf
  @FAST@ orient_init:filter_status:0          GNSS Filters
  @FAST@ nav_init:filter_status:1             GNSS Filters
  @FAST@ heading_init:filter_status:2         GNSS Filters
@@ -27,3 +27,5 @@
  @FAST@ latitude_std        GNSS Std
  @FAST@ longitude_std       GNSS Std
  @FAST@ height_std          GNSS Std
+ @FAST@ SD_stale            GNSS Stale
+ 

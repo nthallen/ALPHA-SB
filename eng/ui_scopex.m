@@ -63,6 +63,7 @@ f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssa', 'Accel' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssattitude', 'Attitude' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssav', 'Ang Vel' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssstd', 'Std' );
+f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssstale', 'Stale' );
 f = ne_listdirs(f, 'SCoPEx_Data_Dir', 15);
 f = ne_dialg(f, 'newcol');
 ne_dialg(f, 'resize');
