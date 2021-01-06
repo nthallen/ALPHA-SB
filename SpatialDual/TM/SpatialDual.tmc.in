@@ -1,0 +1,58 @@
+%{
+%}
+TM "Receive" SpatialDual 0;
+
+TM typedef uint16_t SDstat_t { text "%04X"; }
+TM typedef uint32_t SDtime_t { text "%12d"; }
+TM typedef double SD_d_angle_t { text "%10.5lf"; }
+TM typedef double SDalt_t { text "%9.3lf"; }
+TM typedef double SD_f_angle_t { text "%10.5lf"; }
+TM typedef float SD_vel_t { text "%8.3f"; }
+TM typedef float SD_acc_t { text "%8.4f"; }
+
+TM @FAST@ Hz SDstat_t system_status;
+  Collect system_status = SpatialDual.system_status;
+TM @FAST@ Hz SDstat_t filter_status;
+  Collect filter_status = SpatialDual.filter_status;
+TM @FAST@ Hz SDtime_t unix_seconds;
+  Collect unix_seconds = SpatialDual.unix_seconds;
+TM @FAST@ Hz SDtime_t microseconds;
+  Collect microseconds = SpatialDual.microseconds;
+TM @FAST@ Hz SD_d_angle_t latitude;
+  Collect latitude = SpatialDual.latitude;
+TM @FAST@ Hz SD_d_angle_t longitude;
+  Collect longitude = SpatialDual.longitude;
+TM @FAST@ Hz SDalt_t height;
+  Collect height = SpatialDual.height;
+TM @FAST@ Hz SD_vel_t velocity_north;
+  Collect velocity_north = SpatialDual.velocity_north;
+TM @FAST@ Hz SD_vel_t velocity_east;
+  Collect velocity_east = SpatialDual.velocity_east;
+TM @FAST@ Hz SD_vel_t velocity_down;
+  Collect velocity_down = SpatialDual.velocity_down;
+TM @FAST@ Hz SD_acc_t body_accel_x;
+  Collect body_accel_x = SpatialDual.body_accel_x;
+TM @FAST@ Hz SD_acc_t body_accel_y;
+  Collect body_accel_y = SpatialDual.body_accel_y;
+TM @FAST@ Hz SD_acc_t body_accel_z;
+  Collect body_accel_z = SpatialDual.body_accel_z;
+TM @FAST@ Hz SD_acc_t g_force;
+  Collect g_force = SpatialDual.g_force;
+TM @FAST@ Hz SD_f_angle_t roll;
+  Collect roll = SpatialDual.roll;
+TM @FAST@ Hz SD_f_angle_t pitch;
+  Collect pitch = SpatialDual.pitch;
+TM @FAST@ Hz SD_f_angle_t heading;
+  Collect heading = SpatialDual.heading;
+TM @FAST@ Hz SD_f_angle_t angular_velocity_x;
+  Collect angular_velocity_x = SpatialDual.angular_velocity_x;
+TM @FAST@ Hz SD_f_angle_t angular_velocity_y;
+  Collect angular_velocity_y = SpatialDual.angular_velocity_y;
+TM @FAST@ Hz SD_f_angle_t angular_velocity_z;
+  Collect angular_velocity_z = SpatialDual.angular_velocity_z;
+TM @FAST@ Hz SD_f_angle_t latitude_std;
+  Collect latitude_std = SpatialDual.latitude_std;
+TM @FAST@ Hz SD_f_angle_t longitude_std;
+  Collect longitude_std = SpatialDual.longitude_std;
+TM @FAST@ Hz SD_f_angle_t height_std;
+  Collect height_std = SpatialDual.height_std;

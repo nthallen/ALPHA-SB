@@ -1,10 +1,12 @@
-Moduledef SpatialDual {
+Moduledef SpatialDual [ FAST=10 ] {
 }
 
 mode (default) {
   tmcbase = SpatialDual.tmc:SpatialDual.tmc.in
   colbase = SpatialDual_col.tmc:SpatialDual_col.tmc.in
   genuibase = SpatialDual.genui:SpatialDual.genui.in
+  extbase = SpatialDual_conv.tmc:SpatialDual_conv.tmc.in
+  - : SpatialDual.tbl:SpatialDual.tbl.in
   DISTRIB = @MODDIR@/../SpatialDual
   CPPFLAGS = -I @MODDIR@/..
   %%

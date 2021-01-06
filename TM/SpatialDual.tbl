@@ -1,0 +1,96 @@
+Input "TMbase.tbl";
+
+Nav_Init {
+  HBox { +-; Title: Initializations: ; -+ };
+  Orientation: (orient_init,3);
+  Navigation:  (nav_init,3);
+  Heading:     (heading_init,3);
+  "UTC Time:"  (UTC_time_init,3);
+}
+
+Nav_Filters {
+  HBox { +-; Title: Filters: ; -+ };
+  "Internal GNSS:"  (Int_GNSS_en,8);
+  "Atmos. Alt.:"    (atm_alt_en,8);
+  "Dual Heading:"   (Dual_Ant_active,8);
+}
+
+Nav_Status {
+  [Nav_Init];
+  [Nav_Filters];
+  HBox { +-; Title: Status; -+ };
+  System: (system_status,4);
+  Drift:  (nav_drift,9) sec;
+  [TMbase_times];
+}
+
+Nav_Position {
+  HBox { +-; Title: Position; -+ };
+  Lat: (latitude,10)  "N rad";
+  Lon: (longitude,10) "E rad";
+  Alt: (height,9)     m;
+}
+
+Nav_Velocity {
+  HBox { +-; Title: Velocity; -+ };
+  North: (velocity_north,8) "m/s";
+  East:  (velocity_east,8)  "m/s";
+  Down:  (velocity_down,8)  "m/s";
+}
+
+Nav_Accel {
+  HBox { +-; Title: Acceleration; -+ };
+  X: (body_accel_x,8) "m/s/s";
+  Y: (body_accel_y,8) "m/s/s";
+  Z: (body_accel_z,8) "m/s/s";
+  g: (body_accel_x,8) "g";
+}
+
+Nav_Linear {
+  [Nav_Position];
+  [Nav_Velocity];
+  [Nav_Accel];
+}
+
+Nav_Euler {
+  HBox { +-; Title: "Ang. Position"; -+ };
+  Roll:    (roll,10)    rad;
+  Pitch:   (pitch,10)   rad;
+  Heading: (heading,10) rad;
+}
+
+Nav_Angular_V {
+  HBox { +-; Title: "Ang. Velocity" ; -+ };
+  X: (angular_velocity_x,10) "rad/s";
+  Y: (angular_velocity_y,10) "rad/s";
+  Z: (angular_velocity_z,10) "rad/s";
+}
+
+Nav_Angular {
+  [Nav_Euler];
+  [Nav_Angular_V];
+}
+
+Nav_Deviations {
+  HBox { +-; Title: "Std. Dev." ; -+ };
+  Lat: (latitude_std,10)  rad;
+  Lon: (longitude_std,10) rad;
+  Alt: (height_std,10)    m;
+}
+
+{
+  HBox {
+    |+;
+    {
+      HBox { +-; Title: "Spatial Dual" ; -+ };
+      HBox {
+        [Nav_Linear]; |+; {
+          [Nav_Angular];
+          [Nav_Deviations];
+        }; |+; [Nav_Status];
+      };
+    };
+    |+;
+  };
+  -;
+}

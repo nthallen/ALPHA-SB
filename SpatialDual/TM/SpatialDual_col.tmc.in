@@ -1,0 +1,4 @@
+%{
+  #include "SpatialDual.h"
+  system_state_t SpatialDual;
+%}

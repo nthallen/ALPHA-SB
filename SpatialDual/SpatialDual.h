@@ -19,7 +19,7 @@ typedef struct  __attribute__((__packed__)) {
   float roll; // radians
   float pitch;
   float heading;
-  float angular_velocity_x;
+  float angular_velocity_x; // radians/sec
   float angular_velocity_y;
   float angular_velocity_z;
   float latitude_std;

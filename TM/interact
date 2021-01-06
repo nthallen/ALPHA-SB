@@ -1,7 +1,8 @@
   case `hostname` in
     easwhlpt3425080)
-      propmtrdev=/dev/ttyS3
-      slcandev=/dev/ttyS5;;
+      # propmtrdev=/dev/ttyS3
+      # slcandev=/dev/ttyS5;;
+      spatialdualdev=/dev/ttyS3;;
     EASWHLPT3425022)
       propmtrdev=
       slcandev=/dev/ttyS12;;
@@ -22,4 +23,6 @@
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
+[ -c "$spatialdualdev" ] &&
+  Launch      -      SpatialDual -p $spatialdualdev
   Launch      -TMC-  scopexalgo
