@@ -56,7 +56,7 @@ bool SDual::protocol_input() {
           cp, hdr->LRC, hdr->Packet_ID, hdr->Packet_len, hdr->CRC);
         switch (hdr->Packet_ID) {
           case 20: // System State
-            if (report_system_state((system_state_t*)&buf[cp+5]))
+            if (report_system_state((system_status_t*)&buf[cp+5]))
               return true;
             break;
           case 25: // Velocity Standard Deviation
@@ -84,9 +84,15 @@ bool SDual::protocol_input() {
   return false;
 }
 
-bool SDual::report_system_state(system_state_t *recd) {
-  SpatialDual = *recd;
+bool SDual::report_system_state(system_status_t *recd) {
+  SpatialDual.SD = *recd;
+  SpatialDual.nc = nc;
+  ++SpatialDual.n_reports;
   return false;
+}
+
+bool SDual::TM_sync() {
+  SpatialDual.n_reports = 0;
 }
 
 int main(int argc, char **argv) {

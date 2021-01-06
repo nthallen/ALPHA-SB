@@ -25,6 +25,12 @@ typedef struct  __attribute__((__packed__)) {
   float latitude_std;
   float longitude_std;
   float height_std;
+} system_status_t;
+
+typedef struct __attribute__((__packed__)) {
+  system_status_t SD;
+  uint16_t nc;
+  uint8_t n_reports;
 } system_state_t;
 
 extern system_state_t SpatialDual;

@@ -28,4 +28,6 @@
  @FAST@ longitude_std       GNSS Std
  @FAST@ height_std          GNSS Std
  @FAST@ SD_stale            GNSS Stale
+ @FAST@ SD_n_reports        GNSS Stale
+ @FAST@ SD_nc               GNSS Stale
  
