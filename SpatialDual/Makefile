@@ -12,7 +12,7 @@ OBJ += SpatialDual SpatialDualoui.cc
 DIST += SpatialDual
 SpatialDual : $(SPATIALDUALOBJ)
 	$(CXX) -o SpatialDual $(CPPFLAGS) $(CXXFLAGS) $(SPATIALDUALOBJ) $(LDFLAGS)
-SpatialDual.o : SpatialDual.cc
+SpatialDual.o : SpatialDual.cc SDual_int.h SpatialDual.h
 SpatialDualoui.o : SpatialDualoui.cc
 SpatialDualoui.cc : SpatialDual.oui
 	oui -o SpatialDualoui.cc SpatialDual.oui

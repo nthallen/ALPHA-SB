@@ -17,7 +17,7 @@ class SDual : public Serial {
     bool protocol_input();
     bool report_system_state(system_state_t *recd);
     
-    struct frame_hdr_t {
+    struct __attribute__((__packed__)) frame_hdr_t {
       uint8_t LRC;
       uint8_t Packet_ID;
       uint8_t Packet_len;

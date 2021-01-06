@@ -20,6 +20,7 @@ Nav_Status {
   [Nav_Filters];
   HBox { +-; Title: Status; -+ };
   System: (system_status,4);
+  Stale:  (SD_stale,3);
   Drift:  (nav_drift,9) sec;
   [TMbase_times];
 }

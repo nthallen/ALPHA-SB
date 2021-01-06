@@ -1,6 +1,6 @@
 %{
 %}
-TM "Receive" SpatialDual 0;
+TM "Receive" SpatialDual 1;
 
 TM typedef uint16_t SDstat_t { text "%04X"; }
 TM typedef uint32_t SDtime_t { text "%12d"; }
@@ -9,50 +9,62 @@ TM typedef double SDalt_t { text "%9.3lf"; }
 TM typedef double SD_f_angle_t { text "%10.5lf"; }
 TM typedef float SD_vel_t { text "%8.3f"; }
 TM typedef float SD_acc_t { text "%8.4f"; }
+TM typedef uint8_t SD_stale_t { text "%3u"; }
 
 TM 10 Hz SDstat_t system_status;
-  Collect system_status = SpatialDual.system_status;
 TM 10 Hz SDstat_t filter_status;
-  Collect filter_status = SpatialDual.filter_status;
 TM 10 Hz SDtime_t unix_seconds;
-  Collect unix_seconds = SpatialDual.unix_seconds;
 TM 10 Hz SDtime_t microseconds;
-  Collect microseconds = SpatialDual.microseconds;
 TM 10 Hz SD_d_angle_t latitude;
-  Collect latitude = SpatialDual.latitude;
 TM 10 Hz SD_d_angle_t longitude;
-  Collect longitude = SpatialDual.longitude;
 TM 10 Hz SDalt_t height;
-  Collect height = SpatialDual.height;
 TM 10 Hz SD_vel_t velocity_north;
-  Collect velocity_north = SpatialDual.velocity_north;
 TM 10 Hz SD_vel_t velocity_east;
-  Collect velocity_east = SpatialDual.velocity_east;
 TM 10 Hz SD_vel_t velocity_down;
-  Collect velocity_down = SpatialDual.velocity_down;
 TM 10 Hz SD_acc_t body_accel_x;
-  Collect body_accel_x = SpatialDual.body_accel_x;
 TM 10 Hz SD_acc_t body_accel_y;
-  Collect body_accel_y = SpatialDual.body_accel_y;
 TM 10 Hz SD_acc_t body_accel_z;
-  Collect body_accel_z = SpatialDual.body_accel_z;
 TM 10 Hz SD_acc_t g_force;
-  Collect g_force = SpatialDual.g_force;
 TM 10 Hz SD_f_angle_t roll;
-  Collect roll = SpatialDual.roll;
 TM 10 Hz SD_f_angle_t pitch;
-  Collect pitch = SpatialDual.pitch;
 TM 10 Hz SD_f_angle_t heading;
-  Collect heading = SpatialDual.heading;
 TM 10 Hz SD_f_angle_t angular_velocity_x;
-  Collect angular_velocity_x = SpatialDual.angular_velocity_x;
 TM 10 Hz SD_f_angle_t angular_velocity_y;
-  Collect angular_velocity_y = SpatialDual.angular_velocity_y;
 TM 10 Hz SD_f_angle_t angular_velocity_z;
-  Collect angular_velocity_z = SpatialDual.angular_velocity_z;
 TM 10 Hz SD_f_angle_t latitude_std;
-  Collect latitude_std = SpatialDual.latitude_std;
 TM 10 Hz SD_f_angle_t longitude_std;
-  Collect longitude_std = SpatialDual.longitude_std;
 TM 10 Hz SD_f_angle_t height_std;
-  Collect height_std = SpatialDual.height_std;
+TM 10 Hz SD_stale_t SD_stale;
+
+Group SDual (system_status, filter_status, unix_seconds,
+    microseconds, latitude, longitude, height, velocity_north,
+    velocity_east, velocity_down, body_accel_x, body_accel_y,
+    body_accel_z, g_force, roll, pitch, heading, angular_velocity_x,
+    angular_velocity_y, angular_velocity_z, latitude_std,
+    longitude_std, height_std) {
+  system_status = SpatialDual.system_status;
+  filter_status = SpatialDual.filter_status;
+  unix_seconds = SpatialDual.unix_seconds;
+  microseconds = SpatialDual.microseconds;
+  latitude = SpatialDual.latitude;
+  longitude = SpatialDual.longitude;
+  height = SpatialDual.height;
+  velocity_north = SpatialDual.velocity_north;
+  velocity_east = SpatialDual.velocity_east;
+  velocity_down = SpatialDual.velocity_down;
+  body_accel_x = SpatialDual.body_accel_x;
+  body_accel_y = SpatialDual.body_accel_y;
+  body_accel_z = SpatialDual.body_accel_z;
+  g_force = SpatialDual.g_force;
+  roll = SpatialDual.roll;
+  pitch = SpatialDual.pitch;
+  heading = SpatialDual.heading;
+  angular_velocity_x = SpatialDual.angular_velocity_x;
+  angular_velocity_y = SpatialDual.angular_velocity_y;
+  angular_velocity_z = SpatialDual.angular_velocity_z;
+  latitude_std = SpatialDual.latitude_std;
+  longitude_std = SpatialDual.longitude_std;
+  height_std = SpatialDual.height_std;
+  SD_stale = SpatialDual_obj->Stale(255);
+  SpatialDual_obj->synch();
+}

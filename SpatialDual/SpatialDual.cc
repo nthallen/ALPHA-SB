@@ -65,7 +65,9 @@ bool SDual::protocol_input() {
           case 30: // Satelittes
           case 43: // Angular Acceleration
             break;
-          default: msg(0, "Unsupported packet"); break;
+          default:
+            msg(0, "Unsupported packet type %d", hdr->Packet_ID);
+            break;
         }
       }
       if (cp > 0)
@@ -84,7 +86,7 @@ bool SDual::protocol_input() {
 
 bool SDual::report_system_state(system_state_t *recd) {
   SpatialDual = *recd;
-  return TM->Send();
+  return false;
 }
 
 int main(int argc, char **argv) {
