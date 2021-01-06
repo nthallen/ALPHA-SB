@@ -1,5 +1,5 @@
  10 system_status       GNSS System %.0lf
- 10 orient_init:filter_status:0          GNSS Filters
+ 10 orient_init:filter_status:0          GNSS Filters %.0lf
  10 nav_init:filter_status:1             GNSS Filters
  10 heading_init:filter_status:2         GNSS Filters
  10 UTC_init:filter_status:3             GNSS Filters
@@ -28,4 +28,6 @@
  10 longitude_std       GNSS Std
  10 height_std          GNSS Std
  10 SD_stale            GNSS Stale
+ 10 SD_n_reports        GNSS Stale
+ 10 SD_nc               GNSS Stale
  

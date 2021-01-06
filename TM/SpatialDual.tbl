@@ -22,6 +22,8 @@ Nav_Status {
   System: (system_status,4);
   Stale:  (SD_stale,3);
   Drift:  (nav_drift,9) sec;
+  nc:     (SD_nc,5);
+  n_rep:  (SD_n_reports,3);
   [TMbase_times];
 }
 

@@ -93,6 +93,7 @@ bool SDual::report_system_state(system_status_t *recd) {
 
 bool SDual::TM_sync() {
   SpatialDual.n_reports = 0;
+  return false;
 }
 
 int main(int argc, char **argv) {

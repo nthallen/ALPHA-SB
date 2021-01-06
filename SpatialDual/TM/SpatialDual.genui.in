@@ -1,5 +1,5 @@
  @FAST@ system_status       GNSS System %.0lf
- @FAST@ orient_init:filter_status:0          GNSS Filters
+ @FAST@ orient_init:filter_status:0          GNSS Filters %.0lf
  @FAST@ nav_init:filter_status:1             GNSS Filters
  @FAST@ heading_init:filter_status:2         GNSS Filters
  @FAST@ UTC_init:filter_status:3             GNSS Filters
