@@ -3,6 +3,7 @@
 #include "dasio/quit.h"
 #include "dasio/tm_data_sndr.h"
 #include "nl.h"
+#include "nl_assert.h"
 #include "SDual_int.h"
 #include "oui.h"
 #include "crc16ccitt_false.h"
@@ -36,8 +37,8 @@ bool SDual::protocol_input() {
     }
     if (LRC_count >= 5 && LRC == 0) {
       hdr = (frame_hdr_t*)&buf[cp];
-      if (cp+5+hdr->Packet_len > nc) {
-        // update_tc_vmin(cp+5+hdr->Packet_len-nc)
+      if (cp+sizeof(frame_hdr_t)+hdr->Packet_len > nc) {
+        // update_tc_vmin(cp+sizeof(frame_hdr_t)+hdr->Packet_len-nc)
         break;
       }
       // Check packet CRC
@@ -45,7 +46,7 @@ bool SDual::protocol_input() {
       // The starting value is 0xFFFF.
       // The CRC covers only the packet data.
       uint16_t CRC = crc16ccitt_false_word(0xFFFF,
-                      &buf[cp+5], hdr->Packet_len);
+                      &buf[cp+sizeof(frame_hdr_t)], hdr->Packet_len);
       if (CRC != hdr->CRC) {
         msg(MSG_ERROR, "%s: CRC hdr:%04X pkt:%04X",
               iname, hdr->CRC, CRC);
@@ -61,7 +62,7 @@ bool SDual::protocol_input() {
           cp, hdr->LRC, hdr->Packet_ID, hdr->Packet_len, hdr->CRC);
         switch (hdr->Packet_ID) {
           case 20: // System State
-            if (report_system_state((system_status_t*)&buf[cp+5]))
+            if (report_system_state((system_status_t*)&buf[cp+sizeof(frame_hdr_t)]))
               return true;
             break;
           case 25: // Velocity Standard Deviation
@@ -77,15 +78,25 @@ bool SDual::protocol_input() {
       }
       if (cp > 0)
         msg(MSG_WARN, "Discarded %u bytes before packet", cp);
-      cp += 5 + hdr->Packet_len;
+      cp += sizeof(frame_hdr_t) + hdr->Packet_len;
       report_ok(cp);
       LRC = 0;
       LRC_count = 0;
+      // update_tc_vmin(17-nc);
     }
   }
   if (cp > 0)
     msg(MSG_DEBUG, "Discarding %d chars", cp);
   report_ok(cp);
+  if (LRC_count >= 5 && LRC == 0) {
+    nl_assert(nc >= 5);
+    hdr = (frame_hdr_t*)&buf[cp];
+    nl_assert(nc < cp+sizeof(frame_hdr_t) + hdr->Packet_len);
+    update_tc_vmin(cp+sizeof(frame_hdr_t) + hdr->Packet_len - nc);
+  } else {
+    nl_assert(cp == 0 && nc < 17);
+    update_tc_vmin(17-nc+cp);
+  }
   return false;
 }
 
