@@ -16,7 +16,7 @@ class SDual : public Serial {
   protected:
     bool protocol_input();
     bool report_system_state(system_status_t *recd);
-    bool TM_sync();
+    bool tm_sync();
     
     struct __attribute__((__packed__)) frame_hdr_t {
       uint8_t LRC;

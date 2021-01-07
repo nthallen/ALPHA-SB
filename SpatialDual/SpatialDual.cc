@@ -16,7 +16,11 @@ int SDual_baud = 115200;
 SDual::SDual(const char *port, TM_data_sndr *TM)
     : Serial("SDual", 500, port, O_RDWR),
       TM(TM) {
-  setup(SDual_baud, 8, 'n', 1, 100, 1);
+  setup(SDual_baud, 8, 'n', 1, 17, 1);
+  flags |= gflag(0);
+  update_tc_vmin(1,0);
+  flush_input();
+  update_tc_vmin(17,1);
 }
 
 bool SDual::protocol_input() {
@@ -32,7 +36,8 @@ bool SDual::protocol_input() {
     }
     if (LRC_count >= 5 && LRC == 0) {
       hdr = (frame_hdr_t*)&buf[cp];
-      if (cp+5+hdr->Packet_len >= nc) {
+      if (cp+5+hdr->Packet_len > nc) {
+        // update_tc_vmin(cp+5+hdr->Packet_len-nc)
         break;
       }
       // Check packet CRC
@@ -91,7 +96,7 @@ bool SDual::report_system_state(system_status_t *recd) {
   return false;
 }
 
-bool SDual::TM_sync() {
+bool SDual::tm_sync() {
   SpatialDual.n_reports = 0;
   return false;
 }
