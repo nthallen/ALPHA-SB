@@ -69,7 +69,7 @@ Group SDual (system_status, filter_status, unix_seconds,
   longitude_std = SpatialDual.SD.longitude_std;
   height_std = SpatialDual.SD.height_std;
   SD_nc = SpatialDual.nc;
-  SD_n_reports = SpatialDual.n_reports;
   SD_stale = SpatialDual_obj->Stale(255);
+  SD_n_reports = SD_stale ? 0 : SpatialDual.n_reports;
   SpatialDual_obj->synch();
 }
