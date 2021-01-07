@@ -41,8 +41,10 @@
 %}
 TM typedef double nav_drift_t { text "%9.6le"; }
 nav_drift_t nav_drift; Invalidate nav_drift;
-  { nav_drift = (unix_seconds > 100000) ?
-      (dtime() - unix_seconds - microseconds*1e-6) : 0;
+  { if (SD_stale == 0) {
+      nav_drift = (unix_seconds > 100000) ?
+        (dtime() - unix_seconds - microseconds*1e-6) : 0;
+    }
     Validate nav_drift;
   }
 
