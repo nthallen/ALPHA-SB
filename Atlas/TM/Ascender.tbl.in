@@ -1,0 +1,32 @@
+Ascender {
+  HBox { +-; Title: Ascender; -+ };
+  Pos: (AscPosition,5)    m;
+  Speed: (AscSpeed,5)    "m/s";
+  Cmd:   (AscSpeedCmd,4) "%";
+  Lim1:  (AscLimit1);
+  Lim2:  (AscLimit2);
+}
+
+AscHK {
+  HBox { +-; Title: AscenderHK; -+ };
+  V:  (AscHoistV,6) V;
+  I:  (AscHoistI,3) A;
+  T1: (AscTemp[0],4) C;
+  T2: (AscTemp[1],4) C;
+  T3: (AscTemp[2],4) C;
+  T4: (AscTemp[3],4) C;
+}
+
+AscTech {
+  HBox { +-; Title: AscTech; -+ };
+  CtrlInp:  (AscCtrlInp,5);
+  Mode:     (AscMode,8);
+  Nreports: (AscNreports,3);
+  Stale:    (AscStale,3);
+}
+
+AscGrp {
+  [Ascender];
+  [AscHK];
+  [AscTech];
+}

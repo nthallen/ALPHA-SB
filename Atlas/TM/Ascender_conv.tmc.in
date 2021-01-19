@@ -1,0 +1,37 @@
+%{
+  #define AscOnOff_text(x) ((x)?" On":"Off")
+%}
+TM typedef uint8_t AscOnOff_t { text "%3u"; AscOnOff_text(); }
+uint8_t AscOnOff_t AscLimit1; Invalidate AscLimit1;
+  { AscLimit1 = (AscStatus >> 4) & 1; Validate AscLimit1; }
+uint8_t AscOnOff_t AscLimit2; Invalidate AscLimit2;
+  { AscLimit2 = (AscStatus >> 5) & 1; Validate AscLimit2; }
+
+%{
+  const char *asc_ctrl_inp_text(uint8_t val) {
+    switch (val) {
+      case 1:  return "Serial";
+      case 2:  return "Jog   ";
+      case 3:  return "Aux   ";
+      default: return "******";
+    }
+  }
+%}
+TM typedef uint8_t asc_ctrl_inp_t { text "%5u"; asc_ctrl_inp_text(); }
+asc_ctrl_inp_t AscCtrlInp; Invalidate AscCtrlInp;
+  { AscCtrlInp = AscStatus & 3; Validate AscCtrlInp; }
+
+%{
+  const char *asc_mode_text(uint8_t val) {
+    switch (val) {
+      case 1:  return "Idle    ";
+      case 2:  return "Moving  ";
+      case 3:  return "RecovErr";
+      case 4:  return "UnrecErr";
+      default: return "********";
+    }
+  }
+%}
+TM typedef uint8_t asc_mode_t { text "%8u"; asc_mode_text(); }
+asc_mode_t AscMode; Invalidate AscMode;
+  { AscMode = ((AscStatus >> 2) & 3)+1; Validate AscMode; }

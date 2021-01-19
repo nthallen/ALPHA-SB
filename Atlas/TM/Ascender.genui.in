@@ -1,0 +1,13 @@
+ @RATE@ AscPosition           Ascender Pos
+ @RATE@ AscSpeed              Ascender Speed
+ @RATE@ AscSpeedCmd           Ascender Cmd
+ @RATE@ AscLimit1:AscStatus:4 Ascender Limits
+ @RATE@ AscLimit2:AscStatus:4 Ascender Limits
+
+ @RATE@ AscHoistV             AscHK V
+ @RATE@ AscHoistI             AscHK I
+ @RATE@ AscCtrlInp            AscHK CtrlInp
+ @RATE@ AscMode               AscHK Mode
+ @RATE@ AscTemp[4]            AscHK Temp
+ @RATE@ AscNreports           AscHK Nreports
+ @RATE@ AscStale              AscHK Stale

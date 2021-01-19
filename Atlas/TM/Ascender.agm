@@ -1,0 +1,19 @@
+Moduledef Ascender [ RATE=1 ] {
+}
+
+tmcbase = Ascender.tmc:Ascender.tmc.in
+cmdbase = Ascender.cmd
+genuibase = Ascender.genui:Ascender.genui.in
+extbase = Ascender_conv.tmc
+- : Ascender.tbl:Ascender.tbl.in
+DISTRIB = @MODDIR@/../Ascender
+CPPFLAGS = -I @MODDIR@/..
+
+%%
+
+.PHONY : clean-Ascender @MODDIR@/../Ascender
+@MODDIR@/../Ascender :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-Ascender
+clean-Ascender :
+	$(MAKE) --directory=@MODDIR@/.. clean

@@ -14,6 +14,7 @@ class Ascend : public Serial {
     static const char *Ascender_port;
   protected:
     bool protocol_input();
+    bool tm_sync();
     bool not_range_input(int16_t &val, const char *vname,
       int fix, int32_t min, int32_t max);
 };

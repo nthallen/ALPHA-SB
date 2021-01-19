@@ -11,6 +11,7 @@ Ascend::Ascend(const char *iname)
     : Serial(iname, 80, Ascender_port, O_RDWR) {
   setup(115200, 8, 'n', 1, -1, 0);
   set_obufsize(32);
+  flags |= gflag(0);
 }
 
 bool Ascend::SetSpeed(int32_t percent) {
@@ -28,29 +29,6 @@ bool Ascend::SetSpeed(int32_t percent) {
     }
   } else {
     msg(2, "%s: obuf not empty in SetSpeed()", iname);
-  }
-  return rv;
-}
-
-bool Ascend::not_range_input(int16_t &val, const char *vname,
-      int fix, int32_t min, int32_t max) {
-  bool rv;
-  int16_t val16;
-  int32_t val32;
-  if (fix > 0) {
-    rv = not_fix(fix,val16);
-    val32 = val16;
-  } else {
-    rv = not_int32(val32);
-  }
-  if (!rv)
-    rv = not_str(",");
-  if (!rv && (val32 < min || val32 > max)) {
-    report_err("%s: %s value (%d) out of range",
-      iname, vname, val32);
-    val = 0;
-  } else {
-    val = val32;
   }
   return rv;
 }
@@ -96,6 +74,34 @@ bool Ascend::protocol_input() {
   }
   consume(nc);
   return false;
+}
+
+bool Ascend::tm_sync() {
+  Ascender.Nreports = 0;
+  return false;
+}
+
+bool Ascend::not_range_input(int16_t &val, const char *vname,
+      int fix, int32_t min, int32_t max) {
+  bool rv;
+  int16_t val16;
+  int32_t val32;
+  if (fix > 0) {
+    rv = not_fix(fix,val16);
+    val32 = val16;
+  } else {
+    rv = not_int32(val32);
+  }
+  if (!rv)
+    rv = not_str(",");
+  if (!rv && (val32 < min || val32 > max)) {
+    report_err("%s: %s value (%d) out of range",
+      iname, vname, val32);
+    val = 0;
+  } else {
+    val = val32;
+  }
+  return rv;
 }
 
 AscendCmd::AscendCmd(Ascend *Device)
