@@ -1,0 +1,15 @@
+<package> Ascender
+<include> "dasio/appid.h"
+<include> "Ascender_int.h"
+<include> msg oui
+
+<opts> "p:"
+<sort>
+        -p <port> Specify RS485 port
+
+<switch>
+  case 'p':
+    Ascend::Ascender_port = optarg; break;
+
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("Ascender", "Ascender Driver", "V1.0");

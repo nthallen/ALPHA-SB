@@ -1,11 +1,14 @@
+#include "dasio/loop.h"
+#include "dasio/tm_data_sndr.h"
 #include "Ascender_int.h"
 #include "nl.h"
 #include "oui.h"
 
 ascender_t Ascender;
+const char *Ascend::Ascender_port;
 
-Ascend::Ascend(const char *iname, const char *port)
-    : Serial(iname, 80, port, O_RDWR) {
+Ascend::Ascend(const char *iname)
+    : Serial(iname, 80, Ascender_port, O_RDWR) {
   setup(115200, 8, 'n', 1, -1, 0);
   set_obufsize(32);
 }
@@ -40,7 +43,8 @@ bool Ascend::not_range_input(int16_t &val, const char *vname,
   } else {
     rv = not_int32(val32);
   }
-  rv ||= not_str(",");
+  if (!rv)
+    rv = not_str(",");
   if (!rv && (val32 < min || val32 > max)) {
     report_err("%s: %s value (%d) out of range",
       iname, vname, val32);
@@ -69,7 +73,7 @@ bool Ascend::protocol_input() {
       not_range_input(Temp[2], "Temp1", 2, -128, 127) ||
       not_range_input(Temp[3], "Temp1", 3, -128, 127) ||
       not_range_input(limit1, "limit1", 0, 0, 1) ||
-      not_range_input(limit1, "limit2", 0, 0, 1) ||
+      not_range_input(limit2, "limit2", 0, 0, 1) ||
       not_str("999\n") ) {
     if (cp >= nc) return false;
   } else {
@@ -104,7 +108,7 @@ bool AscendCmd::app_input() {
   switch (buf[0]) {
     case 'W':
       if (not_str("W") ||
-          not_int32_t(speed) ||
+          not_int32(speed) ||
           not_str("\n")) {
         report_err("%s: Invalid speed command", iname);
         break;
@@ -130,7 +134,7 @@ int main(int argc, char **argv) {
           &Ascender, sizeof(Ascender));
     TM->connect();
     ELoop.add_child(TM);
-    Ascend *Device = new Ascend("Device", Ascend_port);
+    Ascend *Device = new Ascend("Device");
     ELoop.add_child(Device);
     AscendCmd *Cmd = new AscendCmd(Device);
     Cmd->connect();
