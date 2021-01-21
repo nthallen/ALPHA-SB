@@ -19,7 +19,7 @@ SDual::SDual(const char *port, TM_data_sndr *TM)
       TM(TM) {
   setup(SDual_baud, 8, 'n', 1, 17, 1);
   flags |= gflag(0);
-  update_tc_vmin(1,0);
+  update_tc_vmin(0,0);
   flush_input();
   update_tc_vmin(17,1);
 }

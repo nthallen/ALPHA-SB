@@ -6,6 +6,10 @@
     EASWHLPT3425022)
       propmtrdev=
       slcandev=/dev/ttyS12;;
+    spi2)
+      propmtrdev=/dev/ttyUSB0
+      spatialdualdev=/dev/ttyUSB1
+      slcandev=/dev/ttyACM0;;
     *)
       propmtrdev=/dev/ttyUSB0
       slcandev=/dev/ttyACM0;;
@@ -24,5 +28,5 @@
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
 [ -c "$spatialdualdev" ] &&
-  Launch      -      SpatialDual -p $spatialdualdev
+  Launch      -      SpatialDual -p $spatialdualdev -v
   Launch      -TMC-  scopexalgo
