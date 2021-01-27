@@ -36,3 +36,7 @@
   : Status LED { $0 = 20; }
   : Alert LED { $0 = 22; }
   ;
+
+&B3MB_ID <int>
+  : CAN_ID %d { $0 = $2; }
+  ;

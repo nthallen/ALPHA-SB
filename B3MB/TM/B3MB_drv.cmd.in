@@ -2,6 +2,6 @@
   /* Commands for @ID@ B3MB, CAN ID #@CAN_ID@ */
 %}
 
-&B3MB_ID <int>
+&B3MB_ID
   : @ID@ { $0 = @CAN_ID@; }
   ;

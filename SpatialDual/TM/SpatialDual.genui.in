@@ -1,11 +1,11 @@
  @FAST@ system_status       GNSS System %.0lf
  @FAST@ orient_init:filter_status:0          GNSS Filters %.0lf
- @FAST@ nav_init:filter_status:1             GNSS Filters
- @FAST@ heading_init:filter_status:2         GNSS Filters
- @FAST@ UTC_init:filter_status:3             GNSS Filters
- @FAST@ Int_GNSS_en:filter_status:9          GNSS Filters
- @FAST@ dual_heading_active:filter_status:10 GNSS Filters
- @FAST@ atm_alt_en:filter_status:12          GNSS Filters
+ @FAST@ nav_init:filter_status:1             GNSS Filters %.0lf
+ @FAST@ heading_init:filter_status:2         GNSS Filters %.0lf
+ @FAST@ UTC_init:filter_status:3             GNSS Filters %.0lf
+ @FAST@ Int_GNSS_en:filter_status:9          GNSS Filters %.0lf
+ @FAST@ dual_heading_active:filter_status:10 GNSS Filters %.0lf
+ @FAST@ atm_alt_en:filter_status:12          GNSS Filters %.0lf
 
  @FAST@ nav_drift           GNSS Drift
  @FAST@ latitude            GNSS Position

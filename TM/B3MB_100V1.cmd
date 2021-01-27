@@ -1,7 +1,7 @@
 %{
-  /* Commands for 100V1 B3MB, CAN ID #1 */
+  /* Commands for 100V1 B3MB, CAN ID #6 */
 %}
 
-&B3MB_ID <int>
-  : 100V1 { $0 = 1; }
+&B3MB_ID
+  : 100V1 { $0 = 6; }
   ;

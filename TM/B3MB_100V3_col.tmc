@@ -1,0 +1,9 @@
+%{
+  /* Board-specific collection for 100V3 B3MB */
+  B3MB_mread_t *B3MB_mreq8;
+  static void B3MB_mreq8_init() {
+    B3MB_mreq8 = B3MB_mread_init(8, 0x20);
+  }
+%}
+TM INITFUNC CAN_identify_board(8);
+TM INITFUNC B3MB_mreq8_init();

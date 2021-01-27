@@ -13,7 +13,8 @@ scopexcltnc.o
 scopexcltncoui.cc
 scopexcltncoui.o
 scopextblnc.tmc
-B3MBtblnc.tmc
+B3MB_28Vtblnc.tmc
+B3MB_100Vtblnc.tmc
 SpatialDualtblnc.tmc
 Housekeepingtblnc.tmc
 scopexdispnc.cc
@@ -48,7 +49,8 @@ scopexengextoui.cc
 scopexengext.o
 scopexengextoui.o
 scopextblnc.tmc.dep
-B3MBtblnc.tmc.dep
+B3MB_28Vtblnc.tmc.dep
+B3MB_100Vtblnc.tmc.dep
 SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err

@@ -1,5 +1,5 @@
 # Table Definitions for the @ID@ B3MB Instance
-B3MB@CAN_ID@_VI {
+B3MB_@ID@_VI {
   HBox { +-; Title: "@ID@"; -+ };
   ""    >Volts<                    >Amps<;
   B1:  (B3MB_@ID@_Batt1_V,7) (B3MB_@ID@_Batt1_I,7);
@@ -13,7 +13,7 @@ B3MB@CAN_ID@_VI {
   L4:  (B3MB_@ID@_Load4_V,7) (B3MB_@ID@_Load4_I,7);
 }
 
-B3MB@CAN_ID@_T {
+B3MB_@ID@_T {
   HBox { +-; Title: "@ID@ Temps"; -+ };
   T1: (B3MB_@ID@_T1,6) C;
   T2: (B3MB_@ID@_T2,6) C;
@@ -22,8 +22,14 @@ B3MB@CAN_ID@_T {
   T5: (B3MB_@ID@_T5,6) C;
 }
 
-B3MB@CAN_ID@_S {
+B3MB_@ID@_S {
   HBox { +-; Title: "@ID@ Status"; -+ };
   "Fault/Cmd:" (B3MB_@ID@_Cmd_S,4);
   "LED etc:"   (B3MB_@ID@_LED_S,4);
+}
+
+B3MB_@ID@_Col {
+  [B3MB_@ID@_VI];
+  [B3MB_@ID@_T];
+  [B3MB_@ID@_S];
 }
