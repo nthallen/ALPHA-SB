@@ -26,6 +26,7 @@ scopexdisp : $extbase scopex.tbl B3MB_28V.tbl B3MB_100V.tbl SpatialDual.tbl Hous
 scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $extbase $genuibase
 B3MBrawext : B3MBraw.cdf
+tmserioext : tmserio.tmc tmserio.cc tmserio.oui crc16modbus.c
 doit : scopex.doit
 %%
 CXXFLAGS+=-g

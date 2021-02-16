@@ -40,6 +40,12 @@ B3MBrawext.cc
 B3MBrawextoui.cc
 B3MBrawext.o
 B3MBrawextoui.o
+tmserioext.cc
+tmserioextoui.cc
+crc16modbus.o
+tmserioext.o
+tmserio.o
+tmserioextoui.o
 doit.dep
 scopexengext.cdf
 scopexengextcdf.oui
@@ -65,5 +71,6 @@ scopexdispnc
 scopexalgo
 scopexjsonext
 B3MBrawext
+tmserioext
 doit
 scopexengext
