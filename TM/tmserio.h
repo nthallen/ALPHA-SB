@@ -8,7 +8,7 @@
 #include "dasio/serial.h"
 #include "dasio/cmd_reader.h"
 #include "dasio/tm_client.h"
-#include "tmserio_pkt.h"
+#include "serio_pkt.h"
 #include "mlf.h"
 
 #define EXTRACTION_ROW send_row(MFCtr, (const uint8_t *)raw);
@@ -48,7 +48,7 @@ class tmserio_if : public Serial {
     // uint16_t scan_mfctr, scan_mfctr_offset;
     // mlf_def_t *mlf;
     // uint8_t scanbuf[scanbufsize];
-    // tmserio_pkt *row_buf;
+    // serio_pkt *row_buf;
     // ssp_scan_hdr_t *ssp_hdr;
     uint16_t row_len;
     // uint16_t row_offset;

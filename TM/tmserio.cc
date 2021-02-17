@@ -39,7 +39,7 @@ tmserio_if::tmserio_if() :
 
   // This calculation is for telemetry data plus the header
   // If OOB data can be larger, the obufsize will need to change
-  row_len = (tm_info.tm.nbminf-2)+sizeof(tmserio_pkt_hdr);
+  row_len = (tm_info.tm.nbminf-2)+sizeof(serio_pkt_hdr);
   set_obufsize(row_len);
   rows_per_row = (tm_info.tm.nsecsper * air_speed) /
         (tm_info.tm.nrowsper * row_len * 10);
@@ -120,11 +120,11 @@ bool tmserio_if::protocol_except() {
 void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
   if (obuf_empty()) {
     struct iovec io[3];
-    tmserio_pkt_hdr hdr;
+    serio_pkt_hdr hdr;
     hdr.LRC = 0;
     hdr.type = pkt_type_TM;
     hdr.length = tm_info.tm.nbminf-2;
-    io[0].iov_len = sizeof(tmserio_pkt_hdr);
+    io[0].iov_len = sizeof(serio_pkt_hdr);
     io[0].iov_base = &hdr;
     io[1].iov_len = sizeof(MFCtr);
     io[1].iov_base = &MFCtr;
