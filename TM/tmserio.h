@@ -23,9 +23,6 @@ class tmserio_if : public Serial {
     void enqueue_photo();
     void send_row(uint16_t MFCtr, const uint8_t *raw);
     static tmserio_if *TMp;
-    static const int max_pkt_payload = 400;
-    static const int max_cmd_packet_size = max_pkt_payload;
-    static const int min_cmd_packet_size = 50;
     static const int blocksize = 512;
     static const char *tm_port;
     static const char *base;
