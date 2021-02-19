@@ -1,0 +1,12 @@
+scopexsicmd.cc
+scopexsicmd.dat
+scopexsicmd.h
+scopexsicltnc.o
+scopexsicltncoui.cc
+scopexsicltncoui.o
+scopexsisrvr.o
+scopexsisrvroui.cc
+scopexsisrvroui.o
+*.err
+scopexsicltnc
+scopexsisrvr

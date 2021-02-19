@@ -1,0 +1,30 @@
+ModuleDef SerIn {
+  Module to collect customizations required for telemetry reception.
+}
+
+DISTRIB = SerIn/scopexsicltnc
+DISTRIB = SerIn/scopexsisrvr
+DISTRIB = ../RFDio/RFDio
+%%
+.PHONY : SerIn/scopexsicltnc SerIn/scopexsisrvr clean-SerIn
+.PHONY : ../RFDio/RFDio clean-RFDio
+SerIn/Makefile :
+	cd SerIn && appgen
+clean-dist : clean-SerIn clean-RFDio
+
+clean-SerIn : SerIn/Makefile
+	make --directory=SerIn clean
+SerIn/scopexsicltnc SerIn/scopexsisrvr : SerIn/Makefile
+	make --directory=SerIn
+
+clean-RFDio :
+	make --directory=../RFDio clean
+../RFDio/RFDio :
+	make --directory=../RFDio
+
+.PHONY : distribution-SerIn
+distribution : distribution-SerIn
+distribution-SerIn :
+	@[ -d $(TGTDIR)/SerIn ] || mkdir $(TGTDIR)/SerIn
+	@for f in VERSION bin doit src; do ln -fs ../$$f $(TGTDIR)/SerIn/$$f; done
+	@distribute $(FORCE) $(TGTDIR)/SerIn SerIn/Experiment.config

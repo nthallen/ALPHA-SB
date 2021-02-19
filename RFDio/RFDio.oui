@@ -6,7 +6,7 @@
 <opts> "p:b:"
 <sort>
   -p <serial port> the serial port connected to the RFD900x
-  -b <buad rate> the serial port baud rate (57600)
+  -b <baud rate> the serial port baud rate (57600)
 <init>
   RFDio_init_options(argc, argv);
 

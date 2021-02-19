@@ -12,6 +12,7 @@ Module B3MB mode=types ID=28V2  CAN_ID=3
 Module B3MB mode=types ID=100V1 CAN_ID=6
 Module B3MB mode=types ID=100V2 CAN_ID=7
 Module B3MB mode=types ID=100V3 CAN_ID=8
+Module SerIn
 tmcbase = B3MB_100V1_cal.tmc
 Module SpatialDual FAST=10
 

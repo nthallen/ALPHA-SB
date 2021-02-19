@@ -1,5 +1,14 @@
 display scopexdisp -n disp
+serin serin
+
 client scopexclt
+client [SI] scopexsiclt
+
+server [SI] cmd/server scopexsisrvr
+server [!SI] cmd/server playbacksrvr
+server [SI] - RFDio -b 230400 -p /dev/ttyS7
+
 extraction scopexjsonext -n json
+
 memo
 batchfile interact

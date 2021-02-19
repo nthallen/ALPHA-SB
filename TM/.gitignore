@@ -42,7 +42,6 @@ B3MBrawext.o
 B3MBrawextoui.o
 tmserioext.cc
 tmserioextoui.cc
-crc16modbus.o
 tmserioext.o
 tmserio.o
 tmserioextoui.o

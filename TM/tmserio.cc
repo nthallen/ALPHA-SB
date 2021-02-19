@@ -81,7 +81,7 @@ void tmserio_if::connect() {
       setup(baud, 8, 'n', 1, 0, 0);
       hwflow_enable(true);
       flush_input();
-      update_tc_vmin(serio::min_cmd_packet_size,1);
+      update_tc_vmin(serio::min_pkt_size,1);
       flags |= Fl_Read;
       if (!obuf_empty())
         flags |= Fl_Write;
