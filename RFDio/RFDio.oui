@@ -1,0 +1,36 @@
+<package> RFDio
+<include> "RFDio_int.h"
+<include> msg oui
+<follow> msg
+
+<opts> "p:b:"
+<sort>
+  -p <serial port> the serial port connected to the RFD900x
+  -b <buad rate> the serial port baud rate (57600)
+<init>
+  RFDio_init_options(argc, argv);
+
+<defs>
+void RFDio_init_options(int argc, char **argv) {
+  int optltr;
+  optind = OPTIND_RESET;
+  opterr = 0;
+  while ((optltr = getopt(argc, argv, opt_string)) != -1) {
+    switch (optltr) {
+      case 'p': RFD_interface::RFD_port = optarg; break;
+      case 'b': RFD_interface::RFD_baud_rate = atoi(optarg); break;
+      case '?':
+        msg(3, "Unrecognized Option -%c", optopt);
+      default:
+        break;
+    }
+  }
+  if (RFD_interface::RFD_port == 0)
+    msg(MSG_FATAL, "Must specify RFD900x serial port with -p option");
+}
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("RFDio",
+    "RFDio Radio Communications Driver", "V1.0");
