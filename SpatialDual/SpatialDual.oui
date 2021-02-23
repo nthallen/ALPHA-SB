@@ -1,7 +1,7 @@
 <package> SpatialDual
-<include> "dasio/appid.h"
 <include> "SDual_int.h"
 <include> msg oui
+<include> cmd_reader
 
 <opts> "p:b:"
 <sort>
@@ -14,5 +14,7 @@
   case 'b':
     SDual_baud = atoi(optarg); break;
 
+<package> appid_default
+<include> "dasio/appid.h"
 <defs>
   DAS_IO::AppID_t DAS_IO::AppID("SDual", "Spatial Dual Driver", "V1.0");

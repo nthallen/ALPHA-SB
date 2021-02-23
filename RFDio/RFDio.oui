@@ -1,6 +1,7 @@
 <package> RFDio
 <include> "RFDio_int.h"
 <include> msg oui
+<include> cmd_reader
 <follow> msg
 
 <opts> "p:b:"
