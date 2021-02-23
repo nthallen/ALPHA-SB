@@ -58,8 +58,8 @@ class tmserio_if : public Serial {
 
 class tmserio_tm_client : public tm_client {
   public:
-    inline tmserio_tm_client(int bufsize, bool fast, const char *hostname) :
-      tm_client(bufsize, fast, hostname) {}
+    inline tmserio_tm_client(int bufsize, bool fast) :
+      tm_client(bufsize, fast) {}
     /**
      * Sets up interfaces to the radio, [ TM_sndr,
      * and Cmd_reader]
