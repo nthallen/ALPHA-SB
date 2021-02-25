@@ -119,6 +119,8 @@ bool tmserio_if::protocol_except() {
  */
 void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
   if (obuf_empty()) {
+    if (nl_debug_level < -1 && !(MFCtr % 100))
+      msg(MSG_DEBUG, "%s: send_row(%u)", iname, MFCtr);
     struct iovec io[3];
     serio_pkt_hdr hdr;
     hdr.LRC = 0;
@@ -143,8 +145,6 @@ void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
     }
     bool rv = iwritev(io, 3);
     rows_this_row = 0;
-    // if (obuf_empty())
-      // send_oob_data();
   }
 }
 
@@ -307,6 +307,8 @@ void tmserio_tm_client::adopted() {
 }
 
 void tmserio_tm_client::send_row(uint16_t MFCtr, const uint8_t *raw) {
+  if (nl_debug_level < -1 && !(MFCtr % 100))
+    msg(MSG_DEBUG, "%s: send_row(%u)", iname, MFCtr);
   if (tmserio_if::TMp)
     tmserio_if::TMp->send_row(MFCtr, raw);
 }
