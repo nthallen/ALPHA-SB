@@ -8,10 +8,10 @@ Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types
 Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT=
 Module PropMtr mode=groups RT1= RT2=
 Module B3MB mode=types ID=28V1  CAN_ID=2
-Module B3MB mode=types ID=28V2  CAN_ID=3
-Module B3MB mode=types ID=100V1 CAN_ID=6
-Module B3MB mode=types ID=100V2 CAN_ID=7
-Module B3MB mode=types ID=100V3 CAN_ID=8
+Module B3MB            ID=28V2  CAN_ID=3
+Module B3MB            ID=100V1 CAN_ID=6
+Module B3MB            ID=100V2 CAN_ID=7
+Module B3MB            ID=100V3 CAN_ID=8
 Module SerIn
 tmcbase = B3MB_100V1_cal.tmc
 Module SpatialDual FAST=10

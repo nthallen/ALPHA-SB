@@ -123,7 +123,10 @@
   } device_name_t;
 
   void CAN_identify_board(uint8_t bdid) {
-    if (!CAN_Initialized) CAN_init();
+    if (!CAN_Initialized) {
+      msg(MSG_ERROR, "CAN ID %d not initialized", bdid);
+      return;
+    }
     uint16_t bdid_hi = bdid<<8;
     // msg(0,"read_ack(0x%02X03)", bdid);
     uint16_t values[4];
@@ -158,3 +161,4 @@
   
   #define B3MB_update(LV,R,I) B3MB_update_int((uint16_t *)&LV,R,I)
 %}
+TM INITFUNC CAN_init();
