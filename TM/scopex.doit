@@ -5,7 +5,7 @@ client scopexclt
 client [SI] scopexsiclt
 
 server [SI]  cmd scopexsisrvr
-server [SI]  -   RFDio -b 230400 -p /dev/ttyS7
+server [SI]  -   RFDio -b 230400 -p /dev/ttyS7 -v
 
 extraction scopexjsonext -n json
 

@@ -168,13 +168,17 @@ bool RFD_interface::process_eof() {
 }
 
 serio_if::serio_if() :
-    Client("serio", "tm_gen", "tm_gen", "serin", 10)
+    Client("serio", "tm_gen", "tm_gen", "serin", 10),
+    packets_forwarded(0)
 {
   connect();
 }
 
 bool serio_if::forward_packet(const char *pkt, int length) {
   if (is_negotiated() && obuf_empty()) {
+    ++packets_forwarded;
+    if (nl_debug_level < -1 && !(packets_forwarded%100))
+      msg(MSG_DEBUG, "%s: packets_forwarded: %d", packets_forwarded);
     return iwrite(pkt, length);
   }
   return true;

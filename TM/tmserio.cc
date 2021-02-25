@@ -301,6 +301,10 @@ void set_cur_photo(uint32_t Photo_Num) {
 }
 #endif
 
+void tmserio_tm_client::process_quit() {
+  ELoop->set_loop_exit();
+}
+
 void tmserio_tm_client::adopted() {
   tmserio_if *radio = new tmserio_if();
   ELoop->add_child(radio);

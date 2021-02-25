@@ -16,6 +16,8 @@ class serio_if : public Client {
      * @return true if the packet could not be sent
      */
     bool forward_packet(const char *pkt, int length);
+  private:
+    int packets_forwarded;
 };
 
 class RFD_interface : public Serial {
