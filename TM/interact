@@ -21,12 +21,12 @@
                 msg "Running script interact"
 [ -c "$slcandev" ] &&
   Launch      -      subbusd_slcan -n CAN -p $slcandev
-  Launch      tm_bfr bfr -s Both
+  Launch      tm_bfr bfr -H: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
 [ -c "$tmseriodev" ] &&
   Launch      -TMC-  tmserioext -p $tmseriodev -b 230400
   Launch      tm_gen scopexcol
-  Launch      cmd    scopexsrvr -s Both
+  Launch      cmd    scopexsrvr -H: -S:
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
