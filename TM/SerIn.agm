@@ -26,5 +26,5 @@ clean-RFDio :
 distribution : distribution-SerIn
 distribution-SerIn :
 	@[ -d $(TGTDIR)/SerIn ] || mkdir $(TGTDIR)/SerIn
-	@for f in VERSION bin doit src; do ln -fs ../$$f $(TGTDIR)/SerIn/$$f; done
+	@for f in VERSION bin doit src; do [ -e $(TGTDIR)/SerIn/$$f ] || ln -fs ../$$f $(TGTDIR)/SerIn/$$f; done
 	@distribute $(FORCE) $(TGTDIR)/SerIn SerIn/Experiment.config
