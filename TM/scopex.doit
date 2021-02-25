@@ -2,7 +2,7 @@ display scopexdisp -n disp
 serin serin
 
 client scopexclt
-client [SI] scopexsiclt
+client [SI] scopexsiclt -vv
 
 server [SI]  cmd scopexsisrvr
 #server [!SI] cmd playbacksrvr

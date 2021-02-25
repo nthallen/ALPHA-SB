@@ -1,0 +1,4 @@
+Moduledef RFDio {
+}
+
+cmdbase = RFDio.cmd

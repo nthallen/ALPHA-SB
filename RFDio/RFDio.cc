@@ -168,7 +168,7 @@ bool RFD_interface::process_eof() {
 }
 
 serio_if::serio_if() :
-    Client("serio", 10, 0, "tm_gen", "serio")
+    Client("serio", "tm_gen", "tm_gen", "serin", 10)
 {
   connect();
 }
