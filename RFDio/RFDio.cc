@@ -101,6 +101,7 @@ bool RFD_interface::protocol_input() {
           "%s: Invalid packet type: '%c'" :
           "%s: Invalid packet type: 0x%02X",
             iname, hdr->type);
+      case pkt_type_NULL: // Ignore type 0, which can show up on a long string of zeros
         ++cp;
         continue;
     }
@@ -171,6 +172,7 @@ serio_if::serio_if() :
     Client("serio", "tm_gen", "tm_gen", "serin", 10),
     packets_forwarded(0)
 {
+  set_obufsize(4096);
   connect();
 }
 
@@ -178,8 +180,10 @@ bool serio_if::forward_packet(const char *pkt, int length) {
   if (is_negotiated() && obuf_empty()) {
     ++packets_forwarded;
     if (nl_debug_level < -1 && !(packets_forwarded%100))
-      msg(MSG_DEBUG, "%s: packets_forwarded: %d", packets_forwarded);
+      msg(MSG_DEBUG, "%s: packets_forwarded: %d", iname, packets_forwarded);
     return iwrite(pkt, length);
+  } else {
+    msg(MSG_DEBUG, "%s: Packet dropped", iname);
   }
   return true;
 }

@@ -7,7 +7,8 @@ client [SI] scopexsiclt
 server [SI]  cmd scopexsisrvr
 server [SI]  -   RFDio -b 230400 -p /dev/ttyS7 -v
 
-extraction scopexjsonext -n json
+extraction [SI]  lgr -N `mlf_find LOG` -n lgr
+extraction [!SI] scopexjsonext -n json
 
 memo
 batchfile interact
