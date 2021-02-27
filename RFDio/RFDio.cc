@@ -179,8 +179,8 @@ serio_if::serio_if() :
 bool serio_if::forward_packet(const char *pkt, int length) {
   if (is_negotiated() && obuf_empty()) {
     ++packets_forwarded;
-    if (nl_debug_level < -1 && !(packets_forwarded%100))
-      msg(MSG_DEBUG, "%s: packets_forwarded: %d", iname, packets_forwarded);
+    // if (nl_debug_level < -1 && !(packets_forwarded%100))
+      // msg(MSG_DEBUG, "%s: packets_forwarded: %d", iname, packets_forwarded);
     return iwrite(pkt, length);
   } else {
     msg(MSG_DEBUG, "%s: Packet dropped", iname);
