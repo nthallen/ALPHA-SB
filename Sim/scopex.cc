@@ -4,18 +4,11 @@
 #include <stdio.h>
 #include <math.h>
 #include <unistd.h>
-
-// for timer and filestream:
-#include <chrono>
-#include <thread>
-#include <fstream>
+#include <fstream> // for std::stod()
 
 #include "SCoPEx.h"
 #include "ode/ode.h"
 #include "ode/mass.h"
-#if USE_DRAWSTUFF
-#include "drawstuff/drawstuff.h"
-#endif
 #include "nl.h"
 #include "model_atmos.h"
 
@@ -105,57 +98,6 @@ void dMassSetSphericalShell (dMass *m, dReal total_mass, dReal radius) {
     dMassCheck (m);
 # endif
 }
-
-#if USE_DRAWSTUFF
-
-/**
- * Static function for calling from drawstuff
- */
-void SCoPEx::graphicsStart() {
-  static float xyz[3] = {
-      (float)1.2*(2*Model.balloonRadius+Model.tetherLength),
-      3,
-      (float)Model.initialAltitude}; // view point [m]
-  static float hpr[3] = {-180, 20.5, 0}; // view direction[�]
-  dsSetViewpoint (xyz,hpr);           // set a view point and direction
-  puts("Controls:");
-  puts("   f - increase thrust");
-  puts("   F - decrease thrust");
-  puts("   d - increase direction angle");
-  puts("   D - decrease direction angle");
-  puts("   Z - zero thrust");
-}
-
-static void graphicsStop() {
-}
-
-void SCoPEx::graphicsCommand(int c) {
-  switch (c) {
-    case 'f':
-      Model.thrust += Model.thrustIncrement;
-      break;
-    case 'F':
-      Model.thrust -= Model.thrustIncrement;
-      break;
-    case 'd':
-      Model.direction += Model.directionIncrement;
-      if (Model.direction > 180) Model.direction -= 360;
-      break;
-    case 'D':
-      Model.direction -= Model.directionIncrement;
-      if (Model.direction < -180) Model.direction += 360;
-      break;
-    case 'z': case 'Z':
-      Model.thrust = 0.;
-      break;
-    default: return;
-  }
-  printf("Thrust = %.1lf Direction = %.1lf\n",
-    (double)Model.thrust, (double)Model.direction);
-}
-#endif
-
-
 
 void SCoPEx::printdR3(const dReal *d) {
   printdRN(d,3);
@@ -510,37 +452,6 @@ void SCoPEx::Log() {
   fclose(ofp);
 }
 
-#if USE_DRAWSTUFF
-void SCoPEx::Draw() {
-  const dReal *pos1, *R1, *pos2, *R2, *pos3, *R3;
-  // draw a sphere
-  dsSetColor(0.9,0.9,0.9);      // set red color
-  dsSetSphereQuality(3);  // set quality of spere. 3 is pretty good
-  pos1 = dBodyGetPosition(balloonID); // get a position
-  R1   = dBodyGetRotation(balloonID); // get an orientation
-  dsDrawSphere(pos1,R1,balloonRadius);         // draw a sphere
-
-  // draw tether
-  dsSetColorAlpha (0,1,0,1);
-  pos2 = dBodyGetPosition(tetherID);
-  R2   = dBodyGetRotation(tetherID);
-  dsDrawCylinder(pos2,R2,tetherLength,tetherRadius);
-
-  // draw a box
-  dsSetColorAlpha (0,0,1,1);
-  pos3 = dBodyGetPosition(payloadID);
-  R3   = dBodyGetRotation(payloadID);
-  dsDrawBox(pos3,R3,payloadSize);
-}
-
-static void graphicsStep(int pause) {
-  Model.Step();
-  Model.Log();
-  Model.Draw();
-}
-
-#endif
-
 void SCoPEx::calculateBuoyancy() {
   // First determine gravity
   dReal k_g = -9.81*6371*6371;
@@ -612,10 +523,6 @@ void SCoPEx::Init(int argc, char **argv) {
     parseInitfile();
   }
 
-  if (opt_logfile) {
-    //MB ofp = fopen(opt_logfile, "w");
-    //std::ofstream ofp(opt_logfile, std::ofstream::trunc);
-  }
   if (opt_commandfile) {
     cmdfile = new commandFile(opt_commandfile);
     cmdfile->addVariable(&Pressure, "Pressure");
@@ -714,39 +621,15 @@ void SCoPEx::Close() {
 }
 
 void SCoPEx::Loop() {
-  using namespace std::this_thread; // sleep_for, sleep_until
-  using namespace std::chrono; // nanoseconds, system_clock, seconds
+  // using namespace std::this_thread; // sleep_for, sleep_until
+  // using namespace std::chrono; // nanoseconds, system_clock, seconds
 
-  #if USE_DRAWSTUFF
-  if (opt_graphics) {
-    // Simulation loop
-    // set drawstuff
-    dsFunctions fn;
-    fn.version = DS_VERSION;
-    fn.start   = &SCoPEx::graphicsStart;
-    fn.step    = &graphicsStep;
-    fn.command = &SCoPEx::graphicsCommand;
-    fn.stop    = &graphicsStop;
-    fn.path_to_textures = "/home/nort/Exp/SCoPEx/ode/drawstuff/textures";
-    dsSimulationLoop (0,0,960,480,&fn);
-  } else {
-  #endif
-    run = true;
-    while (run) {
-      auto start = system_clock::now();
-      Step();
-      sleep_until(start + nanoseconds(50000000));
-      //sleep_for(nanoseconds(50000000));
-      //Log();
-    }
-  // indicate 'standby' for FlightGear:
-  ofp = fopen(opt_logfile, "w");
-  fprintf(ofp, "-1,standing by\n", tcount*stepSize);
-  fclose(ofp);
-
-  #if USE_DRAWSTUFF
+  run = true;
+  while (run) {
+    // auto start = system_clock::now();
+    Step();
+    // sleep_until(start + nanoseconds(50000000));
   }
-  #endif
 }
 
 int main (int argc, char **argv) {

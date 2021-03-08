@@ -3,8 +3,6 @@
 #include "ode/ode.h"
 #include "commandfile.h"
 
-#define USE_DRAWSTUFF 0
-
 class SCoPEx {
   public:
     SCoPEx();
