@@ -9,10 +9,12 @@
 #include "ode/mass.h"
 #include "nl.h"
 #include "model_atmos.h"
+#include "oui.h"
 
 SCoPEx Model;
 
 SCoPEx::SCoPEx() {
+  started = false;
   Pressure = 50; // hPa Derived using model_atmos
   Temperature = 212; // K Derived using model_atmos
   HeliumTemperatureOffset = 8;
@@ -60,9 +62,8 @@ SCoPEx::SCoPEx() {
   prevAngleError = 0;
   ofp = 0;
   tcount = 0;
-  opt_graphics = false;
-  opt_commandfile = 0;
   opt_logfile = 0;
+  opt_navport = 0;
   cmdfile = 0;
   nextCmdTime = 0;
   velocityAngleCorrLimit = 45; //*< degrees
@@ -125,19 +126,19 @@ void SCoPEx::printTorque(const char *when, const dReal *torque) {
   ofp = save_fp;
 }
 
-void SCoPEx::commandStep() {
-  if (opt_commandfile) {
-    double now = tcount * stepSize;
-    while (nextCmdTime <= now) {
-      double dT = cmdfile->eval();
-      if (dT < 0) {
-        run = false;
-        break;
-      }
-      nextCmdTime = now+dT;
-    }
-  }
-}
+// void SCoPEx::commandStep() {
+  // if (opt_commandfile) {
+    // double now = tcount * stepSize;
+    // while (nextCmdTime <= now) {
+      // double dT = cmdfile->eval();
+      // if (dT < 0) {
+        // run = false;
+        // break;
+      // }
+      // nextCmdTime = now+dT;
+    // }
+  // }
+// }
 
 void SCoPEx::clamp(dReal &value, dReal abs_limit) {
   if (value > abs_limit) {
@@ -151,7 +152,7 @@ void SCoPEx::Step() {
   if (tcount > 0)
     dWorldStep(world,stepSize);
 
-  commandStep();
+  // commandStep();
 
   const dReal *gondolaTorque = dBodyGetTorque(payloadID);
   
@@ -223,9 +224,6 @@ void SCoPEx::Step() {
   // printTorque("After right thrust", gondolaTorque);
 
   ++tcount;
-  if (tcount*stepSize > 30 && !opt_commandfile && !opt_graphics) {
-    run = false;
-  }
 }
 
 void SCoPEx::LogBody(dBodyID b) {
@@ -328,16 +326,13 @@ void SCoPEx::calculateBuoyancy() {
 void SCoPEx::Init(int argc, char **argv) {
   int c;
   opterr = 0; /* disable default error message */
-  while ((c = getopt(argc, argv, "gl:f:")) != -1) {
+  while ((c = getopt(argc, argv, opt_string)) != -1) {
     switch (c) {
-      case 'g':
-        opt_graphics = true;
-        break;
       case 'l':
         opt_logfile = optarg;
         break;
-      case 'f':
-        opt_commandfile = optarg;
+      case 'p':
+        opt_navport = optarg;
         break;
       case '?':
         msg(3, "Unrecognized Option -%c", optopt);
@@ -346,25 +341,30 @@ void SCoPEx::Init(int argc, char **argv) {
   if (opt_logfile) {
     ofp = fopen(opt_logfile, "w");
   }
-  if (opt_commandfile) {
-    cmdfile = new commandFile(opt_commandfile);
-    cmdfile->addVariable(&thrust, "Thrust");
-    cmdfile->addVariable(&direction, "Direction");
-    cmdfile->addVariable(&PGain, "PGain");
-    cmdfile->addVariable(&IGain, "IGain");
-    cmdfile->addVariable(&DGain, "DGain");
-    cmdfile->addVariable(&VPGain, "VPGain");
-    cmdfile->addVariable(&VIGain, "VIGain");
-    cmdfile->addVariable(&initialAltitude, "initialAltitude");
-    cmdfile->addVariable(&ductCdischarge, "ductCdischarge");
-    cmdfile->addVariable(&ductArea, "ductArea");
-    cmdfile->addVariable(&ductHeightRatio, "ductHeightRatio");
-    cmdfile->addVariable(&velocityAngleCorrLimit, "velocityAngleCorrLimit");
-    cmdfile->addVariable(&gondolaAngleIntegralLimit,
-                            "gondolaAngleIntegralLimit");
-    cmdfile->addVariable(&dThrust, "dThrust");
-  }
-  commandStep();
+  
+  cmdfile = new commandFile(this);
+  cmdfile->addVariable(&thrust, "Thrust");
+  cmdfile->addVariable(&direction, "Direction");
+  cmdfile->addVariable(&PGain, "PGain");
+  cmdfile->addVariable(&IGain, "IGain");
+  cmdfile->addVariable(&DGain, "DGain");
+  cmdfile->addVariable(&VPGain, "VPGain");
+  cmdfile->addVariable(&VIGain, "VIGain");
+  cmdfile->addVariable(&initialAltitude, "initialAltitude");
+  cmdfile->addVariable(&ductCdischarge, "ductCdischarge");
+  cmdfile->addVariable(&ductArea, "ductArea");
+  cmdfile->addVariable(&ductHeightRatio, "ductHeightRatio");
+  cmdfile->addVariable(&velocityAngleCorrLimit, "velocityAngleCorrLimit");
+  cmdfile->addVariable(&gondolaAngleIntegralLimit,
+                          "gondolaAngleIntegralLimit");
+  cmdfile->addVariable(&dThrust, "dThrust");
+  
+  // commandStep();
+}
+
+void SCoPEx::Start() {
+  if (started) return;
+  started = true;
   dInitODE();              // Initialize ODE
   world = dWorldCreate();  // Create a world
 
@@ -434,8 +434,12 @@ void SCoPEx::Loop() {
   }
 }
 
-int main (int argc, char **argv) {
+void scopex_sim_init_options(int argc, char **argv) {
   Model.Init(argc, argv);
+}
+
+int main (int argc, char **argv) {
+  oui_init_options(argc, argv);
   Model.Loop();
   Model.Close();
   return 0;

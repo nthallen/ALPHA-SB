@@ -1,8 +1,10 @@
 #ifndef COMMANDFILE_H_INCLUDED
 #define COMMANDFILE_H_INCLUDED
 #include <list>
-#include <stdio.h>
+#include "dasio/cmd_reader.h"
 #include "ode/ode.h"
+
+class SCoPEx;
 
 class variableDef {
   public:
@@ -11,22 +13,20 @@ class variableDef {
     const char *name;
 };
 
-class commandFile {
+class commandFile : public DAS_IO::Cmd_reader {
   public:
-    commandFile(const char *filename);
+    commandFile(SCoPEx *model);
     ~commandFile();
     void addVariable(dReal *ptr, const char *name);
-    double eval();
+  protected:
+    bool app_input();
   private:
+    SCoPEx *model;
     std::list<variableDef> vars;
-    FILE *ifp;
     static const int IBUFLEN = 80;
-    char ibuf[IBUFLEN];
     char command[IBUFLEN];
     char varname[IBUFLEN];
     double commandValue;
-    int lineNumber;
-    const char *cmdfilename;
 };
 
 #endif

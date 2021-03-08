@@ -1,5 +1,6 @@
 #ifndef SCOPEX_H_INCLUDED
 #define SCOPEX_H_INCLUDED
+#include "dasio/loop.h"
 #include "ode/ode.h"
 #include "commandfile.h"
 
@@ -8,6 +9,7 @@ class SCoPEx {
     SCoPEx();
     ~SCoPEx();
     void Init(int argc, char **argv);
+    void Start();
     void Loop();
     void Step();
     void commandStep();
@@ -55,11 +57,11 @@ class SCoPEx {
     dReal thrust_left;
     dReal thrust_right;
     
-    bool opt_graphics;
-    const char *opt_commandfile;
     commandFile *cmdfile;
     const char *opt_logfile;
+    const char *opt_navport;
     bool run;
+    bool started;
 
     dWorldID world;  // a dynamic world
     FILE *ofp;
@@ -107,5 +109,7 @@ class SCoPEx {
     static constexpr dReal dRinv = (1/R_He - 1/R_air); // kg K/J
     static constexpr dReal pi = 3.14159265358979;
 };
+
+void scopex_sim_init_options(int argc, char **argv);
 
 #endif

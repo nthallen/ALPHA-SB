@@ -1,0 +1,17 @@
+<package> scopexsim
+<include> msg oui
+<follow> msg
+<include> "SCoPEx.h"
+
+<opts> "l:f:p:"
+<sort>
+  -l logfile Optional log for detailed position data
+  -p navport Serial port far nav data output
+
+<init>
+  scopex_sim_init_options(argc, argv);
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("Sim", "SCoPEx Simulator", "V2.0");

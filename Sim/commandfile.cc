@@ -1,6 +1,6 @@
 /* commandfile.cpp */
 #include <strings.h>
-#include "commandfile.h"
+#include "SCoPEx.h"
 #include "nl.h"
 #include "nl_assert.h"
 
@@ -9,23 +9,12 @@ variableDef::variableDef(dReal* ptr, const char *name) {
   this->name = name;
 }
 
-commandFile::commandFile(const char *filename) {
-  nl_assert(filename != 0);
-  ifp = fopen(filename, "r");
-  if (ifp == 0) {
-    msg(3, "Unable to open command file %s", filename);
-  }
-  ibuf[0] = '\0';
-  lineNumber = 0;
-  cmdfilename = filename;
+commandFile::commandFile(SCoPEx *model)
+  : DAS_IO::Cmd_reader("Cmd", IBUFLEN, "Sim"),
+    model(model) {
 }
 
-commandFile::~commandFile() {
-  if (ifp != 0) {
-    fclose(ifp);
-    ifp = 0;
-  }
-}
+commandFile::~commandFile() {}
 
 void commandFile::addVariable(dReal *ptr, const char *name) {
   nl_assert(ptr && name);
@@ -45,50 +34,91 @@ void commandFile::addVariable(dReal *ptr, const char *name) {
  * @return The number of seconds before the next command or -1 on
  * EOF or Quit
  */
-double commandFile::eval() {
-  if (ifp == 0) return -1;
-  if (lineNumber > 0) {
-    if (strcasecmp("quit",command) == 0) return (-1.);
-    if (strcasecmp("noop",command) != 0) {
-      // Must be 'Set' or 'Adjust'
-      std::list<variableDef>::const_iterator ivar;
-      for (ivar = vars.begin(); ivar != vars.end(); ++ivar) {
-        if (strncasecmp(ivar->name, varname, IBUFLEN) == 0) {
-          if (strcasecmp("set",command) == 0) {
-            *(ivar->ptr) = commandValue;
-          } else if (strcasecmp("adjust", command) == 0) {
-            *(ivar->ptr) += commandValue;
-          } else {
-            msg(3, "%s:%d: Invalid command '%s'",
-              cmdfilename, lineNumber, command);
-          }
-          break;
+bool commandFile::app_input() {
+  bool rv = false;
+  while (cp < nc) {
+    bool have_value = false;
+    if (buf[cp] == '#') {
+      while (cp < nc && buf[cp] != '\n')
+        ++cp; // leave \n in input buffer
+      command[0] = '\0';
+    } else if (buf[cp] != '\n') {
+
+      char *dest = &command[0];
+      while (cp < nc && buf[cp] != ' ' && buf[cp] != '\n') {
+        *dest++ = buf[cp++];
+      }
+      *dest = '\0';
+
+      dest = &varname[0];
+      if (cp < nc && buf[cp++] == ' ') {
+        while (cp < nc && buf[cp] != ' ' && buf[cp] != '\n') {
+          *dest++ = buf[cp++];
         }
       }
-      if (ivar == vars.end()) {
-        msg(2, "%s:%d: Unknown variable: '%s'",
-          cmdfilename, lineNumber, command);
+      *dest = '\0';
+
+      if (cp < nc && buf[cp++] == ' ') {
+        if (not_double(commandValue)) {
+          report_err("%s: Expected value", iname);
+        } else {
+          have_value = true;
+        }
       }
     }
-  }
-  for (;;) {
-    double Tdelta;
-    ++lineNumber;
-    if (fgets(ibuf, IBUFLEN, ifp) == 0) return -1;
-    if (ibuf[0] != '#' && ibuf[0] != '\n') {
-      int nconv = sscanf(ibuf, "%lf %s %s %lf", &Tdelta,
-        &command, &varname, &commandValue);
-      if (nconv == 2 &&
-          (strcasecmp("Quit", command) == 0 ||
-           strcasecmp("Noop", command) == 0)) {
-        varname[0] = '\0';
-      } else if (nconv < 4) {
-        msg(3, "%s:%d: Syntax error '%s'", cmdfilename, lineNumber, ibuf);
+    if (buf[cp] != '\n') {
+      report_err("%s: Unexpected chars after command");
+      while (cp < nc && buf[cp] != '\n')
+        ++cp;
+    } else if (cp < nc) { // Should have '\n' still
+      enum cmd_t { cmd_quit, cmd_noop, cmd_set, cmd_adjust,
+                   cmd_start, cmd_inv } cmd;
+           if (!strcasecmp("", command)) cmd = cmd_noop;
+      else if (!strcasecmp("Quit", command) ||
+               !strcasecmp("Q", command)) cmd = cmd_quit;
+      else if (!strcasecmp("Noop", command)) cmd = cmd_noop;
+      else if (!strcasecmp("Set", command)) cmd = cmd_set;
+      else if (!strcasecmp("Adjust", command)) cmd = cmd_adjust;
+      else if (!strcasecmp("Start", command)) cmd = cmd_start;
+      else {
+        report_err("%s: Invalid command", iname);
+        cmd = cmd_inv;
       }
-      if (Tdelta < 0) {
-        msg(3, "%s:%d: Invalid negative time delta", cmdfilename, lineNumber);
+
+      if (cmd == cmd_quit || cmd == cmd_noop || cmd == cmd_start) {
+        if (varname[0]) {
+          report_err("%s: Unexpected arg after quit or noop", iname);
+          cmd = cmd_inv;
+        }
+      } else if ((cmd == cmd_set || cmd == cmd_adjust) &&
+                  (!varname[0] || !have_value)) {
+        report_err("%s: Expected varname and value for set/adjust",
+                    iname);
+        cmd = cmd_inv;
       }
-      return Tdelta;
+
+      if (cmd == cmd_quit) rv = true;
+      if (cmd == cmd_start) model->Start();
+      if (cmd == cmd_set || cmd == cmd_adjust) {
+        std::list<variableDef>::const_iterator ivar;
+        for (ivar = vars.begin(); ivar != vars.end(); ++ivar) {
+          if (strncasecmp(ivar->name, varname, IBUFLEN) == 0) {
+            if (cmd == cmd_set) {
+              *(ivar->ptr) = commandValue;
+            } else {
+              *(ivar->ptr) += commandValue;
+            }
+            break;
+          }
+        }
+        if (ivar == vars.end()) {
+          msg(2, "%s: Unknown variable: '%s'", iname, varname);
+        }
+      }
+    }
+    if (cp < nc) {
+      report_ok(++cp);
     }
   }
+  return rv;
 }
