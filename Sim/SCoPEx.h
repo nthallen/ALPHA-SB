@@ -10,7 +10,6 @@ class SCoPEx {
     void Init(int argc, char **argv);
     void Loop();
     void Step();
-    void parseInitfile();
     void commandStep();
     void Log();
     void Draw();
@@ -26,17 +25,7 @@ class SCoPEx {
     void printdRN(const dReal *d, int N);
     void printTorque(const char *when, const dReal *torque);
     void dBodyAddDrag(dBodyID ID, dReal Cd, dReal Area);
-    void dBodyAddDragWind(dBodyID ID, dReal Cd, dReal Area, dReal vx, dReal vy, dReal vz);
     dReal angleDiff(dReal a1, dReal a2);
-
-    //command file:
-    FILE *ifp;
-    char command[512];
-    char varname[512];
-    char tmp[512];
-    double commandValue;
-    double Tdelta;
-
     int tcount;
     double nextCmdTime;
     double Pressure; // hPa
@@ -66,17 +55,10 @@ class SCoPEx {
     dReal thrust_left;
     dReal thrust_right;
     
-    // Windshear:
-    dReal WindNorthBalloon;
-    dReal WindEastBalloon;
-    dReal WindNorthPayload;
-    dReal WindEastPayload;
-    
     bool opt_graphics;
     const char *opt_commandfile;
     commandFile *cmdfile;
     const char *opt_logfile;
-    const char *opt_initfile;
     bool run;
 
     dWorldID world;  // a dynamic world
@@ -85,7 +67,6 @@ class SCoPEx {
     dBodyID payloadID;
     dReal payloadMass; // Kg
     dReal payloadSize[3]; // m
-    dReal motorAxisPosition[3]; // [m] [lef/right, front, up?]
     dReal payloadArea; // X x Z, assumes motion in Y direction only
     dReal payloadCd; // assumes motion in Y direction only
     
@@ -99,7 +80,6 @@ class SCoPEx {
     dReal velocityAngleIntegral;
     dReal prevAngleError;
     dVector3 prevPayloadPos;
-    dVector3 prevBalloonPos;
 
     dBodyID tetherID;
     dReal tetherMass; // Kg
