@@ -15,7 +15,7 @@ class dualsim : public DAS_IO::Serial {
         uint8_t LRC;
         uint8_t ID;
         uint8_t length;
-        uint8_t CRC;
+        uint16_t CRC;
       } hdr;
       system_status_t status;
     } tx;
