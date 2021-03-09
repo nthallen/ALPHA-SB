@@ -331,45 +331,48 @@ void SCoPEx::calculateBuoyancy() {
   HeliumPressureOffset = Poffset/100; // hPa
 }
 
-void SCoPEx::Report(system_status_t *S) {
-  struct timespec ts;
-  S->system_status = 0;
-  S->filter_status = 0x062F;
-  clock_gettime(CLOCK_REALTIME, &ts);
-  S->unix_seconds = ts.tv_sec;
-  S->microseconds = ts.tv_nsec/1000;
+bool SCoPEx::Report(system_status_t *S) {
+  if (started) {
+    struct timespec ts;
+    S->system_status = 0;
+    S->filter_status = 0x062F;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    S->unix_seconds = ts.tv_sec;
+    S->microseconds = ts.tv_nsec/1000;
 
-  const dReal *vec = dBodyGetPosition(payloadID);
-  S->latitude = initialLatitude + vec[0]/111111.;
-  S->longitude = initialLongitude -
-    vec[1]/(111111.*cos(S->latitude * 3.14159265358/180));
-  S->height = vec[2];
+    const dReal *vec = dBodyGetPosition(payloadID);
+    S->latitude = initialLatitude + vec[0]/111111.;
+    S->longitude = initialLongitude -
+      vec[1]/(111111.*cos(S->latitude * 3.14159265358/180));
+    S->height = vec[2];
 
-  vec = dBodyGetLinearVel(payloadID);
-  S->velocity_north = vec[0];
-  S->velocity_east = -vec[1];
-  S->velocity_down = -vec[2];
+    vec = dBodyGetLinearVel(payloadID);
+    S->velocity_north = vec[0];
+    S->velocity_east = -vec[1];
+    S->velocity_down = -vec[2];
 
-  S->body_accel_x = 0;
-  S->body_accel_y = 0;
-  S->body_accel_z = 0;
-  S->g_force = 0;
+    S->body_accel_x = 0;
+    S->body_accel_y = 0;
+    S->body_accel_z = 0;
+    S->g_force = 0;
 
-  // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
-  vec = dBodyGetQuaternion(payloadID);
-  S->heading = atan2(2*(vec[0]*vec[3]+vec[1]*vec[2]),
-                     1-2*(vec[2]*vec[2]+vec[3]*vec[3])); // radians
-  S->pitch = asin(2*(vec[0]*vec[2]-vec[3]*vec[1]));
-  S->roll = atan2(2*(vec[0]*vec[1]+vec[2]*vec[3]),
-                  1-2*(vec[1]*vec[1]+vec[2]*vec[2]));
+    // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+    vec = dBodyGetQuaternion(payloadID);
+    S->heading = atan2(2*(vec[0]*vec[3]+vec[1]*vec[2]),
+                       1-2*(vec[2]*vec[2]+vec[3]*vec[3])); // radians
+    S->pitch = asin(2*(vec[0]*vec[2]-vec[3]*vec[1]));
+    S->roll = atan2(2*(vec[0]*vec[1]+vec[2]*vec[3]),
+                    1-2*(vec[1]*vec[1]+vec[2]*vec[2]));
 
-  vec = dBodyGetAngularVel(payloadID);
-  S->angular_velocity_x =  vec[0]; // radians/sec
-  S->angular_velocity_y = -vec[1];
-  S->angular_velocity_z = -vec[2];
-  S->latitude_std = 0.;
-  S->longitude_std = 0.;
-  S->height_std = 0.;
+    vec = dBodyGetAngularVel(payloadID);
+    S->angular_velocity_x =  vec[0]; // radians/sec
+    S->angular_velocity_y = -vec[1];
+    S->angular_velocity_z = -vec[2];
+    S->latitude_std = 0.;
+    S->longitude_std = 0.;
+    S->height_std = 0.;
+  }
+  return started;
 }
 
 void SCoPEx::Init(int argc, char **argv) {
@@ -470,11 +473,11 @@ void SCoPEx::Start() {
 }
 
 void SCoPEx::Loop() {
-  run = true;
-  while (run) {
-    Step();
-    Log();
-  }
+  msg(0, "Starting");
+  ELoop.event_loop();
+  ELoop.delete_children();
+  ELoop.clear_delete_queue(true);
+  msg(0, "Terminating");
 }
 
 void SCoPEx::Close() {

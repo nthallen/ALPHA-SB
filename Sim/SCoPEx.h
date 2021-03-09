@@ -14,7 +14,12 @@ class SCoPEx {
     void Loop();
     void Step();
     void Log();
-    void Report(system_status_t *status);
+    /**
+     * @param status pointer to Spatial Dual system state packet
+     * @return true if started
+     * Fills the state packet with data from the simulation
+     */
+    bool Report(system_status_t *status);
     void Close();
     DAS_IO::Loop ELoop;
     static void graphicsStart();

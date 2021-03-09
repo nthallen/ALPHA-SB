@@ -7,12 +7,10 @@ OBJ = scopex.o commandfile.o model_atmos.o scopexsimoui.o dualsim.o
 OBJ += crc16ccitt_false.o
 
 .PHONY : all clean
-all : scopex
+all : scopexsim
 
-scopex : $(OBJ)
-	$(CXXLD) -o scopex $(CXXFLAGS) $(OBJ) $(LDFLAGS)
-scopex.o : scopex.cc
-commandfile.o : commandfile.cc
+scopexsim : $(OBJ)
+	$(CXXLD) -o scopexsim $(CXXFLAGS) $(OBJ) $(LDFLAGS)
 scopexsimoui.o : scopexsimoui.cc
 scopexsimoui.cc : scopexsim.oui
 	oui -o scopexsimoui.cc scopexsim.oui

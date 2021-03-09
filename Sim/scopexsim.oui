@@ -1,5 +1,6 @@
 <package> scopexsim
 <include> msg oui
+<include> cmd_reader
 <follow> msg
 <include> "SCoPEx.h"
 

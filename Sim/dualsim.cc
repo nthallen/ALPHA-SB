@@ -10,17 +10,18 @@ dualsim::dualsim(const char *port, int baud, SCoPEx *model)
 }
   
 bool dualsim::protocol_input() {
-  model->Report(&tx.status);
-  // Setup hdr
-  tx.hdr.ID = 20; // system state
-  tx.hdr.length = sizeof(tx.status);
-  tx.hdr.CRC = crc16ccitt_false_word(0xFFFF,
-    &tx.status, sizeof(tx.status));
-  tx.hdr.LRC =
-    -(tx.hdr.ID + tx.hdr.length + tx.hdr.CRC + (tx.hdr.CRC>>8));
-  iwrite((const char *)&tx, sizeof(tx));
-  model->Step();
-  model->Log();
+  if (model->Report(&tx.status)) {
+    // Setup hdr
+    tx.hdr.ID = 20; // system state
+    tx.hdr.length = sizeof(tx.status);
+    tx.hdr.CRC = crc16ccitt_false_word(0xFFFF,
+      &tx.status, sizeof(tx.status));
+    tx.hdr.LRC =
+      -(tx.hdr.ID + tx.hdr.length + tx.hdr.CRC + (tx.hdr.CRC>>8));
+    iwrite((const char *)&tx, sizeof(tx));
+    model->Step();
+    model->Log();
+  }
   report_ok(nc);
   return false;
 }
