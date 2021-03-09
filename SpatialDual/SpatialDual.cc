@@ -28,6 +28,7 @@ SDual::SDual(const char *port, TM_data_sndr *TM)
 bool SDual::protocol_input() {
   uint8_t LRC = 0;
   int LRC_count = 0;
+  int expected_pkt_size;
   // cp will point to the start of the hdr
   for (LRC_count = 0; cp+LRC_count < nc; ) {
     if (LRC_count < 5) {
@@ -37,7 +38,6 @@ bool SDual::protocol_input() {
       ++cp;
     }
     if (LRC_count >= 5 && LRC == 0) {
-      int expected_pkt_size;
       hdr = (frame_hdr_t*)&buf[cp];
       switch (hdr->Packet_ID) {
         case 20: expected_pkt_size = 100; break;// System State
@@ -50,9 +50,11 @@ bool SDual::protocol_input() {
       }
       if (expected_pkt_size == 0) {
         msg(MSG_DBG(1), "%s: Unexpected packet ID %d", iname, hdr->Packet_ID);
+        expected_pkt_size = 0;
       } else if (hdr->Packet_len != expected_pkt_size) {
         msg(MSG_DBG(1), "%s: ID %d expected length %d hdr", iname,
               hdr->Packet_ID, expected_pkt_size, hdr->Packet_len);
+        expected_pkt_size = 0;
       } else {
         if (cp+sizeof(frame_hdr_t)+hdr->Packet_len > nc) {
           // update_tc_vmin(cp+sizeof(frame_hdr_t)+hdr->Packet_len-nc)
@@ -106,7 +108,7 @@ bool SDual::protocol_input() {
   if (cp > 0)
     msg(MSG_DEBUG, "Discarding %d chars", cp);
   report_ok(cp);
-  if (LRC_count >= 5 && LRC == 0) {
+  if (LRC_count >= 5 && LRC == 0 && expected_pkt_size > 0) {
     nl_assert(nc >= 5);
     hdr = (frame_hdr_t*)&buf[cp];
     nl_assert(nc < cp+sizeof(frame_hdr_t) + hdr->Packet_len);
