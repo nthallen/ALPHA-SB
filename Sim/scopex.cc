@@ -9,6 +9,7 @@
 #include "ode/mass.h"
 #include "nl.h"
 #include "model_atmos.h"
+#include "dualsim.h"
 #include "oui.h"
 
 SCoPEx Model;
@@ -38,17 +39,22 @@ SCoPEx::SCoPEx() {
   // balloonAltitude = 0.0; // m
   // balloonArea = pi * balloonRadius * balloonRadius; // m^2 Derived
   payloadMass = 590.0; // Kg (reduced by tetherMass)
-  payloadSize[0] = 1; // m
-  payloadSize[1] = 1;
-  payloadSize[2] = 1;
-  payloadArea = payloadSize[0]*payloadSize[2]; // X x Z, assumes motion in Y direction only
-  payloadCd = 1.05; // assumes motion in Y direction only
+  payloadSize[0] = 1.5; // m
+  payloadSize[1] = 1.5;
+  payloadSize[2] = 1.5;
+  payloadArea = payloadSize[1]*payloadSize[2]; // Y*Z, assumes motion in X direction only
+
+  motorAxisPosition[0] = -payloadSize[0]/2;
+  motorAxisPosition[1] = 1.5;
+  motorAxisPosition[2] = 0;
+
+  payloadCd = 1.05; // assumes motion in X direction only
   tetherMass = 10; // Kg
   tetherRadius = 0.02;
   tetherLength = 2*balloonMaxHeight;  // length
   thrust = 4.;
   thrustIncrement = 0.25;
-  direction = 90.; // +Y [-180, 180]
+  direction = 0.; // +X
   directionIncrement = 5; // degrees
   PGain = 0.4/90;
   IGain = 0;
@@ -56,14 +62,15 @@ SCoPEx::SCoPEx() {
   VPGain = 0;
   VIGain = 0;
   stepSize = 0.05; // seconds
-  gondolaVelocityAngle = 90;
-  gondolaAngle = 90;
+  gondolaVelocityAngle = 0;
+  gondolaAngle = 0;
   gondolaSpeed = 0;
   prevAngleError = 0;
   ofp = 0;
   tcount = 0;
   opt_logfile = 0;
   opt_navport = 0;
+  opt_navbaud = 9600;
   cmdfile = 0;
   nextCmdTime = 0;
   velocityAngleCorrLimit = 45; //*< degrees
@@ -216,11 +223,12 @@ void SCoPEx::Step() {
   thrust_right = thrust * (1-dThrust_a) / 2;
   
   // printf("Thrust: %12.8lf %12.8lf\n", thrust_left, thrust_right);
-  dBodyAddRelForceAtRelPos(payloadID, 0, thrust_left, 0,
-    -payloadSize[0]/2, -payloadSize[1]/2, 0); //payloadSize[2]/2);
-  // printTorque("After left thrust", gondolaTorque);
-  dBodyAddRelForceAtRelPos(payloadID, 0, thrust_right, 0,
-    +payloadSize[0]/2, -payloadSize[1]/2, 0); // payloadSize[2]/2);
+  dBodyAddRelForceAtRelPos(payloadID, thrust_left, 0, 0,
+    motorAxisPosition[0], motorAxisPosition[1], motorAxisPosition[2]);
+//    -payloadSize[0]/2, -payloadSize[1]/2, 0); //payloadSize[2]/2);
+  dBodyAddRelForceAtRelPos(payloadID, thrust_right, 0, 0,
+    motorAxisPosition[0], -motorAxisPosition[1], motorAxisPosition[2]);
+//    +payloadSize[0]/2, -payloadSize[1]/2, 0); // payloadSize[2]/2);
   // printTorque("After right thrust", gondolaTorque);
 
   ++tcount;
@@ -323,19 +331,56 @@ void SCoPEx::calculateBuoyancy() {
   HeliumPressureOffset = Poffset/100; // hPa
 }
 
+void SCoPEx::Report(system_status_t *S) {
+  struct timespec ts;
+  S->system_status = 0;
+  S->filter_status = 0x062F;
+  clock_gettime(CLOCK_REALTIME, &ts);
+  S->unix_seconds = ts.tv_sec;
+  S->microseconds = ts.tv_nsec/1000;
+
+  const dReal *vec = dBodyGetPosition(payloadID);
+  S->latitude = initialLatitude + vec[0]/111111.;
+  S->longitude = initialLongitude -
+    vec[1]/(111111.*cos(S->latitude * 3.14159265358/180));
+  S->height = vec[2];
+
+  vec = dBodyGetLinearVel(payloadID);
+  S->velocity_north = vec[0];
+  S->velocity_east = -vec[1];
+  S->velocity_down = -vec[2];
+
+  S->body_accel_x = 0;
+  S->body_accel_y = 0;
+  S->body_accel_z = 0;
+  S->g_force = 0;
+
+  // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+  vec = dBodyGetQuaternion(payloadID);
+  S->heading = atan2(2*(vec[0]*vec[3]+vec[1]*vec[2]),
+                     1-2*(vec[2]*vec[2]+vec[3]*vec[3])); // radians
+  S->pitch = asin(2*(vec[0]*vec[2]-vec[3]*vec[1]));
+  S->roll = atan2(2*(vec[0]*vec[1]+vec[2]*vec[3]),
+                  1-2*(vec[1]*vec[1]+vec[2]*vec[2]));
+
+  vec = dBodyGetAngularVel(payloadID);
+  S->angular_velocity_x =  vec[0]; // radians/sec
+  S->angular_velocity_y = -vec[1];
+  S->angular_velocity_z = -vec[2];
+  S->latitude_std = 0.;
+  S->longitude_std = 0.;
+  S->height_std = 0.;
+}
+
 void SCoPEx::Init(int argc, char **argv) {
   int c;
   opterr = 0; /* disable default error message */
   while ((c = getopt(argc, argv, opt_string)) != -1) {
     switch (c) {
-      case 'l':
-        opt_logfile = optarg;
-        break;
-      case 'p':
-        opt_navport = optarg;
-        break;
-      case '?':
-        msg(3, "Unrecognized Option -%c", optopt);
+      case 'l': opt_logfile = optarg; break;
+      case 'p': opt_navport = optarg; break;
+      case 'b': opt_navbaud = atoi(optarg); break;
+      case '?': msg(MSG_FATAL, "Unrecognized Option -%c", optopt);
     }
   }
   if (opt_logfile) {
@@ -359,6 +404,13 @@ void SCoPEx::Init(int argc, char **argv) {
                           "gondolaAngleIntegralLimit");
   cmdfile->addVariable(&dThrust, "dThrust");
   
+  cmdfile->connect();
+  ELoop.add_child(cmdfile);
+  
+  if (opt_navport) {
+    dualsim *navout = new dualsim(opt_navport, opt_navbaud, this);
+    ELoop.add_child(navout);
+  }
   // commandStep();
 }
 
@@ -417,6 +469,14 @@ void SCoPEx::Start() {
   dJointEnable(tetherPayload);
 }
 
+void SCoPEx::Loop() {
+  run = true;
+  while (run) {
+    Step();
+    Log();
+  }
+}
+
 void SCoPEx::Close() {
   if (opt_logfile) {
     fclose(ofp);
@@ -424,14 +484,6 @@ void SCoPEx::Close() {
   }
   dWorldDestroy (world); // destroy the world
   dCloseODE();           // close ODE
-}
-
-void SCoPEx::Loop() {
-  run = true;
-  while (run) {
-    Step();
-    Log();
-  }
 }
 
 void scopex_sim_init_options(int argc, char **argv) {

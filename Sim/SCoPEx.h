@@ -3,6 +3,7 @@
 #include "dasio/loop.h"
 #include "ode/ode.h"
 #include "commandfile.h"
+#include "SpatialDual.h"
 
 class SCoPEx {
   public:
@@ -12,10 +13,10 @@ class SCoPEx {
     void Start();
     void Loop();
     void Step();
-    void commandStep();
     void Log();
-    void Draw();
+    void Report(system_status_t *status);
     void Close();
+    DAS_IO::Loop ELoop;
     static void graphicsStart();
     static void graphicsCommand(int c);
   private:
@@ -50,6 +51,8 @@ class SCoPEx {
     dReal ductDischargeRate; // kg/sec
     dReal HeliumMass; //
     dReal initialAltitude; // m
+    double initialLatitude; // deg
+    double initialLongitude; // deg
     // dReal balloonArea; // m^2
     dReal gondolaAngle;
     dReal gondolaVelocityAngle;
@@ -60,6 +63,7 @@ class SCoPEx {
     commandFile *cmdfile;
     const char *opt_logfile;
     const char *opt_navport;
+    int opt_navbaud;
     bool run;
     bool started;
 
@@ -69,8 +73,9 @@ class SCoPEx {
     dBodyID payloadID;
     dReal payloadMass; // Kg
     dReal payloadSize[3]; // m
-    dReal payloadArea; // X x Z, assumes motion in Y direction only
-    dReal payloadCd; // assumes motion in Y direction only
+    dReal motorAxisPosition[3]; // m [forward, right/left, up] from COM
+    dReal payloadArea; // Y*Z, assumes motion in X direction only
+    dReal payloadCd; // assumes motion in X direction only
     
     // These are variable for the direction control
     // direction, which is commanded, specifies the desired velocity direction

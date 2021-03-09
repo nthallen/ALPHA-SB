@@ -3,10 +3,11 @@
 <follow> msg
 <include> "SCoPEx.h"
 
-<opts> "l:f:p:"
+<opts> "l:p:b:"
 <sort>
   -l logfile Optional log for detailed position data
-  -p navport Serial port far nav data output
+  -p navport Serial port for nav data output
+  -b baudrate Serial port rate for nav data output
 
 <init>
   scopex_sim_init_options(argc, argv);
