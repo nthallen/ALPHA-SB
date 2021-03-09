@@ -86,11 +86,11 @@ class SCoPEx {
     // direction, which is commanded, specifies the desired velocity direction
     // The setpoint for gondola angle control
     dReal gondolaAngleSetpoint;
-    dReal gondolaAngleIntegral;
-    dReal gondolaAngleIntegralLimit;
-    dReal velocityAngleCorrLimit;
-    dReal velocityAngleIntegral;
-    dReal prevAngleError;
+    // dReal gondolaAngleIntegral;
+    // dReal gondolaAngleIntegralLimit;
+    // dReal velocityAngleCorrLimit;
+    // dReal velocityAngleIntegral;
+    // dReal prevAngleError;
     dVector3 prevPayloadPos;
 
     dBodyID tetherID;
@@ -102,16 +102,16 @@ class SCoPEx {
     dJointID tetherPayload;
     dJointFeedback tetherPayloadFB;
     
-    dReal thrust;
-    dReal dThrust;
-    dReal thrustIncrement;
+    // dReal thrust;
+    // dReal dThrust;
+    // dReal thrustIncrement;
     dReal direction; // +Y [-180, 180]
-    dReal directionIncrement; // degrees
-    dReal PGain;
-    dReal DGain;
-    dReal IGain;
-    dReal VPGain;
-    dReal VIGain;
+    // dReal directionIncrement; // degrees
+    // dReal PGain;
+    // dReal DGain;
+    // dReal IGain;
+    // dReal VPGain;
+    // dReal VIGain;
     dReal stepSize; // time step in seconds
     dReal gravity;
     static constexpr dReal R_He = 2077; // J/(kg K) specific gas constant for Helium

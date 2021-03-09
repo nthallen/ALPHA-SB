@@ -13,6 +13,7 @@ using namespace DAS_IO;
 system_state_t SpatialDual;
 const char *SDual_port = "/dev/ttyS0";
 int SDual_baud = 115200;
+bool SDual_sim = false;
 
 SDual::SDual(const char *port, TM_data_sndr *TM)
     : Serial("SDual", 500, port, O_RDWR),
@@ -109,6 +110,7 @@ bool SDual::report_system_state(system_status_t *recd) {
 
 bool SDual::tm_sync() {
   SpatialDual.n_reports = 0;
+  if (SDual_sim && obuf_empty()) iwrite("\n", 1);
   return false;
 }
 

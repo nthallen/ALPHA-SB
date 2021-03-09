@@ -52,20 +52,21 @@ SCoPEx::SCoPEx() {
   tetherMass = 10; // Kg
   tetherRadius = 0.02;
   tetherLength = 2*balloonMaxHeight;  // length
-  thrust = 4.;
-  thrustIncrement = 0.25;
+  // thrust = 4.;
+  // thrustIncrement = 0.25;
   direction = 0.; // +X
-  directionIncrement = 5; // degrees
-  PGain = 0.4/90;
-  IGain = 0;
-  DGain = 0;
-  VPGain = 0;
-  VIGain = 0;
+  gondolaAngleSetpoint = direction; // legacy
+  // directionIncrement = 5; // degrees
+  // PGain = 0.4/90;
+  // IGain = 0;
+  // DGain = 0;
+  // VPGain = 0;
+  // VIGain = 0;
   stepSize = 0.05; // seconds
   gondolaVelocityAngle = 0;
   gondolaAngle = 0;
   gondolaSpeed = 0;
-  prevAngleError = 0;
+  // prevAngleError = 0;
   ofp = 0;
   tcount = 0;
   opt_logfile = 0;
@@ -73,10 +74,10 @@ SCoPEx::SCoPEx() {
   opt_navbaud = 9600;
   cmdfile = 0;
   nextCmdTime = 0;
-  velocityAngleCorrLimit = 45; //*< degrees
-  velocityAngleIntegral = 0;
-  gondolaAngleIntegral = 0;
-  gondolaAngleIntegralLimit = 0.25;
+  // velocityAngleCorrLimit = 45; //*< degrees
+  // velocityAngleIntegral = 0;
+  // gondolaAngleIntegral = 0;
+  // gondolaAngleIntegralLimit = 0.25;
 }
 
 SCoPEx::~SCoPEx() {}
@@ -193,7 +194,7 @@ void SCoPEx::Step() {
     atan2(boxVelocity[1],boxVelocity[0]) * 180/pi :
     gondolaAngle;
   
-  
+#ifdef INTERNAL_CONTROL
   // The outer control loop. This is configured such that
   // PGain and DGain define the inner loop, which controls the gondola
   // angle (and hence the thrust angle). VPGain controls the outer
@@ -221,6 +222,7 @@ void SCoPEx::Step() {
   else if (dThrust_a < -1) dThrust_a = -1;
   thrust_left = thrust * (1+dThrust_a) / 2;
   thrust_right = thrust * (1-dThrust_a) / 2;
+#endif
   
   // printf("Thrust: %12.8lf %12.8lf\n", thrust_left, thrust_right);
   dBodyAddRelForceAtRelPos(payloadID, thrust_left, 0, 0,
@@ -391,21 +393,22 @@ void SCoPEx::Init(int argc, char **argv) {
   }
   
   cmdfile = new commandFile(this);
-  cmdfile->addVariable(&thrust, "Thrust");
-  cmdfile->addVariable(&direction, "Direction");
-  cmdfile->addVariable(&PGain, "PGain");
-  cmdfile->addVariable(&IGain, "IGain");
-  cmdfile->addVariable(&DGain, "DGain");
-  cmdfile->addVariable(&VPGain, "VPGain");
-  cmdfile->addVariable(&VIGain, "VIGain");
+  cmdfile->addVariable(&thrust_left, "thrustLeft");
+  cmdfile->addVariable(&thrust_right, "thrustRight");
   cmdfile->addVariable(&initialAltitude, "initialAltitude");
   cmdfile->addVariable(&ductCdischarge, "ductCdischarge");
   cmdfile->addVariable(&ductArea, "ductArea");
   cmdfile->addVariable(&ductHeightRatio, "ductHeightRatio");
-  cmdfile->addVariable(&velocityAngleCorrLimit, "velocityAngleCorrLimit");
-  cmdfile->addVariable(&gondolaAngleIntegralLimit,
-                          "gondolaAngleIntegralLimit");
-  cmdfile->addVariable(&dThrust, "dThrust");
+  // cmdfile->addVariable(&dThrust, "dThrust");
+  // cmdfile->addVariable(&direction, "Direction");
+  // cmdfile->addVariable(&PGain, "PGain");
+  // cmdfile->addVariable(&IGain, "IGain");
+  // cmdfile->addVariable(&DGain, "DGain");
+  // cmdfile->addVariable(&VPGain, "VPGain");
+  // cmdfile->addVariable(&VIGain, "VIGain");
+  // cmdfile->addVariable(&velocityAngleCorrLimit, "velocityAngleCorrLimit");
+  // cmdfile->addVariable(&gondolaAngleIntegralLimit,
+                          // "gondolaAngleIntegralLimit");
   
   cmdfile->connect();
   ELoop.add_child(cmdfile);

@@ -1,0 +1,8 @@
+display scopexdisp -n disp
+
+client scopexclt
+extraction [!SI] scopexjsonext -n json
+
+memo
+batchfile runfile.sim
+

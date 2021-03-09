@@ -7,6 +7,7 @@
 
 extern const char *SDual_port;
 extern int SDual_baud;
+extern bool SDual_sim;
 
 using namespace DAS_IO;
 

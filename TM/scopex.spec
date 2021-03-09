@@ -13,6 +13,7 @@ Module B3MB            ID=100V1 CAN_ID=6
 Module B3MB            ID=100V2 CAN_ID=7
 Module B3MB            ID=100V3 CAN_ID=8
 Module SerIn
+Module scopexsim
 tmcbase = B3MB_100V1_cal.tmc
 Module SpatialDual FAST=10
 
