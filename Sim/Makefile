@@ -1,4 +1,4 @@
-LDFLAGS=-L/usr/local/lib -lode -ldasio -lnl 
+LDFLAGS=-L/usr/local/lib -lode -ldasio -lnl -lpthread
 MA_LDFLAGS=
 CXXFLAGS=-g -I../SpatialDual
 CXXLD=$(CXX)
