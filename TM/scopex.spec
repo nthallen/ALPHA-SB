@@ -19,7 +19,7 @@ Module SpatialDual FAST=10
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-DISTRIB = interact services runfile_sim
+DISTRIB = interact services runfile.sim
 
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
