@@ -46,6 +46,7 @@ tmserioext.o
 tmserio.o
 tmserioextoui.o
 doit.dep
+Simdoit.dep
 scopexengext.cdf
 scopexengextcdf.oui
 scopexengextcdf.tmc
@@ -72,4 +73,5 @@ scopexjsonext
 B3MBrawext
 tmserioext
 doit
+Simdoit
 scopexengext

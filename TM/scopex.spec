@@ -30,5 +30,6 @@ scopexjsonext : $extbase $genuibase
 B3MBrawext : B3MBraw.cdf
 tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
+Simdoit : Sim.doit
 %%
 CXXFLAGS+=-g

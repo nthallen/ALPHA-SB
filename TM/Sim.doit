@@ -5,5 +5,5 @@ server - scopexsim -H srvr:$Flightnode -p /dev/ttyS7 -b 115200
 extraction [!SI] scopexjsonext -n json
 
 memo
-batchfile runfile.sim
+batchfile runfile_sim
 
