@@ -359,10 +359,11 @@ bool SCoPEx::Report(system_status_t *S) {
     S->g_force = 0;
 
     // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+    // Negating heading and pitch to convert from fwd/left/up to fwd/rt/down axes
     vec = dBodyGetQuaternion(payloadID);
-    S->heading = atan2(2*(vec[0]*vec[3]+vec[1]*vec[2]),
+    S->heading = -atan2(2*(vec[0]*vec[3]+vec[1]*vec[2]),
                        1-2*(vec[2]*vec[2]+vec[3]*vec[3])); // radians
-    S->pitch = asin(2*(vec[0]*vec[2]-vec[3]*vec[1]));
+    S->pitch = -asin(2*(vec[0]*vec[2]-vec[3]*vec[1]));
     S->roll = atan2(2*(vec[0]*vec[1]+vec[2]*vec[3]),
                     1-2*(vec[1]*vec[1]+vec[2]*vec[2]));
 
