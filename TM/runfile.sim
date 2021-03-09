@@ -32,5 +32,5 @@
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
 [ -c "$spatialdualdev" ] &&
-  Launch      -      SpatialDual -p $spatialdualdev -v
+  Launch      -      SpatialDual -p $spatialdualdev -s -v
   Launch      -TMC-  scopexalgo
