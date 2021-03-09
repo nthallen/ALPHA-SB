@@ -8,7 +8,7 @@
       slcandev=/dev/ttyS12;;
     spi2)
       # propmtrdev=/dev/ttyUSB0
-      spatialdualdev=/dev/ttyUSB1
+      spatialdualdev=/dev/ttyUSB0
       # tmseriodev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
