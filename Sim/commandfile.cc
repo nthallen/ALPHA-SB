@@ -51,14 +51,16 @@ bool commandFile::app_input() {
       *dest = '\0';
 
       dest = &varname[0];
-      if (cp < nc && buf[cp++] == ' ') {
+      if (cp < nc && buf[cp] == ' ') {
+        ++cp;
         while (cp < nc && buf[cp] != ' ' && buf[cp] != '\n') {
           *dest++ = buf[cp++];
         }
       }
       *dest = '\0';
 
-      if (cp < nc && buf[cp++] == ' ') {
+      if (cp < nc && buf[cp] == ' ') {
+        ++cp;
         if (not_double(commandValue)) {
           report_err("%s: Expected value", iname);
         } else {

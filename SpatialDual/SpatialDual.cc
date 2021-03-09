@@ -37,53 +37,70 @@ bool SDual::protocol_input() {
       ++cp;
     }
     if (LRC_count >= 5 && LRC == 0) {
+      int expected_pkt_size;
       hdr = (frame_hdr_t*)&buf[cp];
-      if (cp+sizeof(frame_hdr_t)+hdr->Packet_len > nc) {
-        // update_tc_vmin(cp+sizeof(frame_hdr_t)+hdr->Packet_len-nc)
-        break;
+      switch (hdr->Packet_ID) {
+        case 20: expected_pkt_size = 100; break;// System State
+        case 25: expected_pkt_size = 12; break; // Velocity Standard Deviation
+        case 26: expected_pkt_size = 12; break; // Orientation Standard Deviation
+        case 28: expected_pkt_size = 48; break; // Raw sensors packet (probably not interested)
+        case 30: expected_pkt_size = 13; break; // Satelittes
+        case 43: expected_pkt_size = 12; break; // Angular Acceleration
+        default: expected_pkt_size = 0; break;
       }
-      // Check packet CRC
-      // The CRC is a CRC16-CCITT.
-      // The starting value is 0xFFFF.
-      // The CRC covers only the packet data.
-      uint16_t CRC = crc16ccitt_false_word(0xFFFF,
-                      &buf[cp+sizeof(frame_hdr_t)], hdr->Packet_len);
-      if (CRC != hdr->CRC) {
-        msg(MSG_ERROR, "%s: CRC hdr:%04X pkt:%04X",
-              iname, hdr->CRC, CRC);
-        // I could discard the minimum, assuming a failure
-        // could be due to dropped bytes. This would
-        // generate more noise when the current packet
-        // ultimately gets discarded, but ensure that
-        // if we are misaligned, we have a chance to
-        // recover.
+      if (expected_pkt_size == 0) {
+        msg(MSG_DBG(1), "%s: Unexpected packet ID %d", iname, hdr->Packet_ID);
+      } else if (hdr->Packet_len != expected_pkt_size) {
+        msg(MSG_DBG(1), "%s: ID %d expected length %d hdr", iname,
+              hdr->Packet_ID, expected_pkt_size, hdr->Packet_len);
       } else {
-        msg(MSG_DBG(1),
-          "Packet Located at offset %5d: LRC:%02X ID:%3u Len:%3u CRC:%5u",
-          cp, hdr->LRC, hdr->Packet_ID, hdr->Packet_len, hdr->CRC);
-        switch (hdr->Packet_ID) {
-          case 20: // System State
-            if (report_system_state((system_status_t*)&buf[cp+sizeof(frame_hdr_t)]))
-              return true;
-            break;
-          case 25: // Velocity Standard Deviation
-          case 26: // Orientation Standard Deviation
-          case 28: // Raw sensors packet (probably not interested)
-          case 30: // Satelittes
-          case 43: // Angular Acceleration
-            break;
-          default:
-            msg(0, "Unsupported packet type %d", hdr->Packet_ID);
-            break;
+        if (cp+sizeof(frame_hdr_t)+hdr->Packet_len > nc) {
+          // update_tc_vmin(cp+sizeof(frame_hdr_t)+hdr->Packet_len-nc)
+          break;
         }
+        // Check packet CRC
+        // The CRC is a CRC16-CCITT.
+        // The starting value is 0xFFFF.
+        // The CRC covers only the packet data.
+        uint16_t CRC = crc16ccitt_false_word(0xFFFF,
+                        &buf[cp+sizeof(frame_hdr_t)], hdr->Packet_len);
+        if (CRC != hdr->CRC) {
+          msg(MSG_ERROR, "%s: CRC hdr:%04X pkt:%04X",
+                iname, hdr->CRC, CRC);
+          // I could discard the minimum, assuming a failure
+          // could be due to dropped bytes. This would
+          // generate more noise when the current packet
+          // ultimately gets discarded, but ensure that
+          // if we are misaligned, we have a chance to
+          // recover.
+        } else {
+          msg(MSG_DBG(1),
+            "Packet Located at offset %5d: LRC:%02X ID:%3u Len:%3u CRC:%5u",
+            cp, hdr->LRC, hdr->Packet_ID, hdr->Packet_len, hdr->CRC);
+          switch (hdr->Packet_ID) {
+            case 20: // System State
+              if (report_system_state((system_status_t*)&buf[cp+sizeof(frame_hdr_t)]))
+                return true;
+              break;
+            case 25: // Velocity Standard Deviation
+            case 26: // Orientation Standard Deviation
+            case 28: // Raw sensors packet (probably not interested)
+            case 30: // Satelittes
+            case 43: // Angular Acceleration
+              break;
+            default:
+              msg(0, "Unsupported packet type %d", hdr->Packet_ID);
+              break;
+          }
+        }
+        if (cp > 0)
+          msg(MSG_WARN, "Discarded %u bytes before packet", cp);
+        cp += sizeof(frame_hdr_t) + hdr->Packet_len;
+        report_ok(cp);
+        LRC = 0;
+        LRC_count = 0;
+        // update_tc_vmin(17-nc);
       }
-      if (cp > 0)
-        msg(MSG_WARN, "Discarded %u bytes before packet", cp);
-      cp += sizeof(frame_hdr_t) + hdr->Packet_len;
-      report_ok(cp);
-      LRC = 0;
-      LRC_count = 0;
-      // update_tc_vmin(17-nc);
     }
   }
   if (cp > 0)

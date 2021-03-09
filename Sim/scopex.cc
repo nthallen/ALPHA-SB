@@ -379,6 +379,7 @@ bool SCoPEx::Report(system_status_t *S) {
 
 void SCoPEx::Init(int argc, char **argv) {
   int c;
+  optind = OPTIND_RESET;
   opterr = 0; /* disable default error message */
   while ((c = getopt(argc, argv, opt_string)) != -1) {
     switch (c) {
