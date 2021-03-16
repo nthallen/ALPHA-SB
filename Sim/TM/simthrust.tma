@@ -1,0 +1,25 @@
+%{
+  #include "dasio/cmd_writer.h"
+  PMC_RPM_t Last_Left_RPM;
+  PMC_RPM_t Last_Right_RPM;
+%}
+
+{ if (Last_Left_RPM != PMC_Left_RPM) {
+    double thrust;
+    double rpm;
+    Last_Left_RPM = PMC_Left_RPM;
+    rpm = convert(PMC_Left_RPM);
+    thrust = 4.44E-4 * rpm * rpm;
+    ci_sendfcmd(Cmd_Send_Quiet, "Sim set thrustLeft %.6lf\n", thrust);
+  }
+}
+
+{ if (Last_Right_RPM != PMC_Right_RPM) {
+    double thrust;
+    double rpm;
+    Last_Right_RPM = PMC_Right_RPM;
+    rpm = convert(PMC_Right_RPM);
+    thrust = 4.44E-4 * rpm * rpm;
+    ci_sendfcmd(Cmd_Send_Quiet, "Sim set thrustRight %.6lf\n", thrust);
+  }
+}

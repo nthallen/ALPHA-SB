@@ -4,6 +4,7 @@ Moduledef scopexsim {
 }
 
 cmdbase = scopexsim.cmd
+swsbase = simthrust.tma
 DISTRIB = @MODDIR@/../scopexsim
 %%
 .PHONY : clean-scopexsim @MODDIR@/../scopexsim
