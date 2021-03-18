@@ -1,0 +1,32 @@
+Calibration (B3MB_100V2_B1I_t, B3MB_AMPS) {
+      0,  -1.947,
+  32768,  70.633
+}
+Calibration (B3MB_100V2_B2I_t, B3MB_AMPS) {
+      0,  -0.102,
+  32768,  69.054
+}
+Calibration (B3MB_100V2_B3I_t, B3MB_AMPS) {
+      0,  -0.061,
+  32768,  68.603
+}
+Calibration (B3MB_100V2_B4I_t, B3MB_AMPS) {
+      0,  -0.691,
+  32768,  69.646
+}
+Calibration (B3MB_100V2_L1I_t, B3MB_AMPS) {
+      0,  -0.168,
+  32768,  71.119
+}
+Calibration (B3MB_100V2_L2I_t, B3MB_AMPS) {
+      0,  -1.187,
+  32768,  72.133
+}
+Calibration (B3MB_100V2_L3I_t, B3MB_AMPS) {
+      0,  -0.598,
+  32768,  71.052
+}
+Calibration (B3MB_100V2_L4I_t, B3MB_AMPS) {
+      0,  -0.939,
+  32768,  71.701
+}

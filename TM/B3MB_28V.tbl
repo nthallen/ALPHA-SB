@@ -1,10 +1,9 @@
 Input "TMbase.tbl";
 Input "B3MB_28V1.tbl";
-Input "B3MB_28V2.tbl";
 
 {
   HBox {
-    |+; [B3MB_28V1_Col]; |+; [B3MB_28V2_Col]; |+;
+    |+; [B3MB_28V1_Col]; |+;
   };
   -
 }
