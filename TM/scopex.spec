@@ -22,6 +22,7 @@ tmcbase = B3MB_100V4_cal.tmc
 
 Module SerIn
 Module SpatialDual FAST=10
+Module Ascender
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
