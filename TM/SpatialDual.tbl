@@ -57,16 +57,16 @@ Nav_Linear {
 
 Nav_Euler {
   HBox { +-; Title: "Ang. Position"; -+ };
-  Roll:    (roll,7)    deg;
-  Pitch:   (pitch,7)   deg;
-  Heading: (heading,7) deg;
+  Roll:    (roll,8)    deg;
+  Pitch:   (pitch,8)   deg;
+  Heading: (heading,8) deg;
 }
 
 Nav_Angular_V {
   HBox { +-; Title: "Ang. Velocity" ; -+ };
-  X: (angular_velocity_x,7) "deg/s";
-  Y: (angular_velocity_y,7) "deg/s";
-  Z: (angular_velocity_z,7) "deg/s";
+  X: (angular_velocity_x,8) "deg/s";
+  Y: (angular_velocity_y,8) "deg/s";
+  Z: (angular_velocity_z,8) "deg/s";
 }
 
 Nav_Angular {

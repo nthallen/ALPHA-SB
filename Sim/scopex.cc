@@ -398,6 +398,8 @@ void SCoPEx::Init(int argc, char **argv) {
   cmdfile->addVariable(&thrust_left, "thrustLeft");
   cmdfile->addVariable(&thrust_right, "thrustRight");
   cmdfile->addVariable(&initialAltitude, "initialAltitude");
+  cmdfile->addVariable(&initialLatitude, "initialLatitude");
+  cmdfile->addVariable(&initialLongitude, "initialLongitude");
   cmdfile->addVariable(&ductCdischarge, "ductCdischarge");
   cmdfile->addVariable(&ductArea, "ductArea");
   cmdfile->addVariable(&ductHeightRatio, "ductHeightRatio");

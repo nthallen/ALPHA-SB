@@ -7,7 +7,7 @@ TM typedef uint32_t SDtime_t { text "%12d"; }
 TM typedef double SD_degrees { text "%7.2lf"; }
 TM typedef double SD_d_angle_t { text "%10.5lf"; convert SD_degrees; }
   Calibration (SD_d_angle_t, SD_degrees) { 0, 0, 3.14159265358, 180 }
-TM typedef double SD_f_angle_t { text "%7.2lf"; convert SD_degrees; }
+TM typedef double SD_f_angle_t { text "%8.3lf"; convert SD_degrees; }
   Calibration (SD_f_angle_t, SD_degrees) { 0, 0, 3.14159265358, 180 }
 TM typedef double SDalt_t { text "%9.3lf"; }
 TM typedef double SD_f_m_t { text "%7.2lf"; }
