@@ -8,7 +8,7 @@ ascender_t Ascender;
 const char *Ascend::Ascender_port;
 
 Ascend::Ascend(const char *iname)
-    : Serial(iname, 80, Ascender_port, O_RDWR),
+    : Serial(iname, 80, Ascender_port, O_RDWR|O_NONBLOCK),
       cur_percent(0) {
   setup(115200, 8, 'n', 1, -1, 0);
   set_obufsize(32);
@@ -21,6 +21,7 @@ bool Ascend::SetSpeed(int32_t percent) {
     msg(2, "%s: Speed command value %d out of range",
       iname, percent);
   } else if (obuf_empty()) {
+    msg(MSG_DEBUG, "%s: SetSpeed(%d)", iname, percent);
     char tbuf[32];
     int nb = snprintf(tbuf, 32, "901,%d,999\n", percent);
     if (nb >= 32) {
@@ -137,6 +138,7 @@ bool AscendCmd::app_input() {
         report_err("%s: Invalid speed command", iname);
         break;
       }
+      msg(MSG_DEBUG, "%s: Cmd %d %d", iname, speed, dur_msecs);
       rv = Device->SetSpeed(speed);
       if (speed) {
 	TO.Set(0, dur_msecs);
