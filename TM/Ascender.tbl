@@ -19,7 +19,7 @@ AscHK {
 
 AscTech {
   HBox { +-; Title: AscTech; -+ };
-  CtrlInp:  (AscCtrlInp,5);
+  CtrlInp:  (AscCtrlInp,6);
   Mode:     (AscMode,8);
   Nreports: (AscNreports,3);
   Stale:    (AscStale,3);

@@ -11,8 +11,8 @@ AscOnOff_t AscLimit2; Invalidate AscLimit2;
   const char *asc_ctrl_inp_text(uint8_t val) {
     switch (val) {
       case 1:  return "Serial";
-      case 2:  return "Jog   ";
-      case 3:  return "Aux   ";
+      case 2:  return "   Jog";
+      case 3:  return "   Aux";
       default: return "******";
     }
   }
@@ -24,8 +24,8 @@ asc_ctrl_inp_t AscCtrlInp; Invalidate AscCtrlInp;
 %{
   const char *asc_mode_text(uint8_t val) {
     switch (val) {
-      case 1:  return "Idle    ";
-      case 2:  return "Moving  ";
+      case 1:  return "    Idle";
+      case 2:  return "  Moving";
       case 3:  return "RecovErr";
       case 4:  return "UnrecErr";
       default: return "********";

@@ -35,5 +35,5 @@
 [ -c "$spatialdualdev" ] &&
   Launch      -      SpatialDual -p $spatialdualdev -v
 [ -c "$ascenderdev" ] &&
-  Launch      -      Ascender -p $ascenderdev
+  Launch      -      Ascender -p $ascenderdev -v
   Launch      -TMC-  scopexalgo

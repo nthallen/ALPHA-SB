@@ -89,6 +89,7 @@ bool Ascend::tm_sync() {
 }
 
 bool Ascend::protocol_timeout() {
+  msg(MSG_DEBUG, "%s: Retransmit", iname);
   SetSpeed(cur_percent);
   return false;
 }
@@ -137,7 +138,11 @@ bool AscendCmd::app_input() {
         break;
       }
       rv = Device->SetSpeed(speed);
-      TO.Set(0, dur_msecs);
+      if (speed) {
+	TO.Set(0, dur_msecs);
+      } else {
+	TO.Clear();
+      }
       break;
     case 'Q':
       report_ok(nc);
@@ -150,6 +155,7 @@ bool AscendCmd::app_input() {
 }
 
 bool AscendCmd::protocol_timeout() {
+  msg(MSG_DEBUG, "%s: End of drive", iname);
   TO.Clear();
   return Device->SetSpeed(0);
 }
