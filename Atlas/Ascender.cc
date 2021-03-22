@@ -8,10 +8,11 @@ ascender_t Ascender;
 const char *Ascend::Ascender_port;
 
 Ascend::Ascend(const char *iname)
-    : Serial(iname, 80, Ascender_port, O_RDWR) {
+    : Serial(iname, 80, Ascender_port, O_RDWR|O_NONBLOCK),
+      cur_percent(0) {
   setup(115200, 8, 'n', 1, -1, 0);
   set_obufsize(32);
-  flags |= gflag(0);
+  flags |= gflag(0) | Fl_Timeout;
 }
 
 bool Ascend::SetSpeed(int32_t percent) {
@@ -20,12 +21,19 @@ bool Ascend::SetSpeed(int32_t percent) {
     msg(2, "%s: Speed command value %d out of range",
       iname, percent);
   } else if (obuf_empty()) {
+    msg(MSG_DEBUG, "%s: SetSpeed(%d)", iname, percent);
     char tbuf[32];
     int nb = snprintf(tbuf, 32, "901,%d,999\n", percent);
     if (nb >= 32) {
       msg(2, "%s: Unexpected truncation in SetSpeed()", iname);
     } else {
       rv = iwrite(tbuf, nb);
+    }
+    cur_percent = percent;
+    if (percent != 0) {
+      TO.Set(0, retx_interval_msec);
+    } else {
+      TO.Clear();
     }
   } else {
     msg(2, "%s: obuf not empty in SetSpeed()", iname);
@@ -81,6 +89,12 @@ bool Ascend::tm_sync() {
   return false;
 }
 
+bool Ascend::protocol_timeout() {
+  msg(MSG_DEBUG, "%s: Retransmit", iname);
+  SetSpeed(cur_percent);
+  return false;
+}
+
 bool Ascend::not_range_input(int16_t &val, const char *vname,
       int fix, int32_t min, int32_t max) {
   bool rv;
@@ -106,20 +120,31 @@ bool Ascend::not_range_input(int16_t &val, const char *vname,
 
 AscendCmd::AscendCmd(Ascend *Device)
   : Cmd_reader("Cmd", 80, "ascender"),
-    Device(Device) {}
+    Device(Device) {
+  flags |= Fl_Timeout;
+}
 
 bool AscendCmd::app_input() {
   int32_t speed;
+  int32_t dur_msecs;
   bool rv = false;
   switch (buf[0]) {
     case 'W':
       if (not_str("W") ||
           not_int32(speed) ||
+          not_str(":") ||
+          not_int32(dur_msecs) ||
           not_str("\n")) {
         report_err("%s: Invalid speed command", iname);
         break;
       }
+      msg(MSG_DEBUG, "%s: Cmd %d %d", iname, speed, dur_msecs);
       rv = Device->SetSpeed(speed);
+      if (speed) {
+	TO.Set(0, dur_msecs);
+      } else {
+	TO.Clear();
+      }
       break;
     case 'Q':
       report_ok(nc);
@@ -129,6 +154,12 @@ bool AscendCmd::app_input() {
   }
   report_ok(nc);
   return rv;
+}
+
+bool AscendCmd::protocol_timeout() {
+  msg(MSG_DEBUG, "%s: End of drive", iname);
+  TO.Clear();
+  return Device->SetSpeed(0);
 }
 
 int main(int argc, char **argv) {

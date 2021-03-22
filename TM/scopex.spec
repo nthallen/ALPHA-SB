@@ -4,22 +4,31 @@ swsbase = pmc.sws
 genuibase = scopex.genui
 
 Module TMbase
+
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types
 Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT=
 Module PropMtr mode=groups RT1= RT2=
+
 Module B3MB mode=types ID=28V1  CAN_ID=2
-Module B3MB            ID=28V2  CAN_ID=3
 Module B3MB            ID=100V1 CAN_ID=6
 Module B3MB            ID=100V2 CAN_ID=7
 Module B3MB            ID=100V3 CAN_ID=8
-Module SerIn
-Module scopexsim
+Module B3MB            ID=100V4 CAN_ID=3
+tmcbase = B3MB_28V1_cal.tmc
 tmcbase = B3MB_100V1_cal.tmc
+tmcbase = B3MB_100V2_cal.tmc
+tmcbase = B3MB_100V3_cal.tmc
+tmcbase = B3MB_100V4_cal.tmc
+
+Module scopexsim
+Module SerIn
 Module SpatialDual FAST=10
+Module Ascender
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
 DISTRIB = interact services runfile.sim
+IGNORE = B3MB_gen_cal.asv
 
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp

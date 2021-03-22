@@ -15,8 +15,11 @@ class Ascend : public Serial {
   protected:
     bool protocol_input();
     bool tm_sync();
+    bool protocol_timeout();
     bool not_range_input(int16_t &val, const char *vname,
       int fix, int32_t min, int32_t max);
+    int32_t cur_percent;
+    static const int retx_interval_msec = 100;
 };
 
 class AscendCmd : public Cmd_reader {
@@ -24,6 +27,7 @@ class AscendCmd : public Cmd_reader {
     AscendCmd(Ascend *Device);
   protected:
     bool app_input();
+    bool protocol_timeout();
     Ascend *Device;
 };
 

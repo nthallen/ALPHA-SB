@@ -11,18 +11,18 @@ TM typedef int8_t asc_speedcmd_t { text "%4d"; }
 TM typedef uint8_t asc_status_t { text "%3u"; }
 TM typedef int8_t asc_temp_t { text "%4d"; }
 
-TM @RATE@ Hz asc_hoist_v_t AscHoistV;
-TM @RATE@ Hz asc_hoist_i_t AscHoistI;
-TM @RATE@ Hz asc_pos_t AscPosition;
-TM @RATE@ Hz asc_speed_t AscSpeed;
-TM @RATE@ Hz asc_speedcmd_t AscSpeedCmd;
-TM @RATE@ Hz asc_temp_t AscMtrT;
-TM @RATE@ Hz asc_temp_t AscMtrCtrlT;
-TM @RATE@ Hz asc_temp_t AscOutputPulleyT;
-TM @RATE@ Hz asc_temp_t AscConvT;
-TM @RATE@ Hz asc_status_t AscStatus;
-TM @RATE@ Hz asc_status_t AscNreports;
-TM @RATE@ Hz asc_status_t AscStale;
+TM 1 Hz asc_hoist_v_t AscHoistV;
+TM 1 Hz asc_hoist_i_t AscHoistI;
+TM 1 Hz asc_pos_t AscPosition;
+TM 1 Hz asc_speed_t AscSpeed;
+TM 1 Hz asc_speedcmd_t AscSpeedCmd;
+TM 1 Hz asc_temp_t AscMtrT;
+TM 1 Hz asc_temp_t AscMtrCtrlT;
+TM 1 Hz asc_temp_t AscOutputPulleyT;
+TM 1 Hz asc_temp_t AscConvT;
+TM 1 Hz asc_status_t AscStatus;
+TM 1 Hz asc_status_t AscNreports;
+TM 1 Hz asc_status_t AscStale;
 
 Group Ascend (AscHoistV, AscHoistI, AscPosition, AscSpeed,
       AscSpeedCmd, AscMtrT, AscMtrCtrlT, AscOutputPulleyT,

@@ -2,9 +2,10 @@ Moduledef Ascender [ RATE=1 ] {
 }
 
 tmcbase = Ascender.tmc:Ascender.tmc.in
+colbase = Ascender_col.tmc:Ascender_col.tmc.in
 cmdbase = Ascender.cmd
 genuibase = Ascender.genui:Ascender.genui.in
-extbase = Ascender_conv.tmc
+extbase = Ascender_conv.tmc:Ascender_conv.tmc.in
 - : Ascender.tbl:Ascender.tbl.in
 DISTRIB = @MODDIR@/../Ascender
 CPPFLAGS = -I @MODDIR@/..

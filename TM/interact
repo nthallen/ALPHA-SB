@@ -7,10 +7,11 @@
       propmtrdev=
       slcandev=/dev/ttyS12;;
     spi2)
+      # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
       # spatialdualdev=/dev/ttyUSB1
-      tmseriodev=/dev/ttyUSB0
-      # slcandev=/dev/ttyACM0;;
+      # tmseriodev=/dev/ttyUSB0
+      # slcandev=/dev/ttyACM0
       ;;
     *)
       propmtrdev=/dev/ttyUSB0
@@ -33,4 +34,6 @@
   Launch      -      PropMtr -p $propmtrdev
 [ -c "$spatialdualdev" ] &&
   Launch      -      SpatialDual -p $spatialdualdev -v
+[ -c "$ascenderdev" ] &&
+  Launch      -      Ascender -p $ascenderdev
   Launch      -TMC-  scopexalgo

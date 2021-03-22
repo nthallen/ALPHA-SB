@@ -1,0 +1,16 @@
+ 1 AscPosition           Ascender Pos
+ 1 AscSpeed              Ascender Speed
+ 1 AscSpeedCmd           Ascender Cmd
+ 1 AscLimit1:AscStatus:4 Ascender Limits
+ 1 AscLimit2:AscStatus:4 Ascender Limits
+
+ 1 AscHoistV             AscHK V
+ 1 AscHoistI             AscHK I
+ 1 AscCtrlInp            AscHK CtrlInp
+ 1 AscMode               AscHK Mode
+ 1 AscMtrT               AscHK Temp
+ 1 AscMtrCtrlT           AscHK Temp
+ 1 AscOutputPulleyT      AscHK Temp
+ 1 AscConvT              AscHK Temp
+ 1 AscNreports           AscHK Nreports
+ 1 AscStale              AscHK Stale
