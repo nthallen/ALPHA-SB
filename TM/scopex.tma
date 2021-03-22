@@ -4,3 +4,25 @@ State Init {
 
 State Shutdown {
 }
+
+Partition
+
+State heading_idle {
+}
+
+%{
+#ifdef HEADING
+State heading_PI {
+  { courseError = track - course;
+    courseErrorChange = courseError - prevCourseError;
+    prevCourseError = courseError;
+    courseErrorIntegral += courseError * IGain;
+    clamp(courseErrorIntegral, courseErrorIntegralLimit);
+    dThrust_a =
+      PGain * courseError +
+      IGain * courseErrorIntegral +
+      DGain * courseErrorChange;
+  }
+}
+#endif
+%}
