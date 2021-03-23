@@ -1,0 +1,18 @@
+<package> PropMtrSim
+<include> "PropMtrSim_int.h"
+<include> msg oui
+<include> cmd_reader
+
+<opts> "r:"
+<sort>
+        -r <rate> Specify the simulation rate
+
+<switch>
+  case 'r':
+    SimRate = atoi(optarg); break;
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("PropMtrSim",
+    "Propeller Motor Controller Simulator Driver", "V1.0");
