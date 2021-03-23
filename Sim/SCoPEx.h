@@ -56,8 +56,8 @@ class SCoPEx {
     dReal ductDischargeRate; // kg/sec
     dReal HeliumMass; //
     dReal initialAltitude; // m
-    double initialLatitude; // deg
-    double initialLongitude; // deg
+    dReal initialLatitude; // deg
+    dReal initialLongitude; // deg
     // dReal balloonArea; // m^2
     dReal gondolaAngle;
     dReal gondolaVelocityAngle;
