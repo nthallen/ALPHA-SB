@@ -59,6 +59,7 @@ B3MB_100Vtblnc.tmc.dep
 SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err
+VERSION
 *.o
 *.exe
 *.stackdump

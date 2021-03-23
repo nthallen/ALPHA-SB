@@ -3,6 +3,7 @@ swsbase = scopex.sws
 swsbase = pmc.sws
 genuibase = scopex.genui
 
+Module Version src=scopex.ver
 Module TMbase
 
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types
