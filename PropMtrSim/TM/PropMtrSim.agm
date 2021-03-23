@@ -1,0 +1,11 @@
+Moduledef PropMtrSim {
+}
+
+DISTRIB = @MODDIR@/../PropMtrSim
+%%
+.PHONY : clean-PropMtrSim @MODDIR@/../PropMtrSim
+@MODDIR@/../PropMtrSim :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-PropMtrSim
+clean-PropMtrSim :
+	$(MAKE) --directory=@MODDIR@/.. clean

@@ -6,8 +6,8 @@
 
  1 AscHoistV             AscHK V
  1 AscHoistI             AscHK I
- 1 AscCtrlInp            AscHK CtrlInp
- 1 AscMode               AscHK Mode
+ 1 AscCtrlInp            AscHK CtrlInp %.0lf
+ 1 AscMode               AscHK Mode %.0lf
  1 AscMtrT               AscHK Temp
  1 AscMtrCtrlT           AscHK Temp
  1 AscOutputPulleyT      AscHK Temp

@@ -6,8 +6,8 @@
 
  @RATE@ AscHoistV             AscHK V
  @RATE@ AscHoistI             AscHK I
- @RATE@ AscCtrlInp            AscHK CtrlInp
- @RATE@ AscMode               AscHK Mode
+ @RATE@ AscCtrlInp            AscHK CtrlInp %.0lf
+ @RATE@ AscMode               AscHK Mode %.0lf
  @RATE@ AscMtrT               AscHK Temp
  @RATE@ AscMtrCtrlT           AscHK Temp
  @RATE@ AscOutputPulleyT      AscHK Temp

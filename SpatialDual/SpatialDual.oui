@@ -3,16 +3,19 @@
 <include> msg oui
 <include> cmd_reader
 
-<opts> "p:b:"
+<opts> "p:b:s"
 <sort>
         -p <port> Specify RS485 port (/dev/ttyS0)
         -b <baud> Specify baud rate (115200)
+        -s Support simulator input
 
 <switch>
   case 'p':
     SDual_port = optarg; break;
   case 'b':
     SDual_baud = atoi(optarg); break;
+  case 's':
+    SDual_sim = true; break;
 
 <package> appid_default
 <include> "dasio/appid.h"

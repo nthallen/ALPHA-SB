@@ -21,14 +21,15 @@ tmcbase = B3MB_100V2_cal.tmc
 tmcbase = B3MB_100V3_cal.tmc
 tmcbase = B3MB_100V4_cal.tmc
 
+Module scopexsim
 Module SerIn
 Module SpatialDual FAST=10
 Module Ascender
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
+DISTRIB = interact services runfile.sim
 IGNORE = B3MB_gen_cal.asv
-DISTRIB = interact services
 
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
@@ -39,5 +40,6 @@ scopexjsonext : $extbase $genuibase
 B3MBrawext : B3MBraw.cdf
 tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
+Simdoit : Sim.doit
 %%
 CXXFLAGS+=-g

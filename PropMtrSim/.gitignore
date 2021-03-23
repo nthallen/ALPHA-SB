@@ -1,0 +1,6 @@
+PropMtrSim
+PropMtrSim.exe
+PropMtrSimoui.cc
+*.o
+*.stackdump
+

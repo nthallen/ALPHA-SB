@@ -1,0 +1,15 @@
+Moduledef scopexsim {
+  This module provides the commands necessary to control the simulator
+  and ensures that the simulator is distributed
+}
+
+cmdbase = scopexsim.cmd
+swsbase = simthrust.tma
+DISTRIB = @MODDIR@/../scopexsim
+%%
+.PHONY : clean-scopexsim @MODDIR@/../scopexsim
+@MODDIR@/../scopexsim :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-scopexsim
+clean-scopexsim :
+	$(MAKE) --directory=@MODDIR@/.. clean
