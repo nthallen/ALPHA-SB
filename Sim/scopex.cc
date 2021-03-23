@@ -343,9 +343,10 @@ bool SCoPEx::Report(system_status_t *S) {
     S->microseconds = ts.tv_nsec/1000;
 
     const dReal *vec = dBodyGetPosition(payloadID);
-    S->latitude = initialLatitude + vec[0]/111111.;
-    S->longitude = initialLongitude -
-      vec[1]/(111111.*cos(S->latitude * 3.14159265358/180));
+    S->latitude = (initialLatitude + vec[0]/111111.)*3.14159265358/180;
+    S->longitude = (initialLongitude -
+      vec[1]/(111111.*cos(S->latitude * 3.14159265358/180)))
+      *3.14159265358/180;
     S->height = vec[2];
 
     vec = dBodyGetLinearVel(payloadID);
