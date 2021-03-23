@@ -7,7 +7,7 @@
       propmtrdev=
       slcandev=/dev/ttyS12;;
     spi2)
-      propmtrdev=/dev/ttyUSB0
+      # propmtrdev=/dev/ttyUSB0
       spatialdualdev=/dev/ttyUSB1
       # tmseriodev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
@@ -20,8 +20,8 @@
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
-[ -c "$slcandev" ] &&
-  Launch      -      subbusd_slcan -n CAN -p $slcandev
+#[ -c "$slcandev" ] &&
+# Launch      -      subbusd_slcan -n CAN -p $slcandev
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
 [ -c "$tmseriodev" ] &&
@@ -29,8 +29,7 @@
   Launch      tm_gen scopexcol
   Launch      cmd    scopexsrvr -H srvr: -S:
   Launch      -      tmdf
-[ -c "$propmtrdev" ] &&
-  Launch      -      PropMtr -p $propmtrdev
+  Launch      -      PropMtrSim -r 10
 [ -c "$spatialdualdev" ] &&
   Launch      -      SpatialDual -p $spatialdualdev -s -v
   Launch      -TMC-  scopexalgo
