@@ -50,6 +50,7 @@ scopextblnc.tmc.dep
 SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err
+VERSION
 *.o
 *.exe
 *.stackdump
