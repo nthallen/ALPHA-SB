@@ -44,6 +44,7 @@ PropMtrCmd::PropMtrCmd()
 
 bool PropMtrCmd::app_input() {
   uint16_t devID, func, addr, count, data[2];
+  uint16_t IDX;
   if (cp < nc) {
     int arg_count;
     if (buf[cp] == 'Q') return true;
@@ -76,14 +77,17 @@ bool PropMtrCmd::app_input() {
     if (func == 15 && arg_count == 2) {
       data[0] = (data[0] & 0xFF) | ((data[1] << 8) & 0xFF00);
     }
-    if (devID > 0x01) {
-      report_err("%s: Invalid device ID %d", iname, devID);
-      clear_to_newline();
-      return false;
+    switch (devID) {
+      case 62: IDX = 1; break;
+      case 63: IDX = 0; break;
+      default:
+        report_err("%s: Invalid device ID %d", iname, devID);
+        clear_to_newline();
+        return false;
     }
     
     if (func == 16 && addr == 321) {
-      PropMtr.Ctrl[devID].SetPoint =
+      PropMtr.Ctrl[IDX].SetPoint =
         data[0] + ((uint32_t)data[1] << 16);
     }
     report_ok(cp);
