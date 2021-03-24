@@ -31,7 +31,11 @@ bool Ascend::SetSpeed(int32_t percent) {
     }
     cur_percent = percent;
     if (percent != 0) {
-      TO.Set(0, retx_interval_msec);
+      if (TO.Set()) {
+        TO.Add(0, retx_interval_msec);
+      } else {
+        TO.Set(0, retx_interval_msec);
+      }
     } else {
       TO.Clear();
     }

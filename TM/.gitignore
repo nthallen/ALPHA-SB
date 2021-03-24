@@ -13,6 +13,8 @@ scopexcltnc.o
 scopexcltncoui.cc
 scopexcltncoui.o
 scopextblnc.tmc
+B3MB_28Vtblnc.tmc
+B3MB_100Vtblnc.tmc
 SpatialDualtblnc.tmc
 Housekeepingtblnc.tmc
 scopexdispnc.cc
@@ -32,6 +34,12 @@ scopexjsonext.cc
 scopexjsonextoui.cc
 scopexjsonext.o
 scopexjsonextoui.o
+B3MBrawextcdf.oui
+B3MBrawcdf.tmc
+B3MBrawext.cc
+B3MBrawextoui.cc
+B3MBrawext.o
+B3MBrawextoui.o
 tmserioext.cc
 tmserioextoui.cc
 tmserioext.o
@@ -47,6 +55,8 @@ scopexengextoui.cc
 scopexengext.o
 scopexengextoui.o
 scopextblnc.tmc.dep
+B3MB_28Vtblnc.tmc.dep
+B3MB_100Vtblnc.tmc.dep
 SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err
@@ -62,6 +72,7 @@ scopexcltnc
 scopexdispnc
 scopexalgo
 scopexjsonext
+B3MBrawext
 tmserioext
 doit
 Simdoit
