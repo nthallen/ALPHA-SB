@@ -1,9 +1,9 @@
 1 PMC_Right_RPM_SP       PMC_Right RPM
 1 PMC_Right_RPM_Demand   PMC_Right RPM
-10 PMC_Right_RPM          PMC_Right RPM
+2 PMC_Right_RPM          PMC_Right RPM
 
 1 PMC_Right_I_Demand     PMC_Right Current
-10 PMC_Right_I_Measured   PMC_Right Current
+2 PMC_Right_I_Measured   PMC_Right Current
 
 1 PMC_Right_BusV         PMC_Right Voltage
 

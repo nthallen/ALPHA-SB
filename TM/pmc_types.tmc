@@ -97,4 +97,4 @@ TM typedef int32_t PMC_Position_t { text "%11ld"; }
 TM typedef uint16_t PMC_Status_Word { text "%016b"; }
 
 TM 1 Hz PMC_Stale_t PMC_Stale;
-TM 10 Hz PMC_Stale_t PMC_StaleF;
+TM 2 Hz PMC_Stale_t PMC_StaleF;

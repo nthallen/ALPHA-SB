@@ -18,8 +18,8 @@ TM 1 Hz PMC_Itau_K_raw_t PMC_Left_TCL_Kp;
 TM 1 Hz PMC_Itau_K_raw_t PMC_Left_TCL_Ki;
 TM 1 Hz PMC_Amp_t PMC_Left_I_Demand;
 
-TM 10 Hz PMC_RPM_t PMC_Left_RPM;
-TM 10 Hz PMC_Amp_t PMC_Left_I_Measured;
+TM 2 Hz PMC_RPM_t PMC_Left_RPM;
+TM 2 Hz PMC_Amp_t PMC_Left_I_Measured;
 
 PMC_Position_t PMC_Left_Pos_SP; Invalidate PMC_Left_Pos_SP;
 { if (PMC_Left_Status6 & 0x10) {
