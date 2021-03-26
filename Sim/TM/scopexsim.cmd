@@ -1,6 +1,6 @@
 %INTERFACE <Sim>
 
-&command
+&^command
   : Sim Start * { if_Sim.Turf("Start\n"); }
   : Sim Quit * { if_Sim.Turf("Q\n"); }
 # : Sim Noop * { if_Sim.Turf("Noop\n"); }

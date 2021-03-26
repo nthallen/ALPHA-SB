@@ -1,1 +1,5 @@
-%INTERFACE <RFDio>
+%INTERFACE(Tx) <RFDio>
+
+&command
+  : &^command
+  ;

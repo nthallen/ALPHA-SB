@@ -1,4 +1,7 @@
 Moduledef RFDio {
+  RFDio provides the uplink to and downlink from the payload during flight
+  via RFD900x telemetry radios. The driver will receive commands from the
+  local command server via the RFDio command interface defined in RFDio.cmd.
 }
 
 cmdbase = RFDio.cmd

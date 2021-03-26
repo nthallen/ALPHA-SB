@@ -7,7 +7,7 @@
 
 %INTERFACE <SWData:DG/data>
 
-&command
+&^command
   : &SWTM * { if_SWData.Turf(); }
   ;
 &SWTM

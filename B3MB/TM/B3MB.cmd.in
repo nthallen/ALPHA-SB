@@ -2,7 +2,7 @@
   /* Common B3MB Command Framework */
   #include "scopex_can.h"
 
-  #ifdef SERVER
+  #if defined(SERVER) && !defined(TRANSMITTING)
     int subbus_quit() {
       return CAN->subbus_quit();
     }
@@ -10,7 +10,7 @@
 %}
 %INTERFACE <subbus>
 
-&command
+&^command
   : B3MB &B3MB_ID &B3MB_Switch &B3MB_On_Off * {
       if (CAN_Initialized)
         CAN->write_ack(($2<<8)+0x40, $3+$4);

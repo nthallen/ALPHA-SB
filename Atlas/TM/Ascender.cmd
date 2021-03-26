@@ -1,6 +1,6 @@
 %INTERFACE <ascender>
 
-&command
+&^command
   : Ascender Set Speed %d (-100 to 100 percent) pct For %d &Asc_units * {
       int speed = $4;
       int duration = $7 * $8;

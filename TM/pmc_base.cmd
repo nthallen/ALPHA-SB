@@ -1,6 +1,6 @@
 %INTERFACE <PropMtr>
 %{
-  #ifdef SERVER
+  #if defined(SERVER) && !defined(TRANSMITTING)
   #include <stdint.h>
   
   void PMC_state(uint8_t devID, uint8_t state, bool value) {
@@ -23,7 +23,7 @@
   #endif
 %}
  
-&command
+&^command
   : PMC &pmc_drive &pmc_state &pmc_enable * {
       PMC_state($2, $3, $4);
     }

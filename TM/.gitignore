@@ -9,6 +9,9 @@ scopexcmd.h
 scopexsrvr.o
 scopexsrvroui.cc
 scopexsrvroui.o
+scopextxsrvr.o
+scopextxsrvroui.cc
+scopextxsrvroui.o
 scopexcltnc.o
 scopexcltncoui.cc
 scopexcltncoui.o
@@ -68,6 +71,7 @@ Makefile
 B3MB_gen_cal.asv
 scopexcol
 scopexsrvr
+scopextxsrvr
 scopexcltnc
 scopexdispnc
 scopexalgo
