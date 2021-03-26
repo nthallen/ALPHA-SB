@@ -1,10 +1,8 @@
 display scopexdisp -n disp
 serin serin
-
 client scopexclt
-client [SI] scopexsiclt
 
-server [SI]  cmd scopexsisrvr
+server [SI]  cmd scopextxsrvr
 server [SI]  -   RFDio -b 230400 -p /dev/ttyS7 -v
 
 extraction [SI]  lgr -N `mlf_find LOG` -n lgr
