@@ -10,7 +10,7 @@
       # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
       # spatialdualdev=/dev/ttyUSB1
-      # tmseriodev=/dev/ttyUSB0
+      tmseriodev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
     *)
@@ -25,10 +25,10 @@
   Launch      -      subbusd_slcan -n CAN -p $slcandev
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
-[ -c "$tmseriodev" ] &&
-  Launch      -TMC-  tmserioext -d $tmseriodev -b 230400 -v
   Launch      tm_gen scopexcol
   Launch      cmd    scopexsrvr -H srvr: -S:
+[ -c "$tmseriodev" ] &&
+  Launch      -TMC-  tmserioext -d $tmseriodev -b 230400 -v
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
