@@ -24,6 +24,7 @@ class RFD_interface : public Serial {
   public:
     RFD_interface(const char *name, serio_if *serio);
     // ~RFD_interface();
+    void tx_cmd(struct iovec *io, int n_iov);
     static const int ibufsize = 4096;
     static const char *RFD_port;
     static int RFD_baud_rate;

@@ -21,6 +21,10 @@ RFD_interface::RFD_interface(const char *name, serio_if *serio) :
   connect();
 }
 
+void RFD_interface::tx_cmd(struct iovec *io, int n_iov) {
+  iwritev(io, n_iov);
+}
+
 void RFD_interface::connect() {
   if (fd < 0) {
     int old_response = set_response(NLRSP_QUIET);
@@ -227,7 +231,7 @@ bool RFD_cmd::app_input() {
       }
       hdr.LRC = -hdr.LRC;
     }
-    iwritev(io, 2); // Errors are handled in callbacks
+    RFD->tx_cmd(io, 2); // Errors are handled in callbacks
   } else {
     if (!dropping_tx_cmds) {
       msg(MSG_DEBUG, "%s: dropping command", iname);
