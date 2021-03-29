@@ -134,7 +134,8 @@ bool tmserio_if::protocol_input() {
     }
     serio_pkt_hdr *hdr = (serio_pkt_hdr*)&buf[cp];
     if (hdr->length > serio::max_pkt_payload) {
-      msg(MSG_ERROR, "%s: Invalid pkt length: %d", iname, hdr->length);
+      // msg(MSG_ERROR, "%s: Invalid pkt length: %d", iname, hdr->length);
+      report_err("%s: Invalid pkt length: %d", iname, hdr->length);
       ++cp;
       continue;
     }
