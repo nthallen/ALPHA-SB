@@ -227,7 +227,7 @@ bool RFD_cmd::app_input() {
       }
       hdr.LRC = -hdr.LRC;
     }
-    bool rv = iwritev(io, 2);
+    iwritev(io, 2); // Errors are handled in callbacks
   } else {
     if (!dropping_tx_cmds) {
       msg(MSG_DEBUG, "%s: dropping command", iname);
