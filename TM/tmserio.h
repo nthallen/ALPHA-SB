@@ -33,6 +33,8 @@ class tmserio_if : public Serial {
     void process_data();
     void connect();
     void queue_retry();
+    bool not_serio_pkt_hdr();
+    bool protocol_input();
     bool protocol_timeout();
     bool protocol_except();
     // uint16_t crc_calc(uint8_t *buf, int len);

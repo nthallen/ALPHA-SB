@@ -63,6 +63,9 @@ class RFD_cmd : public Cmd_reader {
     bool app_input();
   protected:
     RFD_interface *RFD;
+    bool dropping_tx_cmds;
+    int n_tx_cmds_dropped;
+    int total_tx_cmds_dropped;
 };
 
 #endif
