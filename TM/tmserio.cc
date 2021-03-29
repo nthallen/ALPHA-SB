@@ -177,8 +177,7 @@ bool tmserio_if::protocol_input() {
           ci_sendcmd(Cmd_Send, (char *)&buf[cp + serio::pkt_hdr_size]);
           buf[cp + serio::pkt_hdr_size + hdr->length] = save_char;
           cp += serio::pkt_hdr_size + hdr->length;
-          report_ok(nc-cp < serio::max_pkt_payload + serio::pkt_hdr_size
-          ? cp : 0);
+          report_ok(cp);
         }
         continue;
       case pkt_type_TM:
