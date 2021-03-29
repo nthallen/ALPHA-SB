@@ -26,7 +26,10 @@ int tmserio_if::air_speed = 125000;
 tmserio_if::tmserio_if() :
     Serial("radio", serio::max_cmd_packet_size),
     row_len(0),
-    connect_waiting(false) {
+    connect_waiting(false),
+    dropping_tx_rows(false),
+    n_tx_rows_dropped(0)
+{
 
   // scan_fd = -1;
   // cur_scan = next_scan = 0;
@@ -121,6 +124,14 @@ void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
   if (obuf_empty()) {
     // if (nl_debug_level < -1 && !(MFCtr % 100))
       // msg(MSG_DEBUG, "%s: send_row(%u)", iname, MFCtr);
+    if (dropping_tx_rows) {
+      msg(MSG_DEBUG, "%s: Tx resumed after dropping %d rows",
+        iname, n_tx_rows_dropped);
+      dropping_tx_rows = false;
+      total_tx_rows_dropped += n_tx_rows_dropped;
+      dropping_tx_rows = false;
+      n_tx_rows_dropped = 0;
+    }
     struct iovec io[3];
     serio_pkt_hdr hdr;
     hdr.LRC = 0;
@@ -146,7 +157,11 @@ void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
     bool rv = iwritev(io, 3);
     rows_this_row = 0;
   } else {
-    msg(MSG_DEBUG, "%s: dropping MFCtr %u", iname, MFCtr);
+    if (!dropping_tx_rows) {
+      msg(MSG_DEBUG, "%s: dropping MFCtr %u", iname, MFCtr);
+      dropping_tx_rows = true;
+    }
+    ++n_tx_rows_dropped;
   }
 }
 

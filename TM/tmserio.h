@@ -52,6 +52,9 @@ class tmserio_if : public Serial {
     uint16_t rows_per_row; //*< Scan rows transmitted per TM row
     uint16_t rows_this_row; //*< Scan rows transmitted so far this TM row
     bool connect_waiting;
+    bool dropping_tx_rows;
+    int n_tx_rows_dropped;
+    int total_tx_rows_dropped;
     
     // void send_scan_data();
 };
