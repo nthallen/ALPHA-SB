@@ -216,7 +216,7 @@ bool RFD_cmd::app_input() {
     serio_pkt_hdr hdr;
     hdr.LRC = 0;
     hdr.type = pkt_type_CMD;
-    hdr.length = tm_info.tm.nbminf-2;
+    hdr.length = nc;
     io[0].iov_len = sizeof(serio_pkt_hdr);
     io[0].iov_base = &hdr;
     io[1].iov_len = nc;
