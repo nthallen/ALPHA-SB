@@ -319,6 +319,7 @@ void set_cur_photo(uint32_t Photo_Num) {
 #endif
 
 void tmserio_tm_client::process_quit() {
+  msg(MSG, "%s: process_quit()", iname);
   ELoop->set_loop_exit();
 }
 
@@ -328,8 +329,6 @@ void tmserio_tm_client::adopted() {
 }
 
 void tmserio_tm_client::send_row(uint16_t MFCtr, const uint8_t *raw) {
-  // if (nl_debug_level < -1 && !(MFCtr % 100))
-    // msg(MSG_DEBUG, "%s: send_row(%u)", iname, MFCtr);
   if (tmserio_if::TMp)
     tmserio_if::TMp->send_row(MFCtr, raw);
 }

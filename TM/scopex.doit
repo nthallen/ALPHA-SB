@@ -1,6 +1,6 @@
 display scopexdisp -n disp
 serin serin
-client scopexclt
+client [SI|RT] scopexclt
 
 server [SI]  cmd scopextxsrvr
 server [SI]  -   RFDio -b 230400 -p /dev/ttyS7 -v
