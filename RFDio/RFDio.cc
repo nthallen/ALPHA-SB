@@ -232,6 +232,7 @@ bool RFD_cmd::app_input() {
       hdr.LRC = -hdr.LRC;
     }
     RFD->tx_cmd(io, 2); // Errors are handled in callbacks
+    report_ok(nc);
   } else {
     if (!dropping_tx_cmds) {
       msg(MSG_DEBUG, "%s: dropping command", iname);
