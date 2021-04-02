@@ -2,6 +2,7 @@ prefix = scopex
 tmcbase = base.tmc
 swsbase = scopex.sws
 swsbase = pmc.sws
+cmdbase = scopex.cmd
 genuibase = scopex.genui
 
 Module Version src=scopexsim.ver
