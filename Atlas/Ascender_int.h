@@ -19,7 +19,7 @@ class Ascend : public Serial {
     bool not_range_input(int16_t &val, const char *vname,
       int fix, int32_t min, int32_t max);
     int32_t cur_percent;
-    static const int retx_interval_msec = 100;
+    static const int retx_interval_msec = 200;
 };
 
 class AscendCmd : public Cmd_reader {

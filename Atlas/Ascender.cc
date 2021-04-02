@@ -94,7 +94,6 @@ bool Ascend::tm_sync() {
 }
 
 bool Ascend::protocol_timeout() {
-  msg(MSG_DEBUG, "%s: Retransmit", iname);
   SetSpeed(cur_percent);
   return false;
 }
@@ -143,12 +142,12 @@ bool AscendCmd::app_input() {
         break;
       }
       msg(MSG_DEBUG, "%s: Cmd %d %d", iname, speed, dur_msecs);
-      rv = Device->SetSpeed(speed);
       if (speed) {
-	TO.Set(0, dur_msecs);
+        TO.Set(0, dur_msecs);
       } else {
-	TO.Clear();
+        TO.Clear();
       }
+      rv = Device->SetSpeed(speed);
       break;
     case 'Q':
       report_ok(nc);
