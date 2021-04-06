@@ -1,0 +1,7 @@
+TM typedef double Nav_Degrees { text "%6.2lf"; }
+TM typedef uint16_t Nav_Angle_t { text "%6.2lf"; convert Nav_Degrees; }
+Calibration (Nav_Angle_t, Nav_Degrees) { 0, 0, 65536, 360 }
+
+TM typedef float Nav_Gain_t { text "%9.2e"; }
+
+TM typedef uint8_t Nav_Thrust_t { text "%3d"; }

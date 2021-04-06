@@ -8,7 +8,7 @@
 # endif
 include /usr/local/share/monarch/appgen.mk
 
-CXXFLAGS+=-g -Wall -std=c++11 $(CPPFLAGS)
+CXXFLAGS+=-g -Wall -std=c++11
 LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -lpthread
 
 .PHONY : all
@@ -20,11 +20,11 @@ PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
 OBJ += PropMtr PropMtroui.cc
 DIST += PropMtr
 PropMtr : $(PROPMTROBJ) $(AG_LIBDIR)/libdasio.a
-	$(CXX) -o PropMtr $(CPPFLAGS) $(CXXFLAGS) $(PROPMTROBJ) $(LDFLAGS)
+	$(CXX) -o PropMtr $(CXXFLAGS) $(PROPMTROBJ) $(LDFLAGS)
 PropMtr.o : PropMtr.cc
 PropMtroui.o : PropMtroui.cc
 PropMtroui.cc : PropMtr.oui
-	oui -o PropMtroui.cc PropMtr.oui
+	oui -o PropMtroui.cc $<
 
 clean :
 	rm -f $(OBJ)

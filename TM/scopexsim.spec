@@ -1,5 +1,12 @@
 prefix = scopex
 tmcbase = base.tmc
+
+# Had to move this module up to make sure its tmcbase entry
+# goes in before the swsbase (SWdata.tmc) which depends on
+# the typedefs therein. Could be resolved with different
+# invocations of the module, but something to think about.
+Module scopexsim
+
 swsbase = scopex.sws
 swsbase = pmc.sws
 cmdbase = scopex.cmd
@@ -23,7 +30,6 @@ Module PropMtr mode=groups RT1= RT2=
 # tmcbase = B3MB_100V3_cal.tmc
 # tmcbase = B3MB_100V4_cal.tmc
 
-Module scopexsim
 Module PropMtrSim
 Module SerIn
 Module SpatialDual FAST=10

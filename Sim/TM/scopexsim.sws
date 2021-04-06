@@ -1,0 +1,10 @@
+SW_Variable: <uint16_t,Nav_Angle_t> Course Set Nav Course
+  : &nav_angle { $0 = $1; }
+SW_Variable: <float,Nav_Gain_t> Nav_PGain Set Nav PGain
+  : &nav_gain { $0 = $1; }
+SW_Variable: <float,Nav_Gain_t> Nav_IGain Set Nav IGain
+  : &nav_gain { $0 = $1; }
+SW_Variable: <float,Nav_Gain_t> Nav_DGain Set Nav DGain
+  : &nav_gain { $0 = $1; }
+SW_Variable: <uint8_t,Nav_Thrust_t> Nav_Thrust Set Nav Thrust
+  : &nav_thrust_pct { $0 = $1; }
