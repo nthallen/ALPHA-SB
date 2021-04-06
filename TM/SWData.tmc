@@ -1,3 +1,8 @@
 TM "Receive" SWData 0;
 
 TM 1 Hz UCHAR SWStat; collect SWStat = SWData.SWStat;
+TM 1 Hz Nav_Angle_t Course; collect Course = SWData.Course;
+TM 1 Hz Nav_Gain_t Nav_PGain; collect Nav_PGain = SWData.Nav_PGain;
+TM 1 Hz Nav_Gain_t Nav_IGain; collect Nav_IGain = SWData.Nav_IGain;
+TM 1 Hz Nav_Gain_t Nav_DGain; collect Nav_DGain = SWData.Nav_DGain;
+TM 1 Hz Nav_Thrust_t Nav_Thrust; collect Nav_Thrust = SWData.Nav_Thrust;

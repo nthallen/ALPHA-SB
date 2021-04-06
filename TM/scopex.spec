@@ -1,4 +1,7 @@
 tmcbase = base.tmc
+tmcbase = nav.tmc
+cmdbase = nav.cmd
+swsbase = nav.sws
 swsbase = scopex.sws
 swsbase = pmc.sws
 cmdbase = scopex.cmd

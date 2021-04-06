@@ -3,10 +3,7 @@ Moduledef scopexsim {
   and ensures that the simulator is distributed
 }
 
-tmcbase = scopexsim.tmc
 cmdbase = scopexsim.cmd
-cmdbase = nav.cmd
-swsbase = scopexsim.sws
 swsbase = simthrust.tma
 DISTRIB = @MODDIR@/../scopexsim
 %%
