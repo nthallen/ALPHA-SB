@@ -72,3 +72,11 @@ SD_endis_t Atm_Alt_en; Invalidate Atm_Alt_en;
 TM typedef uint8_t SD_active_t { text "%8u" SD_act_inact(); }
 SD_active_t Dual_Ant_active; Invalidate Dual_Ant_active;
   { Dual_Ant_active = (filter_status>>10)&12; Validate Dual_Ant_active; }
+
+SD_f_angle_t Track; Invalidate Track;
+{ Track = nav_track(velocity_north, velocity_east);
+  Validate Track; }
+
+SD_vel_t velocity_forward; Invalidate velocity_forward;
+{ velocity_forward = nav_speed(velocity_north, velocity_east);
+  Validate velocity_forward; }

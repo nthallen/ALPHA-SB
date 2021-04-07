@@ -1,0 +1,21 @@
+
+Partition
+
+State heading_idle {
+}
+
+{ nav_set_gains(Nav_PGain, Nav_IGain, Nav_Dgain); }
+
+State heading_PI {
+  { double courseError, courseErrorChange;
+    courseError = angleDiff(track, course);
+    courseErrorChange = courseError - prevCourseError;
+    prevCourseError = courseError;
+    courseErrorIntegral += courseError * IGain;
+    clamp(courseErrorIntegral, courseErrorIntegralLimit);
+    dThrust_a =
+      PGain * courseError +
+      IGain * courseErrorIntegral +
+      DGain * courseErrorChange;
+  }
+}

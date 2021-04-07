@@ -2,11 +2,12 @@ prefix = scopex
 tmcbase = base.tmc
 tmcbase = nav.tmc
 cmdbase = nav.cmd
-swsbase = nav.sws
+swsbase = nav.sws nav.tma
 swsbase = scopex.sws
 swsbase = pmc.sws
 cmdbase = scopex.cmd
 genuibase = scopex.genui
+genuibase = nav.genui
 
 Module Version src=scopexsim.ver
 Module TMbase

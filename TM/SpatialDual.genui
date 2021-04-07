@@ -11,8 +11,10 @@
  10 latitude            GNSS Position
  10 longitude           GNSS Position
  10 height              GNSS Position
- 10 velocity_north      GNSS Velocity
- 10 velocity_east       GNSS Velocity
+#10 velocity_north      GNSS Velocity
+#10 velocity_east       GNSS Velocity
+ 10 Track               GNSS Heading
+ 10 velocity_forward    GNSS Velocity
  10 velocity_down       GNSS Velocity
  10 body_accel_x        GNSS Accel
  10 body_accel_y        GNSS Accel
@@ -20,7 +22,7 @@
  10 g_force             GNSS Accel
  10 roll                GNSS Attitude
  10 pitch               GNSS Attitude
- 10 heading             GNSS Attitude
+ 10 heading             GNSS Heading
  10 angular_velocity_x  GNSS AngVel
  10 angular_velocity_y  GNSS AngVel
  10 angular_velocity_z  GNSS AngVel

@@ -11,8 +11,10 @@
  @FAST@ latitude            GNSS Position
  @FAST@ longitude           GNSS Position
  @FAST@ height              GNSS Position
- @FAST@ velocity_north      GNSS Velocity
- @FAST@ velocity_east       GNSS Velocity
+#@FAST@ velocity_north      GNSS Velocity
+#@FAST@ velocity_east       GNSS Velocity
+ @FAST@ Track               GNSS Heading
+ @FAST@ velocity_forward    GNSS Velocity
  @FAST@ velocity_down       GNSS Velocity
  @FAST@ body_accel_x        GNSS Accel
  @FAST@ body_accel_y        GNSS Accel
@@ -20,7 +22,7 @@
  @FAST@ g_force             GNSS Accel
  @FAST@ roll                GNSS Attitude
  @FAST@ pitch               GNSS Attitude
- @FAST@ heading             GNSS Attitude
+ @FAST@ heading             GNSS Heading
  @FAST@ angular_velocity_x  GNSS AngVel
  @FAST@ angular_velocity_y  GNSS AngVel
  @FAST@ angular_velocity_z  GNSS AngVel
