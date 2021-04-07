@@ -13,6 +13,13 @@
       tmseriodev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
+    spi3)
+      # ascenderdev=/dev/ttyUSB0
+      propmtrdev=/dev/ttyUSB0
+      spatialdualdev=/dev/ttyUSB3
+      tmseriodev=/dev/ttyUSB1
+      slcandev=/dev/ttyACM0
+      ;;
     *)
       propmtrdev=/dev/ttyUSB0
       slcandev=/dev/ttyACM0;;
