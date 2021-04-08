@@ -36,7 +36,7 @@ Nav_Position {
 
 Nav_Velocity {
   HBox { +-; Title: Velocity; -+ };
-  Course:  (Course,8)  deg;
+  Course:  (Course,7)  deg;
   Track:   (Track,8)   deg;
   Heading: (heading,8) deg;
 # North: (velocity_north,8)   "m/s";

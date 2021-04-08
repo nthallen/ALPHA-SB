@@ -66,7 +66,7 @@ double nav_pid_t::angleDiff(double a1, double a2) {
 
 float nav_track(float vn, float ve, float heading) {
   errno = 0;
-  float track = atan2f(vn, ve);
+  float track = atan2f(ve, vn);
   if (errno) track = heading;
   return track;
 }
