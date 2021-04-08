@@ -1,12 +1,12 @@
 
 Partition
 
-# State heading_idle {}
+State heading_idle {}
 
 { nav_set_gains(Nav_PGain, Nav_IGain, Nav_Dgain); }
 { nav_set_course(Course, Nav_Thrust); }
 
-State heading_PI {
+State heading_PID {
   {
     double rpm_port, rpm_starboard;
     nav_calc_rpm(Track, rpm_port, rpm_starboard);
