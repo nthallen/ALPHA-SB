@@ -22,6 +22,7 @@
   : Nav Idle { $0 = SWS_NAV_IDLE; }
   : Set %d { $0 = $2; }
   : Nav PID { $0 = SWS_NAV_PID; }
+  : Sim Init { $0 = SWS_SIM_START; }
   : Shutdown Full { $0 = SWS_SHUTDOWN; }
   : PMC Activate { $0 = SWS_PMC_ACTIVATE; }
   : PMC Stop { $0 = SWS_PMC_STOP; }
