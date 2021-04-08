@@ -5,7 +5,7 @@
   : %f (Enter Positive Angle in degrees)
     { float ang = fmodf($1,360);
       if (ang < 0) ang += 360.;
-      $0 = (uint16_t) (ang * 65536. / 360.);
+      $0 = (uint16_t) (ang * 100);
     }
   ;
 &nav_gain <float>

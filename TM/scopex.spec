@@ -1,7 +1,5 @@
 tmcbase = base.tmc
-tmcbase = nav.tmc
-cmdbase = nav.cmd
-swsbase = nav.sws
+Module Nav mode=types
 swsbase = scopex.sws
 swsbase = pmc.sws
 cmdbase = scopex.cmd
@@ -30,6 +28,7 @@ Module SerIn
 Module SpatialDual FAST=10
 Module Ascender
 Module RFDio
+Module Nav
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile

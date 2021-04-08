@@ -105,6 +105,7 @@ f = ne_dialg(f, 'add', 1, 0, 'pscopexgnsss', 'System' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssf', 'Filters' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssd', 'Drift' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssp', 'Position' );
+f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssh', 'Heading' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssv', 'Velocity' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssa', 'Accel' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexgnssattitude', 'Attitude' );

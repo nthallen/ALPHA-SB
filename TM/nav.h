@@ -1,40 +1,67 @@
 #ifndef NAV_H_INCLUDED
 #define NAV_H_INCLUDED
-#include <math.h>
+#include <cmath>
+#include <cstdint>
 
 class nav_pid_t {
   public:
     nav_pid_t();
-    set_gains(float P, float I, float D);
+    inline void set_gains(float P, float I, float D) {
+      PGain = P;
+      IGain = I;
+      DGain = D;
+    }
+    inline void set_course(uint16_t course, uint8_t thrust) {
+      if (this->course != course)
+        course_rad = (course/100.) * M_PI/180;
+      this->course = course;
+      this->thrust = thrust;
+    }
+    /**
+     * @param track Angle in radians
+     * @param left_rpm output desired RPM on left/port engine
+     * @param right_rpm output desired RPM on right/starboard engine
+     */
+    void calc_rpm(double track, double &left_rpm, double &right_rpm);
+    
+    /**
+     * @param thrust in Newtons
+     * @return RPM to achieve specified thrust
+     */
+    inline double thrust2RPM(double thrust) {
+      return sqrt(thrust * 2270);
+    }
   protected:
+
+    /**
+     * Modifies value if necessary to ensure that it is within
+     * the range [-abs_limit, abs_limit]
+     * @param value input/output
+     * @param abs_limit The limit
+     */
+    void clamp(double &value, double abs_limit);
+
+    /**
+     * @param a1 Angle 1 in radians
+     * @param a2 Angle 2 in radians
+     * @return The difference between Angle 1 and Angle 2 reduced
+     * modulo 2PI to the range [-PI,PI]
+     */
+    double angleDiff(double a1, double a2);
     double prevCourseError;
     double courseErrorIntegral;
-    static const double courseErrorIntegralLimit = 100.;
-    float PGain, IGain, DGain;
+    static const double courseErrorIntegralLimit;
+    static const double absMaxThrustPerEngine; //< in Newtons
+    static const double M_PI;
+    double PGain, IGain, DGain;
+    uint16_t course; //< Course angle as Nav_Angle_t degrees
+    double course_rad; //< Course angle in radians
+    uint8_t thrust; //< thrust as percent of max thrust
 };
 extern nav_pid_t nav_pid;
 
-inline void nav_set_gains(float P, float I, float D) {
-  nav_pid.set_gains(P, I, D);
-}
-
 /**
- * Modifies value if necessary to ensure that it is within
- * the range [-abs_limit, abs_limit]
- * @param value input/output
- * @param abs_limit The limit
- */
-void clamp(double &value, double abs_limit);
-
-/**
- * @param a1 Angle 1 in degrees
- * @param a2 Angle 2 in degrees
- * @return The difference between Angle 1 and Angle 2 reduced
- * modulo 360 to the range [-180,180]
- */
-double angleDiff(double a1, double a2);
-
-/**
+ * Called from SpatialDual_conv.tmc
  * @param vn velocity north in m/s
  * @param ve velocity east in m/s
  * @param hd heading in radians
@@ -43,10 +70,24 @@ double angleDiff(double a1, double a2);
 float nav_track(float vn, float ve, float hd);
 
 /**
+ * Called from SpatialDual_conv.tmc
  * @param vn velocity north in m/s
  * @param ve velocity east in m/s
  * @return horizontal speed in m/s
  */
 float nav_speed(float vn, float ve);
+
+inline void nav_set_gains(float P, float I, float D) {
+  nav_pid.set_gains(P, I, D);
+}
+
+inline void nav_set_course(double course, uint8_t thrust) {
+  nav_pid.set_course(course, thrust);
+}
+
+inline void nav_calc_rpm(double track, double &left_rpm,
+                         double &right_rpm) {
+  nav_pid.calc_rpm(track, left_rpm, right_rpm);
+}
 
 #endif

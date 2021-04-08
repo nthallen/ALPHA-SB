@@ -1,0 +1,19 @@
+Moduledef Nav {
+  Module to collect all the navigation control code.
+  This depends on the SpatialDual variable definitions,
+  so it must appear after the SpatialDual module.
+  The TM typedefs are also required by nav.sws, which means
+  'Module Nav mode=types' must appear before the first
+  swsbase definition.
+}
+
+mode (types) {
+  tmcbase = navtypes.tmc
+}
+
+mode (default) {
+  tmcbase = nav.tmc nav.cc
+  cmdbase = nav.cmd
+  swsbase = nav.sws
+  swsbase = nav.tma
+}
