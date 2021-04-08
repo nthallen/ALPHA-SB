@@ -11,8 +11,8 @@
  @FAST@ latitude            GNSS Position
  @FAST@ longitude           GNSS Position
  @FAST@ height              GNSS Position
-#@FAST@ velocity_north      GNSS Velocity
-#@FAST@ velocity_east       GNSS Velocity
+ @FAST@ velocity_north      GNSS Velocity
+ @FAST@ velocity_east       GNSS Velocity
  @FAST@ Track               GNSS Heading
  @FAST@ velocity_forward    GNSS Velocity
  @FAST@ velocity_down       GNSS Velocity
