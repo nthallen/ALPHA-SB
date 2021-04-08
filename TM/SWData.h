@@ -3,12 +3,12 @@
 #define SWDATA_H_INCLUDED
 
 typedef struct __attribute__((__packed__)) {
+  uint8_t SWStat;
   uint16_t Course;
   float Nav_PGain;
   float Nav_IGain;
   float Nav_DGain;
   uint8_t Nav_Thrust;
-  uint8_t SWStat;
 } SWData_t;
 extern SWData_t SWData;
 

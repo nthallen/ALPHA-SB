@@ -13,7 +13,7 @@ class nav_pid_t {
     }
     inline void set_course(uint16_t course, uint8_t thrust) {
       if (this->course != course)
-        course_rad = (course/100.) * M_PI/180;
+        course_rad = (course/100.) * PI/180;
       this->course = course;
       this->thrust = thrust;
     }
@@ -52,7 +52,7 @@ class nav_pid_t {
     double courseErrorIntegral;
     static const double courseErrorIntegralLimit;
     static const double absMaxThrustPerEngine; //< in Newtons
-    static const double M_PI;
+    static const double PI;
     double PGain, IGain, DGain;
     uint16_t course; //< Course angle as Nav_Angle_t degrees
     double course_rad; //< Course angle in radians

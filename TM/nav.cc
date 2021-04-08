@@ -4,7 +4,7 @@
 nav_pid_t nav_pid;
 const double nav_pid_t::courseErrorIntegralLimit = 100.;
 const double nav_pid_t::absMaxThrustPerEngine = 40.;
-const double nav_pid_t::M_PI = 3.14159265358979323846;
+const double nav_pid_t::PI = 3.14159265358979323846;
 
 nav_pid_t::nav_pid_t()
     : prevCourseError(0),
@@ -59,8 +59,8 @@ void nav_pid_t::clamp(double &value, double abs_limit) {
 }
 
 double nav_pid_t::angleDiff(double a1, double a2) {
-  double diff = fmod(a1-a2+M_PI,2*M_PI);
-  diff += (diff < 0) ? M_PI : -M_PI;
+  double diff = fmod(a1-a2+PI,2*PI);
+  diff += (diff < 0) ? PI : -PI;
   return diff;
 }
 
