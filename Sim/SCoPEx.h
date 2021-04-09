@@ -11,6 +11,7 @@ class SCoPEx {
     ~SCoPEx();
     void Init(int argc, char **argv);
     void Start();
+    void Reset();
     void Loop();
     void Step();
     void Log();

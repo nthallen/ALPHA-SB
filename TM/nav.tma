@@ -9,7 +9,7 @@ State heading_idle {}
 State heading_PID {
   {
     double rpm_port, rpm_starboard;
-    nav_calc_rpm(Track, rpm_port, rpm_starboard);
+    nav_calc_rpm(heading, rpm_port, rpm_starboard);
     ci_sendfcmd(Cmd_Send_Quiet, "PMC Left Velocity Set %.1f RPM\n", rpm_port);
     ci_sendfcmd(Cmd_Send_Quiet, "PMC Right Velocity Set %.1f RPM\n", rpm_starboard);
   }

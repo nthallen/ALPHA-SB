@@ -74,7 +74,7 @@ bool commandFile::app_input() {
         ++cp;
     } else if (cp < nc) { // Should have '\n' still
       enum cmd_t { cmd_quit, cmd_noop, cmd_set, cmd_adjust,
-                   cmd_start, cmd_inv } cmd;
+                   cmd_start, cmd_reset, cmd_inv } cmd;
            if (!strcasecmp("", command)) cmd = cmd_noop;
       else if (!strcasecmp("Quit", command) ||
                !strcasecmp("Q", command)) cmd = cmd_quit;
@@ -82,12 +82,14 @@ bool commandFile::app_input() {
       else if (!strcasecmp("Set", command)) cmd = cmd_set;
       else if (!strcasecmp("Adjust", command)) cmd = cmd_adjust;
       else if (!strcasecmp("Start", command)) cmd = cmd_start;
+      else if (!strcasecmp("Reset", command)) cmd = cmd_reset;
       else {
         report_err("%s: Invalid command", iname);
         cmd = cmd_inv;
       }
 
-      if (cmd == cmd_quit || cmd == cmd_noop || cmd == cmd_start) {
+      if (cmd == cmd_quit || cmd == cmd_noop ||
+          cmd == cmd_start || cmd == cmd_reset) {
         if (varname[0]) {
           report_err("%s: Unexpected arg after quit or noop", iname);
           cmd = cmd_inv;
@@ -101,6 +103,7 @@ bool commandFile::app_input() {
 
       if (cmd == cmd_quit) rv = true;
       if (cmd == cmd_start) model->Start();
+      else if (cmd == cmd_reset) model->Reset();
       if (cmd == cmd_set || cmd == cmd_adjust) {
         std::list<variableDef>::const_iterator ivar;
         for (ivar = vars.begin(); ivar != vars.end(); ++ivar) {

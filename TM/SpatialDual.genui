@@ -11,8 +11,8 @@
  10 latitude            GNSS Position
  10 longitude           GNSS Position
  10 height              GNSS Position
-#10 velocity_north      GNSS Velocity
-#10 velocity_east       GNSS Velocity
+ 10 velocity_north      GNSS Velocity
+ 10 velocity_east       GNSS Velocity
  10 Track               GNSS Heading
  10 velocity_forward    GNSS Velocity
  10 velocity_down       GNSS Velocity

@@ -2,6 +2,7 @@
 
 &^command
   : Sim Start * { if_Sim.Turf("Start\n"); }
+  : Sim Reset * { if_Sim.Turf("Reset\n"); }
   : Sim Quit * { if_Sim.Turf("Q\n"); }
 # : Sim Noop * { if_Sim.Turf("Noop\n"); }
   : Sim Set &simvar %lf * { if_Sim.Turf("Set %s %.5lf\n", $3, $4); }

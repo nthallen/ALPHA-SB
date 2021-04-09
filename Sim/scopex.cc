@@ -480,6 +480,10 @@ void SCoPEx::Start() {
   dJointEnable(tetherPayload);
 }
 
+void SCoPEx::Reset() {
+  started = false;
+}
+
 void SCoPEx::Loop() {
   msg(0, "Starting");
   ELoop.event_loop();
