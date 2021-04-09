@@ -1,11 +1,12 @@
 %{
   #include <math.h>
 %}
-&nav_angle <uint16_t>
+&nav_angle <int16_t>
   : %f (Enter Positive Angle in degrees)
     { float ang = fmodf($1,360);
-      if (ang < 0) ang += 360.;
-      $0 = (uint16_t) (ang * 100);
+      if (ang < -180) ang += 360.;
+      else if (ang > 180) ang -= 360.;
+      $0 = (int16_t) (ang * 100);
     }
   ;
 &nav_gain <float>

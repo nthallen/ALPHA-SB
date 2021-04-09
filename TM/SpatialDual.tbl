@@ -36,7 +36,7 @@ Nav_Position {
 
 Nav_Velocity {
   HBox { +-; Title: Velocity; -+ };
-  Course:  (Course,7)  deg;
+  Course:  (Course,8)  deg;
   Track:   (Track,8)   deg;
   Heading: (heading,8) deg;
 # North: (velocity_north,8)   "m/s";
@@ -82,6 +82,13 @@ Nav_Deviations {
   Lat: (latitude_std,7)  m;
   Lon: (longitude_std,7) m;
   Alt: (height_std,7)    m;
+}
+
+Nav_Gains {
+  HBox { +-; Title: "Nav Gains" ; -+ };
+  P: (Nav_PGain,9);
+  I: (Nav_IGain,9);
+  D: (Nav_DGain,9);
 }
 
 {

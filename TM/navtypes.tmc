@@ -1,5 +1,5 @@
 /* navtypes.tmc */
 TM typedef double Nav_Degrees { text "%6.2lf"; }
-TM typedef uint16_t Nav_Angle_t { text "%6.2lf"; }
+TM typedef uint16_t Nav_Angle_t { text "%7.2lf"; }
 TM typedef float Nav_Gain_t { text "%9.2e"; }
 TM typedef uint8_t Nav_Thrust_t { text "%3d"; }
