@@ -62,7 +62,7 @@ SCoPEx::SCoPEx() {
   // DGain = 0;
   // VPGain = 0;
   // VIGain = 0;
-  stepSize = 0.05; // seconds
+  stepSize = 0.1; // seconds
   gondolaVelocityAngle = 0;
   gondolaAngle = 0;
   gondolaSpeed = 0;
@@ -292,7 +292,8 @@ void SCoPEx::Log() {
 }
 
 void SCoPEx::calculateBuoyancy() {
-  // First determine gravity
+  // First determine gravity as a function of altitude
+  // 6371 km is the approximate mean radius of the Earth
   dReal k_g = -9.81*6371*6371;
   dReal const *balloonPos = dBodyGetPosition(balloonID);
   dReal alt_km = balloonPos[2]/1000;
