@@ -44,8 +44,8 @@ State heading_PID {
 { double FF_dThrust_inc, FF_dThrust_max; }
 
 State heading_FF {
-  { FF_Ta = 3;
-    FF_Tb = 3;
+  { FF_Ta = 30;
+    FF_Tb = 30;
     FF_dThrust = 5;
     Validate FF_init;
   }
