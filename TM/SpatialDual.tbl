@@ -100,6 +100,7 @@ Nav_Gains {
         [Nav_Linear]; |+; {
           [Nav_Angular];
           [Nav_Deviations];
+          [Nav_Gains];
         }; |+; [Nav_Status];
       };
     };

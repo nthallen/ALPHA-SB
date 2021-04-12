@@ -90,8 +90,10 @@ State survey_step {
   Validate heading_FF;
   Hold until valid (heading_FF) or 10;
   Hold until valid (heading_PID);
-  Hold until (angular_velocity_z < 0.1 && angular_velocity_z > -0.1 &&
-              heading < 0.2 && heading > -0.2) or 60;
+  Hold until (convert(angular_velocity_z) < 0.1 &&
+              convert(angular_velocity_z) > -0.1 &&
+              convert(heading) < 0.2 &&
+              convert(heading) > -0.2) or 5:00;
   { FF_dThrust += FF_ddThrust;
     Validate survey_step;
   }
