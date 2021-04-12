@@ -10,5 +10,7 @@ State Sim {
 #     > Sim Set InitialLongitude -74
       > Sim Set InitialAltitude 19999
       > Sim Start
+      > Set Nav PGain 1
+      > Set Nav DGain 100
   +10 > Set Nav Thrust 10
 }

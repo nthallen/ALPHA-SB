@@ -44,16 +44,25 @@ State heading_PID {
 { double FF_dThrust_inc, FF_dThrust_max; }
 
 State heading_FF {
-  { FF_Ta = 30;
-    FF_Tb = 30;
-    FF_dThrust = 5;
-    Validate FF_init;
-  }
-  Hold until valid (FF_accel) or 10
-  else Validate heading_FF_fail;
-  Hold until valid (FF_idle) or 60
-  else Validate heading_FF_fail;
-  Validate heading_idle;
+      { FF_Ta = 30;
+        FF_Tb = 30;
+        FF_dThrust = 5;
+        Validate FF_init;
+      }
+      Hold until valid (FF_accel) or 10
+      else Validate heading_FF_fail;
+      Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+  
+  +10 { FF_dThrust = -FF_dThrust;
+        Validate FF_init;
+      }
+      Hold until valid (FF_accel) or 10
+      else Validate heading_FF_fail;
+      Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+
+      Validate heading_idle;
 }
 
 State heading_FF_fail {
