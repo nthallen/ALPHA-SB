@@ -41,8 +41,6 @@ State heading_PID {
   }
 }
 
-{ double FF_dThrust_inc, FF_dThrust_max; }
-
 State heading_FF {
       > _Set Nav Status FF_Init
       { FF_Ta = 30;
@@ -64,6 +62,7 @@ State heading_FF {
       Hold until valid (FF_idle) or 60
       else Validate heading_FF_fail;
       > _Set Nav Status FF_Done
+      { FF_dThrust = -FF_dThrust; }
 
   +10 > _Set Nav Status PID
       Validate heading_PID;
@@ -78,15 +77,23 @@ Partition
 State survey_idle {}
 
 %{ double FF_dThrust0 = 1;
+   double FF_dThrust1 = 10;
    double FF_ddThrust = 1;
 %}
 State survey_init {
-  { FF_dThrust = FF_dThrust0;
-    Validate survey_step;
-  }
+  { FF_dThrust = FF_dThrust0; }
+  Validate heading_PID;
+  Hold until (convert(angular_velocity_z) < 0.1 &&
+              convert(angular_velocity_z) > -0.1 &&
+              convert(heading) < 0.2 &&
+              convert(heading) > -0.2) or 5:00;
+  Validate survey_step;
 }
 
 State survey_step {
+  { msg(0, "survey_step: dThrust:%.1lf ddThrust=%.1lf",
+        FF_dThrust, FF_ddThrust);
+  }
   Validate heading_FF;
   Hold until valid (heading_FF) or 10;
   Hold until valid (heading_PID);
@@ -95,6 +102,9 @@ State survey_step {
               convert(heading) < 0.2 &&
               convert(heading) > -0.2) or 5:00;
   { FF_dThrust += FF_ddThrust;
-    Validate survey_step;
+    if (FF_dThrust > FF_dThrust1)
+      Validate survey_idle;
+    else Validate survey_step;
   }
 }
+
