@@ -4,5 +4,6 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
   SWS_NAV_IDLE        10 Nav Idle:            Validate heading_idle; break;
   SWS_NAV_PID         11 Nav PID:             Validate heading_PID; break;
   SWS_NAV_FF          12 Nav FeedForward:     Validate heading_FF; break;
+  SWS_NAV_SURVEY      13 Nav Survey:          Validate survey_init; break;
   SWS_SIM_START       15 Sim Init:            Validate Sim; break;
   SWS_SHUTDOWN       255 Shutdown Full:       Validate Shutdown; break;

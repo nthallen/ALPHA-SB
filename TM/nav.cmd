@@ -16,3 +16,10 @@
   : %d (Enter Thrust as an integer percentage)
     { $0 = ($1 > 100) ? 100 : (($1 < 0) ? 0 : $1); }
   ;
+&nav_status_v <uint8_t>
+  : Idle { $0 = 0; }
+  : PID { $0 = 1; }
+  : FF_Init { $0 = 2; }
+  : FF_Coast { $0 = 3; }
+  : FF_Done { $0 = 4; }
+  ;
