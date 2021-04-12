@@ -7,10 +7,55 @@ State heading_idle {}
 { nav_set_course(Course, Nav_Thrust); }
 
 State heading_PID {
-  {
-    double rpm_port, rpm_starboard;
-    nav_calc_rpm(heading, rpm_port, rpm_starboard);
-    ci_sendfcmd(Cmd_Send_Quiet, "PMC Left Velocity Set %.1f RPM\n", rpm_port);
-    ci_sendfcmd(Cmd_Send_Quiet, "PMC Right Velocity Set %.1f RPM\n", rpm_starboard);
+  { nav_set_rpm_pid(heading); }
+}
+
+{ STATE (FF_idle, FF_init, FF_accel, FF_coast, FF_decel);
+  int16_t FF_Ta, FF_Tb, FF_count;
+  double FF_dThrust;
+  depending on (PMC_Left_RPM, FF_init) {
+    FF_count = FF_ta;
+    nav_set_rpm_dth(FF_dThrust);
+    Validate FF_accel;
   }
+  depending on (PMC_Left_RPM, FF_accel) {
+    if (FF_count-- <= 0) {
+      nav_set_rpm_dth(0);
+      FF_count = FF_Tb;
+      Validate FF_coast;
+    }
+  }
+  depending on (PMC_Left_RPM, FF_coast) {
+    if (FF_count-- <= 0) {
+      nav_set_rpm_dth(-FF_dThrust);
+      FF_count = FF_Ta;
+      Validate FF_decel;
+    }
+  }
+  depending on (PMC_Left_RPM, FF_decel) {
+    if (FF_count-- <= 0) {
+      nav_set_rpm_dth(0);
+      FF_count = 0;
+      Validate FF_idle;
+    }
+  }
+}
+
+{ double FF_dThrust_inc, FF_dThrust_max; }
+
+State heading_FF {
+  { FF_Ta = 3;
+    FF_Tb = 3;
+    FF_dThrust = 5;
+    Validate FF_init;
+  }
+  Hold until valid (FF_accel) or 10
+  else Validate heading_FF_fail;
+  Hold until valid (FF_idle) or 60
+  else Validate heading_FF_fail;
+  Validate heading_idle;
+}
+
+State heading_FF_fail {
+  { msg(MSG_ERROR, "heading_FF_fail: count=%d", FF_count); }
 }

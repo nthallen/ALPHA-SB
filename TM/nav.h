@@ -18,11 +18,14 @@ class nav_pid_t {
       this->thrust = thrust;
     }
     /**
-     * @param track Angle in radians
-     * @param left_rpm output desired RPM on left/port engine
-     * @param right_rpm output desired RPM on right/starboard engine
+     * @param heading Angle in radians
      */
-    void calc_rpm(double track, double &left_rpm, double &right_rpm);
+    void set_rpm_pid(double heading);
+
+    /**
+     * @param dTh Newtons differential thrust
+     */
+    void set_rpm_dth(double dTh);
     
     /**
      * @param thrust in Newtons
@@ -85,9 +88,12 @@ inline void nav_set_course(double course, uint8_t thrust) {
   nav_pid.set_course(course, thrust);
 }
 
-inline void nav_calc_rpm(double track, double &left_rpm,
-                         double &right_rpm) {
-  nav_pid.calc_rpm(track, left_rpm, right_rpm);
+inline void nav_set_rpm_pid(double heading) {
+  nav_pid.set_rpm_pid(heading);
+}
+
+inline void nav_set_rpm_dth(double dthrust) {
+  nav_pid.set_rpm_dth(dthrust);
 }
 
 #endif
