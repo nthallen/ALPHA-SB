@@ -32,21 +32,23 @@ void nav_pid_t::set_rpm_dth(double dThrust) {
   // Given differential thrust, calculate left and right thrust
   double avgThrust = thrust*absMaxThrustPerEngine/100.;
   double lThrust, rThrust;
-  if (dThrust >= avgThrust) {
+  if (dThrust > absMaxThrustPerEngine)
+    dThrust = absMaxThrustPerEngine;
+  if (dThrust/2 >= avgThrust) {
     lThrust = dThrust;
     rThrust = 0;
-  } else if (dThrust <= -avgThrust) {
+  } else if (dThrust/2 <= -avgThrust) {
     lThrust = 0;
     rThrust = -dThrust;
-  } else if (avgThrust+dThrust > absMaxThrustPerEngine) {
+  } else if (avgThrust+dThrust/2 > absMaxThrustPerEngine) {
     lThrust = absMaxThrustPerEngine;
     rThrust = lThrust - dThrust;
-  } else if (avgThrust-dThrust > absMaxThrustPerEngine) {
+  } else if (avgThrust-dThrust/2 > absMaxThrustPerEngine) {
     rThrust = absMaxThrustPerEngine;
     lThrust = rThrust - dThrust;
   } else {
-    lThrust = avgThrust + dThrust;
-    rThrust = avgThrust - dThrust;
+    lThrust = avgThrust + dThrust/2;
+    rThrust = avgThrust - dThrust/2;
   }
   
   double left_rpm = thrust2RPM(lThrust);
