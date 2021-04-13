@@ -110,7 +110,7 @@ State survey_step {
               convert(heading) > -0.2) or 5:00;
   { FF_dThrust += FF_ddThrust;
     if (FF_dThrust > FF_dThrust1) {
-      FF_Thrust += FF_Thrust_Max;
+      FF_Thrust += FF_Thrust_Step;
       if (FF_Thrust > FF_Thrust_Max)
         Validate survey_idle;
       else

@@ -32,7 +32,8 @@ class nav_pid_t {
      * @return RPM to achieve specified thrust
      */
     inline double thrust2RPM(double thrust) {
-      return sqrt(thrust * 2270);
+      // return sqrt(thrust * 2270);
+      return pow(thrust * 12500, 0.46243);
     }
   protected:
 
