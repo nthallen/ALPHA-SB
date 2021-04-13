@@ -79,10 +79,17 @@ State survey_idle {}
 %{ double FF_dThrust0 = 1;
    double FF_dThrust1 = 10;
    double FF_ddThrust = 1;
+   int FF_Thrust = 0;
+   int FF_Thrust_Step = 10;
+   int FF_Thrust_Max = 100;
 %}
 State survey_init {
-  { FF_dThrust = FF_dThrust0; }
+  { FF_dThrust = FF_dThrust0;
+    ci_sendfcmd(Cmd_Send_Quiet, "Set Nav Thrust %d\n", FF_Thrust);
+  }
+
   Validate heading_PID;
+  +10
   Hold until (convert(angular_velocity_z) < 0.1 &&
               convert(angular_velocity_z) > -0.1 &&
               convert(heading) < 0.2 &&
@@ -102,9 +109,13 @@ State survey_step {
               convert(heading) < 0.2 &&
               convert(heading) > -0.2) or 5:00;
   { FF_dThrust += FF_ddThrust;
-    if (FF_dThrust > FF_dThrust1)
-      Validate survey_idle;
-    else Validate survey_step;
+    if (FF_dThrust > FF_dThrust1) {
+      FF_Thrust += FF_Thrust_Max;
+      if (FF_Thrust > FF_Thrust_Max)
+        Validate survey_idle;
+      else
+        Validate survey_init;
+    } else Validate survey_step;
   }
 }
 
