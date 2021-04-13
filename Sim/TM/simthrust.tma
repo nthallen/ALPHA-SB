@@ -9,7 +9,7 @@
     double rpm;
     Last_Left_RPM = PMC_Left_RPM;
     rpm = convert(PMC_Left_RPM);
-    thrust = 4.44E-4 * rpm * rpm;
+    thrust = 8E-5 * pow(abs(rpm),2.1625);
     ci_sendfcmd(Cmd_Send_Quiet, "Sim set thrustLeft %.6lf\n", thrust);
   }
 }
