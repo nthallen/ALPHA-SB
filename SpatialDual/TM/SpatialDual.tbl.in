@@ -39,10 +39,11 @@ Nav_Velocity {
   Course:  (Course,8)  deg;
   Track:   (Track,8)   deg;
   Heading: (heading,8) deg;
-# North: (velocity_north,8)   "m/s";
-# East:  (velocity_east,8)    "m/s";
-  Speed: (velocity_forward,8) "m/s";
-  Down:  (velocity_down,8)    "m/s";
+# North:   (velocity_north,8)   "m/s";
+# East:    (velocity_east,8)    "m/s";
+  Thrust:  (Nav_Thrust,3)       "%";
+  Speed:   (velocity_forward,8) "m/s";
+  Down:    (velocity_down,8)    "m/s";
 }
 
 Nav_Accel {
