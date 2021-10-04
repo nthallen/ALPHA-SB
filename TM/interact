@@ -5,7 +5,7 @@
       spatialdualdev=/dev/ttyS3;;
     EASWHLPT3425022)
       propmtrdev=
-      slcandev=/dev/ttyS12;;
+      slcandev=/dev/ttyS3;;
     spi2)
       # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
