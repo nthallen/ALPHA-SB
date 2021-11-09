@@ -1,9 +1,13 @@
   case `hostname` in
     easwhlpt3425080)
+      # Nort's laptop:
+      ascenderdev=/dev/ttyS7
       # propmtrdev=/dev/ttyS3
       # slcandev=/dev/ttyS5;;
-      spatialdualdev=/dev/ttyS3;;
+      # spatialdualdev=/dev/ttyS3
+      ;;
     EASWHLPT3425022)
+      # Marco's laptop
       propmtrdev=
       slcandev=/dev/ttyS3;;
     spi2)
@@ -42,5 +46,5 @@
 [ -c "$spatialdualdev" ] &&
   Launch      -      SpatialDual -p $spatialdualdev -v
 [ -c "$ascenderdev" ] &&
-  Launch      -      Ascender -p $ascenderdev
+  Launch      -      Ascender -p $ascenderdev -v
   Launch      -TMC-  scopexalgo
