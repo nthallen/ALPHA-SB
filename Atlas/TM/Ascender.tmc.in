@@ -36,6 +36,7 @@ Group Ascend (AscHoistV, AscHoistI, AscPosition, AscSpeed,
   AscMtrCtrlT = Ascender.Temp[1];
   AscOutputPulleyT = Ascender.Temp[2];
   AscConvT = Ascender.Temp[3];
+  AscStatus = Ascender.Status;
   AscNreports = Ascender.Nreports;
   AscStale = Ascender_obj->Stale(255);
   Ascender_obj->synch();

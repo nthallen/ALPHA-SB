@@ -23,7 +23,7 @@ bool Ascend::SetSpeed(int32_t percent) {
   } else if (obuf_empty()) {
     msg(MSG_DEBUG, "%s: SetSpeed(%d)", iname, percent);
     char tbuf[32];
-    int nb = snprintf(tbuf, 32, "901,%d,999\n", percent);
+    int nb = snprintf(tbuf, 32, "901,%d,999\r", percent);
     if (nb >= 32) {
       msg(2, "%s: Unexpected truncation in SetSpeed()", iname);
     } else {
@@ -51,17 +51,17 @@ bool Ascend::protocol_input() {
   int16_t Temp[4];
   
   if (not_str("900,") ||
-      not_range_input(ctrl_input, "ctrl_input", 0, 1, 3) ||
+      not_range_input(ctrl_input, "ctrl_input", 0, 0, 3) ||
       not_range_input(mode, "mode", 0, 1, 4) ||
       not_range_input(HoistV, "HoistV", 1, 0, 1500) ||
-      not_range_input(HoistI, "HoistI", 0, 0, 127) ||
+      not_range_input(HoistI, "HoistI", 0, -4, 127) ||
       not_range_input(SpeedCmd, "SpeedCmd", 0, -100, 100) ||
       not_range_input(Speed, "Speed", 1, -128, 127) ||
       not_range_input(Position, "Position", 0, -1000, 1000) ||
-      not_range_input(Temp[0], "Temp1", 0, -128, 127) ||
-      not_range_input(Temp[1], "Temp1", 1, -128, 127) ||
-      not_range_input(Temp[2], "Temp1", 2, -128, 127) ||
-      not_range_input(Temp[3], "Temp1", 3, -128, 127) ||
+      not_range_input(Temp[0], "Temp0", 0, -128, 127) ||
+      not_range_input(Temp[1], "Temp1", 0, -128, 127) ||
+      not_range_input(Temp[2], "Temp2", 0, -128, 127) ||
+      not_range_input(Temp[3], "Temp3", 0, -128, 127) ||
       not_range_input(limit1, "limit1", 0, 0, 1) ||
       not_range_input(limit2, "limit2", 0, 0, 1) ||
       not_str("999\n") ) {
@@ -74,7 +74,7 @@ bool Ascend::protocol_input() {
       (((mode-1) & 3) << 2) |
       ((limit1 & 1) << 4) |
       ((limit2 & 1) << 5);
-    Ascender.HoistI = HoistI;
+    Ascender.HoistI = HoistI >= 0 ? HoistI : 0;
     Ascender.SpeedCmd = SpeedCmd;
     Ascender.Speed = Speed;
     Ascender.Temp[0] = Temp[0];

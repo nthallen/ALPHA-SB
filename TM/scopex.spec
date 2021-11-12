@@ -23,7 +23,7 @@ tmcbase = B3MB_100V2_cal.tmc
 tmcbase = B3MB_100V3_cal.tmc
 tmcbase = B3MB_100V4_cal.tmc
 
-Module scopexsim
+#Module scopexsim
 Module SerIn
 Module SpatialDual FAST=10
 Module Ascender

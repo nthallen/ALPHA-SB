@@ -10,6 +10,7 @@ AscOnOff_t AscLimit2; Invalidate AscLimit2;
 %{
   const char *asc_ctrl_inp_text(uint8_t val) {
     switch (val) {
+      case 0:  return "  None";
       case 1:  return "Serial";
       case 2:  return "   Jog";
       case 3:  return "   Aux";
