@@ -5,10 +5,10 @@ Moduledef scopexsim {
 
 cmdbase = scopexsim.cmd
 swsbase = simthrust.tma
-DISTRIB = @MODDIR@/../scopexsim
+DISTRIB = @MODDIR@/../scopexsim @MODDIR@/../scopexsimsock 
 %%
 .PHONY : clean-scopexsim @MODDIR@/../scopexsim
-@MODDIR@/../scopexsim :
+@MODDIR@/../scopexsim @MODDIR@/../scopexsimsock :
 	$(MAKE) --directory=@MODDIR@/..
 clean-dist : clean-scopexsim
 clean-scopexsim :

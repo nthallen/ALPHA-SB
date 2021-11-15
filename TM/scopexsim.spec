@@ -48,5 +48,6 @@ scopexjsonext : $extbase $genuibase
 tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
 Simdoit : Sim.doit
+SimSockdoit : SimSock.doit
 %%
 CXXFLAGS+=-g
