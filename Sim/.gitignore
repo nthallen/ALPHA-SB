@@ -1,5 +1,5 @@
 *.o
 *.exe
-scopexsimoui.cc
+*oui.cc
 scopexsim
-
+scopexsimsock
