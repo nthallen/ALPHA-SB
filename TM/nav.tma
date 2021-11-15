@@ -85,7 +85,7 @@ State survey_idle {}
 %}
 State survey_init {
   { FF_dThrust = FF_dThrust0;
-    ci_sendfcmd(Cmd_Send, "Set Nav Thrust %d\n", FF_Thrust);
+    /* ci_sendfcmd(Cmd_Send, "Set Nav Thrust %d\n", FF_Thrust); */
   }
 
   Validate heading_PID;

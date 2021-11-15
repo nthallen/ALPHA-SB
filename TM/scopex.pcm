@@ -6,9 +6,9 @@ Effective Frame Dimensions:
   10 Rows 186 Columns
   10 rows/sec
   14880 bits/sec
-  Data:  14520 bits/sec  98 %
+  Data:  14528 bits/sec  98 %
   Synch: 320 bits/sec  2 %
-  Empty: 40 bits/sec  0 %
+  Empty: 32 bits/sec  0 %
 -------End of Frame Statistics-----
 
 
@@ -150,8 +150,9 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Datum CPU_Pct (10,5,171,2)
 1/1 Hz 2 bytes Datum Disk (10,5,173,2)
 1/1 Hz 2 bytes Datum memused (10,5,175,2)
-1/1 Hz 1 bytes Datum Nav_Thrust (10,5,177,1)
-1/1 Hz 1 bytes Datum SWStat (10,5,178,1)
+1/1 Hz 1 bytes Datum Nav_Status (10,5,177,1)
+1/1 Hz 1 bytes Datum Nav_Thrust (10,5,178,1)
+1/1 Hz 1 bytes Datum SWStat (10,5,179,1)
 1/1 Hz 2 bytes Member B3MB_100V4_T4 (10,6,142,2)
 1/1 Hz 2 bytes Member B3MB_100V4_T3 (10,6,144,2)
 1/1 Hz 2 bytes Member B3MB_100V4_T2 (10,6,146,2)
