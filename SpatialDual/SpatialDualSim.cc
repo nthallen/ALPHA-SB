@@ -136,8 +136,8 @@ SDual *new_SDual_socket(Authenticator *Auth,SubService *SS) {
 int main(int argc, char **argv) {
   oui_init_options(argc, argv);
   msg(0, "Starting");
-  Server server("SDual");
-  server.add_subservice(new SubService("SDual", (socket_clone_t)new_SDual_socket, (void*)0));
+  Server server("sdual");
+  server.add_subservice(new SubService("sdual", (socket_clone_t)new_SDual_socket, (void*)0));
   { Quit *Q = new Quit();
     Q->connect();
     server.ELoop.add_child(Q);
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     SDual::set_TM(TM);
     // server.ELoop.add_child(new SDual(SDual_port, TM));
   }
-  server.Start(Srv_Function, "SDual");
+  server.Start(Srv_Function, "SDualSim");
   msg(0, "Terminating");
   return 0;
 }
