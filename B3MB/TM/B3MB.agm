@@ -14,6 +14,7 @@ mode (default,types) {
   tmcbase = B3MB_@ID@.tmc:B3MB_drv.tmc.in
   colbase = B3MB_@ID@_col.tmc:B3MB_drv_col.tmc.in
   cmdbase = B3MB_@ID@.cmd:B3MB_drv.cmd.in
+  extbase = B3MB_@ID@_conv.tmc:B3MB_drv_conv.tmc.in
   genuibase = B3MB_@ID@.genui:B3MB_drv.genui.in
   - : B3MB_@ID@.tbl:B3MB_drv.tbl.in
 }
