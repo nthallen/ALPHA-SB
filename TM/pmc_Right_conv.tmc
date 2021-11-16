@@ -1,0 +1,4 @@
+PMC_on_off_t PMC_Right_Bridge; Invalidate PMC_Right_Bridge;
+{ PMC_Right_Bridge = (PMC_Right_Status0>>0)&1; Validate PMC_Right_Bridge; }
+PMC_on_off_t PMC_Right_Brake; Invalidate PMC_Right_Brake;
+{ PMC_Right_Brake = (PMC_Right_Status0>>7)&1; Validate PMC_Right_Brake; }

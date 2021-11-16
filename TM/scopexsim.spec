@@ -11,7 +11,7 @@ Module Version src=scopexsim.ver
 Module TMbase
 
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=10 SLOW=1 mode=types
-Module PropMtr ID=Right IDX=1 ADDR=62 FAST=10 SLOW=1 DAT=
+Module PropMtr ID=Right IDX=1 ADDR=62 FAST=10 SLOW=1 DAT= RPMSGN=:*(-1)
 Module PropMtr mode=groups RT1= RT2=
 
 # Module B3MB mode=types ID=28V1  CAN_ID=2

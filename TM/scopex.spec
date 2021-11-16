@@ -39,7 +39,7 @@ scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
 scopextxsrvr :
 scopexclt :
-scopexdisp : $extbase scopex.tbl B3MB_28V.tbl B3MB_100V.tbl SpatialDual.tbl Housekeeping.tbl
+scopexdisp : $extbase Summary.tbl scopex.tbl B3MB_28V.tbl B3MB_100V.tbl SpatialDual.tbl Housekeeping.tbl
 scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $extbase $genuibase
 B3MBrawext : B3MBraw.cdf

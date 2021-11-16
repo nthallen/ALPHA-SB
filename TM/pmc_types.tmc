@@ -98,3 +98,10 @@ TM typedef uint16_t PMC_Status_Word { text "%016b"; }
 
 TM 1 Hz PMC_Stale_t PMC_Stale;
 TM 2 Hz PMC_Stale_t PMC_StaleF;
+
+%{
+  const char *PMC_on_off_text(uint16_t x) {
+    return x ? " On" : "Off";
+  }
+%}
+TM typedef uint16_t PMC_on_off_t { text "%3u" PMC_on_off_text(); }

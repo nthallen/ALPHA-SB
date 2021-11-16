@@ -1,0 +1,75 @@
+# Summary.tbl
+Input "TMbase.tbl";
+
+PMC_Full {
+  HBox { +-; Title: Propulsion; -+ };
+  RPM_Set:   (PMC_Left_RPM_SP,7)     (PMC_Right_RPM_SP,7)     RPM;
+  " Meas:"   (PMC_Left_RPM,7)        (PMC_Right_RPM,7)        RPM;
+  Current:   (PMC_Left_I_Measured,6) (PMC_Right_I_Measured,6) Amps;
+  BusV:      (PMC_Left_BusV,6)       (PMC_Right_BusV,6)       V;
+  "100V V:"  (B3MB_100V1_Load1_V,7)  (B3MB_100V3_Load1_V,7)   V;
+  "100V I:"  (B3MB_100V1_Load1_I,7)  (B3MB_100V3_Load1_I,7)   Amps;
+  "100V S:"  {(B3MB_100V1L1S,3) (B3MB_100V1L1F,3)}
+             {(B3MB_100V3L1S,3) (B3MB_100V3L1F,3)};
+  "28V V:"   (B3MB_28V1_Load1_V,7)   (B3MB_28V1_Load4_V,7)    V;  
+  "28V I:"   (B3MB_28V1_Load1_I,7)   (B3MB_28V1_Load4_I,7)    Amps;
+  "28V S:"   {(B3MB_28V1L1S,3) (B3MB_28V1L1F,3)}
+             {(B3MB_28V1L4S,3) (B3MB_28V1L4F,3)};
+  "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
+             HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
+}
+
+Asc {
+  HBox { +-; Title: Ascender; -+ };
+  HBox {
+    {
+      Pos:   (AscPosition,5)    m;
+      Speed: (AscSpeed,5)    "m/s";
+      Cmd:   (AscSpeedCmd,4) "%";
+      Lim1:  (AscLimit1);
+      Lim2:  (AscLimit2);
+    }; |; {
+      V:     (AscHoistV,6) V;
+      I:     (AscHoistI,3) A;
+    }
+  }
+}
+
+AscB3MB {
+  HBox { +-; Title: "Ascender B3MB"; -+ };
+  ""    >Status<  >Volts<   >Amps<;
+  "100V1:" {(B3MB_100V1L2F,3) (B3MB_100V1L2S,3)} (B3MB_100V1_Load2_V,7) (B3MB_100V1_Load2_I,7);
+  "100V2:" {(B3MB_100V2L2F,3) (B3MB_100V2L2S,3)} (B3MB_100V2_Load2_V,7) (B3MB_100V2_Load2_I,7);
+  "100V3:" {(B3MB_100V3L2F,3) (B3MB_100V3L2S,3)} (B3MB_100V3_Load2_V,7) (B3MB_100V3_Load2_I,7);
+  "100V4:" {(B3MB_100V4L2F,3) (B3MB_100V4L2S,3)} (B3MB_100V4_Load2_V,7) (B3MB_100V4_Load2_I,7);
+}
+
+AHRS {
+  HBox { +-; Title: "GNSS/AHRS"; -+ };
+# Course:   (Course,8)  deg;
+# Track:    (Track,8)   deg;
+  Heading:  (heading,8) deg;
+  Rotation: (angular_velocity_z,8) "deg/s";
+# North:    (velocity_north,8)   "m/s";
+# East:     (velocity_east,8)    "m/s";
+  Thrust:   (Nav_Thrust,3)       "%";
+# Speed:    (velocity_forward,8) "m/s";
+# Down:     (velocity_down,8)    "m/s";
+}
+
+TMtime {
+  +-+;
+  VGlue 0+1;
+  [TMbase_times];
+}
+
+{ HBox{ |+;
+    { HBox { [PMC_Full]; |;
+        { [Asc];
+          [AscB3MB]
+        }
+      };
+      HBox {[AHRS]; |+; [TMtime] }
+    }; |+ };
+  -;
+}

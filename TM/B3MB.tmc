@@ -43,3 +43,14 @@ Calibration (B3MB_BusV_t, B3MB_VOLTS) {
 TM typedef uint16_t B3MB_T30K75KU { text "%6.2lf"; Convert B3MB_CELCIUS; }
 
 TM typedef uint16_t B3MB_Status_t { text "%04X"; }
+
+%{
+  const char *B3MB_on_off_text(uint16_t x) {
+    return x ? " On" : "Off";
+  }
+  const char *B3MB_fault_text(uint16_t x) {
+    return x ? "FLT" : "   ";
+  }
+%}
+TM typedef uint16_t B3MB_on_off_t { text "%3u" B3MB_on_off_text(); }
+TM typedef uint16_t B3MB_fault_t { text "%3u" B3MB_fault_text(); }

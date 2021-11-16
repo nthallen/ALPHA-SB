@@ -16,6 +16,7 @@ scopextxsrvroui.o
 scopexcltnc.o
 scopexcltncoui.cc
 scopexcltncoui.o
+Summarytblnc.tmc
 scopextblnc.tmc
 B3MB_28Vtblnc.tmc
 B3MB_100Vtblnc.tmc
@@ -58,6 +59,7 @@ scopexengext.cc
 scopexengextoui.cc
 scopexengext.o
 scopexengextoui.o
+Summarytblnc.tmc.dep
 scopextblnc.tmc.dep
 B3MB_28Vtblnc.tmc.dep
 B3MB_100Vtblnc.tmc.dep
