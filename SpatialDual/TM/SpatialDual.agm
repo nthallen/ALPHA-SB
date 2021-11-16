@@ -7,11 +7,11 @@ mode (default) {
   genuibase = SpatialDual.genui:SpatialDual.genui.in
   extbase = SpatialDual_conv.tmc:SpatialDual_conv.tmc.in
   - : SpatialDual.tbl:SpatialDual.tbl.in
-  DISTRIB = @MODDIR@/../SpatialDual
+  DISTRIB = @MODDIR@/../SpatialDual @MODDIR@/../SpatialDualSim
   CPPFLAGS = -I @MODDIR@/..
   %%
-.PHONY : clean-SpatialDual @MODDIR@/../SpatialDual
-@MODDIR@/../SpatialDual :
+.PHONY : clean-SpatialDual @MODDIR@/../SpatialDual @MODDIR@/../SpatialDualSim
+@MODDIR@/../SpatialDual @MODDIR@/../SpatialDualSim :
 	$(MAKE) --directory=@MODDIR@/..
 clean-dist : clean-SpatialDual
 clean-SpatialDual :

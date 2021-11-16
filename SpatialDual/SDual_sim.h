@@ -1,7 +1,7 @@
 #ifndef SDUAL_H_INCLUDED
 #define SDUAL_H_INCLUDED
 
-#include "dasio/serial.h"
+#include "dasio/server.h"
 #include "dasio/tm_data_sndr.h"
 #include "SpatialDual.h"
 
@@ -13,7 +13,7 @@ using namespace DAS_IO;
 
 class SDual : public Serverside_client {
   public:
-    SDual(Authenticator *Auth);
+    SDual(Authenticator *Auth, const char *iname);
     static inline void set_TM(TM_data_sndr *TM) { SDual::TM = TM; }
   protected:
     bool protocol_input();

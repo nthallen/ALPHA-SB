@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     SDual::set_TM(TM);
     // server.ELoop.add_child(new SDual(SDual_port, TM));
   }
-  server.Start(Srv_Function, "SDualSim");
+  server.Start(Server::Srv_Function, "SDualSim");
   msg(0, "Terminating");
   return 0;
 }

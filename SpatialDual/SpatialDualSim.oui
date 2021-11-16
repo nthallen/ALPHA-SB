@@ -3,6 +3,9 @@
 <include> msg oui
 <include> cmd_reader
 
+<unsort>
+Spatial Dual function SDualSim: where to listen for scopexsimsock
+
 <package> appid_default
 <include> "dasio/appid.h"
 <defs>

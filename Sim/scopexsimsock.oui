@@ -4,6 +4,10 @@
 <follow> msg
 <include> "SCoPEx.h"
 
+<opts> "l:"
+<sort>
+  -l logfile Optional log for detailed position data
+
 <unsort>
 dualsim function nav: Where to find 'sdual' server
 

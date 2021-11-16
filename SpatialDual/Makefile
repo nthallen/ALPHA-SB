@@ -4,7 +4,7 @@ CXXFLAGS+=-g -Wall -std=c++11 $(CPPFLAGS)
 LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -lpthread
 
 .PHONY : all
-all : SpatialDual
+all : SpatialDual SpatialDualSim
 OBJ = *.stackdump *.o
 
 SPATIALDUALOBJ = SpatialDual.o SpatialDualoui.o crc16ccitt_false.o
@@ -19,8 +19,8 @@ SpatialDualoui.o : SpatialDualoui.cc
 SpatialDualoui.cc : SpatialDual.oui
 	oui -o SpatialDualoui.cc SpatialDual.oui
 
-SpatialDualSim : $(SPATIALDUALOBJ)
-	$(CXX) -o SpatialDualSim $(CPPFLAGS) $(CXXFLAGS) $(SPATIALDUALOBJ) $(LDFLAGS)
+SpatialDualSim : $(SPATIALDUALSIMOBJ)
+	$(CXX) -o SpatialDualSim $(CPPFLAGS) $(CXXFLAGS) $(SPATIALDUALSIMOBJ) $(LDFLAGS)
 SpatialDualSim.o : SpatialDualSim.cc SDual_sim.h SpatialDual.h
 SpatialDualSimoui.o : SpatialDualSimoui.cc
 SpatialDualSimoui.cc : SpatialDualSim.oui

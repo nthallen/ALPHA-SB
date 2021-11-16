@@ -70,8 +70,8 @@ SCoPEx::SCoPEx() {
   ofp = 0;
   tcount = 0;
   opt_logfile = 0;
-  opt_navport = 0;
-  opt_navbaud = 9600;
+  // opt_navport = 0;
+  // opt_navbaud = 9600;
   cmdfile = 0;
   nextCmdTime = 0;
   // velocityAngleCorrLimit = 45; //*< degrees
@@ -387,8 +387,8 @@ void SCoPEx::Init(int argc, char **argv) {
   while ((c = getopt(argc, argv, opt_string)) != -1) {
     switch (c) {
       case 'l': opt_logfile = optarg; break;
-      case 'p': opt_navport = optarg; break;
-      case 'b': opt_navbaud = atoi(optarg); break;
+//    case 'p': opt_navport = optarg; break;
+//    case 'b': opt_navbaud = atoi(optarg); break;
       case '?': msg(MSG_FATAL, "Unrecognized Option -%c", optopt);
     }
   }
@@ -419,10 +419,11 @@ void SCoPEx::Init(int argc, char **argv) {
   cmdfile->connect();
   ELoop.add_child(cmdfile);
   
-  if (opt_navport) {
+  // if (opt_navport) {
     dualsim *navout = new dualsim(this);
+    navout->connect();
     ELoop.add_child(navout);
-  }
+  // }
   // commandStep();
 }
 

@@ -20,7 +20,7 @@
 
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
-                msg "Running script interact"
+                msg "Running script runfile.sim"
 #[ -c "$slcandev" ] &&
 # Launch      -      subbusd_slcan -n CAN -p $slcandev
   Launch      tm_bfr bfr -H bfr: -S:
@@ -34,6 +34,7 @@
 if [ -c "$spatialdualdev" ]; then
   Launch      -      SpatialDual -p $spatialdualdev -s -v
 else
-  Launch      -      SpatialDualSim -s -v
+  Launch      sdual  SpatialDualSim
 fi
+  Launch      -      scopexsimsock
   Launch      -TMC-  scopexalgo
