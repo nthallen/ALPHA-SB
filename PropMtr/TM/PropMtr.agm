@@ -1,4 +1,4 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> HOME=1700 ] {
+Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> HOME=1700 RPMSGN= ] {
   ID is a mnemonic for the motor
   ADDR is the Modbus address of the motor controller
   IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
@@ -43,6 +43,7 @@ mode (default,types) {
   tmcbase = pmc_@ID@.tmc:pmc_drv.tmc.in
   cmdbase = pmc_@ID@.cmd:pmc_drv.cmd.in
   genuibase = pmc_@ID@.genui:pmc_drv.genui.in
+  extbase = pmc_@ID@_conv.tmc:pmc_drv_conv.tmc.in
   - : pmc_@ID@.tma:pmc_drv.tma.in
   - : pmc_@ID@.tbl:pmc.tbl.in
 }

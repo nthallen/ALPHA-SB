@@ -1,6 +1,6 @@
-@SLOW@ PMC_@ID@_RPM_SP       PMC_@ID@ RPM
-@SLOW@ PMC_@ID@_RPM_Demand   PMC_@ID@ RPM
-@FAST@ PMC_@ID@_RPM          PMC_@ID@ RPM
+@SLOW@ PMC_@ID@_RPM_SP@RPMSGN@       PMC_@ID@ RPM
+@SLOW@ PMC_@ID@_RPM_Demand@RPMSGN@   PMC_@ID@ RPM
+@FAST@ PMC_@ID@_RPM@RPMSGN@          PMC_@ID@ RPM
 
 @SLOW@ PMC_@ID@_I_Demand     PMC_@ID@ Current
 @FAST@ PMC_@ID@_I_Measured   PMC_@ID@ Current

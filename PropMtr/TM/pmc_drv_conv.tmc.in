@@ -1,0 +1,4 @@
+PMC_on_off_t PMC_@ID@_Bridge; Invalidate PMC_@ID@_Bridge;
+{ PMC_@ID@_Bridge = (PMC_@ID@_Status0>>0)&1; Validate PMC_@ID@_Bridge; }
+PMC_on_off_t PMC_@ID@_Brake; Invalidate PMC_@ID@_Brake;
+{ PMC_@ID@_Brake = (PMC_@ID@_Status0>>7)&1; Validate PMC_@ID@_Brake; }
