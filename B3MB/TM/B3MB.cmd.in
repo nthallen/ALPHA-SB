@@ -6,14 +6,21 @@
     int subbus_quit() {
       return CAN->subbus_quit();
     }
+    /* The CAN_IDs are defined in the .spec file where the B3MB Module is
+       instantiated. The address are defined under B3MB_Switch below.
+       on_off is 0 for 'off', 1 for 'on'.
+    */
+    void B3MB_command(uint16_t CAN_ID, uint16_t addr, uint16_t on_off) {
+      if (CAN_Initialized)
+        CAN->write_ack((CAN_ID<<8)+0x40, addr+on_off);
+    }
   #endif
 %}
 %INTERFACE <subbus>
 
 &^command
   : B3MB &B3MB_ID &B3MB_Switch &B3MB_On_Off * {
-      if (CAN_Initialized)
-        CAN->write_ack(($2<<8)+0x40, $3+$4);
+      B3MB_command($2, $3, $4);
     }
   ;
 
