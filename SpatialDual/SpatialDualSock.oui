@@ -4,7 +4,7 @@
 <include> cmd_reader
 
 <unsort>
-Spatial Dual function SDualSim: where to listen for scopexsimsock
+Spatial Dual function SDualSim: where to listen for sdual service
 
 <package> appid_default
 <include> "dasio/appid.h"

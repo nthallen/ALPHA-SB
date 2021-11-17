@@ -52,6 +52,7 @@ tmserio.o
 tmserioextoui.o
 doit.dep
 Simdoit.dep
+SimSockdoit.dep
 scopexengext.cdf
 scopexengextcdf.oui
 scopexengextcdf.tmc
@@ -83,4 +84,5 @@ B3MBrawext
 tmserioext
 doit
 Simdoit
+SimSockdoit
 scopexengext
