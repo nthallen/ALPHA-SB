@@ -9,6 +9,7 @@ Module Version src=scopex.ver
 Module TMbase
 
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types
+# Will try  RPMSGN=:*(-1) to make RPM positive. Works for ui_, not for rt_ yet
 Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT=
 Module PropMtr mode=groups RT1= RT2=
 
@@ -23,7 +24,8 @@ tmcbase = B3MB_100V2_cal.tmc
 tmcbase = B3MB_100V3_cal.tmc
 tmcbase = B3MB_100V4_cal.tmc
 
-#Module scopexsim
+Module scopexsim
+Module PropMtrSim
 Module SerIn
 Module SpatialDual FAST=10
 Module Ascender
