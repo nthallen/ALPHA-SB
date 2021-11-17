@@ -1,5 +1,5 @@
 <package> SpatialDualSim
-<include> "SDual_sim.h"
+<include> "SDual_sock.h"
 <include> msg oui
 <include> cmd_reader
 

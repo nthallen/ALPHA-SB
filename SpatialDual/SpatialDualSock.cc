@@ -4,7 +4,7 @@
 #include "dasio/tm_data_sndr.h"
 #include "nl.h"
 #include "nl_assert.h"
-#include "SDual_sim.h"
+#include "SDual_sock.h"
 #include "oui.h"
 #include "crc16ccitt_false.h"
 
