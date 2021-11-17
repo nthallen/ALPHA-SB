@@ -5,7 +5,6 @@
       # propmtrdev=/dev/ttyS3
       # slcandev=/dev/ttyS5
       # spatialdualdev=/dev/ttyS3
-      spatialdualsock=yes
       ;;
     EASWHLPT3425022)
       # Marco's laptop
@@ -44,8 +43,6 @@
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
-[ "$spatialdualsock" = "yes" ] &&
-  Launch      sdual  SpatialDualSock
 [ -c "$spatialdualdev" ] &&
   Launch      -      SpatialDual -p $spatialdualdev -v
 [ -c "$ascenderdev" ] &&

@@ -34,7 +34,7 @@
 if [ -c "$spatialdualdev" ]; then
   Launch      -      SpatialDual -p $spatialdualdev -s -v
 else
-  Launch      sdual  SpatialDualSim
+  Launch      sdual  SpatialDualSock
 fi
-  Launch      -      scopexsimsock
+# Launch      -      scopexsimsock
   Launch      -TMC-  scopexalgo
