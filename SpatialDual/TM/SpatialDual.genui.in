@@ -1,35 +1,35 @@
- @FAST@ system_status       GNSS System %.0lf
- @FAST@ orient_init:filter_status:0          GNSS Filters %.0lf
- @FAST@ nav_init:filter_status:1             GNSS Filters %.0lf
- @FAST@ heading_init:filter_status:2         GNSS Filters %.0lf
- @FAST@ UTC_init:filter_status:3             GNSS Filters %.0lf
- @FAST@ Int_GNSS_en:filter_status:9          GNSS Filters %.0lf
- @FAST@ dual_heading_active:filter_status:10 GNSS Filters %.0lf
- @FAST@ atm_alt_en:filter_status:12          GNSS Filters %.0lf
+ @FAST@ system_status       @Panel@GNSS System %.0lf
+ @FAST@ orient_init:filter_status:0          @Panel@GNSS Filters %.0lf
+ @FAST@ nav_init:filter_status:1             @Panel@GNSS Filters %.0lf
+ @FAST@ heading_init:filter_status:2         @Panel@GNSS Filters %.0lf
+ @FAST@ UTC_init:filter_status:3             @Panel@GNSS Filters %.0lf
+ @FAST@ Int_GNSS_en:filter_status:9          @Panel@GNSS Filters %.0lf
+ @FAST@ dual_heading_active:filter_status:10 @Panel@GNSS Filters %.0lf
+ @FAST@ atm_alt_en:filter_status:12          @Panel@GNSS Filters %.0lf
 
- @FAST@ nav_drift           GNSS Drift
- @FAST@ latitude            GNSS Position
- @FAST@ longitude           GNSS Position
- @FAST@ height              GNSS Position
- @FAST@ velocity_north      GNSS Velocity
- @FAST@ velocity_east       GNSS Velocity
- @FAST@ Track               GNSS Heading
- @FAST@ velocity_forward    GNSS Velocity
- @FAST@ velocity_down       GNSS Velocity
- @FAST@ body_accel_x        GNSS Accel
- @FAST@ body_accel_y        GNSS Accel
- @FAST@ body_accel_z        GNSS Accel
- @FAST@ g_force             GNSS Accel
- @FAST@ roll                GNSS Attitude
- @FAST@ pitch               GNSS Attitude
- @FAST@ heading             GNSS Heading
- @FAST@ angular_velocity_x  GNSS AngVel
- @FAST@ angular_velocity_y  GNSS AngVel
- @FAST@ angular_velocity_z  GNSS AngVel
- @FAST@ latitude_std        GNSS Std
- @FAST@ longitude_std       GNSS Std
- @FAST@ height_std          GNSS Std
- @FAST@ SD_stale            GNSS Stale
- @FAST@ SD_n_reports        GNSS Stale
- @FAST@ SD_nc               GNSS Stale
+ @FAST@ nav_drift           @Panel@GNSS Drift
+ @FAST@ latitude            @Panel@GNSS Position
+ @FAST@ longitude           @Panel@GNSS Position
+ @FAST@ height              @Panel@GNSS Position
+ @FAST@ velocity_north      @Panel@GNSS Velocity
+ @FAST@ velocity_east       @Panel@GNSS Velocity
+ @FAST@ Track               @Panel@GNSS Heading
+ @FAST@ velocity_forward    @Panel@GNSS Velocity
+ @FAST@ velocity_down       @Panel@GNSS Velocity
+ @FAST@ body_accel_x        @Panel@GNSS Accel
+ @FAST@ body_accel_y        @Panel@GNSS Accel
+ @FAST@ body_accel_z        @Panel@GNSS Accel
+ @FAST@ g_force             @Panel@GNSS Accel
+ @FAST@ roll                @Panel@GNSS Attitude
+ @FAST@ pitch               @Panel@GNSS Attitude
+ @FAST@ heading             @Panel@GNSS Heading
+ @FAST@ angular_velocity_x  @Panel@GNSS AngVel
+ @FAST@ angular_velocity_y  @Panel@GNSS AngVel
+ @FAST@ angular_velocity_z  @Panel@GNSS AngVel
+ @FAST@ latitude_std        @Panel@GNSS Std
+ @FAST@ longitude_std       @Panel@GNSS Std
+ @FAST@ height_std          @Panel@GNSS Std
+ @FAST@ SD_stale            @Panel@GNSS Stale
+ @FAST@ SD_n_reports        @Panel@GNSS Stale
+ @FAST@ SD_nc               @Panel@GNSS Stale
  

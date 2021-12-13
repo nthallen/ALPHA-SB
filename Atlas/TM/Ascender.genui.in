@@ -1,16 +1,16 @@
- @RATE@ AscPosition           Ascender Pos
- @RATE@ AscSpeed              Ascender Speed
- @RATE@ AscSpeedCmd           Ascender Cmd
- @RATE@ AscLimit1:AscStatus:4 Ascender Limits
- @RATE@ AscLimit2:AscStatus:4 Ascender Limits
+ @RATE@ AscPosition           @Panel@Ascender Pos
+ @RATE@ AscSpeed              @Panel@Ascender Speed
+ @RATE@ AscSpeedCmd           @Panel@Ascender Cmd
+ @RATE@ AscLimit1:AscStatus:4 @Panel@Ascender Limits
+ @RATE@ AscLimit2:AscStatus:4 @Panel@Ascender Limits
 
- @RATE@ AscHoistV             AscHK V
- @RATE@ AscHoistI             AscHK I
- @RATE@ AscCtrlInp            AscHK CtrlInp %.0lf
- @RATE@ AscMode               AscHK Mode %.0lf
- @RATE@ AscMtrT               AscHK Temp
- @RATE@ AscMtrCtrlT           AscHK Temp
- @RATE@ AscOutputPulleyT      AscHK Temp
- @RATE@ AscConvT              AscHK Temp
- @RATE@ AscNreports           AscHK Nreports
- @RATE@ AscStale              AscHK Stale
+ @RATE@ AscHoistV             @Panel@AscHK V
+ @RATE@ AscHoistI             @Panel@AscHK I
+ @RATE@ AscCtrlInp            @Panel@AscHK CtrlInp %.0lf
+ @RATE@ AscMode               @Panel@AscHK Mode %.0lf
+ @RATE@ AscMtrT               @Panel@AscHK Temp
+ @RATE@ AscMtrCtrlT           @Panel@AscHK Temp
+ @RATE@ AscOutputPulleyT      @Panel@AscHK Temp
+ @RATE@ AscConvT              @Panel@AscHK Temp
+ @RATE@ AscNreports           @Panel@AscHK Nreports
+ @RATE@ AscStale              @Panel@AscHK Stale

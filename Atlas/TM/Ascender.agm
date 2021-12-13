@@ -1,4 +1,4 @@
-Moduledef Ascender [ RATE=1 ] {
+Moduledef Ascender [ RATE=1 Panel= ] {
 }
 
 tmcbase = Ascender.tmc:Ascender.tmc.in

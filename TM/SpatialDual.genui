@@ -1,35 +1,35 @@
- 10 system_status       GNSS System %.0lf
- 10 orient_init:filter_status:0          GNSS Filters %.0lf
- 10 nav_init:filter_status:1             GNSS Filters %.0lf
- 10 heading_init:filter_status:2         GNSS Filters %.0lf
- 10 UTC_init:filter_status:3             GNSS Filters %.0lf
- 10 Int_GNSS_en:filter_status:9          GNSS Filters %.0lf
- 10 dual_heading_active:filter_status:10 GNSS Filters %.0lf
- 10 atm_alt_en:filter_status:12          GNSS Filters %.0lf
+ 10 system_status       Main:GNSS System %.0lf
+ 10 orient_init:filter_status:0          Main:GNSS Filters %.0lf
+ 10 nav_init:filter_status:1             Main:GNSS Filters %.0lf
+ 10 heading_init:filter_status:2         Main:GNSS Filters %.0lf
+ 10 UTC_init:filter_status:3             Main:GNSS Filters %.0lf
+ 10 Int_GNSS_en:filter_status:9          Main:GNSS Filters %.0lf
+ 10 dual_heading_active:filter_status:10 Main:GNSS Filters %.0lf
+ 10 atm_alt_en:filter_status:12          Main:GNSS Filters %.0lf
 
- 10 nav_drift           GNSS Drift
- 10 latitude            GNSS Position
- 10 longitude           GNSS Position
- 10 height              GNSS Position
- 10 velocity_north      GNSS Velocity
- 10 velocity_east       GNSS Velocity
- 10 Track               GNSS Heading
- 10 velocity_forward    GNSS Velocity
- 10 velocity_down       GNSS Velocity
- 10 body_accel_x        GNSS Accel
- 10 body_accel_y        GNSS Accel
- 10 body_accel_z        GNSS Accel
- 10 g_force             GNSS Accel
- 10 roll                GNSS Attitude
- 10 pitch               GNSS Attitude
- 10 heading             GNSS Heading
- 10 angular_velocity_x  GNSS AngVel
- 10 angular_velocity_y  GNSS AngVel
- 10 angular_velocity_z  GNSS AngVel
- 10 latitude_std        GNSS Std
- 10 longitude_std       GNSS Std
- 10 height_std          GNSS Std
- 10 SD_stale            GNSS Stale
- 10 SD_n_reports        GNSS Stale
- 10 SD_nc               GNSS Stale
+ 10 nav_drift           Main:GNSS Drift
+ 10 latitude            Main:GNSS Position
+ 10 longitude           Main:GNSS Position
+ 10 height              Main:GNSS Position
+ 10 velocity_north      Main:GNSS Velocity
+ 10 velocity_east       Main:GNSS Velocity
+ 10 Track               Main:GNSS Heading
+ 10 velocity_forward    Main:GNSS Velocity
+ 10 velocity_down       Main:GNSS Velocity
+ 10 body_accel_x        Main:GNSS Accel
+ 10 body_accel_y        Main:GNSS Accel
+ 10 body_accel_z        Main:GNSS Accel
+ 10 g_force             Main:GNSS Accel
+ 10 roll                Main:GNSS Attitude
+ 10 pitch               Main:GNSS Attitude
+ 10 heading             Main:GNSS Heading
+ 10 angular_velocity_x  Main:GNSS AngVel
+ 10 angular_velocity_y  Main:GNSS AngVel
+ 10 angular_velocity_z  Main:GNSS AngVel
+ 10 latitude_std        Main:GNSS Std
+ 10 longitude_std       Main:GNSS Std
+ 10 height_std          Main:GNSS Std
+ 10 SD_stale            Main:GNSS Stale
+ 10 SD_n_reports        Main:GNSS Stale
+ 10 SD_nc               Main:GNSS Stale
  

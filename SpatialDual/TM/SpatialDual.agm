@@ -1,4 +1,4 @@
-Moduledef SpatialDual [ FAST=10 ] {
+Moduledef SpatialDual [ FAST=10 Panel= ] {
 }
 
 mode (default) {

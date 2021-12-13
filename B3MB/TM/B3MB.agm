@@ -1,4 +1,4 @@
-Moduledef B3MB [ ID=28V1 CAN_ID=1 RT1=/* RT2=*/ SLOW=1 FAST=1 ] {
+Moduledef B3MB [ ID=28V1 CAN_ID=1 RT1=/* RT2=*/ SLOW=1 FAST=1 Panel= ] {
   ID specifies which can
   CAN_ID is the CAN bus ID for this board
 }

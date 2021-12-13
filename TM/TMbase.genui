@@ -1,4 +1,4 @@
-  1 SysTDrift TMbase TDrift %.3lf
-  1 CPU_Pct TMbase CPU
-  1 memused TMbase RAM
-  1 Disk TMbase Disk
+  1 SysTDrift Main:TMbase TDrift %.3lf
+  1 CPU_Pct Main:TMbase CPU
+  1 memused Main:TMbase RAM
+  1 Disk Main:TMbase Disk

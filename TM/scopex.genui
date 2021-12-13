@@ -1,6 +1,7 @@
 HEADER SCoPEx Platform
 MNEMONIC scopex
 HOMEDIR SCoPEx_Data_Dir
+ROWS 11
 
- 1 SWStat System SWStat
+ 1 SWStat Main:System SWStat
  
