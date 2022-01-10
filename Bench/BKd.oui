@@ -1,0 +1,18 @@
+<package> BKd
+<include> "BKd_int.h"
+<include> msg oui
+<include> cmd_reader
+
+<opts> "p:"
+<sort>
+        -p <port> Specify serial port
+
+<switch>
+  case 'p':
+    BKd_port = optarg; break;
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("BKd",
+    "BK Precision Model 1687B Bench Power Supply Driver", "V1.0");
