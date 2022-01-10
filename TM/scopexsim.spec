@@ -8,11 +8,12 @@ genuibase = scopex.genui
 genuibase = nav.genui
 
 Module Version src=scopexsim.ver
-Module TMbase
+Module TMbase Panel=Main:
 
-Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=10 SLOW=1 mode=types
-Module PropMtr ID=Right IDX=1 ADDR=62 FAST=10 SLOW=1 DAT= RPMSGN=:*(-1)
-Module PropMtr mode=groups RT1= RT2=
+Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=10 SLOW=1 mode=types Panel=Motors:
+# try  RPMSGN=:*(-1)
+Module PropMtr ID=Right IDX=1 ADDR=62 FAST=10 SLOW=1 DAT= Panel=Motors:
+Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 
 # Module B3MB mode=types ID=28V1  CAN_ID=2
 # Module B3MB            ID=100V1 CAN_ID=6
@@ -28,8 +29,8 @@ Module PropMtr mode=groups RT1= RT2=
 Module scopexsim
 Module PropMtrSim
 Module SerIn
-Module SpatialDual FAST=10
-Module Ascender
+Module SpatialDual FAST=10 Panel=Main:
+Module Ascender Panel=Main:
 Module Nav
 
 TGTDIR = /home/scopex
