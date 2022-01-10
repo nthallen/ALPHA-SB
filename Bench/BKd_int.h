@@ -5,13 +5,14 @@
 #define BKD_INT_H_INCLUDED
 #include "dasio/client.h"
 #include "dasio/serial.h"
+#include "dasio/cmd_reader.h"
 #include "rqueue.h"
 
 class BK_device : public DAS_IO::Serial {
   public:
     BK_device();
     // ~BK_device();
-    enum CB_ID { CB_NONE, CB_GETS, CB_GETD };
+    enum CB_ID { CB_NONE, CB_GETS, CB_GETD, CB_CMD };
     bool protocol_input();
     void enqueue_polls();
     bool process_requests();
@@ -19,10 +20,10 @@ class BK_device : public DAS_IO::Serial {
   protected:
 };
 
-class BKdCmd : public DAS_IO::Client {
+class BKdCmd : public DAS_IO::Cmd_reader {
   public:
     BKdCmd(BK_device *BK_dev);
-    ~BKdCmd();
+    // ~BKdCmd();
     bool app_input();
   protected:
     BK_device *BK_dev;

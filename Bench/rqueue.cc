@@ -74,9 +74,7 @@ void rqueue::requeue_polls() {
 
 void rqueue::dispose_pending() {
   if (pending) {
-    if (!pending->persistent) {
-      req_free.push_back(pending);
-    }
+    free_request(pending);
     pending = 0;
   }
 }
@@ -92,4 +90,21 @@ rqueue_req *rqueue::next_request() {
     ++cur_poll;
   }
   return rv;
+}
+
+rqueue_req *rqueue::new_request() {
+  rqueue_req *req;
+  if (req_free.empty()) {
+    req = new rqueue_req();
+  } else {
+    req = req_free.front();
+    req_free.pop_front();
+  }
+  return req;
+}
+
+void rqueue::free_request(rqueue_req *req) {
+  if (!req->persistent) {
+    req_free.push_back(req);
+  }
 }

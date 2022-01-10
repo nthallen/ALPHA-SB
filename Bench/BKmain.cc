@@ -13,6 +13,7 @@
 using namespace DAS_IO;
 
 BKd_t BKd;
+const char *BKd_port;
 
 int main(int argc, char **argv) {
   oui_init_options(argc, argv);
