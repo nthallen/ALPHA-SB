@@ -14,7 +14,7 @@ LDFLAGS=$(AG_LDFLAGS) -ldasio -lnl -lpthread
 .PHONY : all
 all : PropMtr
 OBJ = *.stackdump *.o
-TGT = $(tgt):/home/flight
+# TGT = $(tgt):/home/flight
 
 PROPMTROBJ = PropMtr.o PropMtroui.o pmc.o
 OBJ += PropMtr PropMtroui.cc
@@ -29,5 +29,5 @@ PropMtroui.cc : PropMtr.oui
 clean :
 	rm -f $(OBJ)
 
-distribution : $(DIST)
-	scp $(DIST) $(TGT)
+#distribution : $(DIST)
+#	scp $(DIST) $(TGT)
