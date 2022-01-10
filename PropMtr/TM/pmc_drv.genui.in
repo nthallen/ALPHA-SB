@@ -12,85 +12,85 @@
 @SLOW@ PMC_@ID@_Pos_Target   @Panel@PMC_@ID@ Position
 @SLOW@ PMC_@ID@_Pos_Measured @Panel@PMC_@ID@ Position
 
-@SLOW@ Bridge_En:PMC_@ID@_Status0:0 @Panel@PMC_@ID@_S Status0
-@SLOW@ DynBrk_En:PMC_@ID@_Status0:1 @Panel@PMC_@ID@_S Status0
-@SLOW@ Stop_En:PMC_@ID@_Status0:2 @Panel@PMC_@ID@_S Status0
-@SLOW@ PosStop_En:PMC_@ID@_Status0:3 @Panel@PMC_@ID@_S Status0
-@SLOW@ NegStop_En:PMC_@ID@_Status0:4 @Panel@PMC_@ID@_S Status0
-@SLOW@ PosTrqInh_In:PMC_@ID@_Status0:5 @Panel@PMC_@ID@_S Status0
-@SLOW@ NegTrqInh_En:PMC_@ID@_Status0:6 @Panel@PMC_@ID@_S Status0
-@SLOW@ ExtBrk_En:PMC_@ID@_Status0:7 @Panel@PMC_@ID@_S Status0
-@SLOW@ DrvReset:PMC_@ID@_Status1:0 @Panel@PMC_@ID@_S Status1
-@SLOW@ DrvIntErr:PMC_@ID@_Status1:1 @Panel@PMC_@ID@_S Status1
-@SLOW@ ShortCir:PMC_@ID@_Status1:2 @Panel@PMC_@ID@_S Status1
-@SLOW@ CurOverShoot:PMC_@ID@_Status1:3 @Panel@PMC_@ID@_S Status1
-@SLOW@ DrvUnderV:PMC_@ID@_Status1:4 @Panel@PMC_@ID@_S Status1
-@SLOW@ DrvOverV:PMC_@ID@_Status1:5 @Panel@PMC_@ID@_S Status1
-@SLOW@ DrvOverT:PMC_@ID@_Status1:6 @Panel@PMC_@ID@_S Status1
+@SLOW@ @ID@_Bridge_En:PMC_@ID@_Status0:0 @Panel@PMC_@ID@_S Status0 Bridge_En
+@SLOW@ @ID@_DynBrk_En:PMC_@ID@_Status0:1 @Panel@PMC_@ID@_S Status0 DynBrk_En
+@SLOW@ @ID@_Stop_En:PMC_@ID@_Status0:2 @Panel@PMC_@ID@_S Status0 Stop_En
+@SLOW@ @ID@_PosStop_En:PMC_@ID@_Status0:3 @Panel@PMC_@ID@_S Status0 PosStop_En
+@SLOW@ @ID@_NegStop_En:PMC_@ID@_Status0:4 @Panel@PMC_@ID@_S Status0 NegStop_En
+@SLOW@ @ID@_PosTrqInh_In:PMC_@ID@_Status0:5 @Panel@PMC_@ID@_S Status0 PosTrqInh_In
+@SLOW@ @ID@_NegTrqInh_En:PMC_@ID@_Status0:6 @Panel@PMC_@ID@_S Status0 NegTrqInh_En
+@SLOW@ @ID@_ExtBrk_En:PMC_@ID@_Status0:7 @Panel@PMC_@ID@_S Status0 ExtBrk_En
+@SLOW@ @ID@_DrvReset:PMC_@ID@_Status1:0 @Panel@PMC_@ID@_S Status1 DrvReset
+@SLOW@ @ID@_DrvIntErr:PMC_@ID@_Status1:1 @Panel@PMC_@ID@_S Status1 DrvIntErr
+@SLOW@ @ID@_ShortCir:PMC_@ID@_Status1:2 @Panel@PMC_@ID@_S Status1 ShortCir
+@SLOW@ @ID@_CurOverShoot:PMC_@ID@_Status1:3 @Panel@PMC_@ID@_S Status1 CurOverShoot
+@SLOW@ @ID@_DrvUnderV:PMC_@ID@_Status1:4 @Panel@PMC_@ID@_S Status1 DrvUnderV
+@SLOW@ @ID@_DrvOverV:PMC_@ID@_Status1:5 @Panel@PMC_@ID@_S Status1 DrvOverV
+@SLOW@ @ID@_DrvOverT:PMC_@ID@_Status1:6 @Panel@PMC_@ID@_S Status1 DrvOverT
 
-@SLOW@ ParRestoreErr:PMC_@ID@_Status2:0 @Panel@PMC_@ID@_S Status2
-@SLOW@ ParStoreErr:PMC_@ID@_Status2:1 @Panel@PMC_@ID@_S Status2
-@SLOW@ InvHallState:PMC_@ID@_Status2:2 @Panel@PMC_@ID@_S Status2
-@SLOW@ PhaseSyncErr:PMC_@ID@_Status2:3 @Panel@PMC_@ID@_S Status2
-@SLOW@ MotorOverT:PMC_@ID@_Status2:4 @Panel@PMC_@ID@_S Status2
-@SLOW@ PhaseDetFault:PMC_@ID@_Status2:5 @Panel@PMC_@ID@_S Status2
-@SLOW@ FBSensorErr:PMC_@ID@_Status2:6 @Panel@PMC_@ID@_S Status2
-@SLOW@ MotorOverSpeed:PMC_@ID@_Status2:7 @Panel@PMC_@ID@_S Status2
-@SLOW@ MaxMeasuredPos:PMC_@ID@_Status2:8 @Panel@PMC_@ID@_S Status2
-@SLOW@ MinMeasuredPos:PMC_@ID@_Status2:9 @Panel@PMC_@ID@_S Status2
-@SLOW@ CommError:PMC_@ID@_Status2:10 @Panel@PMC_@ID@_S Status2
-@SLOW@ PWMBrokenWire:PMC_@ID@_Status2:11 @Panel@PMC_@ID@_S Status2
-@SLOW@ MotionEngErr:PMC_@ID@_Status2:12 @Panel@PMC_@ID@_S Status2
-@SLOW@ MotionEngAbrt:PMC_@ID@_Status2:13 @Panel@PMC_@ID@_S Status2
+@SLOW@ @ID@_ParRestoreErr:PMC_@ID@_Status2:0 @Panel@PMC_@ID@_S Status2 ParRestoreErr
+@SLOW@ @ID@_ParStoreErr:PMC_@ID@_Status2:1 @Panel@PMC_@ID@_S Status2 ParStoreErr
+@SLOW@ @ID@_InvHallState:PMC_@ID@_Status2:2 @Panel@PMC_@ID@_S Status2 InvHallState
+@SLOW@ @ID@_PhaseSyncErr:PMC_@ID@_Status2:3 @Panel@PMC_@ID@_S Status2 PhaseSyncErr
+@SLOW@ @ID@_MotorOverT:PMC_@ID@_Status2:4 @Panel@PMC_@ID@_S Status2 MotorOverT
+@SLOW@ @ID@_PhaseDetFault:PMC_@ID@_Status2:5 @Panel@PMC_@ID@_S Status2 PhaseDetFault
+@SLOW@ @ID@_FBSensorErr:PMC_@ID@_Status2:6 @Panel@PMC_@ID@_S Status2 FBSensorErr
+@SLOW@ @ID@_MotorOverSpeed:PMC_@ID@_Status2:7 @Panel@PMC_@ID@_S Status2 MotorOverSpeed
+@SLOW@ @ID@_MaxMeasuredPos:PMC_@ID@_Status2:8 @Panel@PMC_@ID@_S Status2 MaxMeasuredPos
+@SLOW@ @ID@_MinMeasuredPos:PMC_@ID@_Status2:9 @Panel@PMC_@ID@_S Status2 MinMeasuredPos
+@SLOW@ @ID@_CommError:PMC_@ID@_Status2:10 @Panel@PMC_@ID@_S Status2 CommError
+@SLOW@ @ID@_PWMBrokenWire:PMC_@ID@_Status2:11 @Panel@PMC_@ID@_S Status2 PWMBrokenWire
+@SLOW@ @ID@_MotionEngErr:PMC_@ID@_Status2:12 @Panel@PMC_@ID@_S Status2 MotionEngErr
+@SLOW@ @ID@_MotionEngAbrt:PMC_@ID@_Status2:13 @Panel@PMC_@ID@_S Status2 MotionEngAbrt
 
-@SLOW@ LogEntryMissed:PMC_@ID@_Status3:0 @Panel@PMC_@ID@_S Status3
-@SLOW@ SWDisable:PMC_@ID@_Status3:1 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserDisable:PMC_@ID@_Status3:2 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserPosInh:PMC_@ID@_Status3:3 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserNegInh:PMC_@ID@_Status3:4 @Panel@PMC_@ID@_S Status3
-@SLOW@ CurLimiting:PMC_@ID@_Status3:5 @Panel@PMC_@ID@_S Status3
-@SLOW@ ContCurFoldback:PMC_@ID@_Status3:6 @Panel@PMC_@ID@_S Status3
-@SLOW@ CurLoopSat:PMC_@ID@_Status3:7 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserUnderV:PMC_@ID@_Status3:8 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserOverV:PMC_@ID@_Status3:9 @Panel@PMC_@ID@_S Status3
-@SLOW@ NonSinComm:PMC_@ID@_Status3:10 @Panel@PMC_@ID@_S Status3
-@SLOW@ PhaseDetectActive:PMC_@ID@_Status3:11 @Panel@PMC_@ID@_S Status3
-@SLOW@ MotionEngActive:PMC_@ID@_Status3:12 @Panel@PMC_@ID@_S Status3
-@SLOW@ UserAuxDisable:PMC_@ID@_Status3:13 @Panel@PMC_@ID@_S Status3
-@SLOW@ ShuntRegActive:PMC_@ID@_Status3:14 @Panel@PMC_@ID@_S Status3
-@SLOW@ PhaseDetectDone:PMC_@ID@_Status3:15 @Panel@PMC_@ID@_S Status3
+@SLOW@ @ID@_LogEntryMissed:PMC_@ID@_Status3:0 @Panel@PMC_@ID@_S Status3 LogEntryMissed
+@SLOW@ @ID@_SWDisable:PMC_@ID@_Status3:1 @Panel@PMC_@ID@_S Status3 SWDisable
+@SLOW@ @ID@_UserDisable:PMC_@ID@_Status3:2 @Panel@PMC_@ID@_S Status3 UserDisable
+@SLOW@ @ID@_UserPosInh:PMC_@ID@_Status3:3 @Panel@PMC_@ID@_S Status3 UserPosInh
+@SLOW@ @ID@_UserNegInh:PMC_@ID@_Status3:4 @Panel@PMC_@ID@_S Status3 UserNegInh
+@SLOW@ @ID@_CurLimiting:PMC_@ID@_Status3:5 @Panel@PMC_@ID@_S Status3 CurLimiting
+@SLOW@ @ID@_ContCurFoldback:PMC_@ID@_Status3:6 @Panel@PMC_@ID@_S Status3 ContCurFoldback
+@SLOW@ @ID@_CurLoopSat:PMC_@ID@_Status3:7 @Panel@PMC_@ID@_S Status3 CurLoopSat
+@SLOW@ @ID@_UserUnderV:PMC_@ID@_Status3:8 @Panel@PMC_@ID@_S Status3 UserUnderV
+@SLOW@ @ID@_UserOverV:PMC_@ID@_Status3:9 @Panel@PMC_@ID@_S Status3 UserOverV
+@SLOW@ @ID@_NonSinComm:PMC_@ID@_Status3:10 @Panel@PMC_@ID@_S Status3 NonSinComm
+@SLOW@ @ID@_PhaseDetectActive:PMC_@ID@_Status3:11 @Panel@PMC_@ID@_S Status3 PhaseDetectActive
+@SLOW@ @ID@_MotionEngActive:PMC_@ID@_Status3:12 @Panel@PMC_@ID@_S Status3 MotionEngActive
+@SLOW@ @ID@_UserAuxDisable:PMC_@ID@_Status3:13 @Panel@PMC_@ID@_S Status3 UserAuxDisable
+@SLOW@ @ID@_ShuntRegActive:PMC_@ID@_Status3:14 @Panel@PMC_@ID@_S Status3 ShuntRegActive
+@SLOW@ @ID@_PhaseDetectDone:PMC_@ID@_Status3:15 @Panel@PMC_@ID@_S Status3 PhaseDetectDone
 
-@SLOW@ ZeroVel:PMC_@ID@_Status4:0 @Panel@PMC_@ID@_S Status4
-@SLOW@ AtCommand:PMC_@ID@_Status4:1 @Panel@PMC_@ID@_S Status4
-@SLOW@ VelFollErr:PMC_@ID@_Status4:2 @Panel@PMC_@ID@_S Status4
-@SLOW@ PosTargVelLim:PMC_@ID@_Status4:3 @Panel@PMC_@ID@_S Status4
-@SLOW@ NegTargVelLim:PMC_@ID@_Status4:4 @Panel@PMC_@ID@_S Status4
-@SLOW@ CmdLimiterAct:PMC_@ID@_Status4:5 @Panel@PMC_@ID@_S Status4
-@SLOW@ InHomPos:PMC_@ID@_Status4:6 @Panel@PMC_@ID@_S Status4
-@SLOW@ PosFollErr:PMC_@ID@_Status4:7 @Panel@PMC_@ID@_S Status4
-@SLOW@ MaxTargPosLim:PMC_@ID@_Status4:8 @Panel@PMC_@ID@_S Status4
-@SLOW@ MinTargPosLim:PMC_@ID@_Status4:9 @Panel@PMC_@ID@_S Status4
-@SLOW@ SetPosActive:PMC_@ID@_Status4:10 @Panel@PMC_@ID@_S Status4
-@SLOW@ HomingActive:PMC_@ID@_Status4:12 @Panel@PMC_@ID@_S Status4
-@SLOW@ SafeTrqOff:PMC_@ID@_Status4:13 @Panel@PMC_@ID@_S Status4
-@SLOW@ HomingDone:PMC_@ID@_Status4:14 @Panel@PMC_@ID@_S Status4
-@SLOW@ ZeroPos:PMC_@ID@_Status4:15 @Panel@PMC_@ID@_S Status4
+@SLOW@ @ID@_ZeroVel:PMC_@ID@_Status4:0 @Panel@PMC_@ID@_S Status4 ZeroVel
+@SLOW@ @ID@_AtCommand:PMC_@ID@_Status4:1 @Panel@PMC_@ID@_S Status4 AtCommand
+@SLOW@ @ID@_VelFollErr:PMC_@ID@_Status4:2 @Panel@PMC_@ID@_S Status4 VelFollErr
+@SLOW@ @ID@_PosTargVelLim:PMC_@ID@_Status4:3 @Panel@PMC_@ID@_S Status4 PosTargVelLim
+@SLOW@ @ID@_NegTargVelLim:PMC_@ID@_Status4:4 @Panel@PMC_@ID@_S Status4 NegTargVelLim
+@SLOW@ @ID@_CmdLimiterAct:PMC_@ID@_Status4:5 @Panel@PMC_@ID@_S Status4 CmdLimiterAct
+@SLOW@ @ID@_InHomPos:PMC_@ID@_Status4:6 @Panel@PMC_@ID@_S Status4 InHomPos
+@SLOW@ @ID@_PosFollErr:PMC_@ID@_Status4:7 @Panel@PMC_@ID@_S Status4 PosFollErr
+@SLOW@ @ID@_MaxTargPosLim:PMC_@ID@_Status4:8 @Panel@PMC_@ID@_S Status4 MaxTargPosLim
+@SLOW@ @ID@_MinTargPosLim:PMC_@ID@_Status4:9 @Panel@PMC_@ID@_S Status4 MinTargPosLim
+@SLOW@ @ID@_SetPosActive:PMC_@ID@_Status4:10 @Panel@PMC_@ID@_S Status4 SetPosActive
+@SLOW@ @ID@_HomingActive:PMC_@ID@_Status4:12 @Panel@PMC_@ID@_S Status4 HomingActive
+@SLOW@ @ID@_SafeTrqOff:PMC_@ID@_Status4:13 @Panel@PMC_@ID@_S Status4 SafeTrqOff
+@SLOW@ @ID@_HomingDone:PMC_@ID@_Status4:14 @Panel@PMC_@ID@_S Status4 HomingDone
+@SLOW@ @ID@_ZeroPos:PMC_@ID@_Status4:15 @Panel@PMC_@ID@_S Status4 ZeroPos
 
-@SLOW@ CmddStop:PMC_@ID@_Status5:6 @Panel@PMC_@ID@_S Status5
-@SLOW@ UserStop:PMC_@ID@_Status5:7 @Panel@PMC_@ID@_S Status5
-@SLOW@ Cap1Active:PMC_@ID@_Status5:8 @Panel@PMC_@ID@_S Status5
-@SLOW@ Cap2Active:PMC_@ID@_Status5:9 @Panel@PMC_@ID@_S Status5
-@SLOW@ Cap3Active:PMC_@ID@_Status5:10 @Panel@PMC_@ID@_S Status5
-@SLOW@ CmddPosLim:PMC_@ID@_Status5:11 @Panel@PMC_@ID@_S Status5
-@SLOW@ CmddNegLim:PMC_@ID@_Status5:12 @Panel@PMC_@ID@_S Status5
+@SLOW@ @ID@_CmddStop:PMC_@ID@_Status5:6 @Panel@PMC_@ID@_S Status5 CmddStop
+@SLOW@ @ID@_UserStop:PMC_@ID@_Status5:7 @Panel@PMC_@ID@_S Status5 UserStop
+@SLOW@ @ID@_Cap1Active:PMC_@ID@_Status5:8 @Panel@PMC_@ID@_S Status5 Cap1Active
+@SLOW@ @ID@_Cap2Active:PMC_@ID@_Status5:9 @Panel@PMC_@ID@_S Status5 Cap2Active
+@SLOW@ @ID@_Cap3Active:PMC_@ID@_Status5:10 @Panel@PMC_@ID@_S Status5 Cap3Active
+@SLOW@ @ID@_CmddPosLim:PMC_@ID@_Status5:11 @Panel@PMC_@ID@_S Status5 CmddPosLim
+@SLOW@ @ID@_CmddNegLim:PMC_@ID@_Status5:12 @Panel@PMC_@ID@_S Status5 CmddNegLim
 
-@SLOW@ AbsPosValid:PMC_@ID@_Status6:0 @Panel@PMC_@ID@_S Status6
-@SLOW@ PosStopActive:PMC_@ID@_Status6:1 @Panel@PMC_@ID@_S Status6
-@SLOW@ NegStopActive:PMC_@ID@_Status6:2 @Panel@PMC_@ID@_S Status6
-@SLOW@ ConfigSelect:PMC_@ID@_Status6:4 @Panel@PMC_@ID@_S Status6
-@SLOW@ BrakeCommand:PMC_@ID@_Status6:5 @Panel@PMC_@ID@_S Status6
-@SLOW@ DigOut1:PMC_@ID@_Status6:6 @Panel@PMC_@ID@_S Status6
-@SLOW@ DigOut2:PMC_@ID@_Status6:7 @Panel@PMC_@ID@_S Status6
+@SLOW@ @ID@_AbsPosValid:PMC_@ID@_Status6:0 @Panel@PMC_@ID@_S Status6 AbsPosValid
+@SLOW@ @ID@_PosStopActive:PMC_@ID@_Status6:1 @Panel@PMC_@ID@_S Status6 PosStopActive
+@SLOW@ @ID@_NegStopActive:PMC_@ID@_Status6:2 @Panel@PMC_@ID@_S Status6 NegStopActive
+@SLOW@ @ID@_ConfigSelect:PMC_@ID@_Status6:4 @Panel@PMC_@ID@_S Status6 ConfigSelect
+@SLOW@ @ID@_BrakeCommand:PMC_@ID@_Status6:5 @Panel@PMC_@ID@_S Status6 BrakeCommand
+@SLOW@ @ID@_DigOut1:PMC_@ID@_Status6:6 @Panel@PMC_@ID@_S Status6 DigOut1
+@SLOW@ @ID@_DigOut2:PMC_@ID@_Status6:7 @Panel@PMC_@ID@_S Status6 DigOut2
 
 @SLOW@ PMC_@ID@_VL_Kp        @Panel@PMC_@ID@_G Gains
 @SLOW@ PMC_@ID@_VL_Ki        @Panel@PMC_@ID@_G Gains

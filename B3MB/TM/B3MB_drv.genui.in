@@ -20,22 +20,22 @@
  @SLOW@ B3MB_@ID@_T3      @Panel@B3MB_@ID@_Batt Temp  T3
  @SLOW@ B3MB_@ID@_T4      @Panel@B3MB_@ID@_Batt Temp  T4
  @SLOW@ B3MB_@ID@_T5      @Panel@B3MB_@ID@_Batt Temp  T5
- @SLOW@ B1S:B3MB_@ID@_Cmd_S:0   @Panel@B3MB_@ID@_Batt Status %.0lf B1S
- @SLOW@ B2S:B3MB_@ID@_Cmd_S:1   @Panel@B3MB_@ID@_Batt Status %.0lf B2S
- @SLOW@ B3S:B3MB_@ID@_Cmd_S:2   @Panel@B3MB_@ID@_Batt Status %.0lf B3S
- @SLOW@ B4S:B3MB_@ID@_Cmd_S:3   @Panel@B3MB_@ID@_Batt Status %.0lf B4S
- @SLOW@ L1S:B3MB_@ID@_Cmd_S:4   @Panel@B3MB_@ID@_Load Status %.0lf
- @SLOW@ L2S:B3MB_@ID@_Cmd_S:5   @Panel@B3MB_@ID@_Load Status %.0lf
- @SLOW@ L3S:B3MB_@ID@_Cmd_S:6   @Panel@B3MB_@ID@_Load Status %.0lf
- @SLOW@ L4S:B3MB_@ID@_Cmd_S:7   @Panel@B3MB_@ID@_Load Status %.0lf
- @SLOW@ B1F:B3MB_@ID@_Cmd_S:8   @Panel@B3MB_@ID@_Batt Fault %.0lf
- @SLOW@ B2F:B3MB_@ID@_Cmd_S:9   @Panel@B3MB_@ID@_Batt Fault %.0lf
- @SLOW@ B3F:B3MB_@ID@_Cmd_S:10  @Panel@B3MB_@ID@_Batt Fault %.0lf
- @SLOW@ B4F:B3MB_@ID@_Cmd_S:11  @Panel@B3MB_@ID@_Batt Fault %.0lf
- @SLOW@ L1F:B3MB_@ID@_Cmd_S:12  @Panel@B3MB_@ID@_Load Fault %.0lf
- @SLOW@ L2F:B3MB_@ID@_Cmd_S:13  @Panel@B3MB_@ID@_Load Fault %.0lf
- @SLOW@ L3F:B3MB_@ID@_Cmd_S:14  @Panel@B3MB_@ID@_Load Fault %.0lf
- @SLOW@ L4F:B3MB_@ID@_Cmd_S:15  @Panel@B3MB_@ID@_Load Fault %.0lf
- @SLOW@ Stat_LED:B3MB_@ID@_LED_S:0  @Panel@B3MB_@ID@_Batt Status %.0lf
- @SLOW@ Fault_LED:B3MB_@ID@_LED_S:0 @Panel@B3MB_@ID@_Batt Status %.0lf
- @SLOW@ ID_CPU:B3MB_@ID@_LED_S:0    @Panel@B3MB_@ID@_Batt Status %.0lf
+ @SLOW@ B3MB_@ID@_B1S:B3MB_@ID@_Cmd_S:0   @Panel@B3MB_@ID@_Batt Status %.0lf B1S
+ @SLOW@ B3MB_@ID@_B2S:B3MB_@ID@_Cmd_S:1   @Panel@B3MB_@ID@_Batt Status %.0lf B2S
+ @SLOW@ B3MB_@ID@_B3S:B3MB_@ID@_Cmd_S:2   @Panel@B3MB_@ID@_Batt Status %.0lf B3S
+ @SLOW@ B3MB_@ID@_B4S:B3MB_@ID@_Cmd_S:3   @Panel@B3MB_@ID@_Batt Status %.0lf B4S
+ @SLOW@ B3MB_@ID@_L1S:B3MB_@ID@_Cmd_S:4   @Panel@B3MB_@ID@_Load Status %.0lf L1S
+ @SLOW@ B3MB_@ID@_L2S:B3MB_@ID@_Cmd_S:5   @Panel@B3MB_@ID@_Load Status %.0lf L2S
+ @SLOW@ B3MB_@ID@_L3S:B3MB_@ID@_Cmd_S:6   @Panel@B3MB_@ID@_Load Status %.0lf L3S
+ @SLOW@ B3MB_@ID@_L4S:B3MB_@ID@_Cmd_S:7   @Panel@B3MB_@ID@_Load Status %.0lf L4S
+ @SLOW@ B3MB_@ID@_B1F:B3MB_@ID@_Cmd_S:8   @Panel@B3MB_@ID@_Batt Fault %.0lf B1F
+ @SLOW@ B3MB_@ID@_B2F:B3MB_@ID@_Cmd_S:9   @Panel@B3MB_@ID@_Batt Fault %.0lf B2F
+ @SLOW@ B3MB_@ID@_B3F:B3MB_@ID@_Cmd_S:10  @Panel@B3MB_@ID@_Batt Fault %.0lf B3F
+ @SLOW@ B3MB_@ID@_B4F:B3MB_@ID@_Cmd_S:11  @Panel@B3MB_@ID@_Batt Fault %.0lf B4F
+ @SLOW@ B3MB_@ID@_L1F:B3MB_@ID@_Cmd_S:12  @Panel@B3MB_@ID@_Load Fault %.0lf L1F
+ @SLOW@ B3MB_@ID@_L2F:B3MB_@ID@_Cmd_S:13  @Panel@B3MB_@ID@_Load Fault %.0lf L2F
+ @SLOW@ B3MB_@ID@_L3F:B3MB_@ID@_Cmd_S:14  @Panel@B3MB_@ID@_Load Fault %.0lf L3F
+ @SLOW@ B3MB_@ID@_L4F:B3MB_@ID@_Cmd_S:15  @Panel@B3MB_@ID@_Load Fault %.0lf L4F
+ @SLOW@ B3MB_@ID@_Stat_LED:B3MB_@ID@_LED_S:0  @Panel@B3MB_@ID@_Batt Status %.0lf S_LED
+ @SLOW@ B3MB_@ID@_Fault_LED:B3MB_@ID@_LED_S:1 @Panel@B3MB_@ID@_Batt Status %.0lf F_LED
+ @SLOW@ B3MB_@ID@_ID_CPU:B3MB_@ID@_LED_S:2    @Panel@B3MB_@ID@_Batt Status %.0lf ID_CPU

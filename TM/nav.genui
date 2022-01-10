@@ -1,6 +1,6 @@
-  1 Course GNSS Heading
-  1 Nav_PGain Nav Gains
-  1 Nav_IGain Nav Gains
-  1 Nav_DGain Nav Gains
-  1 Nav_Thrust Nav Thrust
-  1 Nav_Status Nav Status
+  1 Course Main:GNSS Heading
+  1 Nav_PGain Main:Nav Gains
+  1 Nav_IGain Main:Nav Gains
+  1 Nav_DGain Main:Nav Gains
+  1 Nav_Thrust Main:Nav Thrust
+  1 Nav_Status Main:Nav Status
