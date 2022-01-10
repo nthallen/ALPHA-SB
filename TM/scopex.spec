@@ -3,6 +3,7 @@ Module Nav mode=types
 swsbase = scopex.sws
 swsbase = pmc.sws
 cmdbase = scopex.cmd
+cmdbase = B3MB_map.cmd
 genuibase = scopex.genui
 
 Module Version src=scopex.ver

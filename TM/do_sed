@@ -1,0 +1,8 @@
+# dosed
+sed -ne '/^&B3MB_Switch/,/^ *;/ s/^ *: *\(.*\) { \$0 = \([0-9][0-9]*\); }/!\1:\2/p' \
+    B3MB.cmd |
+  sed -e 's/ /_/g' |
+  sed -e 's/^!\(.*\):\(.*\)$/#define B3MB_ADDR_\1 \2/'
+
+grep -h = B3MB_*.cmd |
+  sed -e 's/^ *: \(.*\) { \$0 = \(.*\); }/#define CAN_ID_\1 \2/'
