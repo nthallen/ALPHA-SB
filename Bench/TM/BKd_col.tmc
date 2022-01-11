@@ -1,0 +1,4 @@
+%{
+  #include "BKd.h"
+  BKd_t BKd;
+%}

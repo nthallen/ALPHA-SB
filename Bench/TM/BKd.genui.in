@@ -1,0 +1,7 @@
+@RATE@ BKd_V_set  @Panel@BKd Volts
+@RATE@ BKd_I_set  @Panel@BKd Amps
+@RATE@ BKd_V_disp @Panel@BKd Volts
+@RATE@ BKd_I_disp @Panel@BKd Amps
+@RATE@ BKd_Output:BKd_Status:0 @Panel@BKd Status Output
+@RATE@ BK_Stale:BKd_Status:1   @Panel@BKd Status
+@RATE@ BKd_Stale  @Panel@BKd Stale

@@ -1,0 +1,20 @@
+Moduledef BKd [ RATE=1 Panel= ] {
+}
+
+tmcbase = BKd.tmc:BKd.tmc.in
+colbase = BKd_col.tmc
+cmdbase = BKd.cmd
+genuibase = BKd.genui:BKd.genui.in
+extbase = BKd_conv.tmc
+- : BKd.tbl:BKd.tbl.in
+DISTRIB = @MODDIR@/../BKd
+CPPFLAGS = -I @MODDIR@/..
+
+%%
+
+.PHONY : clean-BKd @MODDIR@/../BKd
+@MODDIR@/../BKd :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-BKd
+clean-BKd :
+	$(MAKE) --directory=@MODDIR@/.. clean

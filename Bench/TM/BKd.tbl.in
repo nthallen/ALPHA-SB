@@ -1,0 +1,7 @@
+BKd {
+  HBox { +-; Title: "BK Precision; -+ };
+  (BKd_OnOff,3)    >Volts<        >Amps<;
+  Set:          (BKd_V_set,4)  (BKd_I_set,4);
+  Meas:         (BKd_V_disp,5) (BKd_V_disp,5);
+  Drv:          (BKd_Stale,3)  (BK_Stale,5);
+}
