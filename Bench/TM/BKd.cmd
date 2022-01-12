@@ -1,3 +1,8 @@
+%{
+  #ifdef SERVER
+    #include "math.h"
+  #endif
+%}
 %INTERFACE <BKd>
 
 &command
@@ -19,5 +24,9 @@
     }
   : BK Output &BK_OnOff * { if_BKd.Turf("S:%d\n", $3); }
   : BK Quit * { if_BKd.Turf("Q\n"); }
+  ;
+&BK_OnOff <int>
+  : On { $0 = 0; }
+  : Off { $0 = 1; }
   ;
 

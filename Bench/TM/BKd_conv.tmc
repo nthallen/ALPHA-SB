@@ -7,4 +7,5 @@ TM typedef uint8_t BK_Stale_t { text "%5u" BK_Stale_text(); }
 BK_Stale_t BK_Stale; Invalidate BK_Stale;
 { BK_Stale = (BKd_Status >> 1) & 1; Validate BK_Stale; }
 TM typedef uint8_t BK_OnOff_t { text "%3d" BK_OnOff_text(); }
+BK_OnOff_t BK_OnOff; Invalidate BK_OnOff;
 { BK_OnOff = ((BKd_Status^1) >> 0) & 1; Validate BK_OnOff; }

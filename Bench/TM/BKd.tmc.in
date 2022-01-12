@@ -2,10 +2,10 @@
   /* BKd.tmc */
   #include "BKd.h"
 %}
-TM typedef uint16_t BKd_VI_set_t { text "%4.1lf"; }
+TM typedef uint16_t BKd_VI_set_t { text "%4.1f"; }
 TM @RATE@ Hz BKd_VI_set_t BKd_V_set;
 TM @RATE@ Hz BKd_VI_set_t BKd_I_set;
-TM typedef uint16_t BKd_VI_disp_t { text "%5.2lf"; }
+TM typedef uint16_t BKd_VI_disp_t { text "%5.2f"; }
 TM @RATE@ Hz BKd_VI_disp_t BKd_V_disp;
 TM @RATE@ Hz BKd_VI_disp_t BKd_I_disp;
 TM typedef uint8_t BKd_Status_t { text "%3u"; }
