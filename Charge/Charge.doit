@@ -2,7 +2,7 @@ display Chargedisp -n disp
 serin serin
 client [SI|RT] Chargeclt
 
-extraction [!SI] Chargejsonext -n json
+# extraction [!SI] Chargejsonext -n json
 
 memo
 batchfile interact

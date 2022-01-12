@@ -13,11 +13,13 @@ class BK_device : public DAS_IO::Serial {
     BK_device();
     // ~BK_device();
     enum CB_ID { CB_NONE, CB_GETS, CB_GETD, CB_CMD };
-    bool protocol_input();
     void enqueue_polls();
     bool process_requests();
     DAS_IO::rqueue RQ;
   protected:
+    bool protocol_input();
+    bool protocol_timeout();
+    bool protocol_gflag(int flag);
 };
 
 class BKdCmd : public DAS_IO::Cmd_reader {

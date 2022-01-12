@@ -3,6 +3,7 @@
       # Nort's laptop:
       # slcandev=/dev/ttyS5
       # cantactpro=yes
+      BKdev=/dev/ttyS4
       ;;
     EASWHLPT3425022)
       # Marco's laptop
@@ -28,5 +29,7 @@
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen Chargecol
   Launch      cmd    Chargesrvr -H srvr: -S:
+[ -c "$BKdev" ] &&
+  Launch      -      BKd -p $BKdev -v
   Launch      -      tmdf
   Launch      -TMC-  Chargealgo

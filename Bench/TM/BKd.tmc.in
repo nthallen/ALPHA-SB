@@ -22,4 +22,5 @@ group BKd_group (BKd_V_set, BKd_I_set,
   BKd_I_disp = BKd.I_disp;
   BKd_Status = BKd.Status;
   BKd_Stale = BKd_obj->Stale(255);
+  BKd_obj->synch();
 }

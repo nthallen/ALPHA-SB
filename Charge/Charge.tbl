@@ -3,7 +3,7 @@ Input "TMbase.tbl";
 Input "BKd.tbl";
 
 { HBox {
-    |; [BKd]; |; [TMbaseB]; |;
+    |+; [BKd]; |+; [TMbaseB]; |+;
   };
   -;
 }
