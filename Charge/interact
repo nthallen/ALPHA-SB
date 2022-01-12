@@ -1,0 +1,32 @@
+  case `hostname` in
+    easwhlpt3425080)
+      # Nort's laptop:
+      # slcandev=/dev/ttyS5
+      # cantactpro=yes
+      ;;
+    EASWHLPT3425022)
+      # Marco's laptop
+      slcandev=/dev/ttyS3;;
+    spi2)
+      # slcandev=/dev/ttyACM0
+      ;;
+    spi3)
+      slcandev=/dev/ttyACM0
+      ;;
+    *)
+      slcandev=/dev/ttyACM0;;
+  esac
+
+  Launch      memo   memo -o $Experiment.log -l4
+              [ -z "$launch_err" ] &&
+                msg "Running script interact"
+[ -c "$slcandev" ] &&
+  Launch      -      subbusd_slcan -n CAN -p $slcandev
+[ "$cantactpro" = "yes" ] &&
+  Launch      -      subbusd_CAN -n CAN
+  Launch      tm_bfr bfr -H bfr: -S:
+  Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
+  Launch      tm_gen Chargecol
+  Launch      cmd    Chargesrvr -H srvr: -S:
+  Launch      -      tmdf
+  Launch      -TMC-  Chargealgo

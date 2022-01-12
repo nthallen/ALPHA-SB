@@ -1,0 +1,4 @@
+HEADER SCoPEx B3MB Charging Station
+MNEMONIC chg
+HOMEDIR Charge_Data_Dir
+ROWS 11
