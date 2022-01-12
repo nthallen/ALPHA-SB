@@ -7,7 +7,7 @@
 using namespace DAS_IO;
 
 BK_device::BK_device() : Serial("BKdev", 80, BKd_port, O_RDWR) {
-  flags |= gflag(0);
+  flags |= Fl_Timeout | gflag(0);
 }
 
 bool BK_device::protocol_input() {
@@ -49,7 +49,7 @@ bool BK_device::protocol_input() {
           return false; // wait for more input
         }
       } else {
-        msg(MSG_DEBUG, "%s: CB_GETD complete", iname);
+        msg(MSG_DEBUG, "%s: CB_GETD complete: i3=%d", iname, i3);
         BKd.V_disp = i1;
         BKd.I_disp = i2;
         BKd.Status = i3 ? 1 : 0; // clearing the stale bit

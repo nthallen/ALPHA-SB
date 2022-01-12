@@ -9,6 +9,7 @@
       # Marco's laptop
       slcandev=/dev/ttyS3;;
     spi2)
+      BKdev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
     spi3)
