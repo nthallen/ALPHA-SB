@@ -31,6 +31,6 @@
   Launch      tm_gen Chargecol
   Launch      cmd    Chargesrvr -H srvr: -S:
 [ -c "$BKdev" ] &&
-  Launch      -      BKd -p $BKdev -v
+  Launch      -      BKd -p $BKdev
   Launch      -      tmdf
   Launch      -TMC-  Chargealgo
