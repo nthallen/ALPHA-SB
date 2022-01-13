@@ -27,8 +27,8 @@ int main(int argc, char **argv) {
 
   // Set up device interface
   BK_device *BK_dev = new BK_device();
-  BK_dev->setup(9600,8,'n',1,-1,'\r');
-  BK_dev->enqueue_polls();
+  // BK_dev->setup(9600,8,'n',1,-1,'\r');
+  // BK_dev->enqueue_polls();
   ELoop.add_child(BK_dev);
 
   // Set up command interface

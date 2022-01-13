@@ -1,5 +1,6 @@
 /** @file BKdev.cc */
 #include <fcntl.h>
+#include <string.h>
 #include "dasio/msg.h"
 #include "BKd_int.h"
 #include "BKd.h" 
@@ -8,6 +9,12 @@ using namespace DAS_IO;
 
 BK_device::BK_device() : Serial("BKdev", 80, BKd_port, O_RDWR) {
   flags |= Fl_Timeout | gflag(0);
+  setup(9600,8,'n',1,-1,0);
+  termios_p.c_iflag |= ICRNL;
+  if ( tcsetattr(fd, TCSANOW, &termios_p) )
+    msg(MSG_ERROR, "%s: Error on tcsetattr: %s", iname, strerror(errno) );
+  tcgetattr(fd, &termios_p);
+  enqueue_polls();
 }
 
 bool BK_device::protocol_input() {
