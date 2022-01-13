@@ -9,11 +9,7 @@ using namespace DAS_IO;
 
 BK_device::BK_device() : Serial("BKdev", 80, BKd_port, O_RDWR) {
   flags |= Fl_Timeout | gflag(0);
-  setup(9600,8,'n',1,-1,0);
-  termios_p.c_iflag |= ICRNL;
-  if ( tcsetattr(fd, TCSANOW, &termios_p) )
-    msg(MSG_ERROR, "%s: Error on tcsetattr: %s", iname, strerror(errno) );
-  tcgetattr(fd, &termios_p);
+  setup(9600,8,'n',1,1,1);
   enqueue_polls();
 }
 
@@ -34,6 +30,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: CB_GETS incomplete, waiting", iname);
+          update_tc_vmin(10-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -53,6 +50,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: CB_GETD incomplete, waiting", iname);
+          update_tc_vmin(13-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -70,6 +68,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: Command response incomplete, waiting", iname);
+          update_tc_vmin(3-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -112,6 +111,11 @@ bool BK_device::process_requests() {
                         RQ.pending->req_sz);
       msg(MSG_DEBUG, "%s: process_requests() issued '%.4s' rv=%d",
           iname, RQ.pending->reqstr, rv);
+      switch (RQ.pending->callback_id) {
+        case CB_GETS: update_tc_vmin(10,1); break;
+        case CB_GETD: update_tc_vmin(13,1); break;
+        case CB_CMD:  update_tc_vmin( 3,1); break;
+      }
       if (rv) TO.Clear();
       else TO.Set(0, 100);
       return rv;
