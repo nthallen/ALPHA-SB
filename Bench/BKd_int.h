@@ -12,7 +12,7 @@ class BK_device : public DAS_IO::Serial {
   public:
     BK_device();
     // ~BK_device();
-    enum CB_ID { CB_NONE, CB_GETS, CB_GETD, CB_CMD };
+    enum CB_ID { CB_NONE, CB_GETS, CB_GETD, CB_CMD, CB_MAX };
     void enqueue_polls();
     bool process_requests();
     DAS_IO::rqueue RQ;
@@ -20,6 +20,11 @@ class BK_device : public DAS_IO::Serial {
     bool protocol_input();
     bool protocol_timeout();
     bool protocol_gflag(int flag);
+    typedef struct {
+      int timeout_msec;
+      int response_size;
+    } reqdef_t[CB_MAX];
+    static reqdef_t reqdef;
 };
 
 class BKdCmd : public DAS_IO::Cmd_reader {

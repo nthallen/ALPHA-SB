@@ -7,6 +7,13 @@
 
 using namespace DAS_IO;
 
+BK_device::reqdef_t BK_device::reqdef = {
+    0,  0, // CB_NONE
+  100, 10, // CB_GETS
+  100, 13, // CB_GETD
+  100,  3  // CB_CMD
+};
+
 BK_device::BK_device() : Serial("BKdev", 80, BKd_port, O_RDWR) {
   flags |= Fl_Timeout | gflag(0);
   setup(9600,8,'n',1,1,1);
@@ -15,7 +22,7 @@ BK_device::BK_device() : Serial("BKdev", 80, BKd_port, O_RDWR) {
 
 bool BK_device::protocol_input() {
   int i1, i2, i3;
-  CB_ID cbid = (CB_ID) (RQ.pending ? RQ.pending->callback_id : CB_NONE);
+  CB_ID cbid = (CB_ID) (RQ.pending ? RQ.pending->get_callback_id(CB_MAX) : CB_NONE);
   switch (cbid) {
     case CB_NONE:
       report_err("%s: Unexpected input", iname);
@@ -30,7 +37,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: CB_GETS incomplete, waiting", iname);
-          update_tc_vmin(10-cp,-1);
+          update_tc_vmin(reqdef[cbid].response_size-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -50,7 +57,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: CB_GETD incomplete, waiting", iname);
-          update_tc_vmin(13-cp,-1);
+          update_tc_vmin(reqdef[cbid].response_size-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -68,7 +75,7 @@ bool BK_device::protocol_input() {
           consume(nc);
         } else {
           msg(MSG_DEBUG, "%s: Command response incomplete, waiting", iname);
-          update_tc_vmin(3-cp,-1);
+          update_tc_vmin(reqdef[cbid].response_size-cp,-1);
           return false; // wait for more input
         }
       } else {
@@ -111,13 +118,9 @@ bool BK_device::process_requests() {
                         RQ.pending->req_sz);
       msg(MSG_DEBUG, "%s: process_requests() issued '%.4s' rv=%d",
           iname, RQ.pending->reqstr, rv);
-      switch (RQ.pending->callback_id) {
-        case CB_GETS: update_tc_vmin(10,1); break;
-        case CB_GETD: update_tc_vmin(13,1); break;
-        case CB_CMD:  update_tc_vmin( 3,1); break;
-      }
-      if (rv) TO.Clear();
-      else TO.Set(0, 100);
+      int cbid = RQ.pending->get_callback_id(CB_MAX);
+      update_tc_vmin(reqdef[cbid].response_size,-1);
+      TO.Set(0, reqdef[cbid].timeout_msec);
       return rv;
     } else {
       msg(MSG_DEBUG, "%s: process_requests() queue empty", iname);

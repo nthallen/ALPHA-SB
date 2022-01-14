@@ -32,6 +32,7 @@ namespace DAS_IO {
        */
       bool setup(bool persistent, int device_index, int callback_id,
             const char *fmt, va_list args);
+      int get_callback_id(int max);
       static const int reqstr_len = 80;
       char reqstr[reqstr_len];
       bool persistent;

@@ -13,6 +13,14 @@ rqueue_req::rqueue_req() {
   reqstr[0] = '\0';
 }
 
+int rqueue_req::get_callback_id(int max) {
+  if (callback_id >= max) {
+    msg(MSG_ERROR, "Invalid callback_id: %d. Setting to zero", callback_id);
+    callback_id = 0;
+  }
+  return callback_id;
+}
+
 bool rqueue_req::setup(bool persistent, int device_index,
             int callback_id, const char *fmt, va_list args) {
   this->persistent = persistent;
