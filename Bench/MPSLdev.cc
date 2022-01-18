@@ -1,6 +1,7 @@
 /** @file MPSLdev.cc */
 #include <fcntl.h>
 #include <string.h>
+#include <math.h>
 #include "dasio/msg.h"
 #include "MPSLd_int.h"
 #include "MPSLd.h" 
@@ -17,7 +18,7 @@ MPSL_device::reqdef_t MPSL_device::reqdef = {
   100,    CID_NR1,  true, // CB_SETPT <NR1>
   100,    CID_NR1,  true, // CB_STATUS <NR1>
   100, CID_SYSERR,  true, // CB_SYSERR "Special!"
-    0,   CID_NONE, false  // CB_CMD
+  300,   CID_NONE, false  // CB_CMD
 };
 
 MPSL_device::MPSL_device()
@@ -36,7 +37,7 @@ bool MPSL_device::protocol_input() {
       return false;
     case CID_NR1:
       if (not_uint16(VNR1) ||
-          not_str("\n")) {
+          not_str("\r\n")) {
         if (cp < nc) {
           report_err("%s: CB_ID %d CID_NR1 response error", iname, cbid);
           consume(nc);
@@ -73,7 +74,7 @@ bool MPSL_device::protocol_input() {
       break;
     case CID_NR2:
       if (not_float(VNR2) ||
-          not_str("\n")) {
+          not_str("\r\n")) {
         if (cp < nc) {
           report_err("%s: CB_ID %d CID_NR2 response error", iname, cbid);
           consume(nc);
@@ -85,16 +86,29 @@ bool MPSL_device::protocol_input() {
       } else {
         msg(MSG_DEBUG, "%s: CB_ID %d CID_NR1 complete", iname, cbid);
         switch (cbid) {
-          case CB_VOLT:  MPSLd.V_set = VNR2; break;
-          case CB_CURR:  MPSLd.I_set = VNR2; break;
-          case CB_MVOLT: MPSLd.V_disp = VNR2; break;
-          case CB_MCURR: MPSLd.V_disp = VNR2; break;
+          case CB_VOLT:  MPSLd.V_set = floor(VNR2*10+0.5); break;
+          case CB_CURR:  MPSLd.I_set = floor(VNR2*10+0.5); break;
+          case CB_MVOLT: MPSLd.V_disp = floor(VNR2*10+0.5); break;
+          case CB_MCURR: MPSLd.I_disp = floor(VNR2*10+0.5); break;
           default:
             msg(MSG_EXIT_ABNORM, "%s: Invalid CB_ID %u for CONV_NR2",
               iname, cbid);
             break;
         }
         report_ok(cp);
+      }
+      break;
+    case CID_SYSERR:
+      if (not_uint16(VNR1) ||
+          not_found('\r') ||
+          not_str("\n")) {
+        report_err("%s: SYSERR syntax error", iname);
+        consume(nc);
+      } else {
+        if (VNR1 != 0) {
+          msg(MSG_ERROR, "%s: SYSERR %.*s", iname, cp-2, buf);
+        }
+        consume(cp);
       }
       break;
     default:
@@ -110,7 +124,7 @@ bool MPSL_device::protocol_input() {
 bool MPSL_device::protocol_timeout() {
   int cbid = RQ.pending->get_callback_id(CB_MAX);
   if (reqdef[cbid].has_response) {
-    report_err("%s: Timeout", iname);
+    report_err("%s: Timeout on CB_ID %d", iname, cbid);
   }
   TO.Clear();
   RQ.dispose_pending();

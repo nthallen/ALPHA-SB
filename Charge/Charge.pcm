@@ -1,13 +1,13 @@
 
 --------Frame Statistics-----------
 Major Frame: 1 minor frames, 1 Hz
-Minor Frame: 24 bytes, 1 Hz
+Minor Frame: 34 bytes, 1 Hz
 Effective Frame Dimensions:
-  1 Rows 24 Columns
+  1 Rows 34 Columns
   1 rows/sec
-  192 bits/sec
-  Data:  160 bits/sec  83 %
-  Synch: 32 bits/sec  17 %
+  272 bits/sec
+  Data:  240 bits/sec  88 %
+  Synch: 32 bits/sec  12 %
   Empty: 0 bits/sec  0 %
 -------End of Frame Statistics-----
 
@@ -21,10 +21,17 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Member BKd_V_disp (1,0,6,2)
 1/1 Hz 2 bytes Member BKd_I_set (1,0,8,2)
 1/1 Hz 2 bytes Member BKd_V_set (1,0,10,2)
-1/1 Hz 4 bytes Datum SysTDrift (1,0,12,4)
-1/1 Hz 2 bytes Datum CPU_Pct (1,0,16,2)
-1/1 Hz 2 bytes Datum Disk (1,0,18,2)
-1/1 Hz 2 bytes Datum memused (1,0,20,2)
-1/1 Hz 2 bytes Datum Synch (1,0,22,2)
+1/1 Hz 10 bytes Group MPSLd_group (1,0,12,10)
+1/1 Hz 1 bytes Member MPSLd_Stale (1,0,12,1)
+1/1 Hz 1 bytes Member MPSLd_Status (1,0,13,1)
+1/1 Hz 2 bytes Member MPSLd_I_disp (1,0,14,2)
+1/1 Hz 2 bytes Member MPSLd_V_disp (1,0,16,2)
+1/1 Hz 2 bytes Member MPSLd_I_set (1,0,18,2)
+1/1 Hz 2 bytes Member MPSLd_V_set (1,0,20,2)
+1/1 Hz 4 bytes Datum SysTDrift (1,0,22,4)
+1/1 Hz 2 bytes Datum CPU_Pct (1,0,26,2)
+1/1 Hz 2 bytes Datum Disk (1,0,28,2)
+1/1 Hz 2 bytes Datum memused (1,0,30,2)
+1/1 Hz 2 bytes Datum Synch (1,0,32,2)
 -------End of PCM Definition-------
 

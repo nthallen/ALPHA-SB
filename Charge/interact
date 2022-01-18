@@ -3,7 +3,8 @@
       # Nort's laptop:
       # slcandev=/dev/ttyS5
       # cantactpro=yes
-      BKdev=/dev/ttyS4
+      # BKdev=/dev/ttyS4
+      MPSLhost=169.254.219.152
       ;;
     EASWHLPT3425022)
       # Marco's laptop
@@ -32,5 +33,7 @@
   Launch      cmd    Chargesrvr -H srvr: -S:
 [ -c "$BKdev" ] &&
   Launch      -      BKd -p $BKdev
+[ -n "$MPSLhost" ] &&
+  Launch      -      MPSLd -H MPSL:$MPSLhost
   Launch      -      tmdf
   Launch      -TMC-  Chargealgo

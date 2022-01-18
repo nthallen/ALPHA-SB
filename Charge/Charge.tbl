@@ -1,9 +1,10 @@
 # Charge.tbl
 Input "TMbase.tbl";
 Input "BKd.tbl";
+Input "MPSLd.tbl";
 
 { HBox {
-    |+; [BKd]; |+; [TMbaseB]; |+;
+    |+; [BKd]; |+; [MPSLd]; |+; [TMbaseB]; |+;
   };
   -;
 }

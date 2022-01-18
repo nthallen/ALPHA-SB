@@ -2,10 +2,10 @@
   /* MPSLd.tmc */
   #include "MPSLd.h"
 %}
-TM typedef uint16_t MPSLd_VI_set_t { text "%4.1f"; }
+TM typedef uint16_t MPSLd_VI_set_t { text "%5.1f"; }
 TM @RATE@ Hz MPSLd_VI_set_t MPSLd_V_set;
 TM @RATE@ Hz MPSLd_VI_set_t MPSLd_I_set;
-TM typedef uint16_t MPSLd_VI_disp_t { text "%5.2f"; }
+TM typedef uint16_t MPSLd_VI_disp_t { text "%5.1f"; }
 TM @RATE@ Hz MPSLd_VI_disp_t MPSLd_V_disp;
 TM @RATE@ Hz MPSLd_VI_disp_t MPSLd_I_disp;
 TM typedef uint8_t MPSLd_Status_t { text "%3u"; }

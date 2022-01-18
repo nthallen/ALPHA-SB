@@ -46,6 +46,9 @@ Makefile
 BKd.genui
 BKd.tmc
 BKd.tbl
+MPSLd.genui
+MPSLd.tmc
+MPSLd.tbl
 TMbase.tbl
 TMbase.genui
 freemem.tmc

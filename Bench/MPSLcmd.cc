@@ -21,7 +21,7 @@ bool MPSLdCmd::app_input() {
           consume(nc);
         } else {
           if (farg < 0) farg = 0;
-          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "VOLT %.1f\n", farg);
+          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "VOLT %.1f\r\n", farg);
           consume(cp);
         }
         break;
@@ -33,7 +33,7 @@ bool MPSLdCmd::app_input() {
           consume(nc);
         } else {
           if (farg < 0) farg = 0;
-          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "CURR %.1f\n", farg);
+          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "CURR %.1f\r\n", farg);
           consume(cp);
         }
         break;
@@ -44,7 +44,7 @@ bool MPSLdCmd::app_input() {
           report_err("%s: invalid S command", iname);
           consume(nc);
         } else {
-          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "OUTP:%s\n",
+          MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD, "OUTP:%s\r\n",
                                   arg ? "START" : "STOP");
           consume(cp);
         }
@@ -57,7 +57,7 @@ bool MPSLdCmd::app_input() {
           consume(nc);
         } else {
           MPSL_dev->RQ.enqueue_cmd(0, MPSL_dev->CB_CMD,
-            "CONF:SETPT %u\n", arg);
+            "CONF:SETPT %u\r\n", arg);
           consume(cp);
         }
         break;
