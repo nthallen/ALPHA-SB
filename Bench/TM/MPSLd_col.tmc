@@ -1,0 +1,4 @@
+%{
+  #include "MPSLd.h"
+  MPSLd_t MPSLd;
+%}

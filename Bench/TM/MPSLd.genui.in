@@ -1,0 +1,15 @@
+@RATE@ MPSLd_V_set  @Panel@MPSLd Volts
+@RATE@ MPSLd_I_set  @Panel@MPSLd Amps
+@RATE@ MPSLd_V_disp @Panel@MPSLd Volts
+@RATE@ MPSLd_I_disp @Panel@MPSLd Amps
+
+@RATE@ MPSLd_SS:MPSLd_Status:1 @Panel@MPSLd Status SS
+@RATE@ MPSLd_STBY:MPSLd_Status:6 @Panel@MPSLd Status STBY
+@RATE@ MPSLd_PWR:MPSLd_Status:7 @Panel@MPSLd Status PWR
+@RATE@ MPSLd_CV:MPSLd_Status:8 @Panel@MPSLd Status CV
+@RATE@ MPSLd_CC:MPSLd_Status:10 @Panel@MPSLd Status CC
+@RATE@ MPSLd_Output:MPSLd_Status:13 @Panel@MPSLd Status Output
+@RATE@ MPSLd_Setpt:MPSLd_Status:14 @Panel@MPSLd Status SetPt
+
+# @RATE@ MPSL_Stale:MPSLd_Status:1   @Panel@MPSLd Status
+@RATE@ MPSLd_Stale  @Panel@MPSLd Stale

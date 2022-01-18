@@ -1,0 +1,8 @@
+MPSLd {
+  HBox { +-; Title: "MPSL SL"; -+ };
+  ""               >Volts<        >Amps<;
+  Set:          (MPSLd_V_set,4)  (MPSLd_I_set,4);
+  Meas:         (MPSLd_V_disp,5) (MPSLd_I_disp,5);
+  Pwr:          (MPSL_OnOff,3);
+  Drv:          (MPSLd_Stale,3);
+}

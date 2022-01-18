@@ -1,0 +1,26 @@
+%{
+  /* MPSLd.tmc */
+  #include "MPSLd.h"
+%}
+TM typedef uint16_t MPSLd_VI_set_t { text "%4.1f"; }
+TM @RATE@ Hz MPSLd_VI_set_t MPSLd_V_set;
+TM @RATE@ Hz MPSLd_VI_set_t MPSLd_I_set;
+TM typedef uint16_t MPSLd_VI_disp_t { text "%5.2f"; }
+TM @RATE@ Hz MPSLd_VI_disp_t MPSLd_V_disp;
+TM @RATE@ Hz MPSLd_VI_disp_t MPSLd_I_disp;
+TM typedef uint8_t MPSLd_Status_t { text "%3u"; }
+TM @RATE@ Hz MPSLd_Status_t MPSLd_Status;
+TM @RATE@ Hz MPSLd_Status_t MPSLd_Stale;
+
+TM "Receive" MPSLd 1;
+
+group MPSLd_group (MPSLd_V_set, MPSLd_I_set,
+    MPSLd_V_disp, MPSLd_I_disp, MPSLd_Status, MPSLd_Stale) {
+  MPSLd_V_set = MPSLd.V_set;
+  MPSLd_I_set = MPSLd.I_set;
+  MPSLd_V_disp = MPSLd.V_disp;
+  MPSLd_I_disp = MPSLd.I_disp;
+  MPSLd_Status = MPSLd.Status;
+  MPSLd_Stale = MPSLd_obj->Stale(255);
+  MPSLd_obj->synch();
+}

@@ -1,0 +1,15 @@
+<package> MPSLd
+<include> "MPSLd_int.h"
+<include> msg oui
+<include> cmd_reader
+<include> host_session
+
+<unsort>
+Host_Session function MPSL: Where to find Magna-Power SL Series device
+Note: Must also supply MPSL port definition in services
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("MPSLd",
+    "Magna-Power SL Series Bench Power Supply Driver", "V1.0");

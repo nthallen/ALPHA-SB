@@ -1,0 +1,20 @@
+Moduledef MPSLd [ RATE=1 Panel= ] {
+}
+
+tmcbase = MPSLd.tmc:MPSLd.tmc.in
+colbase = MPSLd_col.tmc
+cmdbase = MPSLd.cmd
+genuibase = MPSLd.genui:MPSLd.genui.in
+extbase = MPSLd_conv.tmc
+- : MPSLd.tbl:MPSLd.tbl.in
+DISTRIB = @MODDIR@/../MPSLd
+CPPFLAGS = -I @MODDIR@/..
+
+%%
+
+.PHONY : clean-MPSLd @MODDIR@/../MPSLd
+@MODDIR@/../MPSLd :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-MPSLd
+clean-MPSLd :
+	$(MAKE) --directory=@MODDIR@/.. clean

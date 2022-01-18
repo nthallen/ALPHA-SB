@@ -1,0 +1,23 @@
+%{
+  /* MPSLd_conv.tmc */
+  #define MPSL_Stale_text(x) ((x)?"STALE":"Fresh")
+  #define MPSL_OnOff_text(x) ((x)?" On":"Off")
+%}
+
+TM typedef uint8_t MPSL_Stale_t { text "%5u" MPSL_Stale_text(); }
+/* MPSL_Stale_t MPSL_Stale; Invalidate MPSL_Stale;
+{ MPSL_Stale = (MPSLd_Status >> 1) & 1; Validate MPSL_Stale; } */
+
+TM typedef uint8_t MPSL_OnOff_t { text "%3d" MPSL_OnOff_text(); }
+MPSL_OnOff_t MPSL_OnOff; Invalidate MPSL_OnOff;
+{ MPSL_OnOff = (MPSLd_Status >> 7) & 1; Validate MPSL_OnOff; }
+
+/*
+@RATE@ MPSLd_SS:MPSLd_Status:1 @Panel@MPSLd Status SS
+@RATE@ MPSLd_STBY:MPSLd_Status:6 @Panel@MPSLd Status STBY
+@RATE@ MPSLd_PWR:MPSLd_Status:7 @Panel@MPSLd Status PWR
+@RATE@ MPSLd_CV:MPSLd_Status:8 @Panel@MPSLd Status CV
+@RATE@ MPSLd_CC:MPSLd_Status:10 @Panel@MPSLd Status CC
+@RATE@ MPSLd_Output:MPSLd_Status:13 @Panel@MPSLd Status Output
+@RATE@ MPSLd_Setpt:MPSLd_Status:14 @Panel@MPSLd Status SetPt
+*/
