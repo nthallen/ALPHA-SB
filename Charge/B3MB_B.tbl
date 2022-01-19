@@ -1,0 +1,10 @@
+Input "B3MB_100V3.tbl";
+Input "B3MB_100V4.tbl";
+
+{
+  HBox {
+    |+; [B3MB_100V3_Col]; |+;
+        [B3MB_100V4_Col]; |+;
+  };
+  -
+}

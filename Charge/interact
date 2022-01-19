@@ -9,6 +9,10 @@
     EASWHLPT3425022)
       # Marco's laptop
       slcandev=/dev/ttyS3;;
+    spi1)
+      cantactpro=yes
+      BKdev=/dev/ttyUSB0
+      ;;
     spi2)
       BKdev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
