@@ -14,11 +14,12 @@ Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types Panel=Motors:
 Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT= Panel=Motors:
 Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 
-Module B3MB mode=types ID=28V1  CAN_ID=2 Panel=B3MB:
-Module B3MB            ID=100V1 CAN_ID=6 Panel=B3MB:
-Module B3MB            ID=100V2 CAN_ID=7 Panel=B3MB:
-Module B3MB            ID=100V3 CAN_ID=8 Panel=B3MB:
-Module B3MB            ID=100V4 CAN_ID=3 Panel=B3MB:
+# B3MB Configuration as per Under Link 20220813 Rev 2
+Module B3MB mode=types ID=28V1  CAN_ID=11 Panel=B3MB:
+Module B3MB            ID=100V1 CAN_ID=1 Panel=B3MB:
+Module B3MB            ID=100V2 CAN_ID=2 Panel=B3MB:
+Module B3MB            ID=100V3 CAN_ID=3 Panel=B3MB:
+Module B3MB            ID=100V4 CAN_ID=4 Panel=B3MB:
 tmcbase = B3MB_28V1_cal.tmc
 tmcbase = B3MB_100V1_cal.tmc
 tmcbase = B3MB_100V2_cal.tmc

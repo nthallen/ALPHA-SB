@@ -17,6 +17,8 @@ extern SWData_t SWData;
 #define SWS_NAV_PID 11
 #define SWS_NAV_FF 12
 #define SWS_NAV_SURVEY 13
+#define SWS_ASC_OFF 30
+#define SWS_ASC_ON 31
 #define SWS_SHUTDOWN 255
 #define SWS_PMC_ACTIVATE 20
 #define SWS_PMC_STOP 21

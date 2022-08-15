@@ -25,6 +25,8 @@
   : Nav PID { $0 = SWS_NAV_PID; }
   : Nav FeedForward { $0 = SWS_NAV_FF; }
   : Nav Survey { $0 = SWS_NAV_SURVEY; }
+  : Ascender Power Down { $0 = SWS_ASC_OFF; }
+  : Ascender Power Up { $0 = SWS_ASC_ON; }
   : Shutdown Full { $0 = SWS_SHUTDOWN; }
   : PMC Activate { $0 = SWS_PMC_ACTIVATE; }
   : PMC Stop { $0 = SWS_PMC_STOP; }
