@@ -17,7 +17,7 @@
       tmseriodev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
-    spi3)
+    [Ss]pi3)
       propmtrdev=/dev/ttyUSB0
       tmseriodev=/dev/ttyUSB1
       ascenderdev=/dev/ttyUSB2
