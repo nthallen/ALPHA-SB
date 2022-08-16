@@ -1,29 +1,29 @@
 /* Telemetry Channels for a single B3MB Instance, namely @ID@ */
 TM typedef B3MB_Amps_t B3MB_@ID@_B1I_t;
-TM typedef B3MB_Amps_t B3MB_@ID@_B2I_t;
-TM typedef B3MB_Amps_t B3MB_@ID@_B3I_t;
-TM typedef B3MB_Amps_t B3MB_@ID@_B4I_t;
+@RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B2I_t; @RT2@
+@RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B3I_t; @RT2@
+@RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B4I_t; @RT2@
 TM typedef B3MB_Amps_t B3MB_@ID@_L1I_t;
 TM typedef B3MB_Amps_t B3MB_@ID@_L2I_t;
 TM typedef B3MB_Amps_t B3MB_@ID@_L3I_t;
 TM typedef B3MB_Amps_t B3MB_@ID@_L4I_t;
 
 TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt1_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt2_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt3_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt4_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load1_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load2_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load3_V;
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Load4_V;
+@RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt2_V; @RT2@
+@RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt3_V; @RT2@
+@RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt4_V; @RT2@
+TM @SLOW@ Hz B3MB_Volts_t  @L1@_V;
+TM @SLOW@ Hz B3MB_Volts_t  @L2@_V;
+TM @SLOW@ Hz B3MB_Volts_t  @L3@_V;
+TM @SLOW@ Hz B3MB_Volts_t  @L4@_V;
 TM @SLOW@ Hz B3MB_@ID@_B1I_t  B3MB_@ID@_Batt1_I;
-TM @SLOW@ Hz B3MB_@ID@_B2I_t  B3MB_@ID@_Batt2_I;
-TM @SLOW@ Hz B3MB_@ID@_B3I_t  B3MB_@ID@_Batt3_I;
-TM @SLOW@ Hz B3MB_@ID@_B4I_t  B3MB_@ID@_Batt4_I;
-TM @SLOW@ Hz B3MB_@ID@_L1I_t  B3MB_@ID@_Load1_I;
-TM @SLOW@ Hz B3MB_@ID@_L2I_t  B3MB_@ID@_Load2_I;
-TM @SLOW@ Hz B3MB_@ID@_L3I_t  B3MB_@ID@_Load3_I;
-TM @SLOW@ Hz B3MB_@ID@_L4I_t  B3MB_@ID@_Load4_I;
+@RT1@ TM @SLOW@ Hz B3MB_@ID@_B2I_t  B3MB_@ID@_Batt2_I; @RT2@
+@RT1@ TM @SLOW@ Hz B3MB_@ID@_B3I_t  B3MB_@ID@_Batt3_I; @RT2@
+@RT1@ TM @SLOW@ Hz B3MB_@ID@_B4I_t  B3MB_@ID@_Batt4_I; @RT2@
+TM @SLOW@ Hz B3MB_@ID@_L1I_t  @L1@_I;
+TM @SLOW@ Hz B3MB_@ID@_L2I_t  @L2@_I;
+TM @SLOW@ Hz B3MB_@ID@_L3I_t  @L3@_I;
+TM @SLOW@ Hz B3MB_@ID@_L4I_t  @L4@_I;
 TM @SLOW@ Hz B3MB_BusV_t   B3MB_@ID@_Bus_V;
 TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T1;
 TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T2;
@@ -34,31 +34,32 @@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T5;
 TM @SLOW@ Hz B3MB_Status_t B3MB_@ID@_Cmd_S;
 TM @SLOW@ Hz B3MB_Status_t B3MB_@ID@_LED_S;
 
-Group B3MB@CAN_ID@ (B3MB_@ID@_Batt1_V, B3MB_@ID@_Batt2_V, B3MB_@ID@_Batt3_V,
-                    B3MB_@ID@_Batt4_V, B3MB_@ID@_Load1_V, B3MB_@ID@_Load2_V,
-                    B3MB_@ID@_Load3_V, B3MB_@ID@_Load4_V, B3MB_@ID@_Batt1_I,
-                    B3MB_@ID@_Batt2_I, B3MB_@ID@_Batt3_I, B3MB_@ID@_Batt4_I,
-                    B3MB_@ID@_Load1_I, B3MB_@ID@_Load2_I, B3MB_@ID@_Load3_I,
-                    B3MB_@ID@_Load4_I, B3MB_@ID@_Bus_V, B3MB_@ID@_T1,
+Group B3MB@CAN_ID@ (B3MB_@ID@_Batt1_V,
+                    @RT1@ B3MB_@ID@_Batt2_V, B3MB_@ID@_Batt3_V, B3MB_@ID@_Batt4_V, @RT2@
+                    @L1@_V, @L2@_V, @L3@_V,
+                    @L4@_V, B3MB_@ID@_Batt1_I,
+                    @RT1@ B3MB_@ID@_Batt2_I, B3MB_@ID@_Batt3_I, B3MB_@ID@_Batt4_I, @RT2@
+                    @L1@_I, @L2@_I, @L3@_I,
+                    @L4@_I, B3MB_@ID@_Bus_V, B3MB_@ID@_T1,
                     B3MB_@ID@_T2, B3MB_@ID@_T3, B3MB_@ID@_T4, B3MB_@ID@_T5,
                     B3MB_@ID@_Cmd_S, B3MB_@ID@_LED_S) {
   if (B3MB_mread(B3MB_mreq@CAN_ID@)) {
     B3MB_update(B3MB_@ID@_Batt1_V,B3MB_mreq@CAN_ID@,0);
     B3MB_update(B3MB_@ID@_Batt1_I,B3MB_mreq@CAN_ID@,1);
-    B3MB_update(B3MB_@ID@_Batt2_V,B3MB_mreq@CAN_ID@,2);
-    B3MB_update(B3MB_@ID@_Batt2_I,B3MB_mreq@CAN_ID@,3);
-    B3MB_update(B3MB_@ID@_Batt3_V,B3MB_mreq@CAN_ID@,4);
-    B3MB_update(B3MB_@ID@_Batt3_I,B3MB_mreq@CAN_ID@,5);
-    B3MB_update(B3MB_@ID@_Batt4_V,B3MB_mreq@CAN_ID@,6);
-    B3MB_update(B3MB_@ID@_Batt4_I,B3MB_mreq@CAN_ID@,7);
-    B3MB_update(B3MB_@ID@_Load1_V,B3MB_mreq@CAN_ID@,8);
-    B3MB_update(B3MB_@ID@_Load1_I,B3MB_mreq@CAN_ID@,9);
-    B3MB_update(B3MB_@ID@_Load2_V,B3MB_mreq@CAN_ID@,10);
-    B3MB_update(B3MB_@ID@_Load2_I,B3MB_mreq@CAN_ID@,11);
-    B3MB_update(B3MB_@ID@_Load3_V,B3MB_mreq@CAN_ID@,12);
-    B3MB_update(B3MB_@ID@_Load3_I,B3MB_mreq@CAN_ID@,13);
-    B3MB_update(B3MB_@ID@_Load4_V,B3MB_mreq@CAN_ID@,14);
-    B3MB_update(B3MB_@ID@_Load4_I,B3MB_mreq@CAN_ID@,15);
+    @RT1@ B3MB_update(B3MB_@ID@_Batt2_V,B3MB_mreq@CAN_ID@,2); @RT2@
+    @RT1@ B3MB_update(B3MB_@ID@_Batt2_I,B3MB_mreq@CAN_ID@,3); @RT2@
+    @RT1@ B3MB_update(B3MB_@ID@_Batt3_V,B3MB_mreq@CAN_ID@,4); @RT2@
+    @RT1@ B3MB_update(B3MB_@ID@_Batt3_I,B3MB_mreq@CAN_ID@,5); @RT2@
+    @RT1@ B3MB_update(B3MB_@ID@_Batt4_V,B3MB_mreq@CAN_ID@,6); @RT2@
+    @RT1@ B3MB_update(B3MB_@ID@_Batt4_I,B3MB_mreq@CAN_ID@,7); @RT2@
+    B3MB_update(@L1@_V,B3MB_mreq@CAN_ID@,8);
+    B3MB_update(@L1@_I,B3MB_mreq@CAN_ID@,9);
+    B3MB_update(@L2@_V,B3MB_mreq@CAN_ID@,10);
+    B3MB_update(@L2@_I,B3MB_mreq@CAN_ID@,11);
+    B3MB_update(@L3@_V,B3MB_mreq@CAN_ID@,12);
+    B3MB_update(@L3@_I,B3MB_mreq@CAN_ID@,13);
+    B3MB_update(@L4@_V,B3MB_mreq@CAN_ID@,14);
+    B3MB_update(@L4@_I,B3MB_mreq@CAN_ID@,15);
     B3MB_update(B3MB_@ID@_Bus_V,B3MB_mreq@CAN_ID@,16);
     B3MB_update(B3MB_@ID@_T1,B3MB_mreq@CAN_ID@,17);
     B3MB_update(B3MB_@ID@_T2,B3MB_mreq@CAN_ID@,18);

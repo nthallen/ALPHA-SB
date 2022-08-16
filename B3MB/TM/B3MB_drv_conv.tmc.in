@@ -1,33 +1,33 @@
 /* B3MB_drv_conv.tmc */
 B3MB_on_off_t B3MB_@ID@B1S; Invalidate B3MB_@ID@B1S;
-B3MB_on_off_t B3MB_@ID@B2S; Invalidate B3MB_@ID@B2S;
-B3MB_on_off_t B3MB_@ID@B3S; Invalidate B3MB_@ID@B3S;
-B3MB_on_off_t B3MB_@ID@B4S; Invalidate B3MB_@ID@B4S;
+@RT1@ B3MB_on_off_t B3MB_@ID@B2S; Invalidate B3MB_@ID@B2S; @RT2@
+@RT1@ B3MB_on_off_t B3MB_@ID@B3S; Invalidate B3MB_@ID@B3S; @RT2@
+@RT1@ B3MB_on_off_t B3MB_@ID@B4S; Invalidate B3MB_@ID@B4S; @RT2@
 { B3MB_@ID@B1S = (B3MB_@ID@_Cmd_S>>0)&1; Validate B3MB_@ID@B1S; }
-{ B3MB_@ID@B2S = (B3MB_@ID@_Cmd_S>>1)&1; Validate B3MB_@ID@B2S; }
-{ B3MB_@ID@B3S = (B3MB_@ID@_Cmd_S>>2)&1; Validate B3MB_@ID@B3S; }
-{ B3MB_@ID@B4S = (B3MB_@ID@_Cmd_S>>3)&1; Validate B3MB_@ID@B4S; }
-B3MB_on_off_t B3MB_@ID@L1S; Invalidate B3MB_@ID@L1S;
-B3MB_on_off_t B3MB_@ID@L2S; Invalidate B3MB_@ID@L2S;
-B3MB_on_off_t B3MB_@ID@L3S; Invalidate B3MB_@ID@L3S;
-B3MB_on_off_t B3MB_@ID@L4S; Invalidate B3MB_@ID@L4S;
-{ B3MB_@ID@L1S = (B3MB_@ID@_Cmd_S>>4)&1; Validate B3MB_@ID@L1S; }
-{ B3MB_@ID@L2S = (B3MB_@ID@_Cmd_S>>5)&1; Validate B3MB_@ID@L2S; }
-{ B3MB_@ID@L3S = (B3MB_@ID@_Cmd_S>>6)&1; Validate B3MB_@ID@L3S; }
-{ B3MB_@ID@L4S = (B3MB_@ID@_Cmd_S>>7)&1; Validate B3MB_@ID@L4S; }
+@RT1@ { B3MB_@ID@B2S = (B3MB_@ID@_Cmd_S>>1)&1; Validate B3MB_@ID@B2S; } @RT2@
+@RT1@ { B3MB_@ID@B3S = (B3MB_@ID@_Cmd_S>>2)&1; Validate B3MB_@ID@B3S; } @RT2@
+@RT1@ { B3MB_@ID@B4S = (B3MB_@ID@_Cmd_S>>3)&1; Validate B3MB_@ID@B4S; } @RT2@
+B3MB_on_off_t @L1@S; Invalidate @L1@S;
+B3MB_on_off_t @L2@S; Invalidate @L2@S;
+B3MB_on_off_t @L3@S; Invalidate @L3@S;
+B3MB_on_off_t @L4@S; Invalidate @L4@S;
+{ @L1@S = (B3MB_@ID@_Cmd_S>>4)&1; Validate @L1@S; }
+{ @L2@S = (B3MB_@ID@_Cmd_S>>5)&1; Validate @L2@S; }
+{ @L3@S = (B3MB_@ID@_Cmd_S>>6)&1; Validate @L3@S; }
+{ @L4@S = (B3MB_@ID@_Cmd_S>>7)&1; Validate @L4@S; }
 B3MB_fault_t B3MB_@ID@B1F; Invalidate B3MB_@ID@B1F;
-B3MB_fault_t B3MB_@ID@B2F; Invalidate B3MB_@ID@B2F;
-B3MB_fault_t B3MB_@ID@B3F; Invalidate B3MB_@ID@B3F;
-B3MB_fault_t B3MB_@ID@B4F; Invalidate B3MB_@ID@B4F;
+@RT1@ B3MB_fault_t B3MB_@ID@B2F; Invalidate B3MB_@ID@B2F; @RT2@
+@RT1@ B3MB_fault_t B3MB_@ID@B3F; Invalidate B3MB_@ID@B3F; @RT2@
+@RT1@ B3MB_fault_t B3MB_@ID@B4F; Invalidate B3MB_@ID@B4F; @RT2@
 { B3MB_@ID@B1F = (B3MB_@ID@_Cmd_S>>8)&1; Validate B3MB_@ID@B1F; }
-{ B3MB_@ID@B2F = (B3MB_@ID@_Cmd_S>>9)&1; Validate B3MB_@ID@B2F; }
-{ B3MB_@ID@B3F = (B3MB_@ID@_Cmd_S>>10)&1; Validate B3MB_@ID@B3F; }
-{ B3MB_@ID@B4F = (B3MB_@ID@_Cmd_S>>11)&1; Validate B3MB_@ID@B4F; }
-B3MB_fault_t B3MB_@ID@L1F; Invalidate B3MB_@ID@L1F;
-B3MB_fault_t B3MB_@ID@L2F; Invalidate B3MB_@ID@L2F;
-B3MB_fault_t B3MB_@ID@L3F; Invalidate B3MB_@ID@L3F;
-B3MB_fault_t B3MB_@ID@L4F; Invalidate B3MB_@ID@L4F;
-{ B3MB_@ID@L1F = (B3MB_@ID@_Cmd_S>>12)&1; Validate B3MB_@ID@L1F; }
-{ B3MB_@ID@L2F = (B3MB_@ID@_Cmd_S>>13)&1; Validate B3MB_@ID@L2F; }
-{ B3MB_@ID@L3F = (B3MB_@ID@_Cmd_S>>14)&1; Validate B3MB_@ID@L3F; }
-{ B3MB_@ID@L4F = (B3MB_@ID@_Cmd_S>>15)&1; Validate B3MB_@ID@L4F; }
+@RT1@ { B3MB_@ID@B2F = (B3MB_@ID@_Cmd_S>>9)&1; Validate B3MB_@ID@B2F; } @RT2@
+@RT1@ { B3MB_@ID@B3F = (B3MB_@ID@_Cmd_S>>10)&1; Validate B3MB_@ID@B3F; } @RT2@
+@RT1@ { B3MB_@ID@B4F = (B3MB_@ID@_Cmd_S>>11)&1; Validate B3MB_@ID@B4F; } @RT2@
+B3MB_fault_t @L1@F; Invalidate @L1@F;
+B3MB_fault_t @L2@F; Invalidate @L2@F;
+B3MB_fault_t @L3@F; Invalidate @L3@F;
+B3MB_fault_t @L4@F; Invalidate @L4@F;
+{ @L1@F = (B3MB_@ID@_Cmd_S>>12)&1; Validate @L1@F; }
+{ @L2@F = (B3MB_@ID@_Cmd_S>>13)&1; Validate @L2@F; }
+{ @L3@F = (B3MB_@ID@_Cmd_S>>14)&1; Validate @L3@F; }
+{ @L4@F = (B3MB_@ID@_Cmd_S>>15)&1; Validate @L4@F; }

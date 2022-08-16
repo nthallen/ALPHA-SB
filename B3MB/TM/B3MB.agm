@@ -1,4 +1,5 @@
-Moduledef B3MB [ ID=28V1 CAN_ID=1 RT1=/* RT2=*/ SLOW=1 FAST=1 Panel= ] {
+Moduledef B3MB [ ID=28V1 CAN_ID=1 SLOW=1 FAST=1 Panel= RT1= RT2= RT3= 
+ L1=B3MB_@ID@_Load1 L2=B3MB_@ID@_Load2 L3=B3MB_@ID@_Load3 L4=B3MB_@ID@_Load4 ] {
   ID specifies which can
   CAN_ID is the CAN bus ID for this board
 }
@@ -10,7 +11,16 @@ mode (types) {
   cmdbase = B3MB.cmd:B3MB.cmd.in
 }
 
-mode (default,types) {
+mode (V28) [ RT1= RT2= RT3= ] {
+  tmcbase = B3MB_@ID@.tmc:B3MB_drv.tmc.in
+  colbase = B3MB_@ID@_col.tmc:B3MB_drv_col.tmc.in
+  cmdbase = B3MB_@ID@.cmd:B3MB_drv.cmd.in
+  extbase = B3MB_@ID@_conv.tmc:B3MB_drv_conv.tmc.in
+  genuibase = B3MB_@ID@.genui:B3MB_drv.genui.in
+  - : B3MB_@ID@.tbl:B3MB_drv.tbl.in
+}
+
+mode (V100) [ RT1=/* RT2=*/ RT3=# ] {
   tmcbase = B3MB_@ID@.tmc:B3MB_drv.tmc.in
   colbase = B3MB_@ID@_col.tmc:B3MB_drv_col.tmc.in
   cmdbase = B3MB_@ID@.cmd:B3MB_drv.cmd.in
