@@ -21,4 +21,7 @@ B3MB_100V_Cols {
   -
 }
 
-{ [B3MB_100V_Rows ] }
+{
+ HBox { |+; [B3MB_100V_Rows ]; |+ };
+ -
+}
