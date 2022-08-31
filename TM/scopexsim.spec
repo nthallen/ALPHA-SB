@@ -33,9 +33,9 @@ Module SpatialDual FAST=10 Panel=Main:
 Module Ascender Panel=Main:
 Module Nav
 
-TGTDIR = /home/scopex
+TGTDIR = /home/scopex/Sim
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-DISTRIB = interact services runfile.sim
+DISTRIB = services runfile.sim
 IGNORE = B3MB_gen_cal.asv
 
 scopexcol : -lsubbuspp
@@ -47,7 +47,7 @@ scopexalgo : scopexsim.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $extbase $genuibase
 # B3MBrawext : B3MBraw.cdf
 tmserioext : tmserio.tmc tmserio.cc tmserio.oui
-doit : scopex.doit
+# doit : scopex.doit
 Simdoit : Sim.doit
 SimSockdoit : SimSock.doit
 %%
