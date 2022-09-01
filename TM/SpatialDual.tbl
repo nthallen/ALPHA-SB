@@ -36,12 +36,12 @@ Nav_Position {
 
 Nav_Velocity {
   HBox { +-; Title: Velocity; -+ };
-  Course:  (Course,8)  deg;
+  Course:  (Nav_Course,7)  deg;
   Track:   (Track,8)   deg;
   Heading: (heading,8) deg;
 # North:   (velocity_north,8)   "m/s";
 # East:    (velocity_east,8)    "m/s";
-  Thrust:  (Nav_Thrust,3)       "%";
+  Thrust:  (Nav_Thrust_pct,3)       "%";
   Speed:   (velocity_forward,8) "m/s";
   Down:    (velocity_down,8)    "m/s";
 }

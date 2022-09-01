@@ -1,4 +1,4 @@
-SW_Variable: <int16_t,Nav_Angle_t> Course Set Nav Course
+SW_Variable: <int16_t,Nav_Angle_t> Nav_Course Set Nav Course
   : &nav_angle { $0 = $1; }
 SW_Variable: <float,Nav_Gain_t> Nav_PGain Set Nav PGain
   : &nav_gain { $0 = $1; }
@@ -6,7 +6,13 @@ SW_Variable: <float,Nav_Gain_t> Nav_IGain Set Nav IGain
   : &nav_gain { $0 = $1; }
 SW_Variable: <float,Nav_Gain_t> Nav_DGain Set Nav DGain
   : &nav_gain { $0 = $1; }
-SW_Variable: <uint8_t,Nav_Thrust_t> Nav_Thrust Set Nav Thrust
-  : &nav_thrust_pct { $0 = $1; }
+SW_Variable: <uint8_t,Nav_Thrust_pct_t> Nav_Thrust_pct Set Nav Thrust
+  : &nav_thrust_pct_v { $0 = $1; }
+SW_Variable: <int8_t,Nav_dThrust_pct_t> Nav_dThrust_pct Set Nav dThrust
+  : &nav_dthrust_pct_v { $0 = $1; }
+SW_Variable: <uint8_t,Nav_time_t> Nav_T_acc Set Nav T_acc
+  : &nav_time_t_v { $0 = $1; }
+SW_Variable: <uint8_t,Nav_time_t> Nav_T_rot Set Nav T_rot
+  : &nav_time_t_v { $0 = $1; }
 SW_Variable: <uint8_t,UCHAR> Nav_Status Set Nav Status
   : &nav_status_v { $0 = $1; }

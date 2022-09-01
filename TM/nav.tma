@@ -1,34 +1,33 @@
 
-Partition
-
-State heading_idle {}
-
-{ nav_set_gains(Nav_PGain, Nav_IGain, Nav_Dgain); }
-{ nav_set_course(Course, Nav_Thrust); }
-
-State heading_PID {
-  { nav_set_rpm_pid(heading); }
-}
+%{
+  /*
+    Feed Forward partition, hand-coded in TMC to escape TMA 1 Hz resolution.
+    Inputs:
+      Nav_dThrust_pct
+      Nav_Dur
+      Nav_Spacing
+   */
+%}
 
 { STATE (FF_idle, FF_init, FF_accel, FF_coast, FF_decel);
-  int16_t FF_Ta, FF_Tb, FF_count;
+  int16_t FF_T_acc, FF_T_rot, FF_count;
   double FF_dThrust;
   depending on (PMC_Left_RPM, FF_init) {
-    FF_count = FF_ta;
+    FF_count = FF_T_acc;
     nav_set_rpm_dth(FF_dThrust);
     Validate FF_accel;
   }
   depending on (PMC_Left_RPM, FF_accel) {
     if (FF_count-- <= 0) {
       nav_set_rpm_dth(0);
-      FF_count = FF_Tb;
+      FF_count = FF_T_rot;
       Validate FF_coast;
     }
   }
   depending on (PMC_Left_RPM, FF_coast) {
     if (FF_count-- <= 0) {
       nav_set_rpm_dth(-FF_dThrust);
-      FF_count = FF_Ta;
+      FF_count = FF_T_acc;
       Validate FF_decel;
     }
   }
@@ -41,18 +40,38 @@ State heading_PID {
   }
 }
 
+{ nav_set_gains(Nav_PGain, Nav_IGain, Nav_Dgain); }
+{ nav_set_course(convert(Nav_Course), Nav_Thrust_pct); }
+
+Partition
+
+State heading_idle {
+  > _Set Nav Status Idle
+}
+
+State heading_PID {
+  > _Set Nav Status PID
+  { nav_set_rpm_pid(heading); }
+}
+
+%{ /*
+    heading_FF makes a single rotation based on the local variable
+    FF_dThrust, FF_Dur.
+ */
+%}
+
 State heading_FF {
       > _Set Nav Status FF_Init
-      { FF_Ta = 30;
-        FF_Tb = 30;
-        /* FF_dThrust = 5; */
+      { FF_T_acc = Nav_T_acc;
+        FF_T_rot = Nav_T_rot;
+        FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
         Validate FF_init;
       }
       Hold until valid (FF_accel) or 10
       else Validate heading_FF_fail;
       Hold until valid (FF_idle) or 60
       else Validate heading_FF_fail;
-      > _Set Nav Status FF_Coast
+      > _Set Nav Status FF_Pause
   
   +10 { FF_dThrust = -FF_dThrust;
         Validate FF_init;
@@ -64,12 +83,62 @@ State heading_FF {
       > _Set Nav Status FF_Done
       { FF_dThrust = -FF_dThrust; }
 
-  +10 > _Set Nav Status PID
-      Validate heading_PID;
+  +10 Validate heading_PID;
 }
 
 State heading_FF_fail {
+  > _Set Nav Status Fail
   { msg(MSG_ERROR, "heading_FF_fail: count=%d", FF_count); }
+}
+
+State heading_Port_1 {
+  > _Set Nav Status Port1
+  { FF_T_acc = Nav_T_acc;
+    FF_T_rot = Nav_T_rot;
+    FF_count = 0;
+    FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
+    Validate FF_coast;
+  }
+  Hold until valid (FF_idle) or 60
+  else Validate heading_FF_fail;
+  Validate heading_Idle;
+}
+
+State heading_Starboard_1 {
+  > _Set Nav Status Stbd1
+  { FF_T_acc = Nav_T_acc;
+    FF_T_rot = Nav_T_rot;
+    FF_count = 0;
+    FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
+    Validate FF_coast;
+  }
+  Hold until valid (FF_idle) or 60
+  else Validate heading_FF_fail;
+  Validate heading_Idle;
+}
+
+State heading_Port_2 {
+  > _Set Nav Status Port2
+  { FF_T_acc = Nav_T_acc;
+    FF_T_rot = Nav_T_rot;
+    FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
+    Validate FF_init;
+  }
+  Hold until valid (FF_idle) or 60
+  else Validate heading_FF_fail;
+  Validate heading_Idle;
+}
+
+State heading_Starboard_2 {
+  > _Set Nav Status Stbd2
+  { FF_T_acc = Nav_T_acc;
+    FF_T_rot = Nav_T_rot;
+    FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
+    Validate FF_init;
+  }
+  Hold until valid (FF_idle) or 60
+  else Validate heading_FF_fail;
+  Validate heading_Idle;
 }
 
 Partition
@@ -77,16 +146,12 @@ Partition
 State survey_idle {}
 
 %{ double FF_dThrust0 = 1;
-   double FF_dThrust1 = 10;
    double FF_ddThrust = 1;
-   int FF_Thrust = 0;
-   int FF_Thrust_Step = 10;
-   int FF_Thrust_Max = 100;
+   double FF_dThrust1 = 10;
 %}
+
 State survey_init {
-  { FF_dThrust = FF_dThrust0;
-    /* ci_sendfcmd(Cmd_Send, "Set Nav Thrust %d\n", FF_Thrust); */
-  }
+  { FF_dThrust = FF_dThrust0; }
 
   Validate heading_PID;
   +10
@@ -110,12 +175,7 @@ State survey_step {
               convert(heading) > -0.2) or 5:00;
   { FF_dThrust += FF_ddThrust;
     if (FF_dThrust > FF_dThrust1) {
-      FF_Thrust += FF_Thrust_Step;
-      if (FF_Thrust > FF_Thrust_Max)
-        Validate survey_idle;
-      else
-        Validate survey_init;
+      Validate survey_idle;
     } else Validate survey_step;
   }
 }
-
