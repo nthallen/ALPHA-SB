@@ -64,7 +64,7 @@ State heading_FF {
       > _Set Nav Status FF_Init
       { FF_T_acc = Nav_T_acc;
         FF_T_rot = Nav_T_rot;
-        FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
+        /* FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct); */
         Validate FF_init;
       }
       Hold until valid (FF_accel) or 10
@@ -93,7 +93,7 @@ State heading_FF_fail {
 
 State heading_Port_1 {
       > _Set Nav Status Port1
-      { FF_T_acc = Nav_T_acc;
+   +1 { FF_T_acc = Nav_T_acc;
         FF_T_rot = Nav_T_rot;
         FF_count = 0;
         FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
@@ -106,7 +106,7 @@ State heading_Port_1 {
 
 State heading_Starboard_1 {
       > _Set Nav Status Stbd1
-      { FF_T_acc = Nav_T_acc;
+   +1 { FF_T_acc = Nav_T_acc;
         FF_T_rot = Nav_T_rot;
         FF_count = 0;
         FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
@@ -119,7 +119,7 @@ State heading_Starboard_1 {
 
 State heading_Port_2 {
       > _Set Nav Status Port2
-      { FF_T_acc = Nav_T_acc;
+   +1 { FF_T_acc = Nav_T_acc;
         FF_T_rot = Nav_T_rot;
         FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
         Validate FF_init;
@@ -131,7 +131,7 @@ State heading_Port_2 {
 
 State heading_Starboard_2 {
       > _Set Nav Status Stbd2
-      { FF_T_acc = Nav_T_acc;
+   +1 { FF_T_acc = Nav_T_acc;
         FF_T_rot = Nav_T_rot;
         FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
         Validate FF_init;
@@ -145,9 +145,9 @@ Partition
 
 State survey_idle {}
 
-%{ double FF_dThrust0 = 1;
-   double FF_ddThrust = 1;
-   double FF_dThrust1 = 10;
+%{ double FF_dThrust0 = nav_pct_2_thrust(1);
+   double FF_ddThrust = nav_pct_2_thrust(1);
+   double FF_dThrust1 = nav_pct_2_thrust(10);
 %}
 
 State survey_init {

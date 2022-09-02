@@ -1,10 +1,10 @@
 Transmitting
 
 SW_Variable: <uint8_t,UCHAR> SWStat SW Status
-  SWS_NAV_IDLE        10 Nav Idle:            Validate heading_idle; break;
-  SWS_NAV_PID         11 Nav PID:             Validate heading_PID; break;
-  SWS_NAV_FF          12 Nav FeedForward:     Validate heading_FF; break;
-  SWS_NAV_SURVEY      13 Nav Survey:          Validate survey_init; break;
+  SWS_NAV_PID         10 Nav PID:             Validate heading_PID; break;
+  SWS_NAV_FF          11 Nav FeedForward:     Validate heading_FF; break;
+  SWS_NAV_IDLE        12 Nav Survey Idle:     Validate survey_idle; break;
+  SWS_NAV_SURVEY      13 Nav Survey Start:    Validate survey_init; break;
   SWS_NAV_PORT1       14 Nav Port 1:          Validate heading_Port_1; break;
   SWS_NAV_STBD1       15 Nav Starboard 1:     Validate heading_Starboard_1; break;
   SWS_NAV_PORT2       16 Nav Port 2:          Validate heading_Port_2; break;

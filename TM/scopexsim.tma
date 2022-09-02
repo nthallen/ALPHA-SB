@@ -8,9 +8,12 @@ State Shutdown {
 State Sim {
 #     > Sim Set InitialLatitude 42
 #     > Sim Set InitialLongitude -74
-      > Sim Set InitialAltitude 19999
+  +10 > Sim Set InitialAltitude 19999
       > Sim Start
       > Set Nav PGain 1
       > Set Nav DGain 100
-  +10 > Set Nav Thrust 10
+      > Set Nav Thrust 10 pct
+   +1 > Set Nav dThrust 5 pct
+   +1 > Set Nav T_acc 3 sec
+   +1 > Set Nav T_rot 3 sec
 }
