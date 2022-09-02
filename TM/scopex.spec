@@ -16,6 +16,7 @@ Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 
 # B3MB Configuration as per Under Link 20220813 Rev 2
 Module B3MB mode=types ID=28V1  CAN_ID=11 Panel=B3MB:
+Module B3MB            ID=28V2  CAN_ID=12 Panel=B3MB:
 Module B3MB            ID=100V1 CAN_ID=1 Panel=B3MB:
 Module B3MB            ID=100V2 CAN_ID=2 Panel=B3MB:
 Module B3MB            ID=100V3 CAN_ID=3 Panel=B3MB:

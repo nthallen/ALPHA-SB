@@ -11,6 +11,8 @@ PARTITION
   bool AscenderPwrRequest = false;
 %}
 
+State AscPwr_Disable {}
+
 State AscPwr_Init {
   # Check whether ascender is powered or not
   # If any loads are on and/or any loads read close to BusV,
