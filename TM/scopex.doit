@@ -3,7 +3,7 @@ serin serin
 client [SI|RT] scopexclt
 
 server [SI]  cmd scopextxsrvr
-server [SI]  -   RFDio -b 230400 -p /dev/ttyS7 -v
+server [SI]  -   RFDio -b 230400 -p /dev/ttyS3 -v
 
 extraction [SI]  lgr -N `mlf_find LOG` -n lgr
 extraction [!SI] scopexjsonext -n json

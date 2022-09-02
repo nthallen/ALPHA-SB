@@ -7,12 +7,12 @@ PMC_Full {
   " Meas:"   (PMC_Left_RPM,7)        (PMC_Right_RPM,7)        RPM;
   Current:   (PMC_Left_I_Measured,6) (PMC_Right_I_Measured,6) Amps;
   BusV:      (PMC_Left_BusV,6)       (PMC_Right_BusV,6)       V;
-  "100V V:"  (B3MB_100V1_Load1_V,7)  (B3MB_100V3_Load1_V,7)   V;
-  "100V I:"  (B3MB_100V1_Load1_I,7)  (B3MB_100V3_Load1_I,7)   Amps;
+  "100V V:"  (B3MB_100V1_Load1_V,7)  (B3MB_100V4_Load1_V,7)   V;
+  "100V I:"  (B3MB_100V1_Load1_I,7)  (B3MB_100V4_Load1_I,7)   Amps;
   "100V S:"  {(B3MB_100V1L1S,3) (B3MB_100V1L1F,3)}
              {(B3MB_100V3L1S,3) (B3MB_100V3L1F,3)};
-  "28V V:"   (B3MB_28V1_Load1_V,7)   (B3MB_28V1_Load4_V,7)    V;  
-  "28V I:"   (B3MB_28V1_Load1_I,7)   (B3MB_28V1_Load4_I,7)    Amps;
+  "28V V:"   (B3MB_28V1_Load1_V,7)   (B3MB_28V1_Load3_V,7)    V;  
+  "28V I:"   (B3MB_28V1_Load1_I,7)   (B3MB_28V1_Load3_I,7)    Amps;
   "28V S:"   {(B3MB_28V1L1S,3) (B3MB_28V1L1F,3)}
              {(B3MB_28V1L4S,3) (B3MB_28V1L4F,3)};
   "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
