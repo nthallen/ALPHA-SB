@@ -92,53 +92,53 @@ State heading_FF_fail {
 }
 
 State heading_Port_1 {
-  > _Set Nav Status Port1
-  { FF_T_acc = Nav_T_acc;
-    FF_T_rot = Nav_T_rot;
-    FF_count = 0;
-    FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
-    Validate FF_coast;
-  }
-  Hold until valid (FF_idle) or 60
-  else Validate heading_FF_fail;
-  Validate heading_Idle;
+      > _Set Nav Status Port1
+      { FF_T_acc = Nav_T_acc;
+        FF_T_rot = Nav_T_rot;
+        FF_count = 0;
+        FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
+        Validate FF_coast;
+      }
+   +1 Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+      Validate heading_Idle;
 }
 
 State heading_Starboard_1 {
-  > _Set Nav Status Stbd1
-  { FF_T_acc = Nav_T_acc;
-    FF_T_rot = Nav_T_rot;
-    FF_count = 0;
-    FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
-    Validate FF_coast;
-  }
-  Hold until valid (FF_idle) or 60
-  else Validate heading_FF_fail;
-  Validate heading_Idle;
+      > _Set Nav Status Stbd1
+      { FF_T_acc = Nav_T_acc;
+        FF_T_rot = Nav_T_rot;
+        FF_count = 0;
+        FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
+        Validate FF_coast;
+      }
+   +1 Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+      Validate heading_Idle;
 }
 
 State heading_Port_2 {
-  > _Set Nav Status Port2
-  { FF_T_acc = Nav_T_acc;
-    FF_T_rot = Nav_T_rot;
-    FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
-    Validate FF_init;
-  }
-  Hold until valid (FF_idle) or 60
-  else Validate heading_FF_fail;
-  Validate heading_Idle;
+      > _Set Nav Status Port2
+      { FF_T_acc = Nav_T_acc;
+        FF_T_rot = Nav_T_rot;
+        FF_dThrust = nav_pct_2_thrust(Nav_dThrust_pct);
+        Validate FF_init;
+      }
+   +1 Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+      Validate heading_Idle;
 }
 
 State heading_Starboard_2 {
-  > _Set Nav Status Stbd2
-  { FF_T_acc = Nav_T_acc;
-    FF_T_rot = Nav_T_rot;
-    FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
-    Validate FF_init;
-  }
-  Hold until valid (FF_idle) or 60
-  else Validate heading_FF_fail;
-  Validate heading_Idle;
+      > _Set Nav Status Stbd2
+      { FF_T_acc = Nav_T_acc;
+        FF_T_rot = Nav_T_rot;
+        FF_dThrust = -nav_pct_2_thrust(Nav_dThrust_pct);
+        Validate FF_init;
+      }
+   +1 Hold until valid (FF_idle) or 60
+      else Validate heading_FF_fail;
+      Validate heading_Idle;
 }
 
 Partition
