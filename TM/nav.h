@@ -11,11 +11,15 @@ class nav_pid_t {
       IGain = I;
       DGain = D;
     }
-    inline void set_course(uint16_t course, uint8_t thrust) {
+    /**
+     * @param course Course in degrees [0-360)
+     * @param thrust_pct Average thrust as percent of max thrust [0-100]
+     */
+    inline void set_course(int16_t course, uint8_t thrust_pct) {
       if (this->course != course)
         course_rad = (course/100.) * PI/180;
       this->course = course;
-      this->thrust = thrust;
+      this->thrust_pct = thrust_pct;
     }
     /**
      * @param heading Angle in radians
@@ -24,6 +28,8 @@ class nav_pid_t {
 
     /**
      * @param dTh Newtons differential thrust
+     * Positive dTh produces more thrust on the port engine,
+     * generating angular acceleration to the right.
      */
     void set_rpm_dth(double dTh);
     
@@ -31,9 +37,21 @@ class nav_pid_t {
      * @param thrust in Newtons
      * @return RPM to achieve specified thrust
      */
-    inline double thrust2RPM(double thrust) {
+    static inline double thrust2RPM(double thrust) {
       // return sqrt(thrust * 2270);
       return pow(thrust * 12500, 0.46243);
+    }
+    
+    /**
+     * @param RPM
+     * @return Thrust in Newtons according to model
+     */
+    static inline double RPM2thrust(double RPM) {
+      return 8E-5 * pow(abs(RPM),2.1625);
+    }
+    
+    static inline double pct_2_thrust(int thrust_pct) {
+      return  (thrust_pct/100.) * absMaxThrustPerEngine;
     }
   protected:
 
@@ -58,9 +76,9 @@ class nav_pid_t {
     static const double absMaxThrustPerEngine; //< in Newtons
     static const double PI;
     double PGain, IGain, DGain;
-    uint16_t course; //< Course angle as Nav_Angle_t degrees
+    int16_t course; //< Course angle as Nav_Angle_t degrees
     double course_rad; //< Course angle in radians
-    uint8_t thrust; //< thrust as percent of max thrust
+    uint8_t thrust_pct; //< thrust as percent of max thrust
 };
 extern nav_pid_t nav_pid;
 
@@ -85,16 +103,26 @@ inline void nav_set_gains(float P, float I, float D) {
   nav_pid.set_gains(P, I, D);
 }
 
-inline void nav_set_course(double course, uint8_t thrust) {
-  nav_pid.set_course(course, thrust);
+inline void nav_set_course(double course, uint8_t thrust_pct) {
+  nav_pid.set_course(course, thrust_pct);
 }
 
+/**
+ * @param heading Angle in radians
+ */
 inline void nav_set_rpm_pid(double heading) {
   nav_pid.set_rpm_pid(heading);
 }
 
+/**
+ * @param dthrust Newtons differential thrust
+ */
 inline void nav_set_rpm_dth(double dthrust) {
   nav_pid.set_rpm_dth(dthrust);
+}
+
+inline double nav_pct_2_thrust(int thrust_pct) {
+  return nav_pid.pct_2_thrust(thrust_pct);
 }
 
 #endif

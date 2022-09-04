@@ -19,8 +19,8 @@
       ;;
     [Ss]pi3)
       propmtrdev=/dev/ttyUSB0
-      tmseriodev=/dev/ttyUSB1
-      ascenderdev=/dev/ttyUSB2
+      tmseriodev=/dev/ttyUSB2
+      ascenderdev=/dev/ttyUSB1
       spatialdualdev=/dev/ttyUSB3
       slcandev=/dev/ttyACM0
       ;;

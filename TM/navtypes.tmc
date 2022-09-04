@@ -1,5 +1,25 @@
 /* navtypes.tmc */
 TM typedef double Nav_Degrees { text "%6.2lf"; }
-TM typedef uint16_t Nav_Angle_t { text "%7.2lf"; }
+TM typedef int16_t Nav_Angle_t { text "%7.2lf"; }
 TM typedef float Nav_Gain_t { text "%9.2e"; }
-TM typedef uint8_t Nav_Thrust_t { text "%3d"; }
+TM typedef uint8_t Nav_Thrust_pct_t { text "%3u"; }
+TM typedef int8_t Nav_dThrust_pct_t { text "%4d"; }
+TM typedef uint8_t Nav_time_t { text "%4.1lf"; }
+%{
+  const char *nav_status_text(uint8_t status) {
+    switch (status) {
+      case 0:  return "Idle    ";
+      case 1:  return "Fail    ";
+      case 2:  return "PID     ";
+      case 3:  return "FF_Init ";
+      case 4:  return "FF_Pause";
+      case 5:  return "FF_Done ";
+      case 6:  return "Port1   ";
+      case 7:  return "Stbd1   ";
+      case 8:  return "Port2   ";
+      case 9:  return "Stbd2   ";
+      default: return "********";
+    }
+  }
+%}
+TM typedef uint8_t Nav_Status_t { text "%8d" nav_status_text(); }

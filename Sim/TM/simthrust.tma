@@ -1,5 +1,7 @@
 %{
   #include "dasio/cmd_writer.h"
+  #include "nav.h"
+  #define RPM_2_Thrust(x) nav_pid_t::RPM2thrust(x)
   PMC_RPM_t Last_Left_RPM;
   PMC_RPM_t Last_Right_RPM;
 %}
@@ -9,7 +11,7 @@
     double rpm;
     Last_Left_RPM = PMC_Left_RPM;
     rpm = convert(PMC_Left_RPM);
-    thrust = 8E-5 * pow(abs(rpm),2.1625);
+    thrust = RPM_2_Thrust(rpm); /* 8E-5 * pow(abs(rpm),2.1625); */
     ci_sendfcmd(Cmd_Send_Quiet, "Sim set thrustLeft %.6lf\n", thrust);
   }
 }
@@ -20,7 +22,7 @@
     Last_Right_RPM = PMC_Right_RPM;
     rpm = convert(PMC_Right_RPM);
     /* thrust = 4.44E-4 * rpm * rpm; */
-    thrust = 8E-5 * pow(abs(rpm),2.1625);
+    thrust = RPM_2_Thrust(rpm); /* 8E-5 * pow(abs(rpm),2.1625); */
     ci_sendfcmd(Cmd_Send_Quiet, "Sim set thrustRight %.6lf\n", thrust);
   }
 }

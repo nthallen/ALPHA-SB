@@ -11,7 +11,7 @@ nav_pid_t::nav_pid_t()
     : prevCourseError(0),
       courseErrorIntegral(0),
       PGain(0), IGain(0), DGain(0),
-      course(0), course_rad(0), thrust(0)
+      course(0), course_rad(0), thrust_pct(0)
       {}
 
 void nav_pid_t::set_rpm_pid(double track) {
@@ -30,7 +30,7 @@ void nav_pid_t::set_rpm_pid(double track) {
 
 void nav_pid_t::set_rpm_dth(double dThrust) {
   // Given differential thrust, calculate left and right thrust
-  double avgThrust = thrust*absMaxThrustPerEngine/100.;
+  double avgThrust = (thrust_pct/100.) * absMaxThrustPerEngine;
   double lThrust, rThrust;
   if (dThrust > absMaxThrustPerEngine)
     dThrust = absMaxThrustPerEngine;
