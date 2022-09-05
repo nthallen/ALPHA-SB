@@ -41,7 +41,7 @@
 }
 
 { nav_set_gains(Nav_PGain, Nav_IGain, Nav_Dgain); }
-{ nav_set_course(convert(Nav_Course), Nav_Thrust_pct); }
+{ nav_set_course(Nav_Course, Nav_Thrust_pct); }
 
 Partition
 

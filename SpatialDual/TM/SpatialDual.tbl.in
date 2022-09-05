@@ -57,7 +57,7 @@ Nav_Accel {
 Nav_Linear {
   [Nav_Position];
   [Nav_Velocity];
-  [Nav_Accel];
+# [Nav_Accel];
 }
 
 Nav_Euler {
@@ -92,16 +92,29 @@ Nav_Gains {
   D: (Nav_DGain,9);
 }
 
+Nav_SW {
+  HBox { +-; Title: "SW" ; -+ };
+  dThrust:  (Nav_dThrust_pct,3) "%";
+  T_acc:    (Nav_T_acc,4)   sec;
+  T_rot:    (Nav_T_rot,4)   sec;
+  { Status: (Nav_Status,8)}
+}
+
 {
   HBox {
     |+;
     {
       HBox { +-; Title: "Spatial Dual" ; -+ };
       HBox {
-        [Nav_Linear]; |+; {
-          [Nav_Angular];
-          [Nav_Deviations];
-          [Nav_Gains];
+        { HBox {
+            [Nav_Linear]; |+; {
+              [Nav_Angular];
+              [Nav_Deviations];
+            }
+          };
+          HBox {
+            [Nav_Accel]; |; [Nav_Gains]; |; [Nav_SW]
+          }
         }; |+; [Nav_Status];
       };
     };
