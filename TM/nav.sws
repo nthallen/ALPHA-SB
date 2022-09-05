@@ -14,5 +14,5 @@ SW_Variable: <uint8_t,Nav_time_t> Nav_T_acc Set Nav T_acc
   : &nav_time_t_v { $0 = $1; }
 SW_Variable: <uint8_t,Nav_time_t> Nav_T_rot Set Nav T_rot
   : &nav_time_t_v { $0 = $1; }
-SW_Variable: <uint8_t,UCHAR> Nav_Status Set Nav Status
+SW_Variable: <uint8_t,Nav_Status_t> Nav_Status Set Nav Status
   : &nav_status_v { $0 = $1; }

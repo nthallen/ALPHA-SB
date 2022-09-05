@@ -94,7 +94,7 @@ Nav_Gains {
 
 Nav_SW {
   HBox { +-; Title: "SW" ; -+ };
-  dThrust:  (Nav_dThrust_pct,3) "%";
+  dThrust:  (Nav_dThrust_pct,4) "%";
   T_acc:    (Nav_T_acc,4)   sec;
   T_rot:    (Nav_T_rot,4)   sec;
   { Status: (Nav_Status,8)}
