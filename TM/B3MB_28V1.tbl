@@ -2,15 +2,15 @@
 B3MB_28V1_VI {
   HBox { +-; Title: "28V1"; -+ };
   ""    >Volts<                    >Amps<;
-  B1:  (B3MB_28V1_Batt1_V,7) (B3MB_28V1_Batt1_I,7);
-  B2:  (B3MB_28V1_Batt2_V,7) (B3MB_28V1_Batt2_I,7);
-  B3:  (B3MB_28V1_Batt3_V,7) (B3MB_28V1_Batt3_I,7);
-  B4:  (B3MB_28V1_Batt4_V,7) (B3MB_28V1_Batt4_I,7);
+     B1:  (B3MB_28V1_Batt1_V,7) (B3MB_28V1_Batt1_I,7);
+B2:  (B3MB_28V1_Batt2_V,7) (B3MB_28V1_Batt2_I,7);
+B3:  (B3MB_28V1_Batt3_V,7) (B3MB_28V1_Batt3_I,7);
+B4:  (B3MB_28V1_Batt4_V,7) (B3MB_28V1_Batt4_I,7);
   Bus: (B3MB_28V1_Bus_V,7);
-  L1:  (B3MB_28V1_Load1_V,7) (B3MB_28V1_Load1_I,7);
+  L1:  (EngPort28_V,7) (EngPort28_I,7);
   L2:  (B3MB_28V1_Load2_V,7) (B3MB_28V1_Load2_I,7);
-  L3:  (B3MB_28V1_Load3_V,7) (B3MB_28V1_Load3_I,7);
-  L4:  (B3MB_28V1_Load4_V,7) (B3MB_28V1_Load4_I,7);
+  L3:  (EngStbd28_V,7) (EngStbd28_I,7);
+  L4:  (DataSys28_V,7) (DataSys28_I,7);
 }
 
 B3MB_28V1_T {
@@ -36,12 +36,20 @@ B3MB_28V1_Col {
 
 B3MB_28V1_VIH {
   HBox { +-; Title: "28V1"; -+ };
-  ""     >S<                >F<              >Volts<                    >Amps<         ""       >S<             >F<                 >Volts<             >Amps<;
-  B1:  (B3MB_28V1B1S,3) (B3MB_28V1B1F,3)  (B3MB_28V1_Batt1_V,7) (B3MB_28V1_Batt1_I,7) "L1:" (B3MB_28V1L1S,3) (B3MB_28V1L1F,3)  (B3MB_28V1_Load1_V,7) (B3MB_28V1_Load1_I,7);
-  B2:  (B3MB_28V1B2S,3) (B3MB_28V1B2F,3)  (B3MB_28V1_Batt2_V,7) (B3MB_28V1_Batt2_I,7) "L2:" (B3MB_28V1L2S,3) (B3MB_28V1L2F,3)  (B3MB_28V1_Load2_V,7) (B3MB_28V1_Load2_I,7);
-  B3:  (B3MB_28V1B3S,3) (B3MB_28V1B3F,3)  (B3MB_28V1_Batt3_V,7) (B3MB_28V1_Batt3_I,7) "L3:" (B3MB_28V1L3S,3) (B3MB_28V1L3F,3)  (B3MB_28V1_Load3_V,7) (B3MB_28V1_Load3_I,7);
-  B4:  (B3MB_28V1B4S,3) (B3MB_28V1B4F,3)  (B3MB_28V1_Batt4_V,7) (B3MB_28V1_Batt4_I,7) "L4:" (B3MB_28V1L4S,3) (B3MB_28V1L4F,3)  (B3MB_28V1_Load4_V,7) (B3MB_28V1_Load4_I,7);
-  Bus: ""                ""               (B3MB_28V1_Bus_V,7);
+     ""     >S<                >F<              >Volts<                    >Amps<
+     ""       >S<             >F<                 >Volts<             >Amps<;
+     B1:  (B3MB_28V1B1S,3) (B3MB_28V1B1F,3)  (B3MB_28V1_Batt1_V,7) (B3MB_28V1_Batt1_I,7)
+    "L1:" (EngPort28S,3)        (EngPort28F,3)         (EngPort28_V,7)            (EngPort28_I,7);
+B2:  (B3MB_28V1B2S,3) (B3MB_28V1B2F,3)  (B3MB_28V1_Batt2_V,7) (B3MB_28V1_Batt2_I,7)
+#""   ""               ""                ""                    ""
+    "L2:" (B3MB_28V1_Load2S,3)        (B3MB_28V1_Load2F,3)         (B3MB_28V1_Load2_V,7)            (B3MB_28V1_Load2_I,7);
+B3:  (B3MB_28V1B3S,3) (B3MB_28V1B3F,3)  (B3MB_28V1_Batt3_V,7) (B3MB_28V1_Batt3_I,7)
+#""   ""               ""                ""                    ""
+    "L3:" (EngStbd28S,3)        (EngStbd28F,3)         (EngStbd28_V,7)            (EngStbd28_I,7);
+B4:  (B3MB_28V1B4S,3) (B3MB_28V1B4F,3)  (B3MB_28V1_Batt4_V,7) (B3MB_28V1_Batt4_I,7)
+#""   ""               ""                ""                    ""
+    "L4:" (DataSys28S,3)        (DataSys28F,3)         (DataSys28_V,7)            (DataSys28_I,7);
+    Bus:  ""               ""                (B3MB_28V1_Bus_V,7);
 }
 
 B3MB_28V1_Row {

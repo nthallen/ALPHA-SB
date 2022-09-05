@@ -39,12 +39,6 @@ scopexjsonext.cc
 scopexjsonextoui.cc
 scopexjsonext.o
 scopexjsonextoui.o
-B3MBrawextcdf.oui
-B3MBrawcdf.tmc
-B3MBrawext.cc
-B3MBrawextoui.cc
-B3MBrawext.o
-B3MBrawextoui.o
 tmserioext.cc
 tmserioextoui.cc
 tmserioext.o
@@ -80,7 +74,6 @@ scopexcltnc
 scopexdispnc
 scopexalgo
 scopexjsonext
-B3MBrawext
 tmserioext
 doit
 Simdoit

@@ -7,14 +7,14 @@ PMC_Full {
   " Meas:"   (PMC_Left_RPM,7)        (PMC_Right_RPM,7)        RPM;
   Current:   (PMC_Left_I_Measured,6) (PMC_Right_I_Measured,6) Amps;
   BusV:      (PMC_Left_BusV,6)       (PMC_Right_BusV,6)       V;
-  "100V V:"  (B3MB_100V1_Load1_V,7)  (B3MB_100V4_Load1_V,7)   V;
-  "100V I:"  (B3MB_100V1_Load1_I,7)  (B3MB_100V4_Load1_I,7)   Amps;
-  "100V S:"  {(B3MB_100V1L1S,3) (B3MB_100V1L1F,3)}
-             {(B3MB_100V3L1S,3) (B3MB_100V3L1F,3)};
-  "28V V:"   (B3MB_28V1_Load1_V,7)   (B3MB_28V1_Load3_V,7)    V;  
-  "28V I:"   (B3MB_28V1_Load1_I,7)   (B3MB_28V1_Load3_I,7)    Amps;
-  "28V S:"   {(B3MB_28V1L1S,3) (B3MB_28V1L1F,3)}
-             {(B3MB_28V1L4S,3) (B3MB_28V1L4F,3)};
+  "100V V:"  (EngPort100_V,7)        (EngStbd100_V,7)   V;
+  "100V I:"  (EngPort100_I,7)        (EngStbd100_I,7)   Amps;
+  "100V S:"  {(EngPort100S,3)        (EngPort100F,3)}
+             {(EngStbd100S,3)        (EngStbd100F,3)};
+  "28V V:"   (EngPort28_V,7)         (EngStbd28_V,7)    V;  
+  "28V I:"   (EngPort28_I,7)         (EngStbd28_I,7)    Amps;
+  "28V S:"   {(EngPort28S,3)         (EngPort28F,3)}
+             {(EngStbd28S,3)         (EngStbd28F,3)};
   "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
              HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
 }
@@ -38,10 +38,10 @@ Asc {
 AscB3MB {
   HBox { +-; Title: "Ascender B3MB"; -+ };
   ""    >Status<  >Volts<   >Amps<;
-  "100V1:" {(B3MB_100V1L4F,3) (B3MB_100V1L4S,3)} (B3MB_100V1_Load4_V,7) (B3MB_100V1_Load4_I,7);
-  "100V2:" {(B3MB_100V2L2F,3) (B3MB_100V2L2S,3)} (B3MB_100V2_Load2_V,7) (B3MB_100V2_Load2_I,7);
-  "100V3:" {(B3MB_100V3L2F,3) (B3MB_100V3L2S,3)} (B3MB_100V3_Load2_V,7) (B3MB_100V3_Load2_I,7);
-  "100V4:" {(B3MB_100V4L4F,3) (B3MB_100V4L4S,3)} (B3MB_100V4_Load4_V,7) (B3MB_100V4_Load4_I,7);
+  "100V1:" {(AscSec1F,3) (AscSec1S,3)} (AscSec1_V,7) (AscSec1_I,7);
+  "100V2:" {(AscPri1F,3) (AscPri1S,3)} (AscPri1_V,7) (AscPri1_I,7);
+  "100V3:" {(AscPri2F,3) (AscPri2S,3)} (AscPri2_V,7) (AscPri2_I,7);
+  "100V4:" {(AscSec2F,3) (AscSec2S,3)} (AscSec2_V,7) (AscSec2_I,7);
 }
 
 AHRS {

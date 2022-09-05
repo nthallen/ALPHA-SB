@@ -10,6 +10,8 @@ PMC_@ID@_Full {
   " Target:" (PMC_@ID@_Pos_Target,11);
   " Meas:"   (PMC_@ID@_Pos_Measured,11);
   BusV:      (PMC_@ID@_BusV,6)      V;
+  Bridge:    (PMC_@ID@_Bridge,3);
+  Brake:     (PMC_@ID@_Brake,3);
 }
 
 PMC_@ID@_Full_Hdr {

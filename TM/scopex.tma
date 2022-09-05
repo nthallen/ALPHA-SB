@@ -17,7 +17,7 @@ State AscPwr_Init {
   # Check whether ascender is powered or not
   # If any loads are on and/or any loads read close to BusV,
   # all loads should read close to BusV
-   +5 { if (convert(B3MB_100V2_Load2_V) > 77.0) {
+   +5 { if (convert(AscPri1_V) > 77.0) {
           AscenderPwrRequest = true;
           Validate AscPwr_Seq0;
         } else Validate AscPwr_Off;
@@ -30,12 +30,12 @@ State AscPwr_Off {
 
 State AscPwr_Seq0 {
       > Power Ascender Precharge N2 On
-      Hold Until (convert(B3MB_100V2_Load2_V) > 77.0) or 3
+      Hold Until (convert(AscPri1_V) > 77.0) or 3
       else Validate AscPwr_Seq0_Fail;
    +1 > Power Ascender Precharge N3 On
       > Power Ascender Secondary N1 On
       > Power Ascender Secondary N4 On
-      { if (convert(B3MB_100V2_Load2_V) < 77.0 || !AscenderPwrRequest)
+      { if (convert(AscPri1_V) < 77.0 || !AscenderPwrRequest)
           AscenderPwrRequest = false;
           Validate AscPwr_Shutdown;
       }

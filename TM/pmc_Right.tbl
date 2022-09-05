@@ -10,6 +10,8 @@ PMC_Right_Full {
   " Target:" (PMC_Right_Pos_Target,11);
   " Meas:"   (PMC_Right_Pos_Measured,11);
   BusV:      (PMC_Right_BusV,6)      V;
+  Bridge:    (PMC_Right_Bridge,3);
+  Brake:     (PMC_Right_Brake,3);
 }
 
 PMC_Right_Full_Hdr {

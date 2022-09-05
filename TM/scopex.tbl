@@ -6,11 +6,11 @@ Input "TMbase.tbl";
     |;
     { HBox {
         { [PMC_Left_Full_Hdr];
-          [PMC_Left_Stat];
+#         [PMC_Left_Stat];
         };
         |+;
         { [PMC_Right_Full_Hdr];
-          [PMC_Right_Stat];
+#         [PMC_Right_Stat];
         };
       };
       +-+;

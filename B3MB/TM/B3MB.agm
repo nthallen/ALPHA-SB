@@ -1,7 +1,15 @@
-Moduledef B3MB [ ID=28V1 CAN_ID=1 SLOW=1 FAST=1 Panel= RT1= RT2= RT3= 
+Moduledef B3MB [ ID=28V1 CAN_ID=1 SLOW=1 FAST=1 Panel= RT1= RT2= RT3= RT4=#
  L1=B3MB_@ID@_Load1 L2=B3MB_@ID@_Load2 L3=B3MB_@ID@_Load3 L4=B3MB_@ID@_Load4 ] {
   ID specifies which can
   CAN_ID is the CAN bus ID for this board
+  L[1-4] are the prefixes for the load channels
+  SLOW is the TM rate for the slow channels
+  FAST is the TM rate for the fast channels (which may be the same
+    as the slow channels)
+  Panel is the name of the Panel for ui_* and rt_* MATLAB stuff. If
+    non-empty, this must include a trailing colon
+  RT[1-4] are for comment characters to deal with different board
+    configurations
 }
 
 mode (types) {
@@ -20,7 +28,7 @@ mode (V28) [ RT1= RT2= RT3= ] {
   - : B3MB_@ID@.tbl:B3MB_drv.tbl.in
 }
 
-mode (V100) [ RT1=/* RT2=*/ RT3=# ] {
+mode (V100) [ RT1=/* RT2=*/ RT3=# RT4= ] {
   tmcbase = B3MB_@ID@.tmc:B3MB_drv.tmc.in
   colbase = B3MB_@ID@_col.tmc:B3MB_drv_col.tmc.in
   cmdbase = B3MB_@ID@.cmd:B3MB_drv.cmd.in
