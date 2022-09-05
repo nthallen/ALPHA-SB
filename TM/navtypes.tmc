@@ -9,8 +9,8 @@ TM typedef uint8_t Nav_time_t { text "%4.1lf"; }
   const char *nav_status_text(uint8_t status) {
     switch (status) {
       case 0:  return "Idle    ";
-      case 1:  return "Fail    ";
-      case 2:  return "PID     ";
+      case 1:  return "PID     ";
+      case 2:  return "Fail    ";
       case 3:  return "FF_Init ";
       case 4:  return "FF_Pause";
       case 5:  return "FF_Done ";

@@ -9,4 +9,4 @@ TM 1 Hz Nav_Thrust_pct_t Nav_Thrust_pct; collect Nav_Thrust_pct = SWData.Nav_Thr
 TM 1 Hz Nav_dThrust_pct_t Nav_dThrust_pct; collect Nav_dThrust_pct = SWData.Nav_dThrust_pct;
 TM 1 Hz Nav_time_t Nav_T_acc; collect Nav_T_acc = SWData.Nav_T_acc;
 TM 1 Hz Nav_time_t Nav_T_rot; collect Nav_T_rot = SWData.Nav_T_rot;
-TM 1 Hz UCHAR Nav_Status; collect Nav_Status = SWData.Nav_Status;
+TM 1 Hz Nav_Status_t Nav_Status; collect Nav_Status = SWData.Nav_Status;
