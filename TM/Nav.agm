@@ -16,4 +16,5 @@ mode (default) {
   cmdbase = nav.cmd
   swsbase = nav.sws
   swsbase = nav.tma
+  genuibase = nav.genui
 }

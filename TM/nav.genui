@@ -3,4 +3,4 @@
   1 Nav_IGain Main:Nav Gains
   1 Nav_DGain Main:Nav Gains
   1 Nav_Thrust_pct Main:Nav Thrust
-  1 Nav_Status Main:Nav Status
+  1 Nav_Status Main:Nav Status %.0lf
