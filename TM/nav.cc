@@ -45,7 +45,7 @@ void nav_pid_t::set_rpm_dth(double dThrust) {
     rThrust = lThrust - dThrust;
   } else if (avgThrust-dThrust/2 > absMaxThrustPerEngine) {
     rThrust = absMaxThrustPerEngine;
-    lThrust = rThrust - dThrust;
+    lThrust = rThrust + dThrust;
   } else {
     lThrust = avgThrust + dThrust/2;
     rThrust = avgThrust - dThrust/2;
