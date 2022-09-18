@@ -3,4 +3,7 @@
   1 Nav_IGain Main:Nav Gains
   1 Nav_DGain Main:Nav Gains
   1 Nav_Thrust_pct Main:Nav Thrust
+  1 Nav_dThrust_pct Main:Nav dThrust
+  1 Nav_T_acc Main:Nav Timing
+  1 Nav_T_rot Main:Nav Timing
   1 Nav_Status Main:Nav Status %.0lf

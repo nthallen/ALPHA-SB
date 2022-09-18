@@ -8,9 +8,11 @@
  @FAST@ atm_alt_en:filter_status:12          @Panel@GNSS Filters %.0lf
 
  @FAST@ nav_drift           @Panel@GNSS Drift
- @FAST@ latitude            @Panel@GNSS Position
- @FAST@ longitude           @Panel@GNSS Position
- @FAST@ height              @Panel@GNSS Position
+ @FAST@ latitude            @Panel@GNSS LatLon
+ @FAST@ longitude           @Panel@GNSS LatLon
+ @FAST@ height              @Panel@GNSS Altitude
+ @FAST@ north_m             @Panel@GNSS Position
+ @FAST@ east_m              @Panel@GNSS Position
  @FAST@ velocity_north      @Panel@GNSS Velocity
  @FAST@ velocity_east       @Panel@GNSS Velocity
  @FAST@ Track               @Panel@GNSS Heading

@@ -8,9 +8,11 @@
  10 atm_alt_en:filter_status:12          Main:GNSS Filters %.0lf
 
  10 nav_drift           Main:GNSS Drift
- 10 latitude            Main:GNSS Position
- 10 longitude           Main:GNSS Position
- 10 height              Main:GNSS Position
+ 10 latitude            Main:GNSS LatLon
+ 10 longitude           Main:GNSS LatLon
+ 10 height              Main:GNSS Altitude
+ 10 north_m             Main:GNSS Position
+ 10 east_m              Main:GNSS Position
  10 velocity_north      Main:GNSS Velocity
  10 velocity_east       Main:GNSS Velocity
  10 Track               Main:GNSS Heading

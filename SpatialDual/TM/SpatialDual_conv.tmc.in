@@ -38,6 +38,8 @@
     }
     return "******";
   }
+  
+  double lat0, lon0;
 %}
 TM typedef double nav_drift_t { text "%9.6le"; }
 nav_drift_t nav_drift; Invalidate nav_drift;
@@ -72,3 +74,15 @@ SD_endis_t Atm_Alt_en; Invalidate Atm_Alt_en;
 TM typedef uint8_t SD_active_t { text "%8u" SD_act_inact(); }
 SD_active_t Dual_Ant_active; Invalidate Dual_Ant_active;
   { Dual_Ant_active = (filter_status>>10)&12; Validate Dual_Ant_active; }
+
+SD_meters north_m; Invalidate north_m;
+SD_meters east_m; Invalidate east_m;
+{ if (lat0 == 0 && lon0 == 0) {
+    lat0 = latitude;
+    lon0 = latitude;
+  }
+  north_m = (latitude-lat0)*(180/3.14159265389)*111139;
+  east_m = (longitude-lon0)*(180/3.14159265389)*111139*cos(latitude);
+  Validate north_m;
+  Validate east_m;
+}
