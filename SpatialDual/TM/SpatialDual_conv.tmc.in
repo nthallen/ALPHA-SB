@@ -77,10 +77,8 @@ SD_active_t Dual_Ant_active; Invalidate Dual_Ant_active;
 
 SD_meters north_m; Invalidate north_m;
 SD_meters east_m; Invalidate east_m;
-{ if (lat0 == 0 && lon0 == 0) {
-    lat0 = latitude;
-    lon0 = latitude;
-  }
+{ if (lat0 == 0) lat0 = latitude;;
+  if (lon0 == 0) lon0 = longitude;
   north_m = (latitude-lat0)*(180/3.14159265389)*111139;
   east_m = (longitude-lon0)*(180/3.14159265389)*111139*cos(latitude);
   Validate north_m;
