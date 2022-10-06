@@ -6,16 +6,17 @@ Module TMbase Panel=Plots:
 Module BKd Panel=Plots:
 Module MPSLd Panel=Plots:
 
-Module B3MB mode=types ID=28V1  CAN_ID=2 Panel=B3MB:
-Module B3MB            ID=100V1 CAN_ID=6 Panel=B3MB:
-Module B3MB            ID=100V2 CAN_ID=7 Panel=B3MB:
-Module B3MB            ID=100V3 CAN_ID=8 Panel=B3MB:
-Module B3MB            ID=100V4 CAN_ID=3 Panel=B3MB:
-tmcbase = ../TM/B3MB_28V1_cal.tmc
-tmcbase = ../TM/B3MB_100V1_cal.tmc
-tmcbase = ../TM/B3MB_100V2_cal.tmc
-tmcbase = ../TM/B3MB_100V3_cal.tmc
-tmcbase = ../TM/B3MB_100V4_cal.tmc
+Module B3MB mode=types ID=28V1  CAN_ID=11 Panel=B3MB:
+Module B3MB            ID=28V2  CAN_ID=12 Panel=B3MB:
+Module B3MB            ID=100V1 CAN_ID=1 Panel=B3MB:
+Module B3MB            ID=100V2 CAN_ID=2 Panel=B3MB:
+Module B3MB            ID=100V3 CAN_ID=3 Panel=B3MB:
+Module B3MB            ID=100V4 CAN_ID=4 Panel=B3MB:
+# tmcbase = ../TM/B3MB_28V1_cal.tmc
+# tmcbase = ../TM/B3MB_100V1_cal.tmc
+# tmcbase = ../TM/B3MB_100V2_cal.tmc
+# tmcbase = ../TM/B3MB_100V3_cal.tmc
+# tmcbase = ../TM/B3MB_100V4_cal.tmc
 
 TGTDIR = /home/scopex/charge
 IGNORE = "*.asv" "*.o" "*.exe" "*.stackdump" Makefile

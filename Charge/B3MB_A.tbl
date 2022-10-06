@@ -1,12 +1,14 @@
 Input "B3MB_28V1.tbl";
-Input "B3MB_100V1.tbl";
-Input "B3MB_100V2.tbl";
+Input "B3MB_28V2.tbl";
+
+
+B3MB_28V_Rows {
+  [B3MB_28V1_Row];
+  [B3MB_28V2_Row];
+}
 
 {
-  HBox {
-    |+; [B3MB_28V1_Col]; |+;
-        [B3MB_100V1_Col]; |+;
-        [B3MB_100V2_Col]; |+;
-  };
+  HBox { |+; [B3MB_28V_Rows]; |+ };
   -
 }
+

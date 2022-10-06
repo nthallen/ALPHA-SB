@@ -1,10 +1,16 @@
+Input "B3MB_100V1.tbl";
+Input "B3MB_100V2.tbl";
 Input "B3MB_100V3.tbl";
 Input "B3MB_100V4.tbl";
 
+B3MB_100V_Rows {
+  [B3MB_100V1_Row];
+  [B3MB_100V2_Row];
+  [B3MB_100V3_Row];
+  [B3MB_100V4_Row];
+}
+
 {
-  HBox {
-    |+; [B3MB_100V3_Col]; |+;
-        [B3MB_100V4_Col]; |+;
-  };
-  -
+ HBox { |+; [B3MB_100V_Rows ]; |+ };
+ -
 }
