@@ -1,4 +1,5 @@
 # Charge.spec
+# See README.txt for physical configuration
 tmcbase = base.tmc
 genuibase = Charge.genui
 
