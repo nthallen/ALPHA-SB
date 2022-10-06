@@ -41,6 +41,12 @@ B3MB_28V1.tbl
 B3MB_28V1.tmc
 B3MB_28V1_col.tmc
 B3MB_28V1_conv.tmc
+B3MB_28V2.cmd
+B3MB_28V2.genui
+B3MB_28V2.tbl
+B3MB_28V2.tmc
+B3MB_28V2_col.tmc
+B3MB_28V2_conv.tmc
 Chargecol.cc
 tm.dac
 Chargecoloui.cc
@@ -127,6 +133,12 @@ B3MB_28V1.tbl
 B3MB_28V1.tmc
 B3MB_28V1_col.tmc
 B3MB_28V1_conv.tmc
+B3MB_28V2.cmd
+B3MB_28V2.genui
+B3MB_28V2.tbl
+B3MB_28V2.tmc
+B3MB_28V2_col.tmc
+B3MB_28V2_conv.tmc
 Chargecol
 Chargesrvr
 Chargedispnc
