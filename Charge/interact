@@ -15,9 +15,8 @@
       MPSLhost=10.3.3.2;;
     spi2)
       BKdev=/dev/ttyUSB0
-      # slcandev=/dev/ttyACM0
+      slcandev=/dev/ttyACM0
       MPSLhost=10.3.3.2;;
-      ;;
     spi3)
       slcandev=/dev/ttyACM0
       ;;
