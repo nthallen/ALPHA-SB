@@ -70,6 +70,13 @@ Chargealgo.cc
 Chargealgooui.cc
 Chargealgo.o
 Chargealgooui.o
+Chargejsonext.cdf
+Chargejsonextcdf.oui
+Chargejsonextcdf.tmc
+Chargejsonext.cc
+Chargejsonextoui.cc
+Chargejsonext.o
+Chargejsonextoui.o
 doit.dep
 Chargecltnc.o
 Chargecltncoui.cc
@@ -143,6 +150,7 @@ Chargecol
 Chargesrvr
 Chargedispnc
 Chargealgo
+Chargejsonext
 doit
 Chargecltnc
 Chargeengext
