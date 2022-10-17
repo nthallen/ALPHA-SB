@@ -111,8 +111,8 @@ State Charge_100V_Init {
 
 State Charge_100V_Off {
       > MPSL Output Off
-      Hold Until (MPSLd_V_disp == 0) or 10
-      else Validate Charge_100V_Off;
+#     Hold Until (MPSLd_V_disp < 5) or 10
+#     else Validate Charge_100V_Off;
       
   +1  > MPSL Voltage Set 0
       > MPSL Current Set 0
