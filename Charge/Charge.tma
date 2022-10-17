@@ -104,15 +104,50 @@ Partition
 %{
   /* 100V Charging Partition */
 %}
-
-State Charge_100V_Idle {
+State Charge_100V_Init {
+      > MPSL Configure Setpoint Remote
+  +4  Validate Charge_100V_Off;
 }
 
 State Charge_100V_Off {
+      > MPSL Output Off
+      Hold Until (MPSLd_V_disp == 0) or 10
+      else Validate Charge_100V_Off;
+      
+  +1  > MPSL Voltage Set 0
+      > MPSL Current Set 0
+      Hold Until (MPSLd_V_set == 0) or 10
+      else Validate Charge_100V_Off;
+      
+  +1  Validate Charge_100V_Idle;
 }
+
+State Charge_100V_Idle {}
 
 State Charge_100V {
       depending on (B3MB_Temp_Fail) { Validate Charge_100V_Off; }
+      > MPSL Output Off
+  +4  > MPSL Current Set 7.5
+  +4  > MPSL Voltage Set 117.6
+      # MPSLd_[VI]_set report 10ths. Using convert() here
+      # would introduce the difficulty of testing equality
+      # with real numbers
+      Hold Until (MPSLd_V_set == 1176 && MPSLd_I_set == 75) or 10
+      else Validate Charge_100V;
+      
+  +1  > MPSL Output On
+      Hold Until (convert(MPSLd_I_disp) > 7.0) or 10
+      else Validate Charge_100V_Startup_Fail;
+  +1  Hold Until (convert(MPSLd_I_disp) <= 6.0);
+  
+  +1  { msg(0, "100V Charge Cycle Completed");
+        Validate Charge_100V_Off;
+      }
+}
+
+State Charge_100V_Startup_Fail {
+  { msg(2, "Charge_100V Failed to observe > 7A on initial turn on"); }
+  +1  Validate Charge_100V_Off;  
 }
 
 #--------------------------------------
