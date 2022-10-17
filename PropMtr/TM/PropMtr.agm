@@ -20,6 +20,12 @@ Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8
   declared with mode=types to define everything that is common to both
   drives. The last invocation must be with mode=groups along with the
   definitions of RT1 and RT2 as noted above.
+  
+  Note that the groups mode includes all the variables defined in default
+  with hard-coded IDs of 'Left' and 'Right'. If we were to change those
+  designations to 'Port' and 'Starboard' to match the usage elsewhere, it
+  is not sufficient to change the spec file invocations. Perhaps an ID2
+  variable should be provided.
 }
 
 mode (types) {

@@ -24,6 +24,7 @@ extern SWData_t SWData;
 #define SWS_NAV_STBD1 15
 #define SWS_NAV_PORT2 16
 #define SWS_NAV_STBD2 17
+#define SWS_NAV_RESET_REFPOS 18
 #define SWS_ASC_OFF 30
 #define SWS_ASC_ON 31
 #define SWS_SHUTDOWN 255

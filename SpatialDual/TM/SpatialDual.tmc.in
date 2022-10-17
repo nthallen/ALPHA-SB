@@ -11,7 +11,7 @@ TM typedef double SD_f_angle_t { text "%8.3lf"; convert SD_degrees; }
   Calibration (SD_f_angle_t, SD_degrees) { 0, 0, 3.14159265358, 180 }
 TM typedef double SDalt_t { text "%9.3lf"; }
 TM typedef double SD_f_m_t { text "%7.2lf"; }
-TM typedef double SD_meters { text "%8.1lf"; }
+TM typedef double SD_meters { text "%9.2lf"; }
 TM typedef float SD_vel_t { text "%8.3f"; }
 TM typedef float SD_acc_t { text "%8.4f"; }
 TM typedef uint8_t SD_stale_t { text "%3u"; }

@@ -32,6 +32,7 @@
   : Nav Starboard 1 { $0 = SWS_NAV_STBD1; }
   : Nav Port 2 { $0 = SWS_NAV_PORT2; }
   : Nav Starboard 2 { $0 = SWS_NAV_STBD2; }
+  : Nav Reset Position { $0 = SWS_NAV_RESET_REFPOS; }
   : Ascender Power Down { $0 = SWS_ASC_OFF; }
   : Ascender Power Up { $0 = SWS_ASC_ON; }
   : Shutdown Full { $0 = SWS_SHUTDOWN; }
