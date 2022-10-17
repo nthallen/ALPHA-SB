@@ -1,3 +1,4 @@
 /* base.tmc */
 TM typedef uint16_t UINT { text "%5u"; }
 TM 1 Hz UINT MFCtr, Synch;
+TM typedef uint8_t UCHAR { text "%3u"; }

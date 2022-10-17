@@ -1,7 +1,9 @@
 # Charge.spec
 # See README.txt for physical configuration
 tmcbase = base.tmc
+cmdbase = Charge.cmd
 genuibase = Charge.genui
+swsbase = Charge.sws
 
 Module TMbase Panel=Plots:
 Module BKd Panel=Plots:
@@ -26,6 +28,8 @@ IGNORE = BKd.genui BKd.tmc BKd.tbl
 OBJ = BKd.genui BKd.tmc BKd.tbl
 IGNORE = TMbase.tbl TMbase.genui freemem.tmc
 OBJ = TMbase.tbl TMbase.genui freemem.tmc
+IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
+OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 
 IGNORE = MPSLd.genui MPSLd.tmc MPSLd.tbl
 OBJ = MPSLd.genui MPSLd.tmc MPSLd.tbl

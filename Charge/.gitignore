@@ -4,6 +4,10 @@ BKd.tbl
 TMbase.tbl
 TMbase.genui
 freemem.tmc
+SWData.cmd
+SWData.h
+SWData.tmc
+SWData_col.tmc
 MPSLd.genui
 MPSLd.tmc
 MPSLd.tbl
@@ -103,6 +107,10 @@ BKd.tbl
 TMbase.tbl
 TMbase.genui
 freemem.tmc
+SWData.cmd
+SWData.h
+SWData.tmc
+SWData_col.tmc
 MPSLd.genui
 MPSLd.tmc
 MPSLd.tbl

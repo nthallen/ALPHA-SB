@@ -1,3 +1,162 @@
+%{
+  #include "nl.h"
+  #include "dasio/msg.h"
+  long initial_day = 0;
+  
+  /* If HRS_BEHIND_UTC is set to 5, we will restart at 5 UTC or midnight EST,
+     ignoring daylight savings. We can increase this number in order
+     to restart earlier for testing. It is even possible to get clever:
+       if we define MINS_BEHIND_UTC (1800+HRS_BEHIND_UTC*3600)
+     then the restart will be half an hour before midnight.
+     defining MINS_BEHIND_UTC (3000+(HRS_BEHIND_UTC+7)*3600)
+     should restart at 4:50 PM
+   */
+  #define HRS_BEHIND_UTC 5
+  #define MINS_BEHIND_UTC (HRS_BEHIND_UTC*3600)
+%}
+
 State Init {
   > Telemetry Start
+}
+
+State Shutdown_Reduce_Restart {
+  > Savelog Automatic Restart
+  Validate Shutdown;
+}
+
+State Shutdown {
+      Hold until valid (Charge_28V_Idle, Charge_100V_Idle);
+  +5  > Quit
+}
+
+#--------------------------------------
+Partition
+
+State AutoLoop {
+    depending on (Charge_28V) { Validate AutoLoop_disable; }
+    depending on (Charge_100V) { Validate AutoLoop_disable; }
+    depending on (1 Hz) {
+      long cur_day;
+      cur_day = (itime()- MINS_BEHIND_UTC)/86400L;
+
+      if (initial_day == 0) {
+        initial_day = cur_day;
+        msg(0, "initial_day is %ld", initial_day);
+      } else if (initial_day != cur_day) {
+        msg(0, "cur_day is now %ld", cur_day);
+        Validate Shutdown_Reduce_Restart;
+      }
+    }
+}
+
+State AutoLoop_disable {}
+
+#--------------------------------------
+Partition
+
+%{
+  /* 28V Charging Partition */
+%}
+
+State Charge_28V_Off {
+      > BK Output Off
+      Hold Until (BKd_V_disp == 0) or 1:00
+      else Validate Charge_28V_Off;
+      
+  +1  > BK Voltage Set 0
+      Hold Until (convert(BKd_V_set) < 1.0) or 30
+      else Validate Charge_28V_Off;
+      
+  +1  Validate Charge_28V_Idle;
+}
+
+State Charge_28V_Idle {}
+
+State Charge_28V {
+      depending on (B3MB_Temp_Fail) { Validate Charge_28V_Off; }
+      > BK Output Off
+  +4  > BK Current Set 7.5
+  +4  > BK Voltage Set 33.6
+      # BKd_[VI]_set report 10ths. Using convert() here
+      # would introduce the difficulty of testing equality
+      # with real numbers
+      Hold Until (BKd_V_set == 336 && BKd_I_set == 75) or 10
+      else Validate Charge_28V;
+      
+  +1  > BK Output On
+      Hold Until (convert(BKd_I_disp) > 7.0) or 10
+      else Validate Charge_28V_Startup_Fail;
+  +1  Hold Until (convert(BKd_I_disp) <= 6.0);
+  
+  +1  { msg(0, "28V Charge Cycle Completed");
+        Validate Charge_28V_Off;
+      }
+}
+
+State Charge_28V_Startup_Fail {
+  { msg(2, "Charge_28V Failed to observe > 7A on initial turn on"); }
+  +1  Validate Charge_28V_Off;  
+}
+
+#--------------------------------------
+Partition
+
+%{
+  /* 100V Charging Partition */
+%}
+
+State Charge_100V_Idle {
+}
+
+State Charge_100V_Off {
+}
+
+State Charge_100V {
+      depending on (B3MB_Temp_Fail) { Validate Charge_100V_Off; }
+}
+
+#--------------------------------------
+Partition
+%{
+  #define B3MB_TEMP_LIMIT 50
+  #define T_NOK(x) (x >= B3MB_TEMP_LIMIT)
+%}
+
+State B3MB_Temp_Watch {
+  { if (T_NOK(convert(B3MB_28V1_T1)) ||
+        T_NOK(convert(B3MB_28V1_T2)) ||
+        T_NOK(convert(B3MB_28V1_T3)) ||
+        T_NOK(convert(B3MB_28V1_T4)) ||
+        T_NOK(convert(B3MB_28V1_T5)) ||
+        T_NOK(convert(B3MB_28V2_T1)) ||
+        T_NOK(convert(B3MB_28V2_T2)) ||
+        T_NOK(convert(B3MB_28V2_T3)) ||
+        T_NOK(convert(B3MB_28V2_T4)) ||
+        T_NOK(convert(B3MB_28V2_T5)) ||
+        T_NOK(convert(B3MB_100V1_T1)) ||
+        T_NOK(convert(B3MB_100V1_T2)) ||
+        T_NOK(convert(B3MB_100V1_T3)) ||
+        T_NOK(convert(B3MB_100V1_T4)) ||
+        T_NOK(convert(B3MB_100V1_T5)) ||
+        T_NOK(convert(B3MB_100V2_T1)) ||
+        T_NOK(convert(B3MB_100V2_T2)) ||
+        T_NOK(convert(B3MB_100V2_T3)) ||
+        T_NOK(convert(B3MB_100V2_T4)) ||
+        T_NOK(convert(B3MB_100V2_T5)) ||
+        T_NOK(convert(B3MB_100V3_T1)) ||
+        T_NOK(convert(B3MB_100V3_T2)) ||
+        T_NOK(convert(B3MB_100V3_T3)) ||
+        T_NOK(convert(B3MB_100V3_T4)) ||
+        T_NOK(convert(B3MB_100V3_T5)) ||
+        T_NOK(convert(B3MB_100V4_T1)) ||
+        T_NOK(convert(B3MB_100V4_T2)) ||
+        T_NOK(convert(B3MB_100V4_T3)) ||
+        T_NOK(convert(B3MB_100V4_T4)) ||
+        T_NOK(convert(B3MB_100V4_T5)))
+      Validate B3MB_Temp_Fail;
+  }
+}
+
+State B3MB_Temp_Fail {
+  { msg(2, "B3MB Over Temperature"); }
 }

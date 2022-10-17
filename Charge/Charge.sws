@@ -1,0 +1,10 @@
+SW_Variable: <uint8_t,UCHAR> SWStat SW Status
+  SWS_AUTO_REDUCE_ENA 10 Auto Reduce Enable:  Validate AutoLoop; break;
+  SWS_AUTO_REDUCE_DIS 11 Auto Reduce Disable: Validate AutoLoop_disable; break;
+  SWS_28V_CHG_ENA     12 28V Charge Enable:   Validate Charge_28V; break;
+  SWS_28V_CHG_DIS     13 28V Charge Disable:  Validate Charge_28V_Off; break;
+  SWS_100V_CHG_ENA    14 100V Charge Enable:  Validate Charge_100V; break;
+  SWS_100V_CHG_DIS    15 100V Charge Disable: Validate Charge_100V_Off; break;
+
+  SWS_REDUCE         254 Reduce:              Validate Shutdown_Reduce_Restart; break;
+  SWS_SHUTDOWN       255 Shutdown Full:       Validate Shutdown; break;

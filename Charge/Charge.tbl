@@ -5,7 +5,7 @@ Input "MPSLd.tbl";
 
 B3MB_V {
   HBox { +-; Title: "B3MB Volts"; -+ };
-  ""        >"28V1"<                >"28V1"<            >"100V1"<               >"100V2"<                >"100V3"<                >"100V4"<;
+  ""        >"28V1"<                >"28V2"<            >"100V1"<               >"100V2"<                >"100V3"<                >"100V4"<;
   B1:  (B3MB_28V1_Batt1_V,7) (B3MB_28V2_Batt1_V,7) (B3MB_100V1_Batt1_V,7) (B3MB_100V2_Batt1_V,7) (B3MB_100V3_Batt1_V,7) (B3MB_100V4_Batt1_V,7);
   B2:  (B3MB_28V1_Batt2_V,7) (B3MB_28V2_Batt2_V,7);
   B3:  (B3MB_28V1_Batt3_V,7) (B3MB_28V2_Batt3_V,7);
