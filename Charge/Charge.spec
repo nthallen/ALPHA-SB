@@ -54,7 +54,7 @@ DISTRIB = interact services
 Chargecol : -lsubbuspp
 Chargesrvr : ../TM/CAN.oui -lsubbuspp
 Chargedisp : $extbase Charge.tbl B3MB_A.tbl B3MB_B.tbl
-Chargealgo : Charge.tma
+Chargealgo : Charge.tma $swsbase
 Chargejsonext : $extbase $genuibase
 doit : Charge.doit
 %%
