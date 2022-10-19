@@ -32,6 +32,8 @@ State Shutdown {
 #--------------------------------------
 Partition
 
+State AutoLoop_disable {}
+
 State AutoLoop {
     depending on (Charge_28V) { Validate AutoLoop_disable; }
     depending on (Charge_100V) { Validate AutoLoop_disable; }
@@ -45,11 +47,10 @@ State AutoLoop {
       } else if (initial_day != cur_day) {
         msg(0, "cur_day is now %ld", cur_day);
         Validate Shutdown_Reduce_Restart;
+        Validate AutoLoop_disable;
       }
     }
 }
-
-State AutoLoop_disable {}
 
 #--------------------------------------
 Partition
