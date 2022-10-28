@@ -77,12 +77,6 @@ class tmserio_tm_client : public tm_client {
     void send_row(uint16_t MFCtr, const uint8_t *raw);
 };
 
-class tmserio_cmd_rdr : public Cmd_reader {
-  public:
-    tmserio_cmd_rdr();
-    bool app_input();
-};
-
 void set_cur_photo(uint32_t Photo_Num);
 
 #endif /* TMSERIO_H_INCLUDED */
