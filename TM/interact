@@ -22,18 +22,26 @@
       tmseriodev=/dev/ttyUSB2
       ascenderdev=/dev/ttyUSB1
       spatialdualdev=/dev/ttyUSB3
-      slcandev=/dev/ttyACM0
+      #slcandev=/dev/ttyACM0
+      socketcan=can0
       ;;
     *)
       propmtrdev=/dev/ttyUSB0
       slcandev=/dev/ttyACM0;;
   esac
 
+if [ -n "$socketcan" ]; then
+  sudo ip link set $socketcan type can bitrate 50000
+  sudo ip link set up $socketcan
+fi
+
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
 [ -c "$slcandev" ] &&
   Launch      -      subbusd_slcan -n CAN -p $slcandev
+[ -n "$socketcan" ] &&
+  Launch      -      subbusd_CAN -n CAN
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen scopexcol

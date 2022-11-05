@@ -11,7 +11,7 @@ PARTITION
   bool AscenderPwrRequest = false;
 %}
 
-#State AscPwr_Disable {}
+State AscPwr_Disable {}
 
 State AscPwr_Init {
   # Check whether ascender is powered or not
