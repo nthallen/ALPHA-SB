@@ -1,4 +1,4 @@
-State Init {
+  State Init {
   > Telemetry Start
 }
 
@@ -35,9 +35,10 @@ State AscPwr_Seq0 {
    +1 > Power Ascender Precharge N3 On
       > Power Ascender Secondary N1 On
       > Power Ascender Secondary N4 On
-      { if (convert(AscPri1_V) < 77.0 || !AscenderPwrRequest)
+      { if (convert(AscPri1_V) < 77.0 || !AscenderPwrRequest) {
           AscenderPwrRequest = false;
           Validate AscPwr_Shutdown;
+        }
       }
 }
 
