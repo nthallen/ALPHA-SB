@@ -38,7 +38,7 @@ Module Nav
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-DISTRIB = interact services runfile.sim
+DISTRIB = interact services runfile.sim runfile.serin
 IGNORE = B3MB_gen_cal.asv
 
 scopexcol : -lsubbuspp
