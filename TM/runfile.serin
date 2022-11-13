@@ -1,0 +1,15 @@
+  case `hostname` in
+    serin)
+      rfddev=/dev/ttyUSB0;;
+    *) :;;
+  esac
+
+  Launch      memo   memo -o $Experiment.log -l4
+              [ -z "$launch_err" ] &&
+                msg "Running script runfile.serin"
+  Launch      tm_bfr bfr -H bfr: -S:
+  Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
+  Launch      tm_gen serin
+  Launch      cmd    scopextxsrvr -H srvr: -S:
+[ -c "$rfddev" ] &&
+  Launch      -      RFDio -b 230400 -p $rfddev -v
