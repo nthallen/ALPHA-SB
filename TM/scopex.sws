@@ -10,6 +10,8 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
   SWS_NAV_PORT2        16 Nav Port 2:          Validate heading_Port_2; break;
   SWS_NAV_STBD2        17 Nav Starboard 2:     Validate heading_Starboard_2; break;
   SWS_NAV_RESET_REFPOS 18 Nav Reset Position:  break;
+  SWS_NAV_STOP         19 Nav Stop:            Validate heading_Stop; break;
+  SWS_NAV_HARDSTOP     20 Nav Hard Stop:       Validate heading_Hard_Stop; break;
 
 # SWS_SIM_START       18 Sim Init:            Validate Sim; break;
 

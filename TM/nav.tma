@@ -147,6 +147,26 @@ State heading_Starboard_2 {
       Validate heading_Idle;
 }
 
+State heading_Stop {
+  Validate FF_idle;
+  > _Set Nav Status Stop
+  > Set Nav Thrust 0 pct
+  > Set Nav dThrust 0 pct
+  { nav_set_rpm_dth(0);
+    Validate heading_idle;
+  }
+}
+
+State heading_Hard_Stop {
+  Validate FF_idle;
+  > _Set Nav Status HardStop
+  > Set Nav Thrust 0 pct
+  > Set Nav dThrust 0 pct
+  > PMC Left Bridge Disable
+  > PMC Right Bridge Disable
+  Validate heading_idle;
+}
+
 Partition
 
 State survey_idle {}

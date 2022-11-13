@@ -18,6 +18,8 @@ TM typedef uint8_t Nav_time_t { text "%4.1lf"; }
       case 7:  return "Stbd1   ";
       case 8:  return "Port2   ";
       case 9:  return "Stbd2   ";
+      case 10: return "Stop    ";
+      case 11: return "HardStop";
       default: return "********";
     }
   }

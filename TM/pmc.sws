@@ -1,3 +1,3 @@
-  SWS_PMC_ACTIVATE    20 PMC Activate: Validate PMC_Activate; break;
-  SWS_PMC_STOP        21 PMC Stop:     Validate PMC_Stop;     break;
-  SWS_PMC_LOCK        22 PMC Lock:     Validate PMC_Lock;     break;
+  SWS_PMC_ACTIVATE    25 PMC Activate: Validate PMC_Activate; break;
+  SWS_PMC_STOP        26 PMC Stop:     Validate PMC_Stop;     break;
+  SWS_PMC_LOCK        27 PMC Lock:     Validate PMC_Lock;     break;
