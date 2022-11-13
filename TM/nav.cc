@@ -51,6 +51,8 @@ void nav_pid_t::set_rpm_dth(double dThrust) {
     rThrust = avgThrust - dThrust/2;
   }
   
+  clamp(lThrust, absMaxThrustPerEngine);
+  clamp(rThrust, absMaxThrustPerEngine);
   double left_rpm = thrust2RPM(lThrust);
   double right_rpm = thrust2RPM(rThrust);
   ci_sendfcmd(Cmd_Send_Quiet, "PMC Left Velocity Set %.1f RPM\n", left_rpm);
