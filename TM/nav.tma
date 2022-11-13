@@ -18,24 +18,30 @@
     Validate FF_accel;
   }
   depending on (PMC_Left_RPM, FF_accel) {
-    if (FF_count-- <= 0) {
+    if (FF_count <= 0) {
       nav_set_rpm_dth(0);
       FF_count = FF_T_rot;
       Validate FF_coast;
+    } else {
+      FF_count -= 5;
     }
   }
   depending on (PMC_Left_RPM, FF_coast) {
-    if (FF_count-- <= 0) {
+    if (FF_count <= 0) {
       nav_set_rpm_dth(-FF_dThrust);
       FF_count = FF_T_acc;
       Validate FF_decel;
+    } else {
+      FF_count -= 5;
     }
   }
   depending on (PMC_Left_RPM, FF_decel) {
-    if (FF_count-- <= 0) {
+    if (FF_count <= 0) {
       nav_set_rpm_dth(0);
       FF_count = 0;
       Validate FF_idle;
+    } else {
+      FF_count -= 5;
     }
   }
 }
