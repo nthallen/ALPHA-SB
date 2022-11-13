@@ -1,6 +1,6 @@
-function pscopexmgnssf(varargin);
-% pscopexmgnssf( [...] );
-% GNSS Filters
+function pscopexmgnsshkf(varargin);
+% pscopexmgnsshkf( [...] );
+% GNSS HK Filters
 h = ne_dstat({
   'orient_init', 'filter_status', 0; ...
 	'nav_init', 'filter_status', 1; ...

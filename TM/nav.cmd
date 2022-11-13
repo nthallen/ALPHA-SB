@@ -3,10 +3,13 @@
 %}
 &nav_angle <int16_t>
   : %f (Enter Angle in degrees) deg
-    { float ang = fmodf($1,360);
-      if (ang < -180) ang += 360.;
-      else if (ang > 180) ang -= 360.;
-      $0 = (int16_t) (ang * 100);
+    { float ang = $1;
+      if (ang > 3276.7) {
+        ang = 3276.7;
+      } else if (ang < -3276.8) {
+        ang = -3276.8;
+      }
+      $0 = (int16_t) (ang * 10);
     }
   ;
 &nav_gain <float>

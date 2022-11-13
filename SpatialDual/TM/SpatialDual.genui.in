@@ -1,13 +1,13 @@
- @FAST@ system_status       @Panel@GNSS System %.0lf
- @FAST@ orient_init:filter_status:0          @Panel@GNSS Filters %.0lf
- @FAST@ nav_init:filter_status:1             @Panel@GNSS Filters %.0lf
- @FAST@ heading_init:filter_status:2         @Panel@GNSS Filters %.0lf
- @FAST@ UTC_init:filter_status:3             @Panel@GNSS Filters %.0lf
- @FAST@ Int_GNSS_en:filter_status:9          @Panel@GNSS Filters %.0lf
- @FAST@ dual_heading_active:filter_status:10 @Panel@GNSS Filters %.0lf
- @FAST@ atm_alt_en:filter_status:12          @Panel@GNSS Filters %.0lf
+ @FAST@ system_status       @Panel@GNSS_HK System %.0lf
+ @FAST@ orient_init:filter_status:0          @Panel@GNSS_HK Filters %.0lf
+ @FAST@ nav_init:filter_status:1             @Panel@GNSS_HK Filters %.0lf
+ @FAST@ heading_init:filter_status:2         @Panel@GNSS_HK Filters %.0lf
+ @FAST@ UTC_init:filter_status:3             @Panel@GNSS_HK Filters %.0lf
+ @FAST@ Int_GNSS_en:filter_status:9          @Panel@GNSS_HK Filters %.0lf
+ @FAST@ dual_heading_active:filter_status:10 @Panel@GNSS_HK Filters %.0lf
+ @FAST@ atm_alt_en:filter_status:12          @Panel@GNSS_HK Filters %.0lf
 
- @FAST@ nav_drift           @Panel@GNSS Drift
+ @FAST@ nav_drift           @Panel@GNSS_HK Drift
  @FAST@ latitude            @Panel@GNSS LatLon
  @FAST@ longitude           @Panel@GNSS LatLon
  @FAST@ height              @Panel@GNSS Altitude
@@ -15,7 +15,7 @@
  @FAST@ east_m              @Panel@GNSS Position
  @FAST@ velocity_north      @Panel@GNSS Velocity
  @FAST@ velocity_east       @Panel@GNSS Velocity
- @FAST@ Track               @Panel@GNSS Heading
+ @FAST@ Track               @Panel@GNSS Track
  @FAST@ velocity_forward    @Panel@GNSS Velocity
  @FAST@ velocity_down       @Panel@GNSS Velocity
  @FAST@ body_accel_x        @Panel@GNSS Accel
@@ -28,10 +28,10 @@
  @FAST@ angular_velocity_x  @Panel@GNSS AngVel
  @FAST@ angular_velocity_y  @Panel@GNSS AngVel
  @FAST@ angular_velocity_z  @Panel@GNSS AngVel
- @FAST@ latitude_std        @Panel@GNSS Std
- @FAST@ longitude_std       @Panel@GNSS Std
- @FAST@ height_std          @Panel@GNSS Std
- @FAST@ SD_stale            @Panel@GNSS Stale
- @FAST@ SD_n_reports        @Panel@GNSS Stale
- @FAST@ SD_nc               @Panel@GNSS Stale
+ @FAST@ latitude_std        @Panel@GNSS_HK Std
+ @FAST@ longitude_std       @Panel@GNSS_HK Std
+ @FAST@ height_std          @Panel@GNSS_HK Std
+ @FAST@ SD_stale            @Panel@GNSS_HK Stale
+ @FAST@ SD_n_reports        @Panel@GNSS_HK Stale
+ @FAST@ SD_nc               @Panel@GNSS_HK Stale
  

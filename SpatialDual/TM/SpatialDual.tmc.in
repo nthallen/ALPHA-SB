@@ -1,4 +1,6 @@
 %{
+  float prev_heading = 0;
+  int heading_rotations = 0;
 %}
 TM "Receive" SpatialDual 1;
 
@@ -50,6 +52,7 @@ Group SDual (system_status, filter_status, unix_seconds,
     body_accel_z, g_force, roll, pitch, heading, angular_velocity_x,
     angular_velocity_y, angular_velocity_z, latitude_std,
     longitude_std, height_std, SD_nc, SD_n_reports, SD_stale) {
+  float dheading;
   system_status = SpatialDual.SD.system_status;
   filter_status = SpatialDual.SD.filter_status;
   unix_seconds = SpatialDual.SD.unix_seconds;
@@ -66,7 +69,14 @@ Group SDual (system_status, filter_status, unix_seconds,
   g_force = SpatialDual.SD.g_force;
   roll = SpatialDual.SD.roll;
   pitch = SpatialDual.SD.pitch;
-  heading = SpatialDual.SD.heading;
+  dheading = SpatialDual.SD.heading - prev_heading;
+  prev_heading = SpatialDual.SD.heading;
+  if (dheading < -5) {
+    ++heading_rotations;
+  } else if (dheading > 5) {
+    --heading_rotations;
+  }
+  heading = SpatialDual.SD.heading + heading_rotations * 6.2831853;
   angular_velocity_x = SpatialDual.SD.angular_velocity_x;
   angular_velocity_y = SpatialDual.SD.angular_velocity_y;
   angular_velocity_z = SpatialDual.SD.angular_velocity_z;
