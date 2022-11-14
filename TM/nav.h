@@ -15,9 +15,8 @@ class nav_pid_t {
      * @param course Course in degrees [0-360)
      * @param thrust_pct Average thrust as percent of max thrust [0-100]
      */
-    inline void set_course(int16_t course, uint8_t thrust_pct) {
-      if (this->course != course)
-        course_rad = (course/100.) * PI/180;
+    inline void set_course(double course, uint8_t thrust_pct) {
+      course_rad = course * PI/180;
       this->course = course;
       this->thrust_pct = thrust_pct;
     }

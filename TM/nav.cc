@@ -14,8 +14,8 @@ nav_pid_t::nav_pid_t()
       course(0), course_rad(0), thrust_pct(0)
       {}
 
-void nav_pid_t::set_rpm_pid(double track) {
-  double courseError = angleDiff(course_rad, track);
+void nav_pid_t::set_rpm_pid(double heading) {
+  double courseError = course_rad-heading;
   double courseErrorChange = courseError - prevCourseError;
   prevCourseError = courseError;
   courseErrorIntegral += courseError * IGain;
