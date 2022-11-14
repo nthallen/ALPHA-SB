@@ -7,9 +7,9 @@ B3MB_100V1_VI {
 #B3:  (B3MB_100V1_Batt3_V,7) (B3MB_100V1_Batt3_I,7);
 #B4:  (B3MB_100V1_Batt4_V,7) (B3MB_100V1_Batt4_I,7);
   Bus: (B3MB_100V1_Bus_V,7);
-  L1:  (EngPort100_V,7) (EngPort100_I,7);
+  L1:  (B3MB_100V1_Load1_V,7) (B3MB_100V1_Load1_I,7);
   L2:  (B3MB_100V1_Load2_V,7) (B3MB_100V1_Load2_I,7);
-  L3:  (B3MB_100V1_Load3_V,7) (B3MB_100V1_Load3_I,7);
+  L3:  (EngPort100_V,7) (EngPort100_I,7);
   L4:  (AscSec1_V,7) (AscSec1_I,7);
 }
 
@@ -39,13 +39,13 @@ B3MB_100V1_VIH {
      ""     >S<                >F<              >Volts<                    >Amps<
      ""       >S<             >F<                 >Volts<             >Amps<;
      B1:  (B3MB_100V1B1S,3) (B3MB_100V1B1F,3)  (B3MB_100V1_Batt1_V,7) (B3MB_100V1_Batt1_I,7)
-    "L1:" (EngPort100S,3)        (EngPort100F,3)         (EngPort100_V,7)            (EngPort100_I,7);
+    "L1:" (B3MB_100V1_Load1S,3)        (B3MB_100V1_Load1F,3)         (B3MB_100V1_Load1_V,7)            (B3MB_100V1_Load1_I,7);
 #B2:  (B3MB_100V1B2S,3) (B3MB_100V1B2F,3)  (B3MB_100V1_Batt2_V,7) (B3MB_100V1_Batt2_I,7)
 ""   ""               ""                ""                    ""
     "L2:" (B3MB_100V1_Load2S,3)        (B3MB_100V1_Load2F,3)         (B3MB_100V1_Load2_V,7)            (B3MB_100V1_Load2_I,7);
 #B3:  (B3MB_100V1B3S,3) (B3MB_100V1B3F,3)  (B3MB_100V1_Batt3_V,7) (B3MB_100V1_Batt3_I,7)
 ""   ""               ""                ""                    ""
-    "L3:" (B3MB_100V1_Load3S,3)        (B3MB_100V1_Load3F,3)         (B3MB_100V1_Load3_V,7)            (B3MB_100V1_Load3_I,7);
+    "L3:" (EngPort100S,3)        (EngPort100F,3)         (EngPort100_V,7)            (EngPort100_I,7);
 #B4:  (B3MB_100V1B4S,3) (B3MB_100V1B4F,3)  (B3MB_100V1_Batt4_V,7) (B3MB_100V1_Batt4_I,7)
 ""   ""               ""                ""                    ""
     "L4:" (AscSec1S,3)        (AscSec1F,3)         (AscSec1_V,7)            (AscSec1_I,7);

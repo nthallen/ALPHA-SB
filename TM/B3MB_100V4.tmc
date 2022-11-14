@@ -12,17 +12,17 @@ TM 1 Hz B3MB_Volts_t  B3MB_100V4_Batt1_V;
 /* TM 1 Hz B3MB_Volts_t  B3MB_100V4_Batt2_V; */
 /* TM 1 Hz B3MB_Volts_t  B3MB_100V4_Batt3_V; */
 /* TM 1 Hz B3MB_Volts_t  B3MB_100V4_Batt4_V; */
-TM 1 Hz B3MB_Volts_t  EngStbd100_V;
+TM 1 Hz B3MB_Volts_t  B3MB_100V4_Load1_V;
 TM 1 Hz B3MB_Volts_t  B3MB_100V4_Load2_V;
-TM 1 Hz B3MB_Volts_t  B3MB_100V4_Load3_V;
+TM 1 Hz B3MB_Volts_t  EngStbd100_V;
 TM 1 Hz B3MB_Volts_t  AscSec2_V;
 TM 1 Hz B3MB_100V4_B1I_t  B3MB_100V4_Batt1_I;
 /* TM 1 Hz B3MB_100V4_B2I_t  B3MB_100V4_Batt2_I; */
 /* TM 1 Hz B3MB_100V4_B3I_t  B3MB_100V4_Batt3_I; */
 /* TM 1 Hz B3MB_100V4_B4I_t  B3MB_100V4_Batt4_I; */
-TM 1 Hz B3MB_100V4_L1I_t  EngStbd100_I;
+TM 1 Hz B3MB_100V4_L1I_t  B3MB_100V4_Load1_I;
 TM 1 Hz B3MB_100V4_L2I_t  B3MB_100V4_Load2_I;
-TM 1 Hz B3MB_100V4_L3I_t  B3MB_100V4_Load3_I;
+TM 1 Hz B3MB_100V4_L3I_t  EngStbd100_I;
 TM 1 Hz B3MB_100V4_L4I_t  AscSec2_I;
 TM 1 Hz B3MB_BusV_t   B3MB_100V4_Bus_V;
 TM 1 Hz B3MB_T30K75KU B3MB_100V4_T1;
@@ -36,10 +36,10 @@ TM 1 Hz B3MB_Status_t B3MB_100V4_LED_S;
 
 Group B3MB4 (B3MB_100V4_Batt1_V,
                     /* B3MB_100V4_Batt2_V, B3MB_100V4_Batt3_V, B3MB_100V4_Batt4_V, */
-                    EngStbd100_V, B3MB_100V4_Load2_V, B3MB_100V4_Load3_V,
+                    B3MB_100V4_Load1_V, B3MB_100V4_Load2_V, EngStbd100_V,
                     AscSec2_V, B3MB_100V4_Batt1_I,
                     /* B3MB_100V4_Batt2_I, B3MB_100V4_Batt3_I, B3MB_100V4_Batt4_I, */
-                    EngStbd100_I, B3MB_100V4_Load2_I, B3MB_100V4_Load3_I,
+                    B3MB_100V4_Load1_I, B3MB_100V4_Load2_I, EngStbd100_I,
                     AscSec2_I, B3MB_100V4_Bus_V, B3MB_100V4_T1,
                     B3MB_100V4_T2, B3MB_100V4_T3, B3MB_100V4_T4, B3MB_100V4_T5,
                     B3MB_100V4_Cmd_S, B3MB_100V4_LED_S) {
@@ -52,12 +52,12 @@ Group B3MB4 (B3MB_100V4_Batt1_V,
     /* B3MB_update(B3MB_100V4_Batt3_I,B3MB_mreq4,5); */
     /* B3MB_update(B3MB_100V4_Batt4_V,B3MB_mreq4,6); */
     /* B3MB_update(B3MB_100V4_Batt4_I,B3MB_mreq4,7); */
-    B3MB_update(EngStbd100_V,B3MB_mreq4,8);
-    B3MB_update(EngStbd100_I,B3MB_mreq4,9);
+    B3MB_update(B3MB_100V4_Load1_V,B3MB_mreq4,8);
+    B3MB_update(B3MB_100V4_Load1_I,B3MB_mreq4,9);
     B3MB_update(B3MB_100V4_Load2_V,B3MB_mreq4,10);
     B3MB_update(B3MB_100V4_Load2_I,B3MB_mreq4,11);
-    B3MB_update(B3MB_100V4_Load3_V,B3MB_mreq4,12);
-    B3MB_update(B3MB_100V4_Load3_I,B3MB_mreq4,13);
+    B3MB_update(EngStbd100_V,B3MB_mreq4,12);
+    B3MB_update(EngStbd100_I,B3MB_mreq4,13);
     B3MB_update(AscSec2_V,B3MB_mreq4,14);
     B3MB_update(AscSec2_I,B3MB_mreq4,15);
     B3MB_update(B3MB_100V4_Bus_V,B3MB_mreq4,16);

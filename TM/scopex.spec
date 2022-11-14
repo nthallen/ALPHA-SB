@@ -18,10 +18,10 @@ Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 Module B3MB mode=types
 Module B3MB mode=V28  ID=28V1  CAN_ID=11 Panel=B3MB: L1=EngPort28 L3=EngStbd28 L4=DataSys28
 Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
-Module B3MB mode=V100 ID=100V1 CAN_ID=1 Panel=B3MB: L1=EngPort100 L4=AscSec1
+Module B3MB mode=V100 ID=100V1 CAN_ID=1 Panel=B3MB: L3=EngPort100 L4=AscSec1
 Module B3MB mode=V100 ID=100V2 CAN_ID=2 Panel=B3MB: L1=AscRes1 L2=AscPri1
 Module B3MB mode=V100 ID=100V3 CAN_ID=3 Panel=B3MB: L1=AscRes2 L2=AscPri2
-Module B3MB mode=V100 ID=100V4 CAN_ID=4 Panel=B3MB: L1=EngStbd100 L4=AscSec2
+Module B3MB mode=V100 ID=100V4 CAN_ID=4 Panel=B3MB: L3=EngStbd100 L4=AscSec2
 #tmcbase = B3MB_28V1_cal.tmc
 #tmcbase = B3MB_100V1_cal.tmc
 #tmcbase = B3MB_100V2_cal.tmc
