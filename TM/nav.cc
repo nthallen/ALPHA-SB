@@ -3,7 +3,8 @@
 #include "nav.h"
 
 nav_pid_t nav_pid;
-const double nav_pid_t::courseErrorIntegralLimit = 100.;
+// courseErrorIntegralLimit should be less than absMaxThrustPerEngine
+const double nav_pid_t::courseErrorIntegralLimit = 40.;
 const double nav_pid_t::absMaxThrustPerEngine = 40.;
 const double nav_pid_t::PI = 3.14159265358979323846;
 
@@ -18,12 +19,14 @@ void nav_pid_t::set_rpm_pid(double heading) {
   double courseError = course_rad-heading;
   double courseErrorChange = courseError - prevCourseError;
   prevCourseError = courseError;
+  double PdThrust = PGain * courseError;
+  clamp(PdThrust, absMaxThrustPerEngine);
   courseErrorIntegral += courseError * IGain;
   clamp(courseErrorIntegral, courseErrorIntegralLimit);
+  double DdThrust = DGain * courseErrorChange;
+  clamp(DdThrust, absMaxThrustPerEngine);
   double dThrust = // In Newtons per engine
-    PGain * courseError +
-    IGain * courseErrorIntegral +
-    DGain * courseErrorChange;
+    PdThrust + courseErrorIntegral + DdThrust;
   clamp(dThrust, absMaxThrustPerEngine);
   set_rpm_dth(dThrust);
 }

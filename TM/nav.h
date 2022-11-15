@@ -8,7 +8,10 @@ class nav_pid_t {
     nav_pid_t();
     inline void set_gains(float P, float I, float D) {
       PGain = P;
-      IGain = I;
+      if (I != IGain) {
+        IGain = I;
+        courseErrorIntegral = 0;
+      }
       DGain = D;
     }
     /**
