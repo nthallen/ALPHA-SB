@@ -1,3 +1,4 @@
+*.asv
 SCoPEx_Data_Dir.m
 SCoPEx_SI_Data_Dir.m
 rt_scopex_*.m
