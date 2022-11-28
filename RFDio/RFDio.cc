@@ -201,7 +201,9 @@ RFD_cmd::RFD_cmd(RFD_interface *RFD) :
 
 bool RFD_cmd::app_input() {
   // msg(MSG, "Received command '%s'", buf);
-  if (obuf_empty()) {
+  if (strcmp((char*)buf, "Q\n") == 0) {
+    report_ok(nc);
+  } else if (obuf_empty()) {
     if (dropping_tx_cmds) {
       msg(MSG_DEBUG, "%s: Tx resumed after dropping %d cmds",
         iname, n_tx_cmds_dropped);
