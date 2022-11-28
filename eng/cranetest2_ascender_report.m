@@ -14,6 +14,14 @@ P1b = load_eng_mat(primary_datadir, pri_day1_b, 'scopexeng_1');
 F1b = load_eng_mat(primary_datadir, pri_day1_b, 'scopexeng_10');
 P2  = load_eng_mat(primary_datadir, pri_day2, 'scopexeng_1');
 F2  = load_eng_mat(primary_datadir, pri_day2, 'scopexeng_10');
+
+[P1alog_dT, P1blog_dT, P2log_dT] = cranetest2_timeoffsets;
+P1a.T = P1a.T-P1alog_dT;
+F1a.T = F1a.T-P1alog_dT;
+P1b.T = P1b.T-P1blog_dT;
+F1b.T = F1b.T-P1blog_dT;
+P2.T  = P2.T-P2log_dT;
+F2.T  = F2.T-P2log_dT;
 %%
 figure;
 ax = [
@@ -32,16 +40,10 @@ bx = [
 AscErr = zeros(size(Tlog));
 heightErr = zeros(size(Tlog));
 %%
-% P1a log: 01:21:51.105 srvr: tmserio: b3MB 100V4 load 1 Off
-% SI  log: 17:16:27.664 srvr: cmd_wri: b3MB 100V4 load 1 Off
-P1alog_dT = time2d(1,21,51.105)-time2d(17,16,27.664);
 I1a = 1:6;
-% P1alog_dT is the difference between the log on the flight
-% computer and the log on the SerIn server. This is needed to map the
-% ascender height data from the SerIn log onto the flight data.
 % Take our initial ascender height as truth and calculate offsets
 % for height and AscPosition
-T1a = Tlog(I1a)+P1alog_dT;
+T1a = Tlog(I1a);
 dheight = Hlog(1) - interp1(F1a.T, F1a.height, T1a(1),'nearest');
 dAscPos = Hlog(1) - interp1(P1a.T, P1a.AscPosition, T1a(1),'nearest');
 AscPos1a = P1a.AscPosition+dAscPos;
@@ -54,17 +56,10 @@ plot(bx(1),T1a,AscErr(I1a),'*',T1a,heightErr(I1a),'+');
 drawnow;
 xlim(bx(1),T1a([1 end])' -15*[1,-1]);
 %%
-% P1b log: 03:50:48.697 srvr: tmserio: ascender set Speed -100 pct For 10 sec
-% SI  log: 19:45:25.206 srvr: cmd_wri: ascender set Speed -100 pct For 10 sec
-P1blog_dT = time2d(3,50,48.697)-time2d(19,45,25.206);
-% P1blog_dT is the difference between the log on the flight
-% computer and the log on the SerIn server. This is needed to map the
-% ascender height data from the SerIn log onto the flight data.
-[Tlog,Hlog] = cranetest2_heights;
 I1b = 7:11;
 % Take our initial ascender height as truth and calculate offsets
 % for height and AscPosition
-T1b = Tlog(I1b)+P1alog_dT;
+T1b = Tlog(I1b);
 dheight = Hlog(I1b(1)) - interp1(F1b.T, F1b.height, T1b(1),'nearest');
 dAscPos = Hlog(I1b(1)) - interp1(P1b.T, P1b.AscPosition, T1b(1),'nearest');
 AscPos1b = P1b.AscPosition+dAscPos;
@@ -81,18 +76,10 @@ xlim(ax(3),T1b([3 end])' - 15*[1,-1]);
 plot(bx(3),T1b,AscErr(I1b),'*',T1b,heightErr(I1b),'+');
 xlim(bx(3),T1b([3 end])' -15*[1,-1]);
 %%
-% P2 log: 15:35:43.950 srvr: tmserio: set Nav pGain 8
-% SI log: 15:36:01.681 srvr: cmd_wri: set Nav pGain 8
-P2log_dT = time2d(15,35,43.950)-time2d(24+15,36,01.681);
-% P2log_dT is the difference between the log on the flight
-% computer and the log on the SerIn server. This is needed to map the
-% ascender height data from the SerIn log onto the flight data.
-%
-[Tlog,Hlog] = cranetest2_heights;
 I2 = 12:length(Tlog);
 % Take our initial ascender height as truth and calculate offsets
 % for height and AscPosition
-T2 = Tlog(I2)+P2log_dT;
+T2 = Tlog(I2);
 dheight = Hlog(I2(1)) - interp1(F2.T, F2.height, T2(1),'nearest');
 dAscPos = Hlog(I2(1)) - interp1(P2.T, P2.AscPosition, T2(1),'nearest');
 AscPos2 = P2.AscPosition+dAscPos;
