@@ -6,9 +6,9 @@ Effective Frame Dimensions:
   5 Rows 59 Columns
   5 rows/sec
   2360 bits/sec
-  Data:  2168 bits/sec  92 %
+  Data:  2200 bits/sec  93 %
   Synch: 160 bits/sec  7 %
-  Empty: 32 bits/sec  1 %
+  Empty: 0 bits/sec  0 %
 -------End of Frame Statistics-----
 
 
@@ -43,7 +43,7 @@ Effective Frame Dimensions:
 1/1 Hz 10 bytes Group MPSLd_group (5,0,50,1) (5,4,48,9)
 1/1 Hz 1 bytes Member MPSLd_Stale (5,0,50,1)
 1/1 Hz 4 bytes Datum SysTDrift (5,0,51,4)
-1/1 Hz 2 bytes Datum CPU_Pct (5,0,55,2)
+1/1 Hz 2 bytes Datum BKd_V_limit (5,0,55,2)
 1/1 Hz 48 bytes Group B3MB12 (5,1,2,48)
 1/1 Hz 2 bytes Member B3MB_28V2_LED_S (5,1,2,2)
 1/1 Hz 2 bytes Member B3MB_28V2_Cmd_S (5,1,4,2)
@@ -69,9 +69,10 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Member B3MB_28V2_Batt3_V (5,1,44,2)
 1/1 Hz 2 bytes Member B3MB_28V2_Batt2_V (5,1,46,2)
 1/1 Hz 2 bytes Member B3MB_28V2_Batt1_V (5,1,48,2)
-1/1 Hz 2 bytes Datum Disk (5,1,50,2)
-1/1 Hz 2 bytes Datum memused (5,1,52,2)
-1/1 Hz 1 bytes Datum SWStat (5,1,54,1)
+1/1 Hz 2 bytes Datum CPU_Pct (5,1,50,2)
+1/1 Hz 2 bytes Datum Disk (5,1,52,2)
+1/1 Hz 2 bytes Datum memused (5,1,54,2)
+1/1 Hz 1 bytes Datum SWStat (5,1,56,1)
 1/1 Hz 36 bytes Group B3MB1 (5,2,2,36)
 1/1 Hz 2 bytes Member B3MB_100V1_LED_S (5,2,2,2)
 1/1 Hz 2 bytes Member B3MB_100V1_Cmd_S (5,2,4,2)
@@ -129,6 +130,7 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Member B3MB_100V4_Load2_V (5,3,49,2)
 1/1 Hz 2 bytes Member B3MB_100V4_Load1_V (5,3,51,2)
 1/1 Hz 2 bytes Member B3MB_100V4_Batt1_V (5,3,53,2)
+1/1 Hz 2 bytes Datum MPSLd_V_limit (5,3,55,2)
 1/1 Hz 36 bytes Group B3MB3 (5,4,2,36)
 1/1 Hz 2 bytes Member B3MB_100V3_LED_S (5,4,2,2)
 1/1 Hz 2 bytes Member B3MB_100V3_Cmd_S (5,4,4,2)

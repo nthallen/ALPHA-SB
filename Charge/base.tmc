@@ -2,3 +2,7 @@
 TM typedef uint16_t UINT { text "%5u"; }
 TM 1 Hz UINT MFCtr, Synch;
 TM typedef uint8_t UCHAR { text "%3u"; }
+
+TM typedef double Chg_Volts { text "%5.1lf"; }
+TM typedef uint16_t BKd_V_lim_t { text "%5.2lf"; }
+TM typedef uint16_t MPSLd_V_lim_t { text "%5.1lf"; }

@@ -8,3 +8,9 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
 
   SWS_REDUCE         254 Reduce:              Validate Shutdown_Reduce_Restart; break;
   SWS_SHUTDOWN       255 Shutdown Full:       Validate Shutdown; break;
+
+SW_Variable: <uint16_t,BKd_V_lim_t> BKd_V_limit Set 28V Charging Voltage Limit
+  : %f (Enter limit in volts) V { $0 = $1 < 0 ? 0 : ($1 >= 28. ? 2800 : ($1*100)); }
+
+SW_Variable: <uint16_t,MPSLd_V_lim_t> MPSLd_V_limit Set 100V Charging Voltage Limit
+  : %f (Enter limit in volts) V { $0 = $1 < 0 ? 0 : ($1 >= 118. ? 1180 : ($1*10)); }

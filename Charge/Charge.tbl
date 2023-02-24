@@ -21,7 +21,15 @@ B3MB_V {
 
 { HBox {
     |+; { [B3MB_V];
-          HBox { [BKd]; |+; [MPSLd]; |+; [TMbaseB] }
+          HBox {
+            { [BKd];
+              Vlim: (BKd_V_limit,5)
+            }; |+;
+            { [MPSLd];
+              Vlim: (MPSLd_V_limit,5)
+            }; |+;
+            [TMbaseB]
+          }
         }; |+;
   };
   -;

@@ -87,7 +87,9 @@ State Charge_28V {
   +1  > BK Output On
       Hold Until (convert(BKd_I_disp) > 7.0) or 10
       else Validate Charge_28V_Startup_Fail;
-  +1  Hold Until (convert(BKd_I_disp) <= 6.0);
+  +1  Hold Until (convert(BKd_I_disp) <= 6.0 ||
+          (BKd_V_limit > 0 &&
+           convert(BKd_V_disp) >= convert(BKd_V_limit)));
   
   +1  { msg(0, "28V Charge Cycle Completed");
         Validate Charge_28V_Off;
@@ -139,7 +141,9 @@ State Charge_100V {
   +1  > MPSL Output On
       Hold Until (convert(MPSLd_I_disp) > 7.0) or 10
       else Validate Charge_100V_Startup_Fail;
-  +1  Hold Until (convert(MPSLd_I_disp) <= 6.0);
+  +1  Hold Until (convert(MPSLd_I_disp) <= 6.0 ||
+          (MPSLd_V_limit > 0 &&
+           convert(MPSLd_V_disp) >= convert(MPSLd_V_limit)));
   
   +1  { msg(0, "100V Charge Cycle Completed");
         Validate Charge_100V_Off;
