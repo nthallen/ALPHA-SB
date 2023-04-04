@@ -122,13 +122,29 @@ State Charge_100V_Off {
       Hold Until (MPSLd_V_set == 0) or 10
       else Validate Charge_100V_Off;
       
+      depending on (ChgReq100_Charge_Suspend) {
+        Validate Charge_100V_Suspend;
+      }
+      
   +1  Validate Charge_100V_Idle;
 }
 
-State Charge_100V_Idle {}
+State Charge_100V_Idle {
+  depending on (ChgReq100_Charge) { Validate Charge_100V; }
+  depending on (ChgReq100_Discharge1) { Validate Discharge_100V1; }
+  depending on (ChgReq100_Discharge2) { Validate Discharge_100V2; }
+  depending on (ChgReq100_Discharge3) { Validate Discharge_100V3; }
+  depending on (ChgReq100_Discharge4) { Validate Discharge_100V4; }
+}
+
+State Charge_100V_Suspend {
+      depending on (ChgReq100_Charge_Resume) { Validate Charge_100V; }
+}
 
 State Charge_100V {
       depending on (B3MB_Temp_Fail) { Validate Charge_100V_Off; }
+      depending on (ChgReq100_Charge_Suspend) { Validate Charge_100V_Off; }
+      depending on (ChgReq100_Charge_Terminate) { Validate Charge_100V_Off; }
       > MPSL Output Off
   +4  > MPSL Current Set 7.5
   +4  > MPSL Voltage Set 117.6
@@ -153,6 +169,180 @@ State Charge_100V {
 State Charge_100V_Startup_Fail {
   { msg(2, "Charge_100V Failed to observe > 7A on initial turn on"); }
   +1  Validate Charge_100V_Off;  
+}
+
+State Discharge_100V1 {
+      > B3MB 100V1 Battery 1 On
+  +2  > B3MB 100V2 Battery 1 Off
+  +1  > B3MB 100V3 Battery 1 Off
+  +1  > B3MB 100V4 Battery 1 Off
+      Validate Discharge_100V;
+}
+
+State Discharge_100V2 {
+      > B3MB 100V2 Battery 1 On
+  +2  > B3MB 100V1 Battery 1 Off
+  +1  > B3MB 100V3 Battery 1 Off
+  +1  > B3MB 100V4 Battery 1 Off
+      Validate Discharge_100V;
+}
+
+State Discharge_100V3 {
+      > B3MB 100V3 Battery 1 On
+  +2  > B3MB 100V1 Battery 1 Off
+  +1  > B3MB 100V2 Battery 1 Off
+  +1  > B3MB 100V4 Battery 1 Off
+      Validate Discharge_100V;
+}
+
+State Discharge_100V4 {
+      > B3MB 100V4 Battery 1 On
+  +2  > B3MB 100V1 Battery 1 Off
+  +1  > B3MB 100V2 Battery 1 Off
+  +1  > B3MB 100V3 Battery 1 Off
+      Validate Discharge_100V;
+}
+
+State Discharge_100V {
+      depending on (ChgReq100_Discharge_Suspend) { Validate Discharge_100V_Suspend; }
+      depending on (ChgReq100_Charge_Terminate) { Validate Discharge_100V_Terminate; }
+      > B3MB 100V2 Load 1 On
+      Hold until ((MPSLd_V_limit == 0 &&
+                    convert(B3MB_100V2_Bus_V) < 50.0) ||
+                  (MPSLd_V_limit > 0 &&
+                    convert(B3MB_100V2_Bus_V) < convert(MPSLd_V_limit)));
+      Validate Recharge_100V;
+}
+
+State Recharge_100V {
+      > B3MB 100V2 Load 1 Off
+  +5  > B3MB 100V1 Battery 1 On
+  +1  > B3MB 100V2 Battery 1 On
+  +1  > B3MB 100V3 Battery 1 On
+  +1  > B3MB 100V4 Battery 1 On
+  +1  > Set 100V Charging Voltage Limit 98.0 V
+  +1  Validate Charge_100V;
+}
+
+State Discharge_100V_Suspend {
+  > B3MB 100V2 Load 1 Off
+  Hold until valid (ChgReq100_Discharge_Resume);
+  Validate Discharge_100V;
+}
+
+State Discharge_100V_Terminate {
+      > B3MB 100V2 Load 1 Off
+  +1  > B3MB 100V1 Battery 1 On
+  +1  > B3MB 100V2 Battery 1 On
+  +1  > B3MB 100V3 Battery 1 On
+  +1  > B3MB 100V4 Battery 1 On
+  +1  Validate Charge_100V_Idle;
+}
+
+#--------------------------------------
+# ChgReq100 Partition: These should all be selectable via SWS
+#--------------------------------------
+Partition
+
+State ChgReq100_Idle {}
+State ChgReq100_Charge {
+  Hold until valid (Charge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Charge_Suspend {
+  Hold until valid (Charge_100V_Idle) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Charge_Resume {
+  Hold until valid (Charge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Charge_Terminate {
+  Hold until valid (Charge_100V_Idle) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge1 {
+  Hold until valid (Discharge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge2 {
+  Hold until valid (Discharge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge3 {
+  Hold until valid (Discharge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge4 {
+  Hold until valid (Discharge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge_Suspend {
+  Hold until valid (Discharge_100V_Suspend) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge_Resume {
+  Hold until valid (Discharge_100V) or 1:00;
+  Validate ChgReq100_Idle;
+}
+State ChgReq100_Discharge_Seq {
+  Hold until valid (DC100_Sequence) or 30;
+  Validate ChgReq100_Idle;
+}
+
+#--------------------------------------
+# DC100 Partition: These should all be selectable via SWS
+#--------------------------------------
+Partition
+State DC100_Idle {
+  depending on (ChgReq100_Discharge_Seq) { Validate DC100_Sequence; }
+}
+State DC100_Sequence {
+      Validate ChgReq100_Charge;
+      Hold until valid (Charge_100V) or 1:00
+      else {
+        msg(2, "DC100_Sequence failed to start");
+        Validate DC100_Idle;
+      }
+      Hold until valid (Charge_100V_Idle);
+  +1  > Set 100V Charging Voltage Limit 0 V
+
+      Validate ChgReq100_Discharge1;
+      Hold until valid (Discharge_100V) or 1:00
+      else {
+        msg(2, "DC100_Sequence failed at Discharge1");
+        Validate DC100_Idle;
+      }
+      Hold until valid (Charge_100V_Idle);
+  +1  > Set 100V Charging Voltage Limit 0 V
+
+      Validate ChgReq100_Discharge2;
+      Hold until valid (Discharge_100V) or 1:00
+      else {
+        msg(2, "DC100_Sequence failed at Discharge2");
+        Validate DC100_Idle;
+      }
+      Hold until valid (Charge_100V_Idle);
+  +1  > Set 100V Charging Voltage Limit 0 V
+
+      Validate ChgReq100_Discharge3;
+      Hold until valid (Discharge_100V) or 1:00
+      else {
+        msg(2, "DC100_Sequence failed at Discharge3");
+        Validate DC100_Idle;
+      }
+      Hold until valid (Charge_100V_Idle);
+  +1  > Set 100V Charging Voltage Limit 0 V
+
+      Validate ChgReq100_Discharge4;
+      Hold until valid (Discharge_100V) or 1:00
+      else {
+        msg(2, "DC100_Sequence failed at Discharge4");
+        Validate DC100_Idle;
+      }
+      Hold until valid (Charge_100V_Idle);
+  +1  > Set 100V Charging Voltage Limit 0 V
+      Validate DC100_Idle;
 }
 
 #--------------------------------------

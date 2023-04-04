@@ -3,8 +3,17 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
   SWS_AUTO_REDUCE_DIS 11 Auto Reduce Disable: Validate AutoLoop_disable; break;
   SWS_28V_CHG_ENA     12 28V Charge Enable:   Validate Charge_28V; break;
   SWS_28V_CHG_DIS     13 28V Charge Disable:  Validate Charge_28V_Off; break;
-  SWS_100V_CHG_ENA    14 100V Charge Enable:  Validate Charge_100V; break;
-  SWS_100V_CHG_DIS    15 100V Charge Disable: Validate Charge_100V_Off; break;
+  SWS_100V_CHG_ENA    14 100V Charge Enable:  Validate ChgReq100_Charge; break;
+  SWS_100V_CHG_DIS    15 100V Charge Disable: Validate ChgReq100_Charge_Terminate; break;
+  SWS_100V_CHG_SUS    16 100V Charge Suspend: Validate ChgReq100_Charge_Suspend; break;
+  SWS_100V_CHG_RES    17 100V Charge Resume: Validate ChgReq100_Charge_Resume; break;
+  SWS_100V_DCHG1      20 100V Discharge 100V1: Validate ChgReq100_Discharge1; break;
+  SWS_100V_DCHG2      21 100V Discharge 100V2: Validate ChgReq100_Discharge2; break;
+  SWS_100V_DCHG3      22 100V Discharge 100V3: Validate ChgReq100_Discharge3; break;
+  SWS_100V_DCHG4      23 100V Discharge 100V4: Validate ChgReq100_Discharge4; break;
+  SWS_100V_DCHG_SUS   24 100V Discharge Suspend: Validate ChgReq100_Discharge_Suspend; break;
+  SWS_100V_DCHG_RES   25 100V Discharge Resume: Validate ChgReq100_Discharge_Resume; break;
+  SWS_100V_DCHG_SEQ   26 100V Discharge Sequence: Validate ChgReq100_Discharge_Seq; break;
 
   SWS_REDUCE         254 Reduce:              Validate Shutdown_Reduce_Restart; break;
   SWS_SHUTDOWN       255 Shutdown Full:       Validate Shutdown; break;
