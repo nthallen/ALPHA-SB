@@ -93,6 +93,6 @@ f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v4_loads', 'Status' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v4_loadf', 'Fault' );
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Runs');
-f = ne_listdirs(f, 'Charge_Data_Dir', 8);
+f = ne_listdirs(f, 'CHARGE_DATA_DIR', 8);
 f = ne_dialg(f, 'newcol');
 ne_dialg(f, 'resize');

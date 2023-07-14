@@ -1,6 +1,6 @@
 HEADER SCoPEx B3MB Charging Station
 MNEMONIC chg
-HOMEDIR Charge_Data_Dir
+HOMEDIR CHARGE_DATA_DIR
 ROWS 11
 
  1 BKd_V_limit   Plots:BKd Volts

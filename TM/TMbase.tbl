@@ -17,6 +17,13 @@ TMbase_times {
   }
 }
 
+TMbase_htimes {
+  HBox {
+    HGlue 0+1;
+    { (flttime,9) MFCtr: (MFCtr,5) }
+  }
+}
+
 TMbase {
   [TMbase_data];
   VGlue 0+1;
