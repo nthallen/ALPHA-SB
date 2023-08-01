@@ -8,7 +8,7 @@
 #include "dasio/serial.h"
 #include "dasio/cmd_reader.h"
 #include "dasio/tm_client.h"
-#include "serio_pkt.h"
+#include "dasio/serio_pkt.h"
 #include "mlf.h"
 
 #define EXTRACTION_ROW send_row(MFCtr, (const uint8_t *)raw);

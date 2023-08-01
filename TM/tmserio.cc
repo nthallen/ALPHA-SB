@@ -25,7 +25,7 @@ int tmserio_if::baud = 115200;
 int tmserio_if::air_speed = 125000;
 
 tmserio_if::tmserio_if() :
-    Serial("radio", serio::max_cmd_packet_size),
+    Serial("radio", serio::min_buffer_size),
     row_len(0),
     connect_waiting(false),
     dropping_tx_rows(false),

@@ -3,7 +3,7 @@
 #include "dasio/serial.h"
 #include "dasio/client.h"
 #include "dasio/cmd_reader.h"
-#include "serio_pkt.h"
+#include "dasio/serio_pkt.h"
 
 using namespace DAS_IO;
 
@@ -45,7 +45,7 @@ class RFD_interface : public Serial {
      * @return true unless a properly formatted serio_pkt_hdr
      * is located in the input buffer.
      */
-    bool not_serio_pkt_hdr();
+    // bool not_serio_pkt_hdr();
     bool protocol_input();
     bool protocol_timeout();
     bool protocol_except();

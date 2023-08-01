@@ -2,12 +2,16 @@
 <include> "RFDio_int.h"
 <include> msg oui
 <include> cmd_reader
+<include> host_session
 <follow> msg
 
 <opts> "p:b:"
 <sort>
   -p <serial port> the serial port connected to the RFD900x
   -b <baud rate> the serial port baud rate (57600)
+<unsort>
+Host_Session function tm_gen: Where to locate serin
+
 <init>
   RFDio_init_options(argc, argv);
 

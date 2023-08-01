@@ -61,6 +61,7 @@ void RFD_interface::queue_retry() {
   TO.Set(5, 0);
 }
 
+#ifdef NEED_NOT_SERIO
 bool RFD_interface::not_serio_pkt_hdr() {
   uint8_t lrc_sum = 0;
   int cp0 = cp;
@@ -81,6 +82,7 @@ bool RFD_interface::not_serio_pkt_hdr() {
   msg(MSG_ERROR, "%s: Skipping %d bytes", iname, cp-cp0);
   return true;
 }
+#endif
 
 bool RFD_interface::protocol_input() {
   while (nc-cp >= serio::pkt_hdr_size) {
