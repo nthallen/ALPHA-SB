@@ -1,0 +1,16 @@
+ModuleDef Certus {
+  Module to collect customizations required for telemetry reception.
+  For the moment, scopex.certus has the same telemetry definition as
+  scopex, but I expect that to change at some point. It is a separate
+  "telemetry stream" because it travels by a different route and
+  therefore could experience different data loss risk than scopex
+  or scopex.SerIn.
+}
+
+%%
+.PHONY : distribution-Certus
+distribution : distribution-Certus
+distribution-Certus :
+	@[ -d $(TGTDIR)/Certus ] || mkdir $(TGTDIR)/Certus
+	@for f in VERSION bin serindoit src; do [ -e $(TGTDIR)/Certus/$$f ] || ln -fs ../$$f $(TGTDIR)/Certus/$$f; done
+	@distribute $(FORCE) $(TGTDIR)/Certus Certus/Experiment.config
