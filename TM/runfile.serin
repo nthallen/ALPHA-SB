@@ -1,6 +1,8 @@
   case `hostname` in
     serin)
       rfddev=/dev/ttyUSB0;;
+    nortvmu22)
+      rfddev=/dev/ttyUSB0;;
     *) :;;
   esac
 
