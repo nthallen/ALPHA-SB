@@ -39,6 +39,8 @@ class tmserio_if : public Serial {
     bool protocol_input();
     bool protocol_timeout();
     bool protocol_except();
+    bool read_error(int my_errno);
+    bool process_eof();
     // uint16_t crc_calc(uint8_t *buf, int len);
   private:
     // int ser_fd, scan_fd;

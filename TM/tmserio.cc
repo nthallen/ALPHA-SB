@@ -213,6 +213,18 @@ bool tmserio_if::protocol_except() {
   return process_eof();
 }
 
+bool tmserio_if::read_error(int my_errno) {
+  msg(MSG_ERROR, "%s: read error %d: %s", iname,
+    my_errno, strerror(my_errno));
+  return false;
+}
+
+bool tmserio_if::process_eof() {
+  msg(MSG_ERROR, "%s: fh closed unexpectedly", iname);
+  queue_retry();
+  return false;
+}
+
 /**
  * @param MFCtr
  * @param raw The raw homerow data without the leading MFCtr or
