@@ -9,7 +9,7 @@
 	-b <baudrate> specify baud rate for telemetry (115200)
 	-p <path> specify base path to photo files (PNG)
 
-<opts> "a:b:d:p:"
+<opts> "a:b:d:p:f"
 
 <switch>
   case 'a':

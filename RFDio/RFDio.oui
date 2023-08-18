@@ -5,7 +5,7 @@
 <include> host_session
 <follow> msg
 
-<opts> "p:b:"
+<opts> "p:b:f"
 <sort>
   -p <serial port> the serial port connected to the RFD900x
   -b <baud rate> the serial port baud rate (57600)
