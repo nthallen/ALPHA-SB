@@ -25,6 +25,13 @@
       #slcandev=/dev/ttyACM0
       socketcan=can0
       ;;
+    [Ss]pi4)
+      # ascenderdev=/dev/ttyUSB0
+      # propmtrdev=/dev/ttyUSB0
+      # spatialdualdev=/dev/ttyUSB1
+      tmseriodev=/dev/ttyUSB0
+      # slcandev=/dev/ttyACM0
+      ;;
     *)
       propmtrdev=/dev/ttyUSB0
       slcandev=/dev/ttyACM0;;
