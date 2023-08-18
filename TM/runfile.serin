@@ -14,5 +14,5 @@
   Launch      tm_gen serin
   Launch      cmd    scopextxsrvr -H srvr: -S: -v
 [ -c "$rfddev" ] &&
-  Launch      -      RFDio -b 115200 -p $rfddev -v
+  Launch      -      RFDio -b 115200 -p $rfddev -v -f
   # was 230400

@@ -28,6 +28,7 @@ class RFD_interface : public Serial {
     static const int ibufsize = 4096;
     static const char *RFD_port;
     static int RFD_baud_rate;
+    static bool hwflow;
   protected:
     /**
      * Opens the serial port and sets up for operation.

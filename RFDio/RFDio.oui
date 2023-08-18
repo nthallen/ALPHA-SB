@@ -9,6 +9,8 @@
 <sort>
   -p <serial port> the serial port connected to the RFD900x
   -b <baud rate> the serial port baud rate (57600)
+  -f disable hardware flow control on serial port
+
 <unsort>
 Host_Session function tm_gen: Where to locate serin
 
@@ -24,6 +26,7 @@ void RFDio_init_options(int argc, char **argv) {
     switch (optltr) {
       case 'p': RFD_interface::RFD_port = optarg; break;
       case 'b': RFD_interface::RFD_baud_rate = atoi(optarg); break;
+      case 'f': RFD_interface::hwflow = false; break;
       case '?':
         msg(3, "Unrecognized Option -%c", optopt);
       default:
