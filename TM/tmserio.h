@@ -20,6 +20,7 @@ using namespace DAS_IO;
 class tmserio_if : public Serial {
   public:
     tmserio_if();
+    ~tmserio_if();
     void enqueue_photo();
     void send_row(uint16_t MFCtr, const uint8_t *raw);
     static tmserio_if *TMp;
@@ -29,11 +30,12 @@ class tmserio_if : public Serial {
     static int baud;
     static int air_speed;
     static uint32_t cur_photo;
+    static bool hwflow;
   protected:
     void process_data();
     void connect();
     void queue_retry();
-    bool not_serio_pkt_hdr();
+    // bool not_serio_pkt_hdr();
     bool protocol_input();
     bool protocol_timeout();
     bool protocol_except();

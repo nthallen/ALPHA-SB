@@ -23,6 +23,7 @@ const char *tmserio_if::base = "PNG";
 uint32_t tmserio_if::cur_photo = 0;
 int tmserio_if::baud = 115200;
 int tmserio_if::air_speed = 125000;
+bool tmserio_if::hwflow = true;
 
 tmserio_if::tmserio_if() :
     Serial("radio", serio::min_buffer_size),
@@ -69,6 +70,13 @@ tmserio_if::tmserio_if() :
   connect();
 }
 
+tmserio_if::~tmserio_if() {
+  msg(MSG, "%s: destructor", iname);
+  int drops = total_tx_rows_dropped + n_tx_rows_dropped;
+  if (drops)
+    msg(MSG, "%s: %d rows dropped", iname, drops);
+}
+
 void tmserio_if::connect() {
   if (fd < 0) {
     int old_response = set_response(NLRSP_QUIET);
@@ -84,7 +92,7 @@ void tmserio_if::connect() {
     } else {
       msg(MSG, "%s: Successfully opened %s", iname, tm_port);
       setup(baud, 8, 'n', 1, 0, 0);
-      hwflow_enable(true);
+      hwflow_enable(hwflow);
       flush_input();
       update_tc_vmin(serio::min_pkt_size,1);
       flags |= Fl_Read;
@@ -105,6 +113,7 @@ void tmserio_if::queue_retry() {
   TO.Set(5, 0);
 }
 
+#ifdef USE_OLD_SERIO_PKT_HDR
 bool tmserio_if::not_serio_pkt_hdr() {
   uint8_t lrc_sum = 0;
   int cp0 = cp;
@@ -125,6 +134,7 @@ bool tmserio_if::not_serio_pkt_hdr() {
   msg(MSG_ERROR, "%s: Skipping %d bytes", iname, cp-cp0);
   return true;
 }
+#endif
 
 bool tmserio_if::protocol_input() {
   while (nc-cp >= serio::pkt_hdr_size) {
@@ -415,6 +425,7 @@ void tmserio_tm_client::process_quit() {
 void tmserio_tm_client::adopted() {
   tmserio_if *radio = new tmserio_if();
   ELoop->add_child(radio);
+  msg(MSG, "%s: adopted", iname);
 }
 
 void tmserio_tm_client::send_row(uint16_t MFCtr, const uint8_t *raw) {
