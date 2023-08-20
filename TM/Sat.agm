@@ -3,6 +3,7 @@ ModuleDef Sat {
 }
 
 DISTRIB = runfile.sat
+cmdbase = ip_ex.cmd
 satdoit : sat.doit
 
 %%
