@@ -31,6 +31,7 @@ Module B3MB mode=V100 ID=100V4 CAN_ID=4 Panel=B3MB: L3=EngStbd100 L4=AscSec2
 # Module scopexsim
 Module PropMtrSim
 Module SerIn
+Module Sat
 Module SpatialDual FAST=10 Panel=Main:
 Module Ascender Panel=Main:
 Module RFDio
@@ -38,7 +39,7 @@ Module Nav
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-DISTRIB = interact services runfile.sim runfile.serin
+DISTRIB = interact services runfile.sim
 IGNORE = B3MB_gen_cal.asv
 
 scopexcol : -lsubbuspp
@@ -53,6 +54,5 @@ tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
 Simdoit : Sim.doit
 SimSockdoit : SimSock.doit
-serindoit : serin.doit
 %%
 CXXFLAGS+=-g

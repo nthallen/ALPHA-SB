@@ -30,7 +30,8 @@ tmserio_if::tmserio_if() :
     row_len(0),
     connect_waiting(false),
     dropping_tx_rows(false),
-    n_tx_rows_dropped(0)
+    n_tx_rows_dropped(0),
+    total_tx_rows_dropped(0)
 {
 
   // scan_fd = -1;

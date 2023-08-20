@@ -1,0 +1,8 @@
+  Launch      memo   memo -o $Experiment.log -l4
+              [ -z "$launch_err" ] &&
+                msg "Running script runfile.sat"
+  Launch      tm_bfr bfr -H bfr: -S:
+  Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
+  Launch      tm_gen serin
+  Launch      cmd    scopextxsrvr -H srvr: -S: -v
+  Launch      -      tm_ip_import -v

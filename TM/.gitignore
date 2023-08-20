@@ -1,3 +1,5 @@
+serindoit.dep
+satdoit.dep
 scopexcol.cc
 tm.dac
 scopexcoloui.cc
@@ -47,7 +49,6 @@ tmserioextoui.o
 doit.dep
 Simdoit.dep
 SimSockdoit.dep
-serindoit.dep
 scopexengext.cdf
 scopexengextcdf.oui
 scopexengextcdf.tmc
@@ -68,6 +69,8 @@ VERSION
 *.stackdump
 Makefile
 B3MB_gen_cal.asv
+serindoit
+satdoit
 scopexcol
 scopexsrvr
 scopextxsrvr
@@ -79,5 +82,4 @@ tmserioext
 doit
 Simdoit
 SimSockdoit
-serindoit
 scopexengext

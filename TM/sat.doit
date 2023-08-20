@@ -1,0 +1,5 @@
+display scopexdisp -n disp
+client [SI|RT] scopexclt
+extraction scopexjsonext -n json
+memo
+batchfile runfile.sat

@@ -1,0 +1,14 @@
+ModuleDef Sat {
+  Module to collect customizations required for telemetry reception.
+}
+
+DISTRIB = runfile.sat
+satdoit : sat.doit
+
+%%
+.PHONY : distribution-Sat
+distribution : distribution-Sat
+distribution-Sat :
+	@[ -d $(TGTDIR)/Sat ] || mkdir $(TGTDIR)/Sat
+	@for f in VERSION bin satdoit src; do [ -e $(TGTDIR)/Sat/$$f ] || ln -fs ../$$f $(TGTDIR)/Sat/$$f; done
+	@distribute $(FORCE) $(TGTDIR)/Sat Sat/Experiment.config

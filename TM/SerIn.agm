@@ -2,6 +2,9 @@ ModuleDef SerIn {
   Module to collect customizations required for telemetry reception.
 }
 
+DISTRIB = runfile.serin
+serindoit : serin.doit
+
 %%
 .PHONY : distribution-SerIn
 distribution : distribution-SerIn
