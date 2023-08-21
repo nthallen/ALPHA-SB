@@ -30,7 +30,7 @@ Module B3MB mode=V100 ID=100V4 CAN_ID=4 Panel=B3MB: L3=EngStbd100 L4=AscSec2
 
 # Module scopexsim
 Module PropMtrSim
-Module SerIn
+#Module SerIn
 Module Sat
 Module SpatialDual FAST=10 Panel=Main:
 Module Ascender Panel=Main:

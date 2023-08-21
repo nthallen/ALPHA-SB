@@ -1,4 +1,3 @@
-serindoit.dep
 satdoit.dep
 scopexcol.cc
 tm.dac
@@ -69,7 +68,6 @@ VERSION
 *.stackdump
 Makefile
 B3MB_gen_cal.asv
-serindoit
 satdoit
 scopexcol
 scopexsrvr
