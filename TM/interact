@@ -60,7 +60,7 @@ fi
   Launch      -TMC-  tmserioext -d $tmseriodev -b 115200 -v -f
   # Was 230400
 [ -n "$relayhost" ] &&
-  Launch      -TMC-  tm_ip_export -H Relay:$relayhost
+  Launch      -TMC-  tm_ip_export -H Relay:$relayhost -E scopex.sat
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
