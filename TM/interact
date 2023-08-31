@@ -55,7 +55,7 @@ fi
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen scopexcol
-  Launch      cmd    scopexsrvr -H srvr: -S:
+  Launch      cmd    scopexsrvr -H srvr: -S: -v
 [ -c "$tmseriodev" ] &&
   Launch      -TMC-  tmserioext -d $tmseriodev -b 115200 -v -f
   # Was 230400
