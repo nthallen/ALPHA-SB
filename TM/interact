@@ -34,6 +34,7 @@
       ;;
     nortvmu22)
       relayhost=$spi4
+      tmseriodev=/dev/ttyUSB0
       ;;
     *)
       propmtrdev=/dev/ttyUSB0
