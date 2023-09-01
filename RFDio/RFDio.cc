@@ -196,7 +196,7 @@ bool serio_if::forward_packet(const char *pkt, int length) {
 }
 
 RFD_cmd::RFD_cmd(RFD_interface *RFD) :
-    Cmd_reader("cmd", 256, "RFDio"),
+    Cmd_reader("cmd", 256, "cmd_tx"),
     RFD(RFD)
 {
   connect();

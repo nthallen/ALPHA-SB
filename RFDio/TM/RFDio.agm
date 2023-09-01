@@ -6,7 +6,6 @@ Moduledef RFDio {
 
 DISTRIB = @MODDIR@/../RFDio
 
-cmdbase = RFDio.cmd
 %%
 .PHONY : @MODDIR@/../RFDio clean-RFDio
 
