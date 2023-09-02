@@ -1,5 +1,6 @@
 # Summary.tbl
 Input "TMbase.tbl";
+Input "command_sn.tbl";
 
 PMC_Full {
   HBox { +-; Title: Propulsion; -+ };
@@ -64,6 +65,7 @@ AHRS {
 TMtime {
   +-+;
   VGlue 0+1;
+  [Command_SN];
   [TMbase_times];
 }
 

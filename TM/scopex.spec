@@ -9,6 +9,7 @@ genuibase = scopex.genui
 
 Module Version src=scopex.ver
 Module TMbase Panel=Main:
+Module Command_SN Panel=Cmd:
 
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types Panel=Motors:
 # Will try  RPMSGN=:*(-1) to make RPM positive. Works for ui_, not for rt_ yet

@@ -1,3 +1,6 @@
+command_sn.tmc
+command_sn.genui
+command_sn.tbl
 serindoit.dep
 satdoit.dep
 scopexcol.cc
@@ -64,6 +67,9 @@ SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err
 VERSION
+command_sn.tmc
+command_sn.genui
+command_sn.tbl
 *.o
 *.exe
 *.stackdump
