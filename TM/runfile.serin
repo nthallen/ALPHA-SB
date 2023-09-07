@@ -3,12 +3,17 @@
       rfddev=/dev/ttyUSB0;;
     nortvmu22)
       rfddev=/dev/ttyUSB0;;
+    EAS-NALLEN1L)
+      # Nort's laptop 2023:
+      rfddev=/dev/ttyS8
+      relayhost=$spi4
+      ;;
     *) :;;
   esac
 
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
-                msg "Running script runfile.serin"
+              msg "Running script runfile.serin"
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen serin
@@ -16,3 +21,5 @@
 [ -c "$rfddev" ] &&
   Launch      -      RFDio -b 115200 -p $rfddev -v -f
   # was 230400
+[ -n "$relayhost" ] &&
+  Launch      -      cmd_relay -T scopex.sat -H rxsrvr:$relayhost -v
