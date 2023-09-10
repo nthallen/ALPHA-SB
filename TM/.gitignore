@@ -3,6 +3,7 @@ command_sn.genui
 command_sn.tbl
 serindoit.dep
 satdoit.dep
+satrelaydoit.dep
 scopexcol.cc
 tm.dac
 scopexcoloui.cc
@@ -77,6 +78,7 @@ Makefile
 B3MB_gen_cal.asv
 serindoit
 satdoit
+satrelaydoit
 scopexcol
 scopexsrvr
 scopextxsrvr
