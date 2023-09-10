@@ -22,4 +22,4 @@
   Launch      -      RFDio -b 115200 -p $rfddev -v -f
   # was 230400
 [ -n "$relayhost" ] &&
-  Launch      -      cmd_relay -T scopex.sat -H rxsrvr:$relayhost -v
+  Launch      -      cmd_relay -F scopex.sat -H txsrvr:$relayhost -v

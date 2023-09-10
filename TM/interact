@@ -18,12 +18,13 @@
       # slcandev=/dev/ttyACM0
       ;;
     [Ss]pi3)
-      propmtrdev=/dev/ttyUSB0
-      tmseriodev=/dev/ttyUSB2
-      ascenderdev=/dev/ttyUSB1
-      spatialdualdev=/dev/ttyUSB3
+      #propmtrdev=/dev/ttyUSB0
+      #tmseriodev=/dev/ttyUSB2
+      #ascenderdev=/dev/ttyUSB1
+      #spatialdualdev=/dev/ttyUSB3
       #slcandev=/dev/ttyACM0
-      socketcan=can0
+      #socketcan=can0
+      relayhost=$spi4
       ;;
     [Ss]pi4)
       # ascenderdev=/dev/ttyUSB0
