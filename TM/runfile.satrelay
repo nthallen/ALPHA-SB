@@ -4,4 +4,4 @@
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen tm_relay -H bfr:$spi4
-  Launch      cmd    pbsrvr -H srvr: -S: -v
+  Launch      cmd    playbacksrvr -H srvr: -S: -v
