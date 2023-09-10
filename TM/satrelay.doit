@@ -2,4 +2,4 @@ display scopexdisp -n disp
 client [SI|RT] scopexclt -H srvr:$spi4
 extraction scopexjsonext -n json
 memo
-batchfile runfile.sat
+batchfile runfile.satrelay
