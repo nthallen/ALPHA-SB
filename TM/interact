@@ -24,7 +24,6 @@
       #spatialdualdev=/dev/ttyUSB3
       #slcandev=/dev/ttyACM0
       #socketcan=can0
-      relayhost=$spi4
       ;;
     [Ss]pi4)
       # ascenderdev=/dev/ttyUSB0
@@ -34,7 +33,6 @@
       # slcandev=/dev/ttyACM0
       ;;
     nortvmu22)
-      relayhost=$spi4
       tmseriodev=/dev/ttyUSB0
       ;;
     *)
@@ -61,8 +59,8 @@ fi
 [ -c "$tmseriodev" ] &&
   Launch      -TMC-  tmserioext -d $tmseriodev -b 115200 -v -f
   # Was 230400
-[ -n "$relayhost" ] &&
-  Launch      -TMC-  tm_ip_export -H Relay:$relayhost -E scopex.sat
+[ -n "$relay_ext" ] &&
+  Launch      -TMC-  tm_ip_export -H Relay:$relay_ext -E scopex.sat
   Launch      -      tmdf
 [ -c "$propmtrdev" ] &&
   Launch      -      PropMtr -p $propmtrdev
