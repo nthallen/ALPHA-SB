@@ -1,5 +1,18 @@
-function ui_scopex
-f = ne_dialg('SCoPEx Platform',1);
+function ui_scopex(dirfunc, stream)
+% ui_scopex
+% ui_scopex(dirfunc [, stream])
+% dirfunc is a string specifying the name of a function
+%   that specifies where data run directories are stored.
+% stream is an optional argument specifying which stream
+%   the run directories have recorded, e.g. 'SerIn'
+if nargin < 1
+  dirfunc = 'SCOPEX_DATA_DIR';
+end
+if nargin >= 2
+  f = ne_dialg(stream, 1);
+else
+  f = ne_dialg('SCoPEx Platform',1);
+end
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Main');
 f = ne_dialg(f, 'add', 0, 1, 'gscopexms', 'System' );
@@ -166,6 +179,6 @@ f = ne_dialg(f, 'add', 1, 0, 'pscopexb3mb_b3mb_100v4_loads', 'Status' );
 f = ne_dialg(f, 'add', 1, 0, 'pscopexb3mb_b3mb_100v4_loadf', 'Fault' );
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Runs');
-f = ne_listdirs(f, 'SCoPEx_Data_Dir', 8);
+f = ne_listdirs(f, dirfunc, 8);
 f = ne_dialg(f, 'newcol');
 ne_dialg(f, 'resize');

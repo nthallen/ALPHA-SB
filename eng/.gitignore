@@ -1,4 +1,5 @@
 *.asv
-SCoPEx_Data_Dir.m
-SCoPEx_SI_Data_Dir.m
+SCOPEX_DATA_DIR.m
+SCOPEX_SI_DATA_DIR.m
+SCOPEX_SAT_DATA_DIR.m
 rt_scopex_*.m

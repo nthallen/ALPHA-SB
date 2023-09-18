@@ -604,15 +604,20 @@ EOF
     [ -d ~/.monarch ] || mkdir ~/.monarch
     . /usr/local/libexec/setup_getrun.sh
     function output_getrun_exp_ini {
-      if [ -z "$startup_func" ]; then
-        if [ -n "$ui_func" ]; then
-          startup_func="getrun_startup('$data_dir_func', @$ui_func)"
+      if [ -z "$data_dir_desc" ]; then
+        if [ -z "$data_desc" ]; then
+          data_dir_desc="MATLAB data files for $cur_exp"
         else
-          startup_func="getrun_startup('$data_dir_func')"
+          data_dir_desc="$data_desc MATLAB Data"
         fi
       fi
-      [ -z "data_dir_desc" ] &&
-        data_dir_desc="MATLAB data files for $cur_exp"
+      if [ -z "$startup_func" -a -n "$ui_func" ]; then
+        if [ -n '$data_desc' ]; then
+          startup_func="getrun_startup(@$ui_func, '$data_dir_func', '$data_desc')"
+        else
+          startup_func="getrun_startup(@$ui_func, '$data_dir_func')"
+        fi
+      fi
       [ -z "$eng_dir" -a -d "$exp_src/eng" ] &&
         eng_dir=eng
       exp_eng_path=$exp_src/$eng_dir
@@ -622,6 +627,7 @@ EOF
       cat >~/.monarch/getrun.$cur_exp.ini <<EOF
 [$cur_exp]
 data_dir_func=$data_dir_func
+data_desc=$data_desc
 data_dir_desc=$data_dir_desc
 startup_func="$startup_func"
 ui_func=$ui_func
