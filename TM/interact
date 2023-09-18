@@ -10,6 +10,8 @@
       # Marco's laptop
       propmtrdev=
       slcandev=/dev/ttyS3;;
+    EAS-NALLEN1L)
+      ;;
     spi2)
       # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
