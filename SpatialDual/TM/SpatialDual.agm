@@ -7,6 +7,17 @@ mode (default) {
   genuibase = SpatialDual.genui:SpatialDual.genui.in
   extbase = SpatialDual_conv.tmc:SpatialDual_conv.tmc.in
   - : SpatialDual.tbl:SpatialDual.tbl.in
+  IGNORE = SpatialDual.tmc
+  IGNORE = SpatialDual_col.tmc
+  IGNORE = SpatialDual.genui
+  IGNORE = SpatialDual_conv.tmc
+  IGNORE = SpatialDual.tbl
+  OBJ = SpatialDual.tmc
+  OBJ = SpatialDual_col.tmc
+  OBJ = SpatialDual.genui
+  OBJ = SpatialDual_conv.tmc
+  OBJ = SpatialDual.tbl
+
   DISTRIB = @MODDIR@/../SpatialDual @MODDIR@/../SpatialDualSock
   CPPFLAGS = -I @MODDIR@/..
   %%

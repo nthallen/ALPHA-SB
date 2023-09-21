@@ -59,6 +59,11 @@ B3MB_100V4.cmd
 B3MB_100V4_conv.tmc
 B3MB_100V4.genui
 B3MB_100V4.tbl
+SpatialDual.tmc
+SpatialDual_col.tmc
+SpatialDual.genui
+SpatialDual_conv.tmc
+SpatialDual.tbl
 Ascender.tmc
 Ascender_col.tmc
 Ascender.genui
@@ -192,6 +197,11 @@ B3MB_100V4.cmd
 B3MB_100V4_conv.tmc
 B3MB_100V4.genui
 B3MB_100V4.tbl
+SpatialDual.tmc
+SpatialDual_col.tmc
+SpatialDual.genui
+SpatialDual_conv.tmc
+SpatialDual.tbl
 Ascender.tmc
 Ascender_col.tmc
 Ascender.genui
