@@ -43,6 +43,8 @@ TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
 DISTRIB = interact services runfile.sim
 IGNORE = B3MB_gen_cal.asv
+IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
+OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 
 scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp

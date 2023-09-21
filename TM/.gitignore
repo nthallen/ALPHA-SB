@@ -72,6 +72,10 @@ Ascender_col.tmc
 Ascender.genui
 Ascender_conv.tmc
 Ascender.tbl
+SWData.cmd
+SWData.h
+SWData.tmc
+SWData_col.tmc
 serindoit.dep
 satdoit.dep
 satrelaydoit.dep
@@ -218,6 +222,10 @@ Ascender.tbl
 *.stackdump
 Makefile
 B3MB_gen_cal.asv
+SWData.cmd
+SWData.h
+SWData.tmc
+SWData_col.tmc
 serindoit
 satdoit
 satrelaydoit
