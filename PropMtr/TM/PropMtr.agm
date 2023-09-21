@@ -36,6 +36,16 @@ mode (types) {
   - : pmc.tma:pmc.tma.in
   DISTRIB = @MODDIR@/../PropMtr
   CPPFLAGS = -I @MODDIR@/..
+  IGNORE = pmc_types.tmc
+  IGNORE = pmc_col.tmc
+  IGNORE = pmc_base.cmd
+  IGNORE = pmc.genui
+  IGNORE = pmc.tma
+  OBJ = pmc_types.tmc
+  OBJ = pmc_col.tmc
+  OBJ = pmc_base.cmd
+  OBJ = pmc.genui
+  OBJ = pmc.tma
   %%
 .PHONY : clean-PropMtr @MODDIR@/../PropMtr
 @MODDIR@/../PropMtr :
@@ -52,8 +62,22 @@ mode (default,types) {
   extbase = pmc_@ID@_conv.tmc:pmc_drv_conv.tmc.in
   - : pmc_@ID@.tma:pmc_drv.tma.in
   - : pmc_@ID@.tbl:pmc.tbl.in
+  IGNORE = pmc_@ID@.tmc
+  IGNORE = pmc_@ID@.cmd
+  IGNORE = pmc_@ID@.genui
+  IGNORE = pmc_@ID@_conv.tmc
+  IGNORE = pmc_@ID@.tma
+  IGNORE = pmc_@ID@.tbl
+  OBJ = pmc_@ID@.tmc
+  OBJ = pmc_@ID@.cmd
+  OBJ = pmc_@ID@.genui
+  OBJ = pmc_@ID@_conv.tmc
+  OBJ = pmc_@ID@.tma
+  OBJ = pmc_@ID@.tbl
 }
 
 mode (groups) {
   tmcbase = pmc.tmc:pmc.tmc.in
+  IGNORE = pmc.tmc
+  OBJ = pmc.tmc
 }

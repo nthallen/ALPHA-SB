@@ -1,8 +1,0 @@
-%{
-  #include "PropMtr.h"
-  PropMtr_t PropMtr;
-  PropMtr_fast_t PropMtr_fast;
-  
-  #define pmc_ref(idx,name) PropMtr.Ctrl[idx].name
-  #define pmcf_ref(idx,name) PropMtr_fast.Ctrl[idx].name
-%}
