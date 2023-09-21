@@ -59,6 +59,11 @@ B3MB_100V4.cmd
 B3MB_100V4_conv.tmc
 B3MB_100V4.genui
 B3MB_100V4.tbl
+Ascender.tmc
+Ascender_col.tmc
+Ascender.genui
+Ascender_conv.tmc
+Ascender.tbl
 serindoit.dep
 satdoit.dep
 satrelaydoit.dep
@@ -187,6 +192,11 @@ B3MB_100V4.cmd
 B3MB_100V4_conv.tmc
 B3MB_100V4.genui
 B3MB_100V4.tbl
+Ascender.tmc
+Ascender_col.tmc
+Ascender.genui
+Ascender_conv.tmc
+Ascender.tbl
 *.o
 *.exe
 *.stackdump

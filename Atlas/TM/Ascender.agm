@@ -7,6 +7,17 @@ cmdbase = Ascender.cmd
 genuibase = Ascender.genui:Ascender.genui.in
 extbase = Ascender_conv.tmc:Ascender_conv.tmc.in
 - : Ascender.tbl:Ascender.tbl.in
+IGNORE = Ascender.tmc
+IGNORE = Ascender_col.tmc
+IGNORE = Ascender.genui
+IGNORE = Ascender_conv.tmc
+IGNORE = Ascender.tbl
+OBJ = Ascender.tmc
+OBJ = Ascender_col.tmc
+OBJ = Ascender.genui
+OBJ = Ascender_conv.tmc
+OBJ = Ascender.tbl
+
 DISTRIB = @MODDIR@/../Ascender
 CPPFLAGS = -I @MODDIR@/..
 
