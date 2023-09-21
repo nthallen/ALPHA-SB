@@ -2,7 +2,13 @@
   /* Common B3MB Command Framework */
   #include "scopex_can.h"
 
+  #define B3MB_LOAD_1_CMD 8
+  #define B3MB_LOAD_2_CMD 10
+  #define B3MB_LOAD_3_CMD 12
+  #define B3MB_LOAD_4_CMD 14
+
   #if defined(SERVER) && !defined(TRANSMITTING)
+
     int subbus_quit() {
       return CAN->subbus_quit();
     }
@@ -34,10 +40,10 @@
   : Battery 2 { $0 = 2; }
   : Battery 3 { $0 = 4; }
   : Battery 4 { $0 = 6; }
-  : Load 1 { $0 = 8; }
-  : Load 2 { $0 = 10; }
-  : Load 3 { $0 = 12; }
-  : Load 4 { $0 = 14; }
+  : Load 1 { $0 = B3MB_LOAD_1_CMD; }
+  : Load 2 { $0 = B3MB_LOAD_2_CMD; }
+  : Load 3 { $0 = B3MB_LOAD_3_CMD; }
+  : Load 4 { $0 = B3MB_LOAD_4_CMD; }
   : All Loads { $0 = 16; }
   : All Batteries { $0 = 18; }
   : Status LED { $0 = 20; }

@@ -16,21 +16,34 @@
 #   3: Power up the secondary loads
 # In flight configuration, 100V3 Load 2 is a backup precharge circuit, so additional logic
 # can be added.
+%{
+  #define CAN_ID_28V1 11
+  #define CAN_ID_28V2 12
+  #define CAN_ID_28V3 13
+  #define CAN_ID_100V1 1
+  #define CAN_ID_100V2 2
+  #define CAN_ID_100V3 3
+  #define CAN_ID_100V4 4
+  #define CAN_ID_100V5 5
+  #define CAN_ID_100V6 6
+  #define CAN_ID_100V7 7
+  #define CAN_ID_100V8 8
+%}
 
 &^command
-  : Power Port Engine 28V &B3MB_On_Off * { B3MB_command(11,8,$5); }
-  : Power Port Engine 100V &B3MB_On_Off * { B3MB_command(1,12,$5); }
-  : Power Data System 28V &B3MB_On_Off * { B3MB_command(11,14,$5); }
-  : Power Starboard Engine 28V &B3MB_On_Off * { B3MB_command(11,12,$5); }
-  : Power Starboard Engine 100V &B3MB_On_Off * { B3MB_command(4,12,$5); }
-  : Power Ascender Secondary N1 &B3MB_On_Off * { B3MB_command(1,14,$5); }
-  : Power Ascender Precharge N2 &B3MB_On_Off * { B3MB_command(2,10,$5); }
-  : Power Ascender Precharge N3 &B3MB_On_Off * { B3MB_command(3,10,$5); }
-  : Power Ascender Secondary N4 &B3MB_On_Off * { B3MB_command(4,14,$5); }
+  : Power Port Engine 28V &B3MB_On_Off * { B3MB_command(CAN_ID_28V1,B3MB_LOAD_1_CMD,$5); }
+  : Power Port Engine 100V &B3MB_On_Off * { B3MB_command(CAN_ID_100V1,B3MB_LOAD_3_CMD,$5); }
+  : Power Data System 28V &B3MB_On_Off * { B3MB_command(CAN_ID_28V1,B3MB_LOAD_4_CMD,$5); }
+  : Power Starboard Engine 28V &B3MB_On_Off * { B3MB_command(CAN_ID_28V1,B3MB_LOAD_3_CMD,$5); }
+  : Power Starboard Engine 100V &B3MB_On_Off * { B3MB_command(CAN_ID_100V4,B3MB_LOAD_3_CMD,$5); }
+  : Power Ascender Secondary N1 &B3MB_On_Off * { B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,$5); }
+  : Power Ascender Precharge N2 &B3MB_On_Off * { B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,$5); }
+  : Power Ascender Precharge N3 &B3MB_On_Off * { B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,$5); }
+  : Power Ascender Secondary N4 &B3MB_On_Off * { B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,$5); }
   : Power Ascender All Off * {
-      B3MB_command(1,14,0);
-      B3MB_command(2,10,0);
-      B3MB_command(3,10,0);
-      B3MB_command(4,14,0);
+      B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,0);
+      B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,0);
+      B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,0);
+      B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,0);
     }
   ;
