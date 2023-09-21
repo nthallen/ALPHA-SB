@@ -1,3 +1,6 @@
+freemem.tmc
+TMbase.genui
+TMbase.tbl
 command_sn.tmc
 command_sn.genui
 command_sn.tbl
@@ -136,6 +139,9 @@ SpatialDualtblnc.tmc.dep
 Housekeepingtblnc.tmc.dep
 *.err
 VERSION
+freemem.tmc
+TMbase.genui
+TMbase.tbl
 command_sn.tmc
 command_sn.genui
 command_sn.tbl

@@ -8,7 +8,7 @@ cmdbase = cmd_tx.cmd
 genuibase = scopex.genui
 
 Module Version src=scopex.ver
-Module TMbase Panel=Main:
+Module TMbase mode=ignore Panel=Main:
 Module Command_SN Panel=Cmd:
 
 Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types Panel=Motors:
