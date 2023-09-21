@@ -1,9 +1,0 @@
-%{
-  /* Board-specific collection for 28V2 B3MB */
-  B3MB_mread_t *B3MB_mreq12;
-  static void B3MB_mreq12_init() {
-    B3MB_mreq12 = B3MB_mread_init(12, 0x20);
-  }
-%}
-TM INITFUNC CAN_identify_board(12);
-TM INITFUNC B3MB_mreq12_init();

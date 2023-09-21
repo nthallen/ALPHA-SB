@@ -17,6 +17,14 @@ mode (types) {
   tmcbase = B3MB_T30K75KU.tmc:B3MB_T30K75KU.tmc.in
   colbase = B3MB_col.tmc:B3MB_col.tmc.in
   cmdbase = B3MB.cmd:B3MB.cmd.in
+  IGNORE = B3MB.tmc
+  IGNORE = B3MB_T30K75KU.tmc
+  IGNORE = B3MB_col.tmc
+  IGNORE = B3MB.cmd
+  OBJ = B3MB.tmc
+  OBJ = B3MB_T30K75KU.tmc
+  OBJ = B3MB_col.tmc
+  OBJ = B3MB.cmd
 }
 
 mode (V28) [ RT1= RT2= RT3= ] {
@@ -26,6 +34,18 @@ mode (V28) [ RT1= RT2= RT3= ] {
   extbase = B3MB_@ID@_conv.tmc:B3MB_drv_conv.tmc.in
   genuibase = B3MB_@ID@.genui:B3MB_drv.genui.in
   - : B3MB_@ID@.tbl:B3MB_drv.tbl.in
+  IGNORE = B3MB_@ID@.tmc
+  IGNORE = B3MB_@ID@_col.tmc
+  IGNORE = B3MB_@ID@.cmd
+  IGNORE = B3MB_@ID@_conv.tmc
+  IGNORE = B3MB_@ID@.genui
+  IGNORE = B3MB_@ID@.tbl
+  OBJ = B3MB_@ID@.tmc
+  OBJ = B3MB_@ID@_col.tmc
+  OBJ = B3MB_@ID@.cmd
+  OBJ = B3MB_@ID@_conv.tmc
+  OBJ = B3MB_@ID@.genui
+  OBJ = B3MB_@ID@.tbl
 }
 
 mode (V100) [ RT1=/* RT2=*/ RT3=# RT4= ] {
@@ -35,4 +55,16 @@ mode (V100) [ RT1=/* RT2=*/ RT3=# RT4= ] {
   extbase = B3MB_@ID@_conv.tmc:B3MB_drv_conv.tmc.in
   genuibase = B3MB_@ID@.genui:B3MB_drv.genui.in
   - : B3MB_@ID@.tbl:B3MB_drv.tbl.in
+  IGNORE = B3MB_@ID@.tmc
+  IGNORE = B3MB_@ID@_col.tmc
+  IGNORE = B3MB_@ID@.cmd
+  IGNORE = B3MB_@ID@_conv.tmc
+  IGNORE = B3MB_@ID@.genui
+  IGNORE = B3MB_@ID@.tbl
+  OBJ = B3MB_@ID@.tmc
+  OBJ = B3MB_@ID@_col.tmc
+  OBJ = B3MB_@ID@.cmd
+  OBJ = B3MB_@ID@_conv.tmc
+  OBJ = B3MB_@ID@.genui
+  OBJ = B3MB_@ID@.tbl
 }
