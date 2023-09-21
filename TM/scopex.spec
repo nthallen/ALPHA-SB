@@ -20,10 +20,16 @@ Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 Module B3MB mode=types
 Module B3MB mode=V28  ID=28V1  CAN_ID=11 Panel=B3MB: L1=EngPort28 L3=EngStbd28 L4=DataSys28
 Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
+Module B3MB mode=V28  ID=28V3  CAN_ID=13 Panel=B3MB:
 Module B3MB mode=V100 ID=100V1 CAN_ID=1 Panel=B3MB: L3=EngPort100 L4=AscSec1
 Module B3MB mode=V100 ID=100V2 CAN_ID=2 Panel=B3MB: L1=AscRes1 L2=AscPri1
 Module B3MB mode=V100 ID=100V3 CAN_ID=3 Panel=B3MB: L1=AscRes2 L2=AscPri2
 Module B3MB mode=V100 ID=100V4 CAN_ID=4 Panel=B3MB: L3=EngStbd100 L4=AscSec2
+Module B3MB mode=V100 ID=100V5 CAN_ID=5 Panel=B3MB:
+Module B3MB mode=V100 ID=100V6 CAN_ID=6 Panel=B3MB:
+Module B3MB mode=V100 ID=100V7 CAN_ID=7 Panel=B3MB:
+Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB:
+
 #tmcbase = B3MB_28V1_cal.tmc
 #tmcbase = B3MB_100V1_cal.tmc
 #tmcbase = B3MB_100V2_cal.tmc
@@ -50,13 +56,13 @@ scopexcol : -lsubbuspp
 scopexsrvr : CAN.oui -lsubbuspp
 scopextxsrvr :
 scopexclt :
-scopexdisp : $extbase Summary.tbl scopex.tbl B3MB_28V.tbl B3MB_100V.tbl SpatialDual.tbl Housekeeping.tbl
+scopexdisp : $extbase Summary.tbl scopex.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl SpatialDual.tbl Housekeeping.tbl
 scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $extbase $genuibase
 # B3MBrawext : B3MBraw.cdf
 tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
-Simdoit : Sim.doit
-SimSockdoit : SimSock.doit
+#Simdoit : Sim.doit
+#SimSockdoit : SimSock.doit
 %%
 CXXFLAGS+=-g
