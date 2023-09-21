@@ -17,4 +17,5 @@ mode (default) {
   swsbase = nav.sws
   swsbase = nav.tma
   genuibase = nav.genui
+  CPPFLAGS = -I @MODDIR@
 }
