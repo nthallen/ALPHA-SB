@@ -47,7 +47,7 @@ Module Nav
 
 TGTDIR = /home/scopex
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
-DISTRIB = interact services runfile.sim
+DISTRIB = interact services
 IGNORE = B3MB_gen_cal.asv
 IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
