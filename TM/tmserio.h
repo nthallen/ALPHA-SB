@@ -61,6 +61,7 @@ class tmserio_if : public Serial {
     bool dropping_tx_rows;
     int n_tx_rows_dropped;
     int total_tx_rows_dropped;
+    int logfd;
     
     // void send_scan_data();
 };

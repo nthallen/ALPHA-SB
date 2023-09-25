@@ -5,6 +5,7 @@
 #include <termios.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 #include "tmserio.h"
 #include "dasio/appid.h"
 #include "dasio/loop.h"
@@ -69,10 +70,12 @@ tmserio_if::tmserio_if() :
   }
   cic_init();
   connect();
+  logfd = open("tmserio.log",O_WRONLY|O_CREAT,0666);
 }
 
 tmserio_if::~tmserio_if() {
   msg(MSG, "%s: destructor", iname);
+  ::close(logfd);
   int drops = total_tx_rows_dropped + n_tx_rows_dropped;
   if (drops)
     msg(MSG, "%s: %d rows dropped", iname, drops);
@@ -267,6 +270,7 @@ void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
       hdr.LRC = -hdr.LRC;
     }
     bool rv = iwritev(io, 3);
+    writev(logfd,io,3);
     rows_this_row = 0;
   } else {
     if (!dropping_tx_rows) {
