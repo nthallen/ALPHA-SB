@@ -1,6 +1,8 @@
   case `hostname` in
     serin)
       rfddev=/dev/ttyUSB0;;
+    GSE2020A)
+      rfddev=/dev/ttyUSB0;;
     nortvmu22)
       rfddev=/dev/ttyUSB0;;
     EAS-NALLEN1L)
