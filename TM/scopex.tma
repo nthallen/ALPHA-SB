@@ -11,7 +11,7 @@ PARTITION
   bool AscenderPwrRequest = false;
 %}
 
-State AscPwr_Disable {}
+# State AscPwr_Disable {}
 
 State AscPwr_Init {
   # Check whether ascender is powered or not
@@ -35,7 +35,7 @@ State AscPwr_Seq0 {
    +1 > Power Ascender Precharge N3 On
       > Power Ascender Secondary N1 On
       > Power Ascender Secondary N4 On
-      { if (convert(AscPri1_V) < 77.0 || !AscenderPwrRequest) {
+  +10 { if (convert(AscPri1_V) < 77.0 || !AscenderPwrRequest) {
           AscenderPwrRequest = false;
           Validate AscPwr_Shutdown;
         }
