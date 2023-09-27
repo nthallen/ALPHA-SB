@@ -1,5 +1,18 @@
-function ui_chg
-f = ne_dialg('SCoPEx B3MB Charging Station',1);
+function ui_chg(dirfunc, stream)
+% ui_chg
+% ui_chg(dirfunc [, stream])
+% dirfunc is a string specifying the name of a function
+%   that specifies where data run directories are stored.
+% stream is an optional argument specifying which stream
+%   the run directories have recorded, e.g. 'SerIn'
+if nargin < 1
+  dirfunc = 'CHARGE_DATA_DIR';
+end
+if nargin >= 2
+  f = ne_dialg(stream, 1);
+else
+  f = ne_dialg('SCoPEx B3MB Charging Station',1);
+end
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Plots');
 f = ne_dialg(f, 'add', 0, 1, 'gchgpbk', 'B Kd' );
@@ -43,6 +56,18 @@ f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v2_loadvv', 'Volts 28V2' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v2_loadav', 'Amps 28V2' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v2_loads', 'Status' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v2_loadf', 'Fault' );
+f = ne_dialg(f, 'newcol');
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_28v3_batt', 'B3MB 28V3 Batt' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_battvv', 'Volts 28V3' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_battav', 'Amps 28V3' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_batttv', 'Temp 28V3' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_batts', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_battf', 'Fault' );
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_28v3_load', 'B3MB 28V3 Load' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_loadvv', 'Volts 28V3' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_loadav', 'Amps 28V3' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_loads', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_28v3_loadf', 'Fault' );
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v1_batt', 'B3MB 100V1 Batt' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v1_battvv', 'Volts 100V1' );
@@ -92,7 +117,55 @@ f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v4_loadav', 'Amps 100V4' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v4_loads', 'Status' );
 f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v4_loadf', 'Fault' );
 f = ne_dialg(f, 'newcol');
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v5_batt', 'B3MB 100V5 Batt' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_battvv', 'Volts 100V5' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_battav', 'Amps 100V5' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_batttv', 'Temp 100V5' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_batts', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_battf', 'Fault' );
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v5_load', 'B3MB 100V5 Load' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_loadvv', 'Volts 100V5' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_loadav', 'Amps 100V5' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_loads', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v5_loadf', 'Fault' );
+f = ne_dialg(f, 'newcol');
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v6_batt', 'B3MB 100V6 Batt' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_battvv', 'Volts 100V6' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_battav', 'Amps 100V6' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_batttv', 'Temp 100V6' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_batts', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_battf', 'Fault' );
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v6_load', 'B3MB 100V6 Load' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_loadvv', 'Volts 100V6' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_loadav', 'Amps 100V6' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_loads', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v6_loadf', 'Fault' );
+f = ne_dialg(f, 'newcol');
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v7_batt', 'B3MB 100V7 Batt' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_battvv', 'Volts 100V7' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_battav', 'Amps 100V7' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_batttv', 'Temp 100V7' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_batts', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_battf', 'Fault' );
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v7_load', 'B3MB 100V7 Load' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_loadvv', 'Volts 100V7' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_loadav', 'Amps 100V7' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_loads', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v7_loadf', 'Fault' );
+f = ne_dialg(f, 'newcol');
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v8_batt', 'B3MB 100V8 Batt' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_battvv', 'Volts 100V8' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_battav', 'Amps 100V8' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_batttv', 'Temp 100V8' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_batts', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_battf', 'Fault' );
+f = ne_dialg(f, 'add', 0, 1, 'gchgb3mb_b3mb_100v8_load', 'B3MB 100V8 Load' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_loadvv', 'Volts 100V8' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_loadav', 'Amps 100V8' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_loads', 'Status' );
+f = ne_dialg(f, 'add', 1, 0, 'pchgb3mb_b3mb_100v8_loadf', 'Fault' );
+f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Runs');
-f = ne_listdirs(f, 'CHARGE_DATA_DIR', 8);
+f = ne_listdirs(f, dirfunc, 8);
 f = ne_dialg(f, 'newcol');
 ne_dialg(f, 'resize');

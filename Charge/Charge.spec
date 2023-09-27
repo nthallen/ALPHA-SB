@@ -12,10 +12,15 @@ Module MPSLd Panel=Plots:
 Module B3MB mode=types
 Module B3MB mode=V28   ID=28V1  CAN_ID=11 Panel=B3MB:
 Module B3MB mode=V28   ID=28V2  CAN_ID=12 Panel=B3MB:
+Module B3MB mode=V28   ID=28V3  CAN_ID=13 Panel=B3MB:
 Module B3MB mode=V100  ID=100V1 CAN_ID=1 Panel=B3MB:
 Module B3MB mode=V100  ID=100V2 CAN_ID=2 Panel=B3MB:
 Module B3MB mode=V100  ID=100V3 CAN_ID=3 Panel=B3MB:
 Module B3MB mode=V100  ID=100V4 CAN_ID=4 Panel=B3MB:
+Module B3MB mode=V100  ID=100V5 CAN_ID=5 Panel=B3MB:
+Module B3MB mode=V100  ID=100V6 CAN_ID=6 Panel=B3MB:
+Module B3MB mode=V100  ID=100V7 CAN_ID=7 Panel=B3MB:
+Module B3MB mode=V100  ID=100V8 CAN_ID=8 Panel=B3MB:
 # tmcbase = ../TM/B3MB_28V1_cal.tmc
 # tmcbase = ../TM/B3MB_100V1_cal.tmc
 # tmcbase = ../TM/B3MB_100V2_cal.tmc
@@ -34,20 +39,6 @@ OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 IGNORE = MPSLd.genui MPSLd.tmc MPSLd.tbl
 OBJ = MPSLd.genui MPSLd.tmc MPSLd.tbl
 
-IGNORE = B3MB.cmd B3MB.tmc B3MB_T30K75KU.tmc B3MB_col.tmc
-IGNORE = B3MB_100V[1234].cmd B3MB_100V[1234].genui B3MB_100V[1234].tbl
-IGNORE = B3MB_100V[1234].tmc B3MB_100V[1234]_col.tmc B3MB_100V[1234]_conv.tmc
-IGNORE = B3MB_28V1.cmd B3MB_28V1.genui B3MB_28V1.tbl
-IGNORE = B3MB_28V1.tmc B3MB_28V1_col.tmc B3MB_28V1_conv.tmc
-IGNORE = B3MB_28V2.cmd B3MB_28V2.genui B3MB_28V2.tbl
-IGNORE = B3MB_28V2.tmc B3MB_28V2_col.tmc B3MB_28V2_conv.tmc
-OBJ = B3MB.cmd B3MB.tmc B3MB_T30K75KU.tmc B3MB_col.tmc
-OBJ = B3MB_100V[1234].cmd B3MB_100V[1234].genui B3MB_100V[1234].tbl
-OBJ = B3MB_100V[1234].tmc B3MB_100V[1234]_col.tmc B3MB_100V[1234]_conv.tmc
-OBJ = B3MB_28V1.cmd B3MB_28V1.genui B3MB_28V1.tbl
-OBJ = B3MB_28V1.tmc B3MB_28V1_col.tmc B3MB_28V1_conv.tmc
-OBJ = B3MB_28V2.cmd B3MB_28V2.genui B3MB_28V2.tbl
-OBJ = B3MB_28V2.tmc B3MB_28V2_col.tmc B3MB_28V2_conv.tmc
 
 DISTRIB = interact services
 
