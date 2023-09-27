@@ -1,7 +1,7 @@
   case `hostname` in
     serin)
       rfddev=/dev/ttyUSB0;;
-    GSE2020A)
+    GSE9020A)
       rfddev=/dev/ttyUSB0;;
     nortvmu22)
       rfddev=/dev/ttyUSB0;;
@@ -21,7 +21,7 @@
   Launch      tm_gen serin
   Launch      cmd    scopextxsrvr -H srvr: -S: -v
 [ -c "$rfddev" ] &&
-  Launch      -      RFDio -b 115200 -p $rfddev -v -f
+  Launch      -      RFDio -b 115200 -p $rfddev
   # was 230400
 [ -n "$relayhost" ] &&
   Launch      -      cmd_relay -F scopex.sat -H txsrvr:$relayhost -v
