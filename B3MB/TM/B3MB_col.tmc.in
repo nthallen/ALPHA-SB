@@ -131,7 +131,7 @@
     // msg(0,"read_ack(0x%02X03)", bdid);
     uint16_t values[4];
     uint16_t nread;
-    subbus_mread_req *mreq = CAN_sequential_mread(CAN, bdid, 0x05, 4);
+    subbus_mread_req *mreq = CAN_sequential_mread(CAN, bdid, 0x02, 4);
     CAN->mread_subbus_nw(mreq, values, &nread);
     msg(0, "  Board ID:%d Build:%d S/N:%d Instrument:%d",
       values[0], values[1], values[2], values[3]);
@@ -145,7 +145,7 @@
     if (rv < 0) {
       msg(2, "Error %d from mread", rv);
     } else {
-      msg(0, "nr:%u/%u '%s'", nread, devname.n_words, &devname.name[0]);
+      msg(0, "    '%s'", &devname.name[0]);
     }
     free_memory(mreq);
   }
