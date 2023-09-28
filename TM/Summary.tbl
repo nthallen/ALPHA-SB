@@ -30,8 +30,10 @@ Asc {
       Lim1:  (AscLimit1);
       Lim2:  (AscLimit2);
     }; |; {
-      V:     (AscHoistV,6) V;
-      I:     (AscHoistI,3) A;
+      V:       (AscHoistV,6) V;
+      I:       (AscHoistI,3) A;
+      CtrlInp: (AscCtrlInp,6);
+      Mode:    (AscMode,8);
     }
   }
 }
