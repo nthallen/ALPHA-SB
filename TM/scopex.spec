@@ -11,9 +11,9 @@ Module Version src=scopex.ver
 Module TMbase mode=ignore Panel=Main:
 Module Command_SN Panel=Cmd:
 
-Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 mode=types Panel=Motors:
+Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 HOME=700 mode=types Panel=Motors:
 # Will try  RPMSGN=:*(-1) to make RPM positive. Works for ui_, not for rt_ yet
-Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 DAT= Panel=Motors:
+Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 HOME=2830 DAT= Panel=Motors:
 Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 
 # B3MB Configuration as per Under Link 20220813 Rev 2
