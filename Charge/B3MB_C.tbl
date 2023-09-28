@@ -1,0 +1,16 @@
+Input "B3MB_100V5.tbl";
+Input "B3MB_100V6.tbl";
+Input "B3MB_100V7.tbl";
+Input "B3MB_100V8.tbl";
+
+B3MB_100V_Rows {
+  [B3MB_100V5_Row];
+  [B3MB_100V6_Row];
+  [B3MB_100V7_Row];
+  [B3MB_100V8_Row];
+}
+
+{
+ HBox { |+; [B3MB_100V_Rows ]; |+ };
+ -
+}
