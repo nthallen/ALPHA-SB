@@ -15,6 +15,6 @@ if (SWStat == SWS_NAV_RESET_REFPOS && !refpos_reset) {
   refpos_reset = false;
 }
 
-if (SWStat == SWS_NAV_UNWIND_HEADING) {
+if (SWStat == SWS_NAV_UNWIND_HDNG) {
   heading_rotations = 0;
 }
