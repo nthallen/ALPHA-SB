@@ -1,5 +1,8 @@
-  State Init {
+State Init {
   > Telemetry Start
+ +5 > Set Nav PGain 12
+    > Set Nav IGain 0
+    > Set Nav DGain 640
 }
 
 State Shutdown {
