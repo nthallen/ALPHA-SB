@@ -12,6 +12,7 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
   SWS_NAV_RESET_REFPOS 18 Nav Reset Position:  break;
   SWS_NAV_STOP         19 Nav Stop:            Validate heading_Stop; break;
   SWS_NAV_HARDSTOP     20 Nav Hard Stop:       Validate heading_Hard_Stop; break;
+  SWS_NAV_UNWIND_HDNG  21 Nav Unwind Heading:  break;
 
 # SWS_SIM_START       18 Sim Init:            Validate Sim; break;
 

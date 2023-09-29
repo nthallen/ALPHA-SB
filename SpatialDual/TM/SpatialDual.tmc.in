@@ -1,6 +1,5 @@
 %{
   float prev_heading = 0;
-  int heading_rotations = 0;
 %}
 TM "Receive" SpatialDual 1;
 

@@ -4,6 +4,7 @@
   #include "SWData.h"
   double lat0, lon0;
   bool refpos_reset = false;
+  int heading_rotations = 0;
 %}
 
 if (SWStat == SWS_NAV_RESET_REFPOS && !refpos_reset) {
@@ -12,4 +13,8 @@ if (SWStat == SWS_NAV_RESET_REFPOS && !refpos_reset) {
   refpos_reset = true;
 } else if (refpos_reset && SWStat != SWS_NAV_RESET_REFPOS) {
   refpos_reset = false;
+}
+
+if (SWStat == SWS_NAV_UNWIND_HEADING) {
+  heading_rotations = 0;
 }
