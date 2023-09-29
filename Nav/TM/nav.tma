@@ -148,13 +148,13 @@ State heading_Starboard_2 {
 }
 
 State heading_Stop {
-  Validate FF_idle;
-  > _Set Nav Status Stop
-  > Set Nav Thrust 0 pct
-  > Set Nav dThrust 0 pct
-  { nav_set_rpm_dth(0);
-    Validate heading_idle;
-  }
+    Validate FF_idle;
+    > _Set Nav Status Stop
+    > Set Nav Thrust 0 pct
+    > Set Nav dThrust 0 pct
+ +1 { nav_set_rpm_dth(0);
+      Validate heading_idle;
+    }
 }
 
 State heading_Hard_Stop {
