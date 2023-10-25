@@ -3,6 +3,8 @@
       rfddev=/dev/ttyUSB0;;
     GSE9020A)
       rfddev=/dev/ttyUSB0;;
+    NorthFlickerB) # aka GSE9020B
+      rfddev=/dev/ttyUSB0;;
     nortvmu22)
       rfddev=/dev/ttyUSB0;;
     EAS-NALLEN1L)
