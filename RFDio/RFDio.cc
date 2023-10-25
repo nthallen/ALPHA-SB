@@ -1,6 +1,7 @@
 #include <cstring>
 #include "RFDio_int.h"
 #include "dasio/loop.h"
+#include "dasio/tm.h"
 #include "crc16modbus.h"
 #include "oui.h"
 #include "nl.h"
@@ -19,6 +20,7 @@ RFD_interface::RFD_interface(const char *name, serio_if *serio) :
     serio(serio)
 {
   flags = Fl_Except;
+  ::load_tmdac(".");
   connect();
 }
 
