@@ -11,6 +11,7 @@
       propmtrdev=
       slcandev=/dev/ttyS3;;
     EAS-NALLEN1L)
+      tmseriodev=/dev/ttyS6
       ;;
     spi2)
       # ascenderdev=/dev/ttyUSB0

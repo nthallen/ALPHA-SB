@@ -230,7 +230,6 @@ bool tmserio_if::process_eof() {
  * @param MFCtr
  * @param raw The raw homerow data without the leading MFCtr or
  *    trailing Synch
- * @param Synch
  */
 void tmserio_if::send_row(uint16_t MFCtr, const uint8_t *raw) {
   if (obuf_empty()) {
