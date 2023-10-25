@@ -68,15 +68,15 @@ bool RFD_interface::protocol_input() {
   uint16_t length;
   uint8_t *payload;
   
-  /* Unlike tm_ip_import, we are receiving TCP data, so we won't
+  /* Unlike tm_ip_import, we are receiving serial data, so we won't
    * discard partial packets.
    */
   while (cp < nc) {
     bool rv = not_serio_pkt(have_hdr, type, length, payload);
     if (have_hdr &&
         ((type != pkt_type_TM) || (length != tm_info.tm.nbminf-2))) {
-      report_err("%s: Invalid packet type '%c' or length %d",
-        iname, type, length);
+      report_err("%s: Invalid packet type '%c' or length %d (%d)",
+        iname, type, length, tm_info.tm.nbminf-2);
       ++cp;
       continue;
     }
