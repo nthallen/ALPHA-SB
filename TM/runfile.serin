@@ -1,15 +1,15 @@
   case `hostname` in
     serin)
-      rfddev=/dev/ttyUSB0;;
+      tmrfidev=/dev/ttyUSB0;;
     GSE9020A)
-      rfddev=/dev/ttyUSB0;;
+      tmrfidev=/dev/ttyUSB0;;
     NorthFlickerB) # aka GSE9020B
-      rfddev=/dev/ttyUSB0;;
+      tmrfidev=/dev/ttyUSB0;;
     nortvmu22)
-      rfddev=/dev/ttyUSB0;;
+      tmrfidev=/dev/ttyUSB0;;
     EAS-NALLEN1L)
       # Nort's laptop 2023:
-      rfddev=/dev/ttyS8
+      tmrfidev=/dev/ttyS8
       relayhost=$spi4
       ;;
     *) :;;
@@ -22,8 +22,8 @@
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen serin
   Launch      cmd    scopextxsrvr -H srvr: -S: -v
-[ -c "$rfddev" ] &&
-  Launch      -      RFDio -b 115200 -p $rfddev
+[ -c "$tmrfidev" ] &&
+  Launch      -      tm_rf_import -b 115200 -p $tmrfidev
   # was 230400
 [ -n "$relayhost" ] &&
   Launch      -      cmd_relay -F scopex.sat -H txsrvr:$relayhost -v

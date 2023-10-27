@@ -42,7 +42,7 @@ Module SerIn
 Module Sat
 Module SpatialDual FAST=10 Panel=Main:
 Module Ascender Panel=Main:
-Module RFDio
+# Module RFDio
 Module Nav
 
 TGTDIR = /home/scopex
@@ -60,7 +60,7 @@ scopexdisp : $extbase Summary.tbl scopex.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100
 scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 scopexjsonext : $extbase $genuibase
 # B3MBrawext : B3MBraw.cdf
-tmserioext : tmserio.tmc tmserio.cc tmserio.oui
+# tmserioext : tmserio.tmc tmserio.cc tmserio.oui
 doit : scopex.doit
 #Simdoit : Sim.doit
 #SimSockdoit : SimSock.doit

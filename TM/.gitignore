@@ -151,11 +151,6 @@ scopexjsonext.cc
 scopexjsonextoui.cc
 scopexjsonext.o
 scopexjsonextoui.o
-tmserioext.cc
-tmserioextoui.cc
-tmserioext.o
-tmserio.o
-tmserioextoui.o
 doit.dep
 scopexengext.cdf
 scopexengextcdf.oui
@@ -296,6 +291,5 @@ scopexcltnc
 scopexdispnc
 scopexalgo
 scopexjsonext
-tmserioext
 doit
 scopexengext

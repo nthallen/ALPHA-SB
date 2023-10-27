@@ -11,18 +11,18 @@
       propmtrdev=
       slcandev=/dev/ttyS3;;
     EAS-NALLEN1L)
-      tmseriodev=/dev/ttyS6
+      tmrfxdev=/dev/ttyS6
       ;;
     spi2)
       # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
       # spatialdualdev=/dev/ttyUSB1
-      tmseriodev=/dev/ttyUSB0
+      tmrfxdev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
     [Ss]pi3)
       propmtrdev=/dev/ttyUSB0
-      tmseriodev=/dev/ttyUSB2
+      tmrfxdev=/dev/ttyUSB2
       ascenderdev=/dev/ttyUSB1
       spatialdualdev=/dev/ttyUSB3
       #slcandev=/dev/ttyACM0
@@ -32,11 +32,11 @@
       # ascenderdev=/dev/ttyUSB0
       # propmtrdev=/dev/ttyUSB0
       # spatialdualdev=/dev/ttyUSB1
-      tmseriodev=/dev/ttyUSB0
+      tmrfxdev=/dev/ttyUSB0
       # slcandev=/dev/ttyACM0
       ;;
     nortvmu22)
-      tmseriodev=/dev/ttyUSB0
+      tmrfxdev=/dev/ttyUSB0
       ;;
     *)
       propmtrdev=/dev/ttyUSB0
@@ -59,8 +59,8 @@ fi
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen scopexcol
   Launch      cmd    scopexsrvr -H srvr: -S: -v
-[ -c "$tmseriodev" ] &&
-  Launch      -TMC-  tmserioext -d $tmseriodev -b 115200 -v -f
+[ -c "$tmrfxdev" ] &&
+  Launch      -TMC-  tm_rf_export -d $tmrfxdev -b 115200 -v -f
   # Was 230400
 [ -n "$relay_ext" ] &&
   Launch      -TMC-  tm_ip_export -H Relay:$relay_ext -E scopex.sat
