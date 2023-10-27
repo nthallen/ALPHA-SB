@@ -1,5 +1,0 @@
-%{
-  #include "tmserio.h"
-%}
-
-/* set_cur_photo(Photo_Num); */
