@@ -1,18 +1,14 @@
 # 10/30/2023 implemented usb_enum. Non-automated customizations remaining:
 #   $relay_ext: External IP address of relay host
 #     Current defined in Experiment.config
-#   $socketcan: If non-empty, will use can0 and can1 network interfaces
-#     Still using host-based definition below, but would like to add
-#     into usb_enum
 
-  /usr/local/lib_exec/usb_enum >USB_def.log
-  . ./USB_def.log
+/usr/local/lib_exec/usb_enum >USB_def.log
+. ./USB_def.log
 
-  case $(hostname) in
-    [Ss]pi3)
-      socketcan=can0
-      ;;
-  esac
+socketcan=''
+which ip >/dev/null 2>&1 &&
+  ip -br a | grep -q "^can0" &&
+  socketcan=can0
 
 if [ -n "$socketcan" ]; then
   sudo ip link set $socketcan type can bitrate 50000
