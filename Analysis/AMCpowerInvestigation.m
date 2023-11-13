@@ -2,8 +2,10 @@
 Iport = scopexeng_2.PMC_Left_I_Measured;
 RPMport = scopexeng_2.PMC_Left_RPM;
 T2 = scopexeng_2.T;
-Ib3mb = scopexeng_1.B3MB_100V1_Load1_I;
-Vb3mb = scopexeng_1.B3MB_100V1_Load1_V;
+%Ib3mb = scopexeng_1.B3MB_100V1_Load3_I;
+%Vb3mb = scopexeng_1.B3MB_100V1_Load3_V;
+Ib3mb = scopexeng_1.EngPort100_I;
+Vb3mb = scopexeng_1.EngPort100_V;
 T1 = scopexeng_1.T;
 %%
 figure;

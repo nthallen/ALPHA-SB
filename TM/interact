@@ -1,9 +1,14 @@
 # 10/30/2023 implemented usb_enum. Non-automated customizations remaining:
 #   $relay_ext: External IP address of relay host
 #     Current defined in Experiment.config
+#   usb_enum does not support Windows or Cygwin, so when accessing devices
+#     we will need a work-around
 
 /usr/local/lib_exec/usb_enum >USB_def.log
 . ./USB_def.log
+
+[ -z "$tmrfx_port" -a $(hostname) = EAS-NALLEN1L ] &&
+  tmrfx_port=/dev/ttyS6
 
 socketcan=''
 which ip >/dev/null 2>&1 &&

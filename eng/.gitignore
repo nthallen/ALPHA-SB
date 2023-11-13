@@ -1,4 +1,5 @@
 *.asv
+cust_*.m
 SCOPEX_DATA_DIR.m
 SCOPEX_SI_DATA_DIR.m
 SCOPEX_SAT_DATA_DIR.m
