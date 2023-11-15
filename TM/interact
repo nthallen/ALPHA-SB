@@ -4,7 +4,7 @@
 #   usb_enum does not support Windows or Cygwin, so when accessing devices
 #     we will need a work-around
 
-/usr/local/lib_exec/usb_enum >USB_def.log
+/usr/local/libexec/usb_enum >USB_def.log
 . ./USB_def.log
 
 [ -z "$tmrfx_port" -a $(hostname) = EAS-NALLEN1L ] &&
