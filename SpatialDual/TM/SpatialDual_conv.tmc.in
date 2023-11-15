@@ -63,17 +63,17 @@ SD_yesno_t UTC_time_init; Invalidate UTC_time_init;
 
 TM typedef uint8_t SD_fix_t { text "%6u" SD_fix_text(); }
 SD_fix_t GNSS_fix; Invalidate GNSS_fix;
-  { GNSS_fix = (filter_status>>4)&7; Validate GNSS_fix; }
+  { GNSS_fix = (filter_status>>4)&1; Validate GNSS_fix; }
 
 TM typedef uint8_t SD_endis_t { text "%8u" SD_en_dis(); }
 SD_endis_t Int_GNSS_en; Invalidate Int_GNSS_en;
   { Int_GNSS_en = (filter_status>>9)&1; Validate Int_GNSS_en; }
 SD_endis_t Atm_Alt_en; Invalidate Atm_Alt_en;
-  { Atm_Alt_en = (filter_status>>9)&12; Validate Atm_Alt_en; }
+  { Atm_Alt_en = (filter_status>>9)&1; Validate Atm_Alt_en; }
 
 TM typedef uint8_t SD_active_t { text "%8u" SD_act_inact(); }
 SD_active_t Dual_Ant_active; Invalidate Dual_Ant_active;
-  { Dual_Ant_active = (filter_status>>10)&12; Validate Dual_Ant_active; }
+  { Dual_Ant_active = (filter_status>>10)&1; Validate Dual_Ant_active; }
 
 SD_meters north_m; Invalidate north_m;
 SD_meters east_m; Invalidate east_m;
