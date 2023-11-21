@@ -25,11 +25,11 @@ TM @SLOW@ Hz B3MB_@ID@_L2I_t  @L2@_I;
 TM @SLOW@ Hz B3MB_@ID@_L3I_t  @L3@_I;
 TM @SLOW@ Hz B3MB_@ID@_L4I_t  @L4@_I;
 TM @SLOW@ Hz B3MB_BusV_t   B3MB_@ID@_Bus_V;
-TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T1;
-TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T2;
-TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T3;
-TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T4;
-TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T5;
+@T1L@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T1; @T1R@
+@T2L@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T2; @T2R@
+@T3L@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T3; @T3R@
+@T4L@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T4; @T4R@
+@T5L@ TM @SLOW@ Hz B3MB_T30K75KU B3MB_@ID@_T5; @T5R@
 /* TM @SLOW@ Hz B3MB_NRead_t B3MB_@ID@_NReads; */
 TM @SLOW@ Hz B3MB_Status_t B3MB_@ID@_Cmd_S;
 TM @SLOW@ Hz B3MB_Status_t B3MB_@ID@_LED_S;
@@ -39,9 +39,8 @@ Group B3MB@CAN_ID@ (B3MB_@ID@_Batt1_V,
                     @L1@_V, @L2@_V, @L3@_V,
                     @L4@_V, B3MB_@ID@_Batt1_I,
                     @RT1@ B3MB_@ID@_Batt2_I, B3MB_@ID@_Batt3_I, B3MB_@ID@_Batt4_I, @RT2@
-                    @L1@_I, @L2@_I, @L3@_I,
-                    @L4@_I, B3MB_@ID@_Bus_V, B3MB_@ID@_T1,
-                    B3MB_@ID@_T2, B3MB_@ID@_T3, B3MB_@ID@_T4, B3MB_@ID@_T5,
+                    @L1@_I, @L2@_I, @L3@_I, @L4@_I, B3MB_@ID@_Bus_V,
+                    @DT1@ @DT2@ @DT3@ @DT4@ @DT5@
                     B3MB_@ID@_Cmd_S, B3MB_@ID@_LED_S) {
   if (B3MB_mread(B3MB_mreq@CAN_ID@)) {
     B3MB_update(B3MB_@ID@_Batt1_V,B3MB_mreq@CAN_ID@,0);
@@ -61,11 +60,11 @@ Group B3MB@CAN_ID@ (B3MB_@ID@_Batt1_V,
     B3MB_update(@L4@_V,B3MB_mreq@CAN_ID@,14);
     B3MB_update(@L4@_I,B3MB_mreq@CAN_ID@,15);
     B3MB_update(B3MB_@ID@_Bus_V,B3MB_mreq@CAN_ID@,16);
-    B3MB_update(B3MB_@ID@_T1,B3MB_mreq@CAN_ID@,17);
-    B3MB_update(B3MB_@ID@_T2,B3MB_mreq@CAN_ID@,18);
-    B3MB_update(B3MB_@ID@_T3,B3MB_mreq@CAN_ID@,19);
-    B3MB_update(B3MB_@ID@_T4,B3MB_mreq@CAN_ID@,20);
-    B3MB_update(B3MB_@ID@_T5,B3MB_mreq@CAN_ID@,21);
+    @T1L@ B3MB_update(B3MB_@ID@_T1,B3MB_mreq@CAN_ID@,17); @T1R@
+    @T2L@ B3MB_update(B3MB_@ID@_T2,B3MB_mreq@CAN_ID@,18); @T2R@
+    @T3L@ B3MB_update(B3MB_@ID@_T3,B3MB_mreq@CAN_ID@,19); @T3R@
+    @T4L@ B3MB_update(B3MB_@ID@_T4,B3MB_mreq@CAN_ID@,20); @T4R@
+    @T5L@ B3MB_update(B3MB_@ID@_T5,B3MB_mreq@CAN_ID@,21); @T5R@
     if (B3MB_update(B3MB_@ID@_Cmd_S,B3MB_mreq@CAN_ID@,22))
       B3MB_@ID@_Cmd_S ^= 0xFF00;
     B3MB_update(B3MB_@ID@_LED_S,B3MB_mreq@CAN_ID@,23);

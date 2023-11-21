@@ -15,11 +15,11 @@ B3MB_@ID@_VI {
 
 B3MB_@ID@_T {
   HBox { +-; Title: "@ID@ Temps"; -+ };
-  T1: (B3MB_@ID@_T1,6) C;
-  T2: (B3MB_@ID@_T2,6) C;
-  T3: (B3MB_@ID@_T3,6) C;
-  T4: (B3MB_@ID@_T4,6) C;
-  T5: (B3MB_@ID@_T5,6) C;
+  T1: @LT1@            C;
+  T2: @LT2@            C;
+  T3: @LT3@            C;
+  T4: @LT4@            C;
+  T5: @LT5@            C;
 }
 
 B3MB_@ID@_S {

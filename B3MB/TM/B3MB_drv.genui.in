@@ -15,11 +15,11 @@
       @SLOW@ @L3@_I @Panel@B3MB_@ID@_Load Amps_@ID@  L3I
       @SLOW@ @L4@_I @Panel@B3MB_@ID@_Load Amps_@ID@  L4I
       @SLOW@ B3MB_@ID@_Bus_V   @Panel@B3MB_@ID@_Batt Volts_@ID@ BusV
-      @SLOW@ B3MB_@ID@_T1      @Panel@B3MB_@ID@_Batt Temp_@ID@  T1
-      @SLOW@ B3MB_@ID@_T2      @Panel@B3MB_@ID@_Batt Temp_@ID@  T2
-      @SLOW@ B3MB_@ID@_T3      @Panel@B3MB_@ID@_Batt Temp_@ID@  T3
-      @SLOW@ B3MB_@ID@_T4      @Panel@B3MB_@ID@_Batt Temp_@ID@  T4
-      @SLOW@ B3MB_@ID@_T5      @Panel@B3MB_@ID@_Batt Temp_@ID@  T5
+@T1@  @SLOW@ B3MB_@ID@_T1      @Panel@B3MB_@ID@_Batt Temp_@ID@  T1
+@T2@  @SLOW@ B3MB_@ID@_T2      @Panel@B3MB_@ID@_Batt Temp_@ID@  T2
+@T3@  @SLOW@ B3MB_@ID@_T3      @Panel@B3MB_@ID@_Batt Temp_@ID@  T3
+@T4@  @SLOW@ B3MB_@ID@_T4      @Panel@B3MB_@ID@_Batt Temp_@ID@  T4
+@T5@  @SLOW@ B3MB_@ID@_T5      @Panel@B3MB_@ID@_Batt Temp_@ID@  T5
       @SLOW@ B3MB_@ID@_B1S:B3MB_@ID@_Cmd_S:0   @Panel@B3MB_@ID@_Batt Status %.0lf B1S
 @RT3@ @SLOW@ B3MB_@ID@_B2S:B3MB_@ID@_Cmd_S:1   @Panel@B3MB_@ID@_Batt Status %.0lf B2S
 @RT3@ @SLOW@ B3MB_@ID@_B3S:B3MB_@ID@_Cmd_S:2   @Panel@B3MB_@ID@_Batt Status %.0lf B3S
