@@ -357,32 +357,41 @@ State B3MB_Temp_Watch {
         T_NOK(convert(B3MB_28V1_T2)) ||
         T_NOK(convert(B3MB_28V1_T3)) ||
         T_NOK(convert(B3MB_28V1_T4)) ||
-        T_NOK(convert(B3MB_28V1_T5)) ||
+        // T_NOK(convert(B3MB_28V1_T5)) ||
         T_NOK(convert(B3MB_28V2_T1)) ||
         T_NOK(convert(B3MB_28V2_T2)) ||
         T_NOK(convert(B3MB_28V2_T3)) ||
         T_NOK(convert(B3MB_28V2_T4)) ||
         T_NOK(convert(B3MB_28V2_T5)) ||
+        T_NOK(convert(B3MB_28V3_T1)) ||
+        T_NOK(convert(B3MB_28V3_T2)) ||
+        T_NOK(convert(B3MB_28V3_T3)) ||
+        T_NOK(convert(B3MB_28V3_T4)) ||
+        // T_NOK(convert(B3MB_28V3_T5)) ||
         T_NOK(convert(B3MB_100V1_T1)) ||
         T_NOK(convert(B3MB_100V1_T2)) ||
         T_NOK(convert(B3MB_100V1_T3)) ||
         T_NOK(convert(B3MB_100V1_T4)) ||
-        T_NOK(convert(B3MB_100V1_T5)) ||
+        // T_NOK(convert(B3MB_100V1_T5)) ||
         T_NOK(convert(B3MB_100V2_T1)) ||
         T_NOK(convert(B3MB_100V2_T2)) ||
         T_NOK(convert(B3MB_100V2_T3)) ||
         T_NOK(convert(B3MB_100V2_T4)) ||
-        T_NOK(convert(B3MB_100V2_T5)) ||
+        // T_NOK(convert(B3MB_100V2_T5)) ||
         T_NOK(convert(B3MB_100V3_T1)) ||
         T_NOK(convert(B3MB_100V3_T2)) ||
         T_NOK(convert(B3MB_100V3_T3)) ||
         T_NOK(convert(B3MB_100V3_T4)) ||
-        T_NOK(convert(B3MB_100V3_T5)) ||
+        // T_NOK(convert(B3MB_100V3_T5)) ||
         T_NOK(convert(B3MB_100V4_T1)) ||
         T_NOK(convert(B3MB_100V4_T2)) ||
         T_NOK(convert(B3MB_100V4_T3)) ||
         T_NOK(convert(B3MB_100V4_T4)) ||
-        T_NOK(convert(B3MB_100V4_T5)))
+        // T_NOK(convert(B3MB_100V4_T5)) ||
+        T_NOK(convert(B3MB_100V5_T2)) ||
+        T_NOK(convert(B3MB_100V6_T1)) ||
+        T_NOK(convert(B3MB_100V7_T1)) ||
+        T_NOK(convert(B3MB_100V8_T1)))
       Validate B3MB_Temp_Fail;
   }
 }
