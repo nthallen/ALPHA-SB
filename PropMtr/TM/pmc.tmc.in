@@ -1,7 +1,7 @@
 TM "Receive" PropMtr 1;
 TM "Receive" PropMtr_fast 1;
 
-Group PMC_@ID@ (
+Group PMC (
     PMC_Left_RPM_Demand,
     PMC_Left_Pos_Measured, PMC_Left_Pos_Target, PMC_Left_Pos_Demand,
     PMC_Left_VL_Kp, PMC_Left_VL_Ki, PMC_Left_VL_Kd,
@@ -64,7 +64,7 @@ Group PMC_@ID@ (
   PropMtr_obj->synch();
 }
 
-Group PMCF_@ID@ (
+Group PMCF (
         PMC_Left_RPM, PMC_Left_I_Measured,
         @RT1@
         PMC_Right_RPM, PMC_Right_I_Measured,
