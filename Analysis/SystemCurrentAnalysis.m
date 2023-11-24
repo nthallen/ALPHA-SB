@@ -3,6 +3,19 @@
 % 100V Load Current Variables: use definitions from scopex.spec
 % Compare total load current to total battery current
 % Look at balance of power between cans
+B28V1.name = '28V1';
+B28V1.SN = 3;
+B28V1.L1 = 'EngPort28';
+B28V1.L3 = 'EngStbd28';
+B28V1.L4 = 'DataSys28';
+
+B28V2.name = '28V2';
+B28V2.SN = 108;
+
+B28V3.name = '28V3';
+B28V3.SN = 2;
+
+
 B100V1.name = '100V1';
 B100V1.SN = 101;
 B100V1.L3 = 'EngPort100';
@@ -32,8 +45,13 @@ B100V7.SN = 103;
 B100V8.name = '100V8';
 B100V8.SN = 110;
 
+BattV_FullScale = 206.848;
+BattI_FullScale = 68.2667;
+BusV_FullScale = 413.696;
+
 Cans = {B100V1, B100V2, B100V3, B100V4, B100V5, B100V6, B100V7, B100V8 }';
-clear B100V1 B100V2 B100V3 B100V4 B100V5 B100V6 B100V7 B100V8;
+% Cans = {B28V1, B28V2, B28V3, B100V1, B100V2, B100V3, B100V4, B100V5, B100V6, B100V7, B100V8 }';
+clear B28V1 B28V2 B28V3 B100V1 B100V2 B100V3 B100V4 B100V5 B100V6 B100V7 B100V8;
 %%
 % Collect the calibration data for each can
 % Steps during tests
@@ -106,6 +124,7 @@ clear loadnum ld ldV ldI ldW can i
 %   The default name for loads is B3MB_$(name)_Load$(load)_I,V, but the
 %   lengthy part is replaced with the short name if provided.
 Names = cell(length(Cans),1);
+fid = fopen('B3MB_cal.tmc','w');
 for i=1:length(Cans)
   can = Cans{i};
   % % Get Calibration Data
@@ -136,7 +155,20 @@ for i=1:length(Cans)
   can.LWH = cumsum(can.LW)/3600; % WH
   can.LKWH = sum(can.LW)/3600/1000; % scalar
   Cans{i} = can;
+  fprintf(fid,'Calibration (B3MB_Volts_t, B3MB_%s_B1V_t) {\n', can.name);
+  fprintf(fid,'      0, %8.3f,\n',(0-can.CalBattV(2))/can.CalBattV(1));
+  fprintf(fid,'  32768, %8.3f\n}\n', ...
+    (BattV_FullScale-can.CalBattV(2))/can.CalBattV(1));
+  fprintf(fid,'Calibration (B3MB_Amps_t, B3MB_%s_B1I_t) {\n', can.name);
+  fprintf(fid,'      0, %8.3f,\n',(0-can.CalBattI(2))/can.CalBattI(1));
+  fprintf(fid,'  32768, %8.3f\n}\n', ...
+    (BattI_FullScale-can.CalBattI(2))/can.CalBattI(1));
+  fprintf(fid,'Calibration (B3MB_Volts_t, B3MB_%s_BusV_t) {\n', can.name);
+  fprintf(fid,'      0, %8.3f,\n',(0-can.CalBusV(2))/can.CalBusV(1));
+  fprintf(fid,'  32768, %8.3f\n}\n', ...
+    (BusV_FullScale-can.CalBusV(2))/can.CalBusV(1));
 end
+fclose(fid);
 clear loadnum ld ldV ldI ldW BattI BattV can i
 %%
 % Correct for saturated Battery currents:
@@ -151,6 +183,9 @@ for i=1:length(Cans)
 end
 saturated = satpct >= 0.01;
 Idflt = zeros(size(T));
+if all(saturated)
+  error('All cans appear to be saturated')
+end
 for i=find(~saturated)'
   Idflt = Idflt + Cans{i}.BattI;
 end
@@ -160,8 +195,10 @@ for i=find(saturated)'
   I = can.BattI;
   sat = I < Imin(i) + 2.5*.002;
   figure;
-  plot(Idflt(~sat),I(~sat),'.'); grid;
-  title(sprintf('Can %d BattI vs Idflt',i));
+  plot(Idflt(~sat),I(~sat),'.',Idflt(sat),I(sat),'.',Idflt(sat), ...
+    Idflt(sat),'.'); grid;
+  title(sprintf('%s BattI vs Idflt',Cans{i}.name));
+  legend('unsat','sat','fix','location','southeast');
   % fitsat = polyfit(Idflt(~sat),I(~sat),1);
   % fprintf('Can %d fitsat: ',i); disp(fitsat);
   % can.BattI(sat) = polyval(fitsat,Idflt(sat));
