@@ -1,0 +1,96 @@
+Calibration (B3MB_Volts_t, B3MB_100V1_B1V_t) {
+      0,    0.053,
+  32768,  206.684
+}
+Calibration (B3MB_Amps_t, B3MB_100V1_B1I_t) {
+      0,   -0.099,
+  32768,   68.606
+}
+Calibration (B3MB_Volts_t, B3MB_100V1_BusV_t) {
+      0,    0.062,
+  32768,  413.763
+}
+Calibration (B3MB_Volts_t, B3MB_100V2_B1V_t) {
+      0,    0.129,
+  32768,  206.455
+}
+Calibration (B3MB_Amps_t, B3MB_100V2_B1I_t) {
+      0,   -0.151,
+  32768,   67.677
+}
+Calibration (B3MB_Volts_t, B3MB_100V2_BusV_t) {
+      0,    0.133,
+  32768,  412.794
+}
+Calibration (B3MB_Volts_t, B3MB_100V3_B1V_t) {
+      0,    0.118,
+  32768,  206.551
+}
+Calibration (B3MB_Amps_t, B3MB_100V3_B1I_t) {
+      0,   -1.827,
+  32768,   68.209
+}
+Calibration (B3MB_Volts_t, B3MB_100V3_BusV_t) {
+      0,    0.143,
+  32768,  411.477
+}
+Calibration (B3MB_Volts_t, B3MB_100V4_B1V_t) {
+      0,    0.121,
+  32768,  206.053
+}
+Calibration (B3MB_Amps_t, B3MB_100V4_B1I_t) {
+      0,   -0.676,
+  32768,   67.706
+}
+Calibration (B3MB_Volts_t, B3MB_100V4_BusV_t) {
+      0,    0.131,
+  32768,  411.737
+}
+Calibration (B3MB_Volts_t, B3MB_100V5_B1V_t) {
+      0,    0.113,
+  32768,  206.360
+}
+Calibration (B3MB_Amps_t, B3MB_100V5_B1I_t) {
+      0,   -0.200,
+  32768,   68.527
+}
+Calibration (B3MB_Volts_t, B3MB_100V5_BusV_t) {
+      0,    0.119,
+  32768,  413.723
+}
+Calibration (B3MB_Volts_t, B3MB_100V6_B1V_t) {
+      0,    0.120,
+  32768,  206.820
+}
+Calibration (B3MB_Amps_t, B3MB_100V6_B1I_t) {
+      0,   -1.627,
+  32768,   67.881
+}
+Calibration (B3MB_Volts_t, B3MB_100V6_BusV_t) {
+      0,    0.128,
+  32768,  412.924
+}
+Calibration (B3MB_Volts_t, B3MB_100V7_B1V_t) {
+      0,    0.130,
+  32768,  206.889
+}
+Calibration (B3MB_Amps_t, B3MB_100V7_B1I_t) {
+      0,   -0.651,
+  32768,   68.976
+}
+Calibration (B3MB_Volts_t, B3MB_100V7_BusV_t) {
+      0,    0.136,
+  32768,  413.169
+}
+Calibration (B3MB_Volts_t, B3MB_100V8_B1V_t) {
+      0,    0.121,
+  32768,  206.437
+}
+Calibration (B3MB_Amps_t, B3MB_100V8_B1I_t) {
+      0,    0.087,
+  32768,   68.003
+}
+Calibration (B3MB_Volts_t, B3MB_100V8_BusV_t) {
+      0,    0.132,
+  32768,  414.769
+}

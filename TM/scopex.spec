@@ -29,12 +29,7 @@ Module B3MB mode=V100 ID=100V5 CAN_ID=5 Panel=B3MB:
 Module B3MB mode=V100 ID=100V6 CAN_ID=6 Panel=B3MB:
 Module B3MB mode=V100 ID=100V7 CAN_ID=7 Panel=B3MB:
 Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB:
-
-#tmcbase = B3MB_28V1_cal.tmc
-#tmcbase = B3MB_100V1_cal.tmc
-#tmcbase = B3MB_100V2_cal.tmc
-#tmcbase = B3MB_100V3_cal.tmc
-#tmcbase = B3MB_100V4_cal.tmc
+tmcbase = B3MB_cal.tmc
 
 # Module scopexsim
 Module PropMtrSim
