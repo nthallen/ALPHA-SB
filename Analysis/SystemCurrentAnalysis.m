@@ -155,15 +155,15 @@ for i=1:length(Cans)
   can.LWH = cumsum(can.LW)/3600; % WH
   can.LKWH = sum(can.LW)/3600/1000; % scalar
   Cans{i} = can;
-  fprintf(fid,'Calibration (B3MB_Volts_t, B3MB_%s_B1V_t) {\n', can.name);
+  fprintf(fid,'Calibration (B3MB_%s_B1V_t, B3MB_VOLTS) {\n', can.name);
   fprintf(fid,'      0, %8.3f,\n',(0-can.CalBattV(2))/can.CalBattV(1));
   fprintf(fid,'  32768, %8.3f\n}\n', ...
     (BattV_FullScale-can.CalBattV(2))/can.CalBattV(1));
-  fprintf(fid,'Calibration (B3MB_Amps_t, B3MB_%s_B1I_t) {\n', can.name);
+  fprintf(fid,'Calibration (B3MB_%s_B1I_t, B3MB_AMPS) {\n', can.name);
   fprintf(fid,'      0, %8.3f,\n',(0-can.CalBattI(2))/can.CalBattI(1));
   fprintf(fid,'  32768, %8.3f\n}\n', ...
     (BattI_FullScale-can.CalBattI(2))/can.CalBattI(1));
-  fprintf(fid,'Calibration (B3MB_Volts_t, B3MB_%s_BusV_t) {\n', can.name);
+  fprintf(fid,'Calibration (B3MB_%s_BusV_t, B3MB_VOLTS) {\n', can.name);
   fprintf(fid,'      0, %8.3f,\n',(0-can.CalBusV(2))/can.CalBusV(1));
   fprintf(fid,'  32768, %8.3f\n}\n', ...
     (BusV_FullScale-can.CalBusV(2))/can.CalBusV(1));
