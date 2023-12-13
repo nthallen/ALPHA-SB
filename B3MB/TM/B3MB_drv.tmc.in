@@ -1,5 +1,7 @@
 /* Telemetry Channels for a single B3MB Instance, namely @ID@ */
 TM typedef B3MB_Amps_t B3MB_@ID@_B1I_t;
+TM typedef B3MB_Volts_t B3MB_@ID@_B1V_t;
+TM typedef B3MB_BusV_t B3MB_@ID@_BusV_t;
 @RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B2I_t; @RT2@
 @RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B3I_t; @RT2@
 @RT1@ TM typedef B3MB_Amps_t B3MB_@ID@_B4I_t; @RT2@
@@ -8,7 +10,7 @@ TM typedef B3MB_Amps_t B3MB_@ID@_L2I_t;
 TM typedef B3MB_Amps_t B3MB_@ID@_L3I_t;
 TM typedef B3MB_Amps_t B3MB_@ID@_L4I_t;
 
-TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt1_V;
+TM @SLOW@ Hz B3MB_@ID@_B1V_t  B3MB_@ID@_Batt1_V;
 @RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt2_V; @RT2@
 @RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt3_V; @RT2@
 @RT1@ TM @SLOW@ Hz B3MB_Volts_t  B3MB_@ID@_Batt4_V; @RT2@

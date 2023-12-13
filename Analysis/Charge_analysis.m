@@ -39,6 +39,7 @@ grid;
 
 %%
 % These sections are looking at the repeatability of the charging curves
+% for 100V batteries. These were all done with 4 cans
 chgA = load_charge('221018.1');
 chgB = load_charge('230620.2');
 chgC = load_charge('230725.1');
