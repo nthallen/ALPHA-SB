@@ -22,7 +22,6 @@ Module B3MB mode=V28  ID=28V1  CAN_ID=11 Panel=B3MB: \
           L1=EngPort28 L3=EngStbd28 L4=DataSys28 \
           T5=# DT5= LT5="" T5L=/* T5R=*/
 Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
-<<<<<<< HEAD
 Module B3MB mode=V28  ID=28V3  CAN_ID=13 Panel=B3MB: \
           T5=# DT5= LT5="" T5L=/* T5R=*/
 Module B3MB mode=V100 ID=100V1 CAN_ID=1 Panel=B3MB: \
