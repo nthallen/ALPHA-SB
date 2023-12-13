@@ -33,11 +33,7 @@ Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB: T2=# DT2= LT2="" T2L=/* T2R=
                                                     T4=# DT4= LT4="" T4L=/* T4R=*/ \
                                                     T5=# DT5= LT5="" T5L=/* T5R=*/
 Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
-# tmcbase = ../TM/B3MB_28V1_cal.tmc
-# tmcbase = ../TM/B3MB_100V1_cal.tmc
-# tmcbase = ../TM/B3MB_100V2_cal.tmc
-# tmcbase = ../TM/B3MB_100V3_cal.tmc
-# tmcbase = ../TM/B3MB_100V4_cal.tmc
+tmcbase = B3MB_cal.tmc
 
 TGTDIR = /home/scopex/charge
 IGNORE = "*.asv" "*.o" "*.exe" "*.stackdump" Makefile
