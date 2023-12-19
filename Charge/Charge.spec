@@ -11,6 +11,7 @@ Module MPSLd Panel=Plots:
 
 Module B3MB mode=types
 Module B3MB mode=V28  ID=28V1  CAN_ID=11 Panel=B3MB: T5=# DT5= LT5="" T5L=/* T5R=*/
+Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
 Module B3MB mode=V28  ID=28V3  CAN_ID=13 Panel=B3MB: T5=# DT5= LT5="" T5L=/* T5R=*/
 Module B3MB mode=V100 ID=100V1 CAN_ID=1 Panel=B3MB:  T5=# DT5= LT5="" T5L=/* T5R=*/
 Module B3MB mode=V100 ID=100V2 CAN_ID=2 Panel=B3MB:  T5=# DT5= LT5="" T5L=/* T5R=*/
@@ -32,7 +33,6 @@ Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB: T2=# DT2= LT2="" T2L=/* T2R=
                                                     T3=# DT3= LT3="" T3L=/* T3R=*/ \
                                                     T4=# DT4= LT4="" T4L=/* T4R=*/ \
                                                     T5=# DT5= LT5="" T5L=/* T5R=*/
-Module B3MB mode=V28  ID=28V2  CAN_ID=12 Panel=B3MB:
 tmcbase = B3MB_cal.tmc
 
 TGTDIR = /home/scopex/charge
