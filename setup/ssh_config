@@ -1,5 +1,5 @@
-host spi3
-hostname 10.245.83.82
+host spi3 10.245.83.81
+hostname 10.245.83.81
 
-Match final host 10.245.83.82
+Match final host 10.245.83.81
 user pi

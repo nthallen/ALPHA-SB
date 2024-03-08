@@ -144,7 +144,7 @@ if ($setup_cygwin) {
   if (Test-Path -Path setup-x86_64.exe -PathType Leaf)
   {
     Write-Output "`nInvoking Cygwin Setup`n"
-    start-process setup-x86_64.exe  -Wait -argumentlist "--packages bzip2,cygwin-doc,file,less,openssh,git,chere,cmake,doxygen,graphviz,gcc-core,gcc-g++,gdb,make,bison,flex,perl,libncurses-devel,screen"
+    start-process setup-x86_64.exe  -Wait -argumentlist "--packages bzip2,cygwin-doc,file,less,openssh,git,chere,cmake,doxygen,graphviz,gcc-core,gcc-g++,gdb,make,bison,flex,perl,libncurses-devel,screen --upgrade-also --no-desktop"
   }
   else
   {
@@ -643,6 +643,55 @@ EOF
     cat >>$matscriptfile <<EOF
 savepath;
 EOF
+  fi
+
+  ins_file=$exp_src/setup/ssh_config_insert
+  ssh_cfg=$exp_src/setup/ssh_config
+  cfg_dir=/etc/monarch/$exp_base
+  if [ -f $ssh_cfg ]; then
+    $sudo mkdir -p $cfg_dir
+    [ -d $cfg_dir ] || nl_error "Unable to create $cfg_dir"
+    $sudo cp $ssh_cfg $cfg_dir
+    $sudo chmod g-w $cfg_dir/ssh_config
+  fi
+  if [ -f $ins_file ]; then
+    umask 023 # Make sure not to add g+w to ~/.ssh/config
+    line1=$(head -n1 $ins_file)
+    line2=$(tail -n1 $ins_file)
+    rmpatch=no
+    addpatch=no
+    [ -f ~/.ssh/config ] || touch ~/.ssh/config
+    sed -ne "/^$line1/,/^$line2/ p" ~/.ssh/config >${ins_file}.old
+    if cmp --quiet $ins_file ${ins_file}.old; then
+      echo "Code from $ins_file is already present in ~/.ssh/config"
+    elif [ -s ${ins_file}.old ]; then
+      echo "An old version of the code from $ins_file is present in ~/.ssh/config:"
+      echo
+      diff -u ${ins_file}.old $ins_file | sed -e 's/^/  /'
+      rmpatch=yes
+      addpatch=yes
+    else
+      echo "Code from $ins_file is not present in ~/.ssh/config"
+      addpatch=yes
+    fi
+    rm -f ${ins_file}.old
+
+    if [ $rmpatch = yes -o $addpatch = yes ]; then
+      echo
+      echo "Updating ~/.ssh/config. Old version saved in ~/.ssh/config.prev"
+      rm -f ~/.ssh/config.prev
+      mv ~/.ssh/config ~/.ssh/config.prev
+
+      if [ $rmpatch = yes ]; then
+        sed -e "/^$line1/,/^$line2/ d" ~/.ssh/config.prev >~/.ssh/config
+      else
+        cp ~/.ssh/config.prev ~/.ssh/config
+      fi
+
+      if [ $addpatch = yes ]; then
+        cat $ins_file >>~/.ssh/config
+      fi
+    fi
   fi
 
   # Now locate matlab and run it, specifying this directory and the

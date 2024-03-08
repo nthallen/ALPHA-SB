@@ -1,0 +1,15 @@
+### Begin scopex ssh_config_insert ###
+# Match all is necessary to close any preceding host blocks
+Match all
+include /etc/monarch/scopex/ssh_config
+
+# We are using a single account on the scopex flight computer
+# with the username pi. This is configured in the file included
+# above. If you know what you're doing and need to use a different
+# username standard monarch tools (./doit, saverun, reduce, etc.)
+# specify it outside this block using the following syntax or
+# equivalent:
+#   hostname 10.245.83.81
+#   user my_username
+
+### End scopex ssh_config_insert ###
