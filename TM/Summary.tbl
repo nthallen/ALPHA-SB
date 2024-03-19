@@ -1,7 +1,7 @@
 # Summary.tbl
 Input "TMbase.tbl";
 Input "command_sn.tbl";
-#Input "Ascender.tbl";
+Input "Ascender.tbl";
 Input "B3MB_Summary.tbl";
 
 PMC_Full {
