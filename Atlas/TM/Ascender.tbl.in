@@ -25,8 +25,22 @@ AscTech {
   Stale:    (AscStale,3);
 }
 
+AscTech2 {
+  V:       (AscHoistV,6) V;
+  I:       (AscHoistI,3) A;
+  CtrlInp: (AscCtrlInp,6);
+  Mode:    (AscMode,8);
+}
+
 AscGrp {
   [Ascender];
   [AscHK];
   [AscTech];
+}
+
+Asc {
+  HBox { +-; Title: Ascender; -+ };
+  HBox {
+    [Ascender]; |; [AscTech2]
+  }
 }

@@ -1,0 +1,32 @@
+B3MB_T {
+  "";
+  ""         T;
+  min:  (B3MB_T_min,6);
+  mean: (B3MB_T_mean,6);
+  max:  (B3MB_T_max,6);
+}
+
+B3MB_28V {
+  HBox { >"28V"< };
+           BattV                 BusV;
+  (B3MB_28V_Batt_V_min,7)  (B3MB_28V_Bus_V_min,7);
+  (B3MB_28V_Batt_V_mean,7) (B3MB_28V_Bus_V_mean,7);
+  (B3MB_28V_Batt_V_max,7)  (B3MB_28V_Bus_V_max,7);
+}
+
+B3MB_100V {
+  HBox { >"100V"< };
+           BattV                 BusV;
+  (B3MB_100V_Batt_V_min,7)  (B3MB_100V_Bus_V_min,7);
+  (B3MB_100V_Batt_V_mean,7) (B3MB_100V_Bus_V_mean,7);
+  (B3MB_100V_Batt_V_max,7)  (B3MB_100V_Bus_V_max,7);
+}
+
+B3MB_Summary {
+  HBox { +-; B3MB; -+ };
+  HBox {
+    [B3MB_T]; |+; [B3MB_28V]; |+; [B3MB_100V]
+  }
+}
+
+# { [B3MB_Summary] }

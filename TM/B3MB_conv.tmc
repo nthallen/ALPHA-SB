@@ -1,0 +1,165 @@
+%{
+  /* B3MB_conv.tmc */
+%}
+
+/* All Batteries Min/Mean/Max Temperature */
+B3MB_CELCIUS B3MB_T_mean; invalidate B3MB_T_mean;
+B3MB_CELCIUS B3MB_T_min; invalidate B3MB_T_min;
+B3MB_CELCIUS B3MB_T_max; invalidate B3MB_T_max;
+{
+  B3MB_CELCIUS Temps[33];
+  B3MB_CELCIUS Tmin, Tmax, Tsum;
+  int i;
+  Temps[0] = convert(B3MB_100V1_T1);
+  Temps[1] = convert(B3MB_100V1_T2);
+  Temps[2] = convert(B3MB_100V1_T3);
+  Temps[3] = convert(B3MB_100V1_T4);
+  Temps[4] = convert(B3MB_100V2_T1);
+  Temps[5] = convert(B3MB_100V2_T2);
+  Temps[6] = convert(B3MB_100V2_T3);
+  Temps[7] = convert(B3MB_100V2_T4);
+  Temps[8] = convert(B3MB_100V3_T1);
+  Temps[9] = convert(B3MB_100V3_T2);
+  Temps[10] = convert(B3MB_100V3_T3);
+  Temps[11] = convert(B3MB_100V3_T4);
+  Temps[12] = convert(B3MB_100V4_T1);
+  Temps[13] = convert(B3MB_100V4_T2);
+  Temps[14] = convert(B3MB_100V4_T3);
+  Temps[15] = convert(B3MB_100V4_T4);
+  Temps[16] = convert(B3MB_100V5_T2);
+  Temps[17] = convert(B3MB_100V6_T1);
+  Temps[18] = convert(B3MB_100V7_T1);
+  Temps[19] = convert(B3MB_100V8_T1);
+  Temps[20] = convert(B3MB_28V1_T1);
+  Temps[21] = convert(B3MB_28V1_T2);
+  Temps[22] = convert(B3MB_28V1_T3);
+  Temps[23] = convert(B3MB_28V1_T4);
+  Temps[24] = convert(B3MB_28V2_T1);
+  Temps[25] = convert(B3MB_28V2_T2);
+  Temps[26] = convert(B3MB_28V2_T3);
+  Temps[27] = convert(B3MB_28V2_T4);
+  Temps[28] = convert(B3MB_28V2_T5);
+  Temps[29] = convert(B3MB_28V3_T1);
+  Temps[30] = convert(B3MB_28V3_T2);
+  Temps[31] = convert(B3MB_28V3_T3);
+  Temps[32] = convert(B3MB_28V3_T4);
+  Tmin = Tmax = Tsum = Temps[0];
+  for (i = 1; i < 33; ++i) {
+    Tsum += Temps[i];
+    if (Temps[i] < Tmin) Tmin = Temps[i];
+    else if (Temps[i] > Tmax) Tmax = Temps[i];
+  }
+  B3MB_T_mean = Tsum/33; Validate B3MB_T_mean;
+  B3MB_T_min = Tmin; Validate B3MB_T_min;
+  B3MB_T_max = Tmax; Validate B3MB_T_max;
+}
+
+/* 28V Batteries Min/Mean/Max Voltage */
+B3MB_Volts B3MB_28V_Batt_V_mean; Invalidate B3MB_28V_Batt_V_mean;
+B3MB_Volts B3MB_28V_Batt_V_min; Invalidate B3MB_28V_Batt_V_min;
+B3MB_Volts B3MB_28V_Batt_V_max; Invalidate B3MB_28V_Batt_V_max;
+{
+  B3MB_VOLTS BVs[33];
+  B3MB_VOLTS Vmin, Vmax, Vsum;
+  int i;
+  BVs[0] = convert(B3MB_28V1_Batt1_V);
+  BVs[1] = convert(B3MB_28V1_Batt2_V);
+  BVs[2] = convert(B3MB_28V1_Batt3_V);
+  BVs[3] = convert(B3MB_28V1_Batt4_V);
+  BVs[4] = convert(B3MB_28V2_Batt1_V);
+  BVs[5] = convert(B3MB_28V2_Batt2_V);
+  BVs[6] = convert(B3MB_28V2_Batt3_V);
+  BVs[7] = convert(B3MB_28V2_Batt4_V);
+  BVs[8] = convert(B3MB_28V3_Batt1_V);
+  BVs[9] = convert(B3MB_28V3_Batt2_V);
+  BVs[10] = convert(B3MB_28V3_Batt3_V);
+  BVs[11] = convert(B3MB_28V3_Batt4_V);
+  Vmin = Vmax = Vsum = BVs[0];
+  for (i = 1; i < 12; ++i) {
+    Vsum += BVs[i];
+    if (BVs[i] < Vmin) Vmin = BVs[i];
+    else if (BVs[i] > Vmax) Vmax = BVs[i];
+  }
+  B3MB_28V_Batt_V_mean = Vsum/12; Validate B3MB_28V_Batt_V_mean;
+  B3MB_28V_Batt_V_min = Vmin; Validate B3MB_28V_Batt_V_min;
+  B3MB_28V_Batt_V_max = Vmax; Validate B3MB_28V_Batt_V_max;
+}
+
+/* 28V Bus Min/Mean/Max Voltage */
+B3MB_Volts B3MB_28V_Bus_V_mean; Invalidate B3MB_28V_Bus_V_mean
+B3MB_Volts B3MB_28V_Bus_V_min; Invalidate B3MB_28V_Bus_V_min;
+B3MB_Volts B3MB_28V_Bus_V_max; Invalidate B3MB_28V_Bus_V_max;
+{
+  B3MB_VOLTS BVs[3];
+  B3MB_VOLTS Vmin, Vmax, Vsum;
+  int i;
+  BVs[0] = convert(B3MB_28V1_Bus_V);
+  BVs[1] = convert(B3MB_28V2_Bus_V);
+  BVs[2] = convert(B3MB_28V3_Bus_V);
+  Vmin = Vmax = Vsum = BVs[0];
+  for (i = 1; i < 3; ++i) {
+    Vsum += BVs[i];
+    if (BVs[i] < Vmin) Vmin = BVs[i];
+    else if (BVs[i] > Vmax) Vmax = BVs[i];
+  }
+  B3MB_28V_Bus_V_mean = Vsum/3; Validate B3MB_28V_Bus_V_mean;
+  B3MB_28V_Bus_V_min = Vmin; Validate B3MB_28V_Bus_V_min;
+  B3MB_28V_Bus_V_max = Vmax; Validate B3MB_28V_Bus_V_max;
+}
+
+/* 100V Batteries Min/Mean/Max Voltage */
+B3MB_Volts B3MB_100V_Batt_V_mean; Invalidate B3MB_100V_Batt_V_mean;
+B3MB_Volts B3MB_100V_Batt_V_min; Invalidate B3MB_100V_Batt_V_min;
+B3MB_Volts B3MB_100V_Batt_V_max; Invalidate B3MB_100V_Batt_V_max;
+{
+  B3MB_VOLTS BVs[8];
+  B3MB_VOLTS Vmin, Vmax, Vsum;
+  int i;
+  BVs[0] = convert(B3MB_100V1_Batt1_V);
+  BVs[1] = convert(B3MB_100V2_Batt1_V);
+  BVs[2] = convert(B3MB_100V3_Batt1_V);
+  BVs[3] = convert(B3MB_100V4_Batt1_V);
+  BVs[4] = convert(B3MB_100V5_Batt1_V);
+  BVs[5] = convert(B3MB_100V6_Batt1_V);
+  BVs[6] = convert(B3MB_100V7_Batt1_V);
+  BVs[7] = convert(B3MB_100V8_Batt1_V);
+  Vmin = Vmax = Vsum = BVs[0];
+  for (i = 1; i < 8; ++i) {
+    Vsum += BVs[i];
+    if (BVs[i] < Vmin) Vmin = BVs[i];
+    else if (BVs[i] > Vmax) Vmax = BVs[i];
+  }
+  B3MB_100V_Batt_V_mean = Vsum/8; Validate B3MB_100V_Batt_V_mean;
+  B3MB_100V_Batt_V_min = Vmin; Validate B3MB_100V_Batt_V_min;
+  B3MB_100V_Batt_V_max = Vmax; Validate B3MB_100V_Batt_V_max;
+}
+
+/* 100V Bus Min/Mean/Max Voltage */
+B3MB_Volts B3MB_100V_Bus_V_mean; Invalidate B3MB_100V_Bus_V_mean
+B3MB_Volts B3MB_100V_Bus_V_min; Invalidate B3MB_100V_Bus_V_min;
+B3MB_Volts B3MB_100V_Bus_V_max; Invalidate B3MB_100V_Bus_V_max;
+{
+  B3MB_VOLTS BVs[8];
+  B3MB_VOLTS Vmin, Vmax, Vsum;
+  int i;
+  BVs[0] = convert(B3MB_100V1_Bus_V);
+  BVs[1] = convert(B3MB_100V2_Bus_V);
+  BVs[2] = convert(B3MB_100V3_Bus_V);
+  BVs[3] = convert(B3MB_100V4_Bus_V);
+  BVs[4] = convert(B3MB_100V5_Bus_V);
+  BVs[5] = convert(B3MB_100V6_Bus_V);
+  BVs[6] = convert(B3MB_100V7_Bus_V);
+  BVs[7] = convert(B3MB_100V8_Bus_V);
+  Vmin = Vmax = Vsum = BVs[0];
+  for (i = 1; i < 8; ++i) {
+    Vsum += BVs[i];
+    if (BVs[i] < Vmin) Vmin = BVs[i];
+    else if (BVs[i] > Vmax) Vmax = BVs[i];
+  }
+  B3MB_100V_Bus_V_mean = Vsum/8; Validate B3MB_100V_Bus_V_mean;
+  B3MB_100V_Bus_V_min = Vmin; Validate B3MB_100V_Bus_V_min;
+  B3MB_100V_Bus_V_max = Vmax; Validate B3MB_100V_Bus_V_max;
+}
+
+/* 28V Battery Fuel Gauge, Hours remaining at current load */
+/* 100V Battery Fuel Gauge, Hours remaining at current load */

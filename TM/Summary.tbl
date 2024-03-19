@@ -1,6 +1,8 @@
 # Summary.tbl
 Input "TMbase.tbl";
 Input "command_sn.tbl";
+#Input "Ascender.tbl";
+Input "B3MB_Summary.tbl";
 
 PMC_Full {
   HBox { +-; Title: Propulsion; -+ };
@@ -18,24 +20,6 @@ PMC_Full {
              {(EngStbd28S,3)         (EngStbd28F,3)};
   "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
              HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
-}
-
-Asc {
-  HBox { +-; Title: Ascender; -+ };
-  HBox {
-    {
-      Pos:   (AscPosition,5)    m;
-      Speed: (AscSpeed,5)    "m/s";
-      Cmd:   (AscSpeedCmd,4) "%";
-      Lim1:  (AscLimit1);
-      Lim2:  (AscLimit2);
-    }; |; {
-      V:       (AscHoistV,6) V;
-      I:       (AscHoistI,3) A;
-      CtrlInp: (AscCtrlInp,6);
-      Mode:    (AscMode,8);
-    }
-  }
 }
 
 AscB3MB {
@@ -71,7 +55,12 @@ TMtime {
   [TMbase_times];
 }
 
-{ HBox{ |+;
+TMtime_hor {
+  +-+;
+  HBox { [Command_SN_hor]; [TMbase_htimes] };
+}
+
+Summary_Asc { HBox{ |+;
     { HBox { [PMC_Full]; |;
         { [Asc];
           [AscB3MB]
@@ -81,3 +70,16 @@ TMtime {
     }; |+ };
   -;
 }
+
+Summary_NoAsc { HBox{ |+;
+    { HBox { [PMC_Full]; |;
+        { [AHRS];
+          [B3MB_Summary]
+        }
+      };
+      [TMtime_hor];
+    }; |+ };
+  -;
+}
+
+{ [Summary_Asc] }
