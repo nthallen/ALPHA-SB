@@ -34,6 +34,8 @@ Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB: T2=# DT2= LT2="" T2L=/* T2R=
                                                     T4=# DT4= LT4="" T4L=/* T4R=*/ \
                                                     T5=# DT5= LT5="" T5L=/* T5R=*/
 tmcbase = B3MB_cal.tmc
+extbase = B3MB_conv.tmc
+genuibase = B3MB_conv.genui
 
 TGTDIR = /home/scopex/charge
 IGNORE = "*.asv" "*.o" "*.exe" "*.stackdump" Makefile

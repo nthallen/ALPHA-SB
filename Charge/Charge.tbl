@@ -2,6 +2,7 @@
 Input "TMbase.tbl";
 Input "BKd.tbl";
 Input "MPSLd.tbl";
+Input "B3MB_Summary.tbl";
 
 B3MB_V {
   HBox { +-; Title: "B3MB Volts"; -+ };
@@ -22,7 +23,7 @@ B3MB_V {
 }
 
 { HBox {
-    |+; { [B3MB_V];
+    |+; { [B3MB_Summary2];
           HBox {
             { [BKd];
               Vlim: (BKd_V_limit,5)
