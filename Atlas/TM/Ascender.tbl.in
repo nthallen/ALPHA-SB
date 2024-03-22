@@ -1,5 +1,5 @@
 Ascender {
-  HBox { +-; Title: Ascender; -+ };
+# HBox { +-; Title: Ascender; -+ };
   Pos:   (AscPosition,5)    m;
   Speed: (AscSpeed,5)    "m/s";
   Cmd:   (AscSpeedCmd,4) "%";

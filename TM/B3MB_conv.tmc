@@ -86,7 +86,7 @@ B3MB_Volts B3MB_28V_Batt_V_max; Invalidate B3MB_28V_Batt_V_max;
 }
 
 /* 28V Bus Min/Mean/Max Voltage */
-B3MB_Volts B3MB_28V_Bus_V_mean; Invalidate B3MB_28V_Bus_V_mean
+B3MB_Volts B3MB_28V_Bus_V_mean; Invalidate B3MB_28V_Bus_V_mean;
 B3MB_Volts B3MB_28V_Bus_V_min; Invalidate B3MB_28V_Bus_V_min;
 B3MB_Volts B3MB_28V_Bus_V_max; Invalidate B3MB_28V_Bus_V_max;
 {
@@ -135,7 +135,7 @@ B3MB_Volts B3MB_100V_Batt_V_max; Invalidate B3MB_100V_Batt_V_max;
 }
 
 /* 100V Bus Min/Mean/Max Voltage */
-B3MB_Volts B3MB_100V_Bus_V_mean; Invalidate B3MB_100V_Bus_V_mean
+B3MB_Volts B3MB_100V_Bus_V_mean; Invalidate B3MB_100V_Bus_V_mean;
 B3MB_Volts B3MB_100V_Bus_V_min; Invalidate B3MB_100V_Bus_V_min;
 B3MB_Volts B3MB_100V_Bus_V_max; Invalidate B3MB_100V_Bus_V_max;
 {

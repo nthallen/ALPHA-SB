@@ -74,7 +74,7 @@ Summary_Asc { HBox{ |+;
 Summary_NoAsc { HBox{ |+;
     { HBox { [PMC_Full]; |;
         { [AHRS];
-          [B3MB_Summary]
+          [B3MB_Summary2]
         }
       };
       [TMtime_hor];
@@ -82,4 +82,4 @@ Summary_NoAsc { HBox{ |+;
   -;
 }
 
-{ [Summary_Asc] }
+{ [Summary_NoAsc] }

@@ -1,27 +1,28 @@
-Moduledef Ascender [ RATE=1 Panel= ] {
+Moduledef Ascender [ RATE=1 Panel= GENUIFMT= GFMT= ] {
 }
 
-tmcbase = Ascender.tmc:Ascender.tmc.in
-colbase = Ascender_col.tmc:Ascender_col.tmc.in
-cmdbase = Ascender.cmd
-genuibase = Ascender.genui:Ascender.genui.in
-extbase = Ascender_conv.tmc:Ascender_conv.tmc.in
-- : Ascender.tbl:Ascender.tbl.in
-IGNORE = Ascender.tmc
-IGNORE = Ascender_col.tmc
-IGNORE = Ascender.genui
-IGNORE = Ascender_conv.tmc
-IGNORE = Ascender.tbl
-OBJ = Ascender.tmc
-OBJ = Ascender_col.tmc
-OBJ = Ascender.genui
-OBJ = Ascender_conv.tmc
-OBJ = Ascender.tbl
+mode (default, present) {
+  tmcbase = Ascender.tmc:Ascender.tmc.in
+  colbase = Ascender_col.tmc:Ascender_col.tmc.in
+  cmdbase = Ascender.cmd
+  genuibase = Ascender.genui:Ascender.genui.in
+  extbase = Ascender_conv.tmc:Ascender_conv.tmc.in
+  - : Ascender.tbl:Ascender.tbl.in
+  IGNORE = Ascender.tmc
+  IGNORE = Ascender_col.tmc
+  IGNORE = Ascender.genui
+  IGNORE = Ascender_conv.tmc
+  IGNORE = Ascender.tbl
+  OBJ = Ascender.tmc
+  OBJ = Ascender_col.tmc
+  OBJ = Ascender.genui
+  OBJ = Ascender_conv.tmc
+  OBJ = Ascender.tbl
 
-DISTRIB = @MODDIR@/../Ascender
-CPPFLAGS = -I @MODDIR@/..
+  DISTRIB = @MODDIR@/../Ascender
+  CPPFLAGS = -I @MODDIR@/..
 
-%%
+  %%
 
 .PHONY : clean-Ascender @MODDIR@/../Ascender
 @MODDIR@/../Ascender :
@@ -29,3 +30,9 @@ CPPFLAGS = -I @MODDIR@/..
 clean-dist : clean-Ascender
 clean-Ascender :
 	$(MAKE) --directory=@MODDIR@/.. clean
+}
+
+mode (absent) [ GENUIFMT=%- GFMT=- ] {
+  genuibase = Ascender.genui:Ascender.genui.in
+  - : Ascender.tbl:Ascabsent.tbl.in
+}
