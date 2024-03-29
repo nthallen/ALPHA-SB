@@ -7,7 +7,7 @@
 #define N_ICM20948_PEAKS 3
 
 typedef struct {
-  int16_t max_accel[3];
+  uint16_t max_accel[3];
   struct {
     uint16_t freq_index;
     uint16_t amplitude;
@@ -16,8 +16,6 @@ typedef struct {
   uint16_t samples_per_sec;
   uint8_t mode;
   uint8_t fs;
-  uint8_t fresh;
-  uint8_t pad;
 } ICM20948_dev;
 
 typedef struct {

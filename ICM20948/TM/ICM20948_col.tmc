@@ -1,0 +1,6 @@
+/* ICM20948_col.tmc */
+%{
+  #include "ICM20948.h"
+  ICM20948_t ICM20948;
+%}
+TM "Receive" ICM20948 1;

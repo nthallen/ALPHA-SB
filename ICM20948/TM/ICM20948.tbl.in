@@ -1,0 +1,10 @@
+# ICM20948.tbl
+ICM20948 {
+  HBox { +-; ICM20948; -+ };
+# Max:   (ICM_max_g,7) g;
+  Rate:    (ICM_sps,5) Hz;
+  MLF:     (ICM_mlf,5);
+  Mode:   (ICM_mode,3);
+  Scale:    (ICM_fs,7) g;
+  Stale: (ICM_stale,3);
+}

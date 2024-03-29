@@ -1,0 +1,9 @@
+# ICM20948.genui
+#1 ICM_max_g @Panel@ICM Max
+ 1 ICM_sps   @Panel@ICM Rate
+ 1 ICM_mlf   @HKPanel@ICM_HK MLF
+ 1 ICM_mode  @HKPanel@ICM_HK Mode
+ 1 ICM_sps   @HKPanel@ICM_HK Rate
+ 1 ICM_fs    @HKPanel@ICM_HK Scale
+ 1 ICM_stale @HKPanel@ICM_HK Stale
+ 

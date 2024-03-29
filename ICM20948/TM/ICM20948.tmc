@@ -1,0 +1,41 @@
+/* ICM20948.tmc */
+TM typedef double ICM_g { text "%7.3lf"; }
+TM typedef uint8_t icm_mode_t { text "%3u"; }
+TM typedef uint8_t icm_fs_t { text "%3u"; Convert ICM_g; }
+TM typedef uint16_t icm_rate_t { text "%5u"; }
+TM typedef uint16_t icm_mlf_t { text "%5u"; }
+TM typedef uint16_t icm_max_t { text "%5u"; Convert ICM_g; }
+TM typedef uint8_t icm_stale_t { text "%3u"; }
+
+Calibration (icm_max_t, ICM_g) {
+  0, 0,
+  65536, 16
+}
+
+Calibration (icm_fs_t, ICM_g) {
+  0, 2,
+  1, 4,
+  2, 8,
+  4, 16,
+  5, 9999,
+  6, 9999
+}
+
+/* TM 1 Hz icm_max_t ICM_max_g; */ /* Max acceleration */
+TM 1 Hz icm_mlf_t ICM_mlf;  /* MLF index number */
+TM 1 Hz icm_rate_t ICM_sps; /* samples per second */
+TM 1 Hz icm_mode_t ICM_mode;
+TM 1 Hz icm_fs_t ICM_fs;
+TM 1 Hz icm_stale_t ICM_stale;
+
+%{
+  #define ICMsrc(index,name) ICM20948.dev[index].name
+%}
+Group ICM20948 (/* ICM_max_g,*/ ICM_mlf, ICM_sps, ICM_mode, ICM_fs, ICM_stale) {
+  /* ICM_max_g = ICMsrc(0,max_accel); */
+  ICM_mlf = ICMsrc(0,mlf_file);
+  ICM_sps = ICMsrc(0,samples_per_sec);
+  ICM_mode = ICMsrc(0,mode);
+  ICM_fs = ICMsrc(0,fs);
+  ICM_stale = ICM20948_obj->Stale(255);
+}

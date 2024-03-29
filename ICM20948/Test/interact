@@ -1,0 +1,15 @@
+serusbdev=/dev/ttyS2
+
+  Launch      memo   memo -o $Experiment.log -l4
+              [ -z "$launch_err" ] &&
+                msg "Running script interact"
+[ -c "$serusbdev" ] &&
+  Launch      -      subbusd_serusb -q -p $serusbdev -b 115200
+[ "$cantactpro" = "yes" ] &&
+  Launch      -      subbusd_CAN -n CAN
+  Launch      tm_bfr bfr -H bfr: -S:
+  Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
+  Launch      tm_gen icmtcol
+  Launch      cmd    icmtsrvr -H srvr: -S:
+  Launch      -      tmdf
+  Launch      -TMC-  icmtalgo
