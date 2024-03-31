@@ -1,11 +1,11 @@
-function dfs_out = rt_eng(dfs)
-% dfs = rt_eng()
+function dfs_out = rt_icmt(dfs)
+% dfs = rt_icmt()
 %   Create a data_fields object and setup all the buttons for realtime
 %   plots
-% dfs_out = rt_eng(dfs)
+% dfs_out = rt_icmt(dfs)
 %   Use the data_fields object and setup all the buttons for realtime plots
 if nargin < 1
-  dfs = data_fields('title', 'Engineering Data', ...
+  dfs = data_fields('title', 'ICM20948 Vibration Sensor Test', ...
     'Color', [.8 .8 1], ...
     'h_leading', 8, 'v_leading', 2, ...
     'btn_fontsize', 12, ...
@@ -22,6 +22,8 @@ dfs.plot('tmram','label','RAM','vars',{'memused'});
 dfs.plot('tmd','label','Disk','vars',{'Disk'});
 dfs.plot('icm', 'label', 'ICM', 'plots', {'icmr'});
 dfs.plot('icmr','label','Rate','vars',{'ICM_sps'});
+dfs.end_col;
+dfs.start_col;
 dfs.plot('icmhk', 'label', 'ICM HK', 'plots', {'icmhkmlf','icmhkm','icmhkr','icmhks','icmhkstale'});
 dfs.plot('icmhkmlf','label','MLF','vars',{'ICM_mlf'});
 dfs.plot('icmhkm','label','Mode','vars',{'ICM_mode'});

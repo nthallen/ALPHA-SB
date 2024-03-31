@@ -1,5 +1,5 @@
-function pengicmhkstale(varargin);
-% pengicmhkstale( [...] );
+function picmicmhkstale(varargin);
+% picmicmhkstale( [...] );
 % ICM HK Stale
 h = timeplot({'ICM_stale'}, ...
       'ICM HK Stale', ...

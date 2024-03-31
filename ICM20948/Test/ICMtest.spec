@@ -1,5 +1,6 @@
 prefix = icmt
 tmcbase = base.tmc
+genuibase = ICMtest.genui
 
 Module TMbase mode=ignore
 Module ../TM/ICM20948

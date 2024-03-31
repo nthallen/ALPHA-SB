@@ -10,16 +10,19 @@ using namespace DAS_IO;
 
 ICM20948_t ICM20948;
 const char *ICM_dev::subbusd_service = "subbusd";
+const char *ICM_dev::mlf_config;
 
-ICM_dev::ICM_dev(Loop *ELoop)
+ICM_dev::ICM_dev()
     : Interface("ICM", 0),
+      mlf(0), ofp(0), records_in_file(0),
       quit_requested(false),
-      cmd_modefs(0), req_modefs(0), rep_modefs(0),
-      req_mode(0), req_fs(0),
+      req_mode(0), req_fs(0), req_modefs(0),
       Fsample(566) {
   SB = new subbuspp(subbusd_service, "serusb"); // for now
-  ELoop->add_child(this);
-  flags = gflag(0);
+  for (int i = 0; i < NS; ++i) {
+    cmd_modefs[i] = rep_modefs[i] = 0;
+  }
+  mlf = mlf_init(3,60,1,"ICM","dat",mlf_config);
 }
 
 void ICM_dev::set_mode(uint8_t mode) {
@@ -39,32 +42,119 @@ void ICM_dev::Quit() {
   quit_requested = true;
 }
 
-void ICM_dev::read_sensors() {
+void ICM_dev::read_sensors(int i) {
+  msg(MSG_DEBUG, "%s: read_sensors()", iname);
+  uint16_t mask = (1<<NS)-1;
+  while (mask) {
+    for (int i = 0; i < NS; ++i) {
+      if (mask & (1<<i)) {
+        int nrows_needed = samples_per_report + dev[i].cur_skip;
+        int nwords_needed = nrows_needed*3;
+        uint16_t *udata = dev[i].udata;
+        int nw = dev[i].nw;
+        subbus_mread_req rm;
+        int n_fifo_reads = nwords_needed - nw;
+        if (n_fifo_reads+2 > max_mread)
+          n_fifo_reads = max_mread-2;
+        rm.req_len = snprintf(rm.multread_cmd, 256,
+                      dev[i].rm_fifo_fmt, n_fifo_reads+2, n_fifo_reads);
+        rm.req_len += 2*sizeof(uint16_t)+1;
+        // msg(MSG_DEBUG, "%s: format is '%s'", iname, rm.multread_cmd);
+        rm.n_reads = n_fifo_reads+2;
+        uint16_t udata_save[2];
+        if (nw > 0) {
+          udata_save[0] = udata[nw];
+          udata_save[1] = udata[nw+1];
+        }
+        uint16_t nwords;
+        int rv = SB->mread_subbus_nw(&rm, &udata[nw], &nwords);
+        if (rv < 0) {
+          msg(MSG_FATAL, "%s: Driver error %d", iname, rv);
+          break;
+        } else {
+          if (rv == SBS_NOACK)
+            report_err("%s: SBS_NOACK on sensor read", iname);
+          if (nwords < 2)
+            msg(MSG_ERROR, "%s: Expected at least 2 words: %u", iname, nwords);
+          msg(MSG_DEBUG, "%s: nwords:%u modefs:%u nw_fifo:%u",
+                iname, nwords, udata[nw], udata[nw+1]);
+          uint16_t modefs = udata[nw];
+          rep_modefs[i] = modefs;
+          ICM20948.dev[i].mode = mask_mode(modefs);
+          ICM20948.dev[i].fs = mask_fs(modefs);
+          if (nw > 0) {
+            udata[nw] = udata_save[0];
+            udata[nw+1] = udata_save[1];
+          }
+          if (nwords > 2) {
+            dev[i].nw += nwords-2;
+          }
+        }
+        if (dev[i].nw >= nwords_needed) {
+          mask &= ~(1<<i);
+        } else if (ICM20948.dev[i].mode != 2) {
+          mask &= ~(1<<i);
+          break;
+        }
+      }
+    }
+  }
+  // Write out the raw data to MLF
+  // Records are all int16_t
+  // First row is: uint16_t[3]: dev_index, dev_fs, N_rows,
+  //   followed by int16_t[N_rows][3]
+  for (int i = 0; i < NS; ++i) {
+    uint16_t hdr[3];
+    int n_rows = dev[i].nw/3;
+    msg(MSG_DEBUG, "%s: Output: nw:%u", iname, dev[i].nw);
+    hdr[0] = i;
+    hdr[1] = mask_fs(rep_modefs[i]);
+    hdr[2] = n_rows;
+    if (ofp == 0) {
+      ofp = mlf_next_file(mlf);
+      ICM20948.mlf_file = mlf->index;
+    }
+    fwrite(hdr, sizeof(uint16_t), 3, ofp);
+    int16_t *data = (int16_t *)&dev[i].udata[2];
+    fwrite(data, sizeof(int16_t)*3, n_rows, ofp);
+  }
+  if (++records_in_file >= records_per_file) {
+    fclose(ofp);
+    ofp = 0;
+    records_in_file = 0;
+  }
+  
+  // Analyze max shock
+  // Perform FFT and identify peaks
+  for (int i=0; i < NS; ++i) {
+    dev[i].nw = 0;
+  }
 }
 
-void ICM_dev::read_modes() {
+void ICM_dev::read_modes(int i) {
   uint16_t data[2];
-  for (int i = 0; i < N_ICM20948_SENSORS; ++i) {
+  for (int i = 0; i < NS; ++i) {
     SB->mread_subbus(rm_idle[i], data);
+    rep_modefs[i] = data[0];
     ICM20948.dev[i].mode = mask_mode(data[0]);
     ICM20948.dev[i].fs = mask_fs(data[0]);
   }
 }
 
 void ICM_dev::prep_multiread() {
-  char prepbuf[80];
-  
-  for (int i = 0; i < N_ICM20948_SENSORS; ++i) {
+  for (int i = 0; i < NS; ++i) {
     uint16_t base = base_addr[i];
     rm_idle[i] =
       SB->pack_mread_requests(base+0x64, base+0x65, 0);
-    snprintf(prepbuf, 80, "%X,%X|1EF@%X", base+0x64, base+0x65, base+0x66);
-    rm_fifo[i] =
-      SB->pack_mread_request(497, prepbuf);
+    snprintf(dev[i].rm_fifo_fmt, 32,
+      "M%%X#%X,%X|%%X@%X\n", base+0x64, base+0x65, base+0x66);
+    rm_fifo[i] = new subbus_mread_req;
+      // SB->pack_mread_request(497, prepbuf);
+    
   }
 }
 
-uint16_t ICM_dev::base_addr[N_ICM20948_SENSORS] = { 0 };
+uint16_t ICM_dev::base_addr[NS] = { 0 };
 
 void ICM_dev::event_loop() {
   int subfunc = SB->load();
@@ -76,37 +166,44 @@ void ICM_dev::event_loop() {
 
   while (!quit_requested) {
     req_modefs = mask_modefs(req_mode, req_fs);
-    if (req_modefs != rep_modefs) {
-      if (mask_mode(rep_modefs) == 0) {
-        // Now we can command the new mode
-        if (mask_mode(cmd_modefs) == 0) {
-          report_err("%s: Previous mode 0 command not completed", iname);
-        }
-        if (req_fs != mask_fs(rep_modefs)) {
-          SB->write_ack(uDACS_cmd_addr, uDACS_fs_cmd_offset+req_fs);
-        }
-        SB->write_ack(uDACS_cmd_addr, uDACS_mode_cmd_offset+req_mode);
-        cmd_modefs = req_modefs;
-      } else {
-        // rep_mode not zero, need to command it
-        if (mask_mode(cmd_modefs) == 0) {
-          report_err("%s: Expected mode zero", iname);
+    // msg(MSG_DEBUG, "%s: Top of loop: rep_modefs = %02X", iname, rep_modefs);
+    for (int i = 0; i < NS; ++i) {
+      uint16_t cmd_addr = base_addr[i] + uDACS_cmd_addr;
+      if (req_modefs != rep_modefs[i]) {
+        msg(MSG_DEBUG, "%s: req_modefs=%02X rep_modefs[%d]=%02X",
+            iname, req_modefs, i, rep_modefs[i]);
+        if (mask_mode(rep_modefs[i]) == 0) {
+          // Now we can command the new mode
+          if (mask_mode(cmd_modefs[i]) == 0) {
+            report_err("%s: Previous mode 0 command not completed", iname);
+          }
+          msg(MSG_DEBUG, "%s: commanding new mode/fs of %u/%u",
+              iname, req_mode, req_fs);
+          if (req_fs != mask_fs(rep_modefs[i])) {
+            SB->write_ack(cmd_addr, uDACS_fs_cmd_offset+req_fs);
+          }
+          SB->write_ack(cmd_addr, uDACS_mode_cmd_offset+req_mode);
+          cmd_modefs[i] = req_modefs;
+          read_modes(i);
         } else {
-          SB->write_ack(uDACS_cmd_addr, uDACS_mode_cmd_offset+0);
-          cmd_modefs = mask_modefs(0, mask_fs(rep_modefs));
+          // rep_mode not zero, need to command it
+          if (mask_mode(cmd_modefs[i]) == 0) {
+            report_err("%s: Expected mode zero", iname);
+          } else {
+            SB->write_ack(cmd_addr, uDACS_mode_cmd_offset+0);
+            cmd_modefs[i] = mask_modefs(0, mask_fs(rep_modefs[i]));
+            read_modes(i);
+          }
         }
+      } else if (req_mode == 2) {
+        read_sensors(i);
+      } else {
+        read_modes(i);
       }
-    } else if (req_mode == 2) {
-      read_sensors();
-    } else {
-      read_modes();
     }
+    // msg(MSG_DEBUG, "%s: Entering event_loop()", iname);
     ELoop->event_loop();
   }
-}
-
-bool ICM_dev::tm_sync() {
-  return true;
 }
 
 ICM_cmd_t::ICM_cmd_t(ICM_dev *ICM)
@@ -119,7 +216,7 @@ ICM_cmd_t::ICM_cmd_t(ICM_dev *ICM)
  *  - F[0-3] : Select full scale sensor range. Fn => 2^(n+1) g
  *  - Q      : Quit
  */
-bool ICM_cmd_t::protocol_input() {
+bool ICM_cmd_t::app_input() {
   uint8_t MF_val;
   if (nc > 0) {
     unsigned char cmd = buf[cp];
@@ -133,6 +230,7 @@ bool ICM_cmd_t::protocol_input() {
         report_err("%s: incomplete command", iname);
       consume(nc);
     } else {
+      msg(MSG_DEBUG, "Received '%c' command %d", cmd, MF_val);
       if (cmd == 'M') ICM->set_mode(MF_val);
       else ICM->set_fs(MF_val);
       report_ok(nc);
@@ -141,20 +239,30 @@ bool ICM_cmd_t::protocol_input() {
   return false;
 }
 
+ICM_TM_t::ICM_TM_t()
+    : TM_data_sndr("TM",0,"ICM20948", &ICM20948, sizeof(ICM20948)) {}
+
+bool ICM_TM_t::app_input() {
+  report_ok(nc);
+  Send();
+  return true;
+}
+
 int main(int argc, char **argv) {
   oui_init_options(argc, argv);
   { Loop ELoop;
     
     AppID.report_startup();
     
-    ICM_dev *ICM = new ICM_dev(&ELoop);
+    ICM_dev *ICM = new ICM_dev();
+    ELoop.add_child(ICM);
 
     ICM_cmd_t *ICM_cmd = new ICM_cmd_t(ICM);
     ELoop.add_child(ICM_cmd);
     ICM_cmd->connect();
     
-    TM_data_sndr *ICM_TM =
-      new TM_data_sndr("TM",0,"ICM20948", &ICM20948, sizeof(ICM20948));
+    ICM_TM_t *ICM_TM =
+      new ICM_TM_t();
     ELoop.add_child(ICM_TM);
     ICM_TM->connect();
     

@@ -1,5 +1,5 @@
-function pengicmhkmlf(varargin);
-% pengicmhkmlf( [...] );
+function picmicmhkmlf(varargin);
+% picmicmhkmlf( [...] );
 % ICM HK MLF
 h = timeplot({'ICM_mlf'}, ...
       'ICM HK MLF', ...

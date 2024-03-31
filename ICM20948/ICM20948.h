@@ -12,13 +12,13 @@ typedef struct {
     uint16_t freq_index;
     uint16_t amplitude;
   } peaks[N_ICM20948_PEAKS];
-  uint16_t mlf_file;
   uint16_t samples_per_sec;
   uint8_t mode;
   uint8_t fs;
 } ICM20948_dev;
 
 typedef struct {
+  uint32_t mlf_file;
   ICM20948_dev dev[N_ICM20948_SENSORS];
 } ICM20948_t;
 

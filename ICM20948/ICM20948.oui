@@ -3,13 +3,21 @@
 <include> msg oui
 <include> cmd_reader
 
-<opts> "s:"
+<opts> "s:N:"
 <sort>
-        -s <service> service name for subbus
+        -s <service> service name for subbus (default: subbusd)
+        -N <logging config>
+<unsort>
+Logging config is a path string identifying the last
+file previously written and implicitly the next file
+to write. This is usually the direct output of the
+mlf_find script: ICM20948 -N `mlf_find ICM`
 
 <switch>
   case 's':
     ICM_dev::subbusd_service = optarg; break;
+  case 'N':
+    ICM_dev::mlf_config = optarg; break;
 
 <package> appid_default
 <include> "dasio/appid.h"

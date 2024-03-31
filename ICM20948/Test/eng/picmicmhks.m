@@ -1,5 +1,5 @@
-function pengicmhks(varargin);
-% pengicmhks( [...] );
+function picmicmhks(varargin);
+% picmicmhks( [...] );
 % ICM HK Scale
 h = timeplot({'ICM_fs'}, ...
       'ICM HK Scale', ...

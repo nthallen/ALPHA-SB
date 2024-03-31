@@ -1,4 +1,3 @@
-# ICM20948.tbl
 ICM20948 {
   HBox { +-; ICM20948; -+ };
 # Max:   (ICM_max_g,7) g;

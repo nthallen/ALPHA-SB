@@ -1,5 +1,5 @@
-function pengicmhkm(varargin);
-% pengicmhkm( [...] );
+function picmicmhkm(varargin);
+% picmicmhkm( [...] );
 % ICM HK Mode
 h = timeplot({'ICM_mode'}, ...
       'ICM HK Mode', ...

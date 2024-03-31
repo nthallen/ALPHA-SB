@@ -1,5 +1,5 @@
 display icmtdisp -n disp
 client [SI|RT] icmtclt
-extraction [!SI] icmtjsonext -n json
+# extraction [!SI] icmtjsonext -n json
 memo
 batchfile interact
