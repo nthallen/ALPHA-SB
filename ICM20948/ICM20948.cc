@@ -149,8 +149,6 @@ void ICM_dev::prep_multiread() {
     snprintf(dev[i].rm_fifo_fmt, 32,
       "M%%X#%X,%X|%%X@%X\n", base+0x64, base+0x65, base+0x66);
     rm_fifo[i] = new subbus_mread_req;
-      // SB->pack_mread_request(497, prepbuf);
-    
   }
 }
 
