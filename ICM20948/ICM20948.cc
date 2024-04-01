@@ -16,11 +16,11 @@ ICM_dev::ICM_dev()
     : Interface("ICM", 0),
       mlf(0), ofp(0), records_in_file(0),
       quit_requested(false),
-      req_mode(0), req_fs(0), req_modefs(0),
-      Fsample(566) {
+      req_mode(0), req_fs(0), req_modefs(0) {
   SB = new subbuspp(subbusd_service, "serusb"); // for now
   for (int i = 0; i < NS; ++i) {
     cmd_modefs[i] = rep_modefs[i] = 0;
+    dev[i].cur_skip = approx_samples_per_sec - samples_per_report;
   }
   mlf = mlf_init(3,60,1,"ICM","dat",mlf_config);
 }
@@ -100,6 +100,11 @@ void ICM_dev::read_sensors(int i) {
       }
     }
   }
+  
+  // Update dev[i].cur_skip to try to maintain a small (probably non-zero) remainder
+  for (int i = 0; i < NS; ++i) {
+  }
+  
   // Write out the raw data to MLF
   // Records are all int16_t
   // First row is: uint16_t[3]: dev_index, dev_fs, N_rows,

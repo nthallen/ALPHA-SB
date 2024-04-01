@@ -29,6 +29,7 @@ class ICM_dev : public Interface {
     static const char *subbusd_service;
     static const int NS = N_ICM20948_SENSORS;
     static const int samples_per_report = 512;
+    static const int approx_samples_per_sec = 566;
     static const int max_skip = 300; // arbitrary
     static const int max_mread = 497; // 497;
     static const int udata_size = (samples_per_report+max_skip)*3+2;
@@ -54,7 +55,6 @@ class ICM_dev : public Interface {
     uint8_t req_mode; ///< Requested mode from cmd
     uint8_t req_fs; ///< Requested fs from cmd
     uint8_t req_modefs; ///< Requested modefs
-    int Fsample;
     uint8_t cmd_modefs[NS]; ///< Commanded modefs
     uint8_t rep_modefs[NS]; ///< Reported modefs
     static const uint16_t uDACS_cmd_addr = 0x30;
