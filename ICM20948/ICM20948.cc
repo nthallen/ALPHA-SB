@@ -125,6 +125,28 @@ void ICM_dev::read_sensors(int i) {
   }
   
   // Analyze max shock
+  for (int i=0; i < NS; ++i) {
+    int16_t (*data)[3];
+    data = (int16_t(*)[3])&dev[i].udata[2];
+    int n_rows = dev[i].nw/3;
+    uint32_t max_g2 = 0;
+    int max_g_i = 0;
+    for (int j=0; j < n_rows; ++j) {
+      int32_t term;
+      uint32_t sum = 0;
+      for (int k=0; k < 3; ++k) {
+        term = data[j][k];
+        sum += term*term;
+      }
+      if (sum > max_g2) {
+        max_g_i = j;
+      }
+    }
+    for (int k=0; k<3; ++k) {
+      ICM20948.dev[i].max_accel[k] = data[max_g_i][k];
+    }
+  }
+
   // Perform FFT and identify peaks
   for (int i=0; i < NS; ++i) {
     dev[i].nw = 0;

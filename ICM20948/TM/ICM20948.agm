@@ -5,6 +5,7 @@ ModuleDef ICM20948 [ Panel= HKPanel= ] {
 tmcbase = ICM20948.tmc
 colbase = ICM20948_col.tmc
 cmdbase = ICM20948.cmd
+extbase = ICM20948_conv.tmc
 genuibase = ICM20948.genui:ICM20948.genui.in
 - : ICM20948.tbl:ICM20948.tbl.in
 

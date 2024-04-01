@@ -10,8 +10,8 @@ SCRIPT = VERSION Experiment.config
 DISTRIB = interact services
 IGNORE = Makefile "*.exe"
 
-icmtdisp : ICMtest.tbl
-icmtjsonext : $genuibase
+icmtdisp : $extbase ICMtest.tbl
+icmtjsonext : $extbase $genuibase
 icmtalgo : ICMtest.tma
 doit : ICMtest.doit
 %%

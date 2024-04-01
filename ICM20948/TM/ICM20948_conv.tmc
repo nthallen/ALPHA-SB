@@ -1,0 +1,14 @@
+/* ICM20-948_conv.tmc */
+%{
+  #define ICM_accel_squared(j) (ICM_max_accel[j] * (double)ICM_max_accel[j])
+%}
+
+ICM_g ICM_max_g; Invalidate ICM_max_g;
+{ double sum;
+  double term;
+  term = ICM_max_accel[0]; sum  = term * term;
+  term = ICM_max_accel[1]; sum += term * term;
+  term = ICM_max_accel[2]; sum += term * term;
+  ICM_max_g = sqrt(sum)*convert(ICM_fs)/32768;
+  Validate ICM_max_g;
+}
