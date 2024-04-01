@@ -33,6 +33,7 @@ Group ICM20948 (ICM_max_accel, ICM_mlf, ICM_sps, ICM_rem, ICM_mode, ICM_fs, ICM_
   ICM_max_accel[2] = ICMsrc(0,max_accel[2]);
   ICM_mlf = ICM20948.mlf_file;
   ICM_sps = ICMsrc(0,samples_per_sec);
+  ICM_rem = ICMsrc(0,remainder);
   ICM_mode = ICMsrc(0,mode);
   ICM_fs = ICMsrc(0,fs);
   ICM_stale = ICM20948_obj->Stale(255);

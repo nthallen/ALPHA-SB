@@ -9,6 +9,6 @@ ICM_g ICM_max_g; Invalidate ICM_max_g;
   term = ICM_max_accel[0]; sum  = term * term;
   term = ICM_max_accel[1]; sum += term * term;
   term = ICM_max_accel[2]; sum += term * term;
-  ICM_max_g = sqrt(sum)*convert(ICM_fs)/32768;
+  ICM_max_g = (sum==0) ? 9999.0 : sqrt(sum)*convert(ICM_fs)/32768;
   Validate ICM_max_g;
 }

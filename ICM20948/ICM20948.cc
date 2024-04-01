@@ -82,6 +82,7 @@ void ICM_dev::read_sensors(int i) {
           rep_modefs[i] = modefs;
           ICM20948.dev[i].mode = mask_mode(modefs);
           ICM20948.dev[i].fs = mask_fs(modefs);
+          ICM20948.dev[i].remainder = udata[nw+1];
           if (nw > 0) {
             udata[nw] = udata_save[0];
             udata[nw+1] = udata_save[1];
