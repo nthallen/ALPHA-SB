@@ -32,6 +32,8 @@ dfs.plot('icmhkr','label','Rate','vars',{'ICM_sps'});
 dfs.plot('icmhkremainder','label','Remainder','vars',{'ICM_rem'});
 dfs.plot('icmhks','label','Scale','vars',{'ICM_fs'});
 dfs.plot('icmhkstale','label','Stale','vars',{'ICM_stale'});
+dfs.plot('icmg', 'label', 'ICM Gain', 'plots', {'icmgg'});
+dfs.plot('icmgg','label','Gain','vars',{'ICM_Gp','ICM_Gi'});
 dfs.end_col;
 dfs.resize(context_level);
 dfs.set_connection('127.0.0.1', 1416);

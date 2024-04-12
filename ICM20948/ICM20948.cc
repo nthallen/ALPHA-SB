@@ -20,7 +20,9 @@ ICM_dev::ICM_dev()
   SB = new subbuspp(subbusd_service, "serusb"); // for now
   for (int i = 0; i < NS; ++i) {
     cmd_modefs[i] = rep_modefs[i] = 0;
-    dev[i].cur_skip = approx_samples_per_sec - samples_per_report;
+    set_cur_skip(i, 0);
+    dev[i].skip_set = false;
+    dev[i].nw = 0;
   }
   mlf = mlf_init(3,60,1,"ICM","dat",mlf_config);
 }
@@ -38,8 +40,39 @@ void ICM_dev::set_fs(uint8_t fs) {
     req_fs = fs;
 }
 
+void ICM_dev::set_rem(uint8_t rem) {
+  rem_setpoint = rem;
+}
+
+void ICM_dev::set_gain(char cmd, float val) {
+  switch (cmd) {
+    case 'P':
+      ICM20948.Gp = Gp = val;
+      break;
+    case 'I':
+      ICM20948.Gi = Gi = val;
+      for (int i = 0; i < NS; ++i) {
+        dev[i].rem_err_sum = dev[i].cur_skip/Gi;
+      }
+      rem_err_sum_lim = max_skip/Gi;
+      break;
+    case 'R':
+    default:
+      msg(MSG_ERROR, "%s: Invalid gain code '%c'", iname, cmd);
+  }
+}
+
 void ICM_dev::Quit() {
   quit_requested = true;
+}
+
+void ICM_dev::set_cur_skip(int i, int skip) {
+  if (skip > max_skip)
+    skip = max_skip;
+  dev[i].cur_skip = skip;
+  dev[i].nrows_needed = samples_per_report + skip;
+  dev[i].nwords_needed = dev[i].nrows_needed*3;
+  ICM20948.dev[i].samples_per_sec = dev[i].nrows_needed;
 }
 
 void ICM_dev::read_sensors(int i) {
@@ -48,12 +81,10 @@ void ICM_dev::read_sensors(int i) {
   while (mask) {
     for (int i = 0; i < NS; ++i) {
       if (mask & (1<<i)) {
-        int nrows_needed = samples_per_report + dev[i].cur_skip;
-        int nwords_needed = nrows_needed*3;
         uint16_t *udata = dev[i].udata;
         int nw = dev[i].nw;
         subbus_mread_req rm;
-        int n_fifo_reads = nwords_needed - nw;
+        int n_fifo_reads = dev[i].nwords_needed - nw;
         if (n_fifo_reads+2 > max_mread)
           n_fifo_reads = max_mread-2;
         rm.req_len = snprintf(rm.multread_cmd, 256,
@@ -82,7 +113,18 @@ void ICM_dev::read_sensors(int i) {
           rep_modefs[i] = modefs;
           ICM20948.dev[i].mode = mask_mode(modefs);
           ICM20948.dev[i].fs = mask_fs(modefs);
-          ICM20948.dev[i].remainder = udata[nw+1];
+          uint16_t rem = udata[nw+1];
+          if (!dev[i].skip_set) {
+            // Since we were last here, we have read
+            // dev[i].nwords_needed words, and an additional
+            // rem - dev[i].remainder words have arrived
+            set_cur_skip(i,
+              dev[i].nwords_needed +
+              rem - dev[i].remainder - samples_per_report);
+            dev[i].remainder = rem;
+            ICM20948.dev[i].remainder = rem;
+            dev[i].skip_set = true;
+          }
           if (nw > 0) {
             udata[nw] = udata_save[0];
             udata[nw+1] = udata_save[1];
@@ -91,7 +133,7 @@ void ICM_dev::read_sensors(int i) {
             dev[i].nw += nwords-2;
           }
         }
-        if (dev[i].nw >= nwords_needed) {
+        if (dev[i].nw >= dev[i].nwords_needed) {
           mask &= ~(1<<i);
         } else if (ICM20948.dev[i].mode != 2) {
           mask &= ~(1<<i);
@@ -101,9 +143,24 @@ void ICM_dev::read_sensors(int i) {
     }
   }
   
-  // Update dev[i].cur_skip to try to maintain a small (probably non-zero) remainder
-  for (int i = 0; i < NS; ++i) {
-  }
+  // Update dev[i].cur_skip to try to maintain a small
+  // (probably non-zero) remainder
+  // if (Gp != 0 || Gi != 0) {
+    // for (int i = 0; i < NS; ++i) {
+      // double rem_err = ICM20948.dev[i].remainder - rem_setpoint;
+      // dev[i].rem_err_sum += rem_err;
+      // if (dev[i].rem_err_sum > rem_err_sum_lim)
+        // dev[i].rem_err_sum = rem_err_sum_lim;
+      // else if (dev[i].rem_err_sum < -rem_err_sum_lim)
+        // dev[i].rem_err_sum = -rem_err_sum_lim;
+      // double new_skip = Gp * rem_err + Gi * dev[i].rem_err_sum;
+      // if (new_skip > max_skip) new_skip = max_skip;
+      // else if (new_skip < 0) new_skip = 0;
+      // dev[i].cur_skip = (uint16_t)new_skip;
+      // ICM20948.dev[i].samples_per_sec =
+        // dev[i].cur_skip + samples_per_report;
+    // }
+  // }
   
   // Write out the raw data to MLF
   // Records are all int16_t
@@ -156,6 +213,7 @@ void ICM_dev::read_sensors(int i) {
   // Perform FFT and identify peaks
   for (int i=0; i < NS; ++i) {
     dev[i].nw = 0;
+    dev[i].skip_set = false;
   }
 }
 
@@ -244,24 +302,63 @@ ICM_cmd_t::ICM_cmd_t(ICM_dev *ICM)
  */
 bool ICM_cmd_t::app_input() {
   uint8_t MF_val;
+  float PI_val;
   if (nc > 0) {
     unsigned char cmd = buf[cp];
-    if (cmd == 'Q') {
-      msg(MSG_DEBUG, "Received Quit");
-      report_ok(nc);
-      ICM->Quit();
-      return true;
-    } else if (not_any("MF") || not_uint8(MF_val) || not_str("\n")) {
-      if (cp >= nc)
-        report_err("%s: incomplete command", iname);
-      consume(nc);
-    } else {
-      msg(MSG_DEBUG, "Received '%c' command %d", cmd, MF_val);
-      if (cmd == 'M') ICM->set_mode(MF_val);
-      else ICM->set_fs(MF_val);
-      report_ok(nc);
+    switch (cmd) {
+      case 'Q':
+        msg(MSG_DEBUG, "Received Quit");
+        report_ok(nc);
+        ICM->Quit();
+        return true;
+      case 'M':
+      case 'F':
+      case 'R':
+        if (not_any("MFR") || not_uint8(MF_val) || not_str("\n")) {
+          if (cp >= nc)
+            report_err("%s: incomplete command", iname);
+          consume(nc);
+          return false;
+        } else {
+          msg(MSG_DEBUG, "Received '%c' command %d", cmd, MF_val);
+          switch (cmd) {
+            case 'M':
+              ICM->set_mode(MF_val);
+              break;
+            case 'F':
+              ICM->set_fs(MF_val);
+              break;
+            case 'R':
+              ICM->set_rem(MF_val);
+              break;
+          }
+          report_ok(nc);
+        }
+        return false;
+      case 'P':
+      case 'I':
+        if (not_any("PI") ||
+            not_whitespace() ||
+            not_float(PI_val) ||
+            not_str("\n")) {
+          if (cp >= nc)
+            report_err("%s: incomplete PI command", iname);
+          consume(nc);
+          return false;
+        } else {
+          msg(MSG_DEBUG, "Received '%c' command %.3e", cmd, PI_val);
+          ICM->set_gain(cmd, PI_val);
+          report_ok(nc);
+        }
+        return false;
     }
   }
+  return false;
+}
+
+bool ICM_cmd_t::not_whitespace() {
+  while (cp < nc && isspace(buf[cp]))
+    ++cp;
   return false;
 }
 

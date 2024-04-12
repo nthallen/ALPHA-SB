@@ -22,6 +22,15 @@ class ICM_dev : public Interface {
      */
     void set_fs(uint8_t fs);
     /**
+     * @param cmd One of 'P' or 'I', for Gp or Gi
+     * @param val The corresponding gain value
+     */
+    void set_gain(char cmd, float val);
+    /**
+     * @param rem The target remainder value
+     */
+    void set_rem(uint8_t rem);
+    /**
      * Called by ICM_cmd_t when a quit command is received.
      */
     void Quit();
@@ -30,7 +39,7 @@ class ICM_dev : public Interface {
     static const int NS = N_ICM20948_SENSORS;
     static const int samples_per_report = 512;
     static const int approx_samples_per_sec = 566;
-    static const int max_skip = 300; // arbitrary
+    static const int max_skip = 65; // arbitrary
     static const int max_mread = 497; // 497;
     static const int udata_size = (samples_per_report+max_skip)*3+2;
     static const char *mlf_config;
@@ -39,6 +48,7 @@ class ICM_dev : public Interface {
     void prep_multiread();
     void read_sensors(int i);
     void read_modes(int i);
+    void set_cur_skip(int i, int skip);
     subbuspp *SB;
     mlf_def_t *mlf;
     FILE *ofp;
@@ -48,6 +58,11 @@ class ICM_dev : public Interface {
       char rm_fifo_fmt[32];
       uint16_t cur_skip;
       uint16_t nw;
+      uint16_t remainder;
+      double rem_err_sum;
+      int nrows_needed;
+      int nwords_needed;
+      bool skip_set;
     } dev[NS];
     subbus_mread_req *rm_idle[NS];
     subbus_mread_req *rm_fifo[NS];
@@ -57,6 +72,9 @@ class ICM_dev : public Interface {
     uint8_t req_modefs; ///< Requested modefs
     uint8_t cmd_modefs[NS]; ///< Commanded modefs
     uint8_t rep_modefs[NS]; ///< Reported modefs
+    double Gp, Gi;
+    double rem_setpoint;
+    double rem_err_sum_lim;
     static const uint16_t uDACS_cmd_addr = 0x30;
     static const uint16_t uDACS_mode_cmd_offset = 40;
     static const uint16_t uDACS_fs_cmd_offset = 50;
@@ -74,6 +92,7 @@ class ICM_cmd_t : public Cmd_reader {
   protected:
     // ~ICM_cmd_t();
     bool app_input();
+    bool not_whitespace(); //*< Always returns false
     ICM_dev *ICM;
 };
 

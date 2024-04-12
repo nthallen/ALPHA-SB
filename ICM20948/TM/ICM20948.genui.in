@@ -7,4 +7,6 @@
  1 ICM_sps       @HKPanel@ICM_HK Rate
  1 ICM_rem       @HKPanel@ICM_HK Remainder
  1 ICM_fs        @HKPanel@ICM_HK Scale
+ 1 ICM_Gp        @HKPanel@ICM_Gain Gain
+ 1 ICM_Gi        @HKPanel@ICM_Gain Gain
  1 ICM_stale     @HKPanel@ICM_HK Stale

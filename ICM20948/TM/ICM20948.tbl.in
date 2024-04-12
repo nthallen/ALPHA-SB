@@ -6,5 +6,7 @@ ICM20948 {
   MLF:     (ICM_mlf,5);
   Mode:   (ICM_mode,3);
   Scale:    (ICM_fs,7) g;
+  Gp:      (ICM_Gp,10);
+  Gi:      (ICM_Gi,10);
   Stale: (ICM_stale,3);
 }

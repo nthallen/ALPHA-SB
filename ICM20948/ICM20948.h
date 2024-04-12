@@ -19,6 +19,7 @@ typedef struct {
 } ICM20948_dev;
 
 typedef struct {
+  double Gp, Gi;
   uint32_t mlf_file;
   ICM20948_dev dev[N_ICM20948_SENSORS];
 } ICM20948_t;
