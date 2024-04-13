@@ -21,6 +21,7 @@ TM 1 Hz icm_max_t ICM_max_accel[3]; /* Max acceleration */
 TM 1 Hz icm_mlf_t ICM_mlf;  /* MLF index number */
 TM 1 Hz icm_rate_t ICM_sps; /* samples per second */
 TM 1 Hz icm_rate_t ICM_rem; /* remainder */
+TM 1 Hz icm_rate_t ICM_msecs; /* milliseconds */
 TM 1 Hz icm_mode_t ICM_mode;
 TM 1 Hz icm_fs_t ICM_fs;
 TM 1 Hz icm_gain ICM_Gp;
@@ -30,13 +31,16 @@ TM 1 Hz icm_stale_t ICM_stale;
 %{
   #define ICMsrc(index,name) ICM20948.dev[index].name
 %}
-Group ICM20948 (ICM_max_accel, ICM_mlf, ICM_sps, ICM_rem, ICM_mode, ICM_fs, ICM_Gp, ICM_Gi, ICM_stale) {
+Group ICM20948 (ICM_max_accel, ICM_mlf, ICM_sps, ICM_rem,
+                ICM_msecs, ICM_mode, ICM_fs, ICM_Gp, ICM_Gi,
+                ICM_stale) {
   ICM_max_accel[0] = ICMsrc(0,max_accel[0]);
   ICM_max_accel[1] = ICMsrc(0,max_accel[1]);
   ICM_max_accel[2] = ICMsrc(0,max_accel[2]);
   ICM_mlf = ICM20948.mlf_file;
   ICM_sps = ICMsrc(0,samples_per_sec);
   ICM_rem = ICMsrc(0,remainder);
+  ICM_msecs = ICMsrc(0,msecs);
   ICM_mode = ICMsrc(0,mode);
   ICM_fs = ICMsrc(0,fs);
   ICM_Gp = ICM20948.Gp;

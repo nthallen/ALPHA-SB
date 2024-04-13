@@ -1,4 +1,5 @@
 /* ICM20948.cc */
+#include <chrono>
 #include <stdio.h>
 #include "ICM20948_drv.h"
 #include "dasio/appid.h"
@@ -16,7 +17,10 @@ ICM_dev::ICM_dev()
     : Interface("ICM", 0),
       mlf(0), ofp(0), records_in_file(0),
       quit_requested(false),
-      req_mode(0), req_fs(0), req_modefs(0) {
+      req_mode(0), req_fs(0), req_modefs(0),
+      Gp(0), Gi(0),
+      rem_setpoint(0),
+      nsync(0) {
   SB = new subbuspp(subbusd_service, "serusb"); // for now
   for (int i = 0; i < NS; ++i) {
     cmd_modefs[i] = rep_modefs[i] = 0;
@@ -25,6 +29,7 @@ ICM_dev::ICM_dev()
     dev[i].nw = 0;
   }
   mlf = mlf_init(3,60,1,"ICM","dat",mlf_config);
+  TO.Set(0, 0);
 }
 
 void ICM_dev::set_mode(uint8_t mode) {
@@ -42,6 +47,10 @@ void ICM_dev::set_fs(uint8_t fs) {
 
 void ICM_dev::set_rem(uint8_t rem) {
   rem_setpoint = rem;
+}
+
+void ICM_dev::set_nsync(int nsync) {
+  this->nsync = nsync;
 }
 
 void ICM_dev::set_gain(char cmd, float val) {
@@ -72,43 +81,56 @@ void ICM_dev::set_cur_skip(int i, int skip) {
   dev[i].cur_skip = skip;
   dev[i].nrows_needed = samples_per_report + skip;
   dev[i].nwords_needed = dev[i].nrows_needed*3;
-  ICM20948.dev[i].samples_per_sec = dev[i].nrows_needed;
+  // ICM20948.dev[i].samples_per_sec = dev[i].nrows_needed;
 }
 
-void ICM_dev::read_sensors(int i) {
+void ICM_dev::read_sensors() {
   msg(MSG_DEBUG, "%s: read_sensors()", iname);
   uint16_t mask = (1<<NS)-1;
-  while (mask) {
+  std::chrono::system_clock::time_point Tstart =
+    std::chrono::system_clock::now();
+  while (mask && nsync == 0) {
+    msg(MSG_DEBUG, "%s: Preloop: nsync:%d", iname, nsync);
+    flags |= Fl_Timeout;
+    ELoop->event_loop();
+    flags &= ~Fl_Timeout;
+    msg(MSG_DEBUG, "%s: nsync:%d", iname, nsync);
     for (int i = 0; i < NS; ++i) {
       if (mask & (1<<i)) {
         uint16_t *udata = dev[i].udata;
         int nw = dev[i].nw;
-        subbus_mread_req rm;
-        int n_fifo_reads = dev[i].nwords_needed - nw;
-        if (n_fifo_reads+2 > max_mread)
-          n_fifo_reads = max_mread-2;
-        rm.req_len = snprintf(rm.multread_cmd, 256,
-                      dev[i].rm_fifo_fmt, n_fifo_reads+2, n_fifo_reads);
-        rm.req_len += 2*sizeof(uint16_t)+1;
-        // msg(MSG_DEBUG, "%s: format is '%s'", iname, rm.multread_cmd);
-        rm.n_reads = n_fifo_reads+2;
-        uint16_t udata_save[2];
-        if (nw > 0) {
-          udata_save[0] = udata[nw];
-          udata_save[1] = udata[nw+1];
-        }
-        uint16_t nwords;
-        int rv = SB->mread_subbus_nw(&rm, &udata[nw], &nwords);
-        if (rv < 0) {
-          msg(MSG_FATAL, "%s: Driver error %d", iname, rv);
-          break;
-        } else {
+        if (nsync == 0) {
+          subbus_mread_req rm;
+          int n_fifo_reads = dev[i].nwords_needed - nw;
+          if (n_fifo_reads < 0) {
+            msg(MSG_FATAL, "%s: n_fifo_reads:%d needed:%d nw:%d",
+              iname, dev[i].nwords_needed, nw);
+          }
+          if (n_fifo_reads+2 > max_mread)
+            n_fifo_reads = max_mread-2;
+          rm.req_len = snprintf(rm.multread_cmd, 256,
+                        dev[i].rm_fifo_fmt, n_fifo_reads+2, n_fifo_reads);
+          rm.req_len += 2*sizeof(uint16_t)+1;
+          // msg(MSG_DEBUG, "%s: format is '%s'", iname, rm.multread_cmd);
+          rm.n_reads = n_fifo_reads+2;
+          uint16_t udata_save[2];
+          if (nw > 0) {
+            udata_save[0] = udata[nw];
+            udata_save[1] = udata[nw+1];
+          }
+          uint16_t nwords;
+          int rv = SB->mread_subbus_nw(&rm, &udata[nw], &nwords);
+          if (rv < 0) {
+            msg(MSG_FATAL, "%s: Driver error %d", iname, rv);
+            break;
+          }
           if (rv == SBS_NOACK)
             report_err("%s: SBS_NOACK on sensor read", iname);
           if (nwords < 2)
             msg(MSG_ERROR, "%s: Expected at least 2 words: %u", iname, nwords);
-          msg(MSG_DEBUG, "%s: nwords:%u modefs:%u nw_fifo:%u",
-                iname, nwords, udata[nw], udata[nw+1]);
+          msg(MSG_DBG(1),
+            "%s: nwords:%u modefs:%u nw_fifo:%u nsync:%d",
+                iname, nwords, udata[nw], udata[nw+1], nsync);
           uint16_t modefs = udata[nw];
           rep_modefs[i] = modefs;
           ICM20948.dev[i].mode = mask_mode(modefs);
@@ -132,9 +154,16 @@ void ICM_dev::read_sensors(int i) {
           if (nwords > 2) {
             dev[i].nw += nwords-2;
           }
+        } else { // nsync > 0
+          dev[i].nwords_needed = dev[i].nw;
         }
         if (dev[i].nw >= dev[i].nwords_needed) {
           mask &= ~(1<<i);
+          std::chrono::system_clock::time_point Tend =
+            std::chrono::system_clock::now();
+          auto dur =
+            std::chrono::duration_cast<std::chrono::milliseconds>(Tend-Tstart);
+          ICM20948.dev[i].msecs = dur.count();
         } else if (ICM20948.dev[i].mode != 2) {
           mask &= ~(1<<i);
           break;
@@ -169,7 +198,9 @@ void ICM_dev::read_sensors(int i) {
   for (int i = 0; i < NS; ++i) {
     uint16_t hdr[3];
     int n_rows = dev[i].nw/3;
-    msg(MSG_DEBUG, "%s: Output: nw:%u", iname, dev[i].nw);
+    ICM20948.dev[i].samples_per_sec = n_rows;
+    msg(MSG_DEBUG, "%s: Output: nw:%u nsync:%d",
+        iname, dev[i].nw, nsync);
     hdr[0] = i;
     hdr[1] = mask_fs(rep_modefs[i]);
     hdr[2] = n_rows;
@@ -214,10 +245,15 @@ void ICM_dev::read_sensors(int i) {
   for (int i=0; i < NS; ++i) {
     dev[i].nw = 0;
     dev[i].skip_set = false;
+    nsync = 0;
   }
 }
 
-void ICM_dev::read_modes(int i) {
+bool ICM_dev::protocol_timeout() {
+  return true;
+}
+
+void ICM_dev::read_modes() {
   uint16_t data[2];
   for (int i = 0; i < NS; ++i) {
     SB->mread_subbus(rm_idle[i], data);
@@ -259,7 +295,8 @@ void ICM_dev::event_loop() {
         if (mask_mode(rep_modefs[i]) == 0) {
           // Now we can command the new mode
           if (mask_mode(cmd_modefs[i]) == 0) {
-            report_err("%s: Previous mode 0 command not completed", iname);
+            msg(MSG_DEBUG,
+              "%s: Previous mode 0 command not completed", iname);
           }
           msg(MSG_DEBUG, "%s: commanding new mode/fs of %u/%u",
               iname, req_mode, req_fs);
@@ -268,7 +305,7 @@ void ICM_dev::event_loop() {
           }
           SB->write_ack(cmd_addr, uDACS_mode_cmd_offset+req_mode);
           cmd_modefs[i] = req_modefs;
-          read_modes(i);
+          read_modes();
         } else {
           // rep_mode not zero, need to command it
           if (mask_mode(cmd_modefs[i]) == 0) {
@@ -276,17 +313,19 @@ void ICM_dev::event_loop() {
           } else {
             SB->write_ack(cmd_addr, uDACS_mode_cmd_offset+0);
             cmd_modefs[i] = mask_modefs(0, mask_fs(rep_modefs[i]));
-            read_modes(i);
+            read_modes();
           }
         }
-      } else if (req_mode == 2) {
-        read_sensors(i);
-      } else {
-        read_modes(i);
       }
+    }
+    if (req_mode == 2) {
+      read_sensors();
+    } else {
+      read_modes();
     }
     // msg(MSG_DEBUG, "%s: Entering event_loop()", iname);
     ELoop->event_loop();
+    nsync = 0;
   }
 }
 
@@ -362,10 +401,12 @@ bool ICM_cmd_t::not_whitespace() {
   return false;
 }
 
-ICM_TM_t::ICM_TM_t()
-    : TM_data_sndr("TM",0,"ICM20948", &ICM20948, sizeof(ICM20948)) {}
+ICM_TM_t::ICM_TM_t(ICM_dev *ICM)
+    : TM_data_sndr("TM",0,"ICM20948", &ICM20948, sizeof(ICM20948)),
+      ICM(ICM) {}
 
 bool ICM_TM_t::app_input() {
+  ICM->set_nsync(nc);
   report_ok(nc);
   Send();
   return true;
@@ -385,7 +426,7 @@ int main(int argc, char **argv) {
     ICM_cmd->connect();
     
     ICM_TM_t *ICM_TM =
-      new ICM_TM_t();
+      new ICM_TM_t(ICM);
     ELoop.add_child(ICM_TM);
     ICM_TM->connect();
     

@@ -31,6 +31,10 @@ class ICM_dev : public Interface {
      */
     void set_rem(uint8_t rem);
     /**
+     * @param nsync The number of syncs that have been received
+     */
+    void set_nsync(int nsync);
+    /**
      * Called by ICM_cmd_t when a quit command is received.
      */
     void Quit();
@@ -45,9 +49,10 @@ class ICM_dev : public Interface {
     static const char *mlf_config;
     static const int records_per_file = 5;
   protected:
+    bool protocol_timeout();
     void prep_multiread();
-    void read_sensors(int i);
-    void read_modes(int i);
+    void read_sensors();
+    void read_modes();
     void set_cur_skip(int i, int skip);
     subbuspp *SB;
     mlf_def_t *mlf;
@@ -75,6 +80,7 @@ class ICM_dev : public Interface {
     double Gp, Gi;
     double rem_setpoint;
     double rem_err_sum_lim;
+    int nsync;
     static const uint16_t uDACS_cmd_addr = 0x30;
     static const uint16_t uDACS_mode_cmd_offset = 40;
     static const uint16_t uDACS_fs_cmd_offset = 50;
@@ -98,10 +104,11 @@ class ICM_cmd_t : public Cmd_reader {
 
 class ICM_TM_t : public TM_data_sndr {
   public:
-    ICM_TM_t();
+    ICM_TM_t(ICM_dev *ICM);
     bool app_input();
   protected:
     // ~ICM_TM_t();
+    ICM_dev *ICM;
 };
 
 #endif

@@ -27,6 +27,7 @@ f = ne_dialg(f, 'add', 1, 0, 'picmticmhkmlf', 'MLF' );
 f = ne_dialg(f, 'add', 1, 0, 'picmticmhkm', 'Mode' );
 f = ne_dialg(f, 'add', 1, 0, 'picmticmhkr', 'Rate' );
 f = ne_dialg(f, 'add', 1, 0, 'picmticmhkremainder', 'Remainder' );
+f = ne_dialg(f, 'add', 1, 0, 'picmticmhkmsecs', 'msecs' );
 f = ne_dialg(f, 'add', 1, 0, 'picmticmhks', 'Scale' );
 f = ne_dialg(f, 'add', 1, 0, 'picmticmhkstale', 'Stale' );
 f = ne_dialg(f, 'add', 0, 1, 'gicmticmg', 'ICM Gain' );

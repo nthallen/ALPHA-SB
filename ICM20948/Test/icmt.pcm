@@ -1,33 +1,34 @@
 
 --------Frame Statistics-----------
 Major Frame: 1 minor frames, 1 Hz
-Minor Frame: 47 bytes, 1 Hz
+Minor Frame: 49 bytes, 1 Hz
 Effective Frame Dimensions:
-  1 Rows 47 Columns
+  1 Rows 49 Columns
   1 rows/sec
-  376 bits/sec
-  Data:  344 bits/sec  91 %
-  Synch: 32 bits/sec  9 %
+  392 bits/sec
+  Data:  360 bits/sec  92 %
+  Synch: 32 bits/sec  8 %
   Empty: 0 bits/sec  0 %
 -------End of Frame Statistics-----
 
 
 --------PCM Definition-------------
 1/1 Hz 2 bytes Datum MFCtr (1,0,0,2)
-1/1 Hz 33 bytes Group ICM20948 (1,0,2,33)
+1/1 Hz 35 bytes Group ICM20948 (1,0,2,35)
 1/1 Hz 1 bytes Member ICM_stale (1,0,2,1)
 1/1 Hz 8 bytes Member ICM_Gi (1,0,3,8)
 1/1 Hz 8 bytes Member ICM_Gp (1,0,11,8)
 1/1 Hz 1 bytes Member ICM_fs (1,0,19,1)
 1/1 Hz 1 bytes Member ICM_mode (1,0,20,1)
-1/1 Hz 2 bytes Member ICM_rem (1,0,21,2)
-1/1 Hz 2 bytes Member ICM_sps (1,0,23,2)
-1/1 Hz 4 bytes Member ICM_mlf (1,0,25,4)
-1/1 Hz 6 bytes Member ICM_max_accel (1,0,29,6)
-1/1 Hz 4 bytes Datum SysTDrift (1,0,35,4)
-1/1 Hz 2 bytes Datum CPU_Pct (1,0,39,2)
-1/1 Hz 2 bytes Datum Disk (1,0,41,2)
-1/1 Hz 2 bytes Datum memused (1,0,43,2)
-1/1 Hz 2 bytes Datum Synch (1,0,45,2)
+1/1 Hz 2 bytes Member ICM_msecs (1,0,21,2)
+1/1 Hz 2 bytes Member ICM_rem (1,0,23,2)
+1/1 Hz 2 bytes Member ICM_sps (1,0,25,2)
+1/1 Hz 4 bytes Member ICM_mlf (1,0,27,4)
+1/1 Hz 6 bytes Member ICM_max_accel (1,0,31,6)
+1/1 Hz 4 bytes Datum SysTDrift (1,0,37,4)
+1/1 Hz 2 bytes Datum CPU_Pct (1,0,41,2)
+1/1 Hz 2 bytes Datum Disk (1,0,43,2)
+1/1 Hz 2 bytes Datum memused (1,0,45,2)
+1/1 Hz 2 bytes Datum Synch (1,0,47,2)
 -------End of PCM Definition-------
 
