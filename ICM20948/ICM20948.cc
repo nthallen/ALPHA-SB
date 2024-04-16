@@ -164,6 +164,18 @@ void ICM_dev::read_sensors() {
           auto dur =
             std::chrono::duration_cast<std::chrono::milliseconds>(Tend-Tstart);
           ICM20948.dev[i].msecs = dur.count();
+          double T_err = ICM20948.dev[i].remainder - rem_setpoint;
+          dev[i].rem_err_sum += rem_err;
+          if (dev[i].rem_err_sum > rem_err_sum_lim)
+            dev[i].rem_err_sum = rem_err_sum_lim;
+          else if (dev[i].rem_err_sum < -rem_err_sum_lim)
+            dev[i].rem_err_sum = -rem_err_sum_lim;
+          double new_skip = Gp * rem_err + Gi * dev[i].rem_err_sum;
+          if (new_skip > max_skip) new_skip = max_skip;
+          else if (new_skip < 0) new_skip = 0;
+          dev[i].cur_skip = (uint16_t)new_skip;
+          ICM20948.dev[i].samples_per_sec =
+            dev[i].cur_skip + samples_per_report;
         } else if (ICM20948.dev[i].mode != 2) {
           mask &= ~(1<<i);
           break;

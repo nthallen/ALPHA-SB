@@ -1,12 +1,12 @@
-display scopexdisp -n disp
+display asbdisp -n disp
 serin serin
-client [SI|RT] scopexclt
+client [SI|RT] asbclt
 
-server [SI]  cmd scopextxsrvr
+server [SI]  cmd asbtxsrvr
 server [SI]  -   RFDio -b 230400 -p /dev/ttyS3 -v
 
 extraction [SI]  lgr -N `mlf_find LOG` -n lgr
-extraction [!SI] scopexjsonext -n json
+extraction [!SI] asbjsonext -n json
 
 memo
 batchfile interact

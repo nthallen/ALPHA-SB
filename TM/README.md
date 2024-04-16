@@ -1,17 +1,22 @@
-# SCoPEx TM
+# ALPHA-SB TM
+
+## Configuration
+This section describes a failed strategy: more than one .spec file
+in the TM directory.
+
 For this experiment, we are experimenting with actively supporting
 two different telemetry frames within the same source directory.
-There are two different .spec files, scopex.spec and scopexsim.spec.
+There are two different .spec files, alpha-sb.spec and alpha-sbsim.spec.
 With more than one .spec file, appgen must be invoked with an explicit
 argument:
 
-```$ appgen scopex.spec```
+```$ appgen alpha-sb.spec```
 
-scopex.spec is the main instrument definition, including all
+alpha-sb.spec is the main instrument definition, including all
 peripheral devices operating at the anticipated flight data rate.
-scopexsim.spec eliminates the B3MB data from the frame and operates
+alpha-sbsim.spec eliminates the B3MB data from the frame and operates
 the PropMtr and SpatialDual data at a higher rate to improve the
-precision of the scopexsim kinematic model.
+precision of the alpha-sbsim kinematic model.
 
 It is possible to run simulations using the full instrument definition
 as well. As currently configured, the simulation startup (runfile.sim)
@@ -33,7 +38,7 @@ Note: When directing these two configurations to different
 HomeDirs, they need to have different Experiment.config files,
 or one that can correct the HomeDir definition.
 
-# Navigation
+## Navigation
 
 The purpose of having propellers on the gondola is to be able to
 manuever the gondola over relatively short distances relative to

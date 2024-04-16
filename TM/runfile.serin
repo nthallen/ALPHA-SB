@@ -21,9 +21,9 @@
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen serin
-  Launch      cmd    scopextxsrvr -H srvr: -S: -v
+  Launch      cmd    asbtxsrvr -H srvr: -S: -v
 [ -c "$tmrfidev" ] &&
   Launch      -      tm_rf_import -b 115200 -p $tmrfidev
   # was 230400
 [ -n "$relayhost" ] &&
-  Launch      -      cmd_relay -F scopex.sat -H txsrvr:$relayhost -v
+  Launch      -      cmd_relay -F alpha-sb.sat -H txsrvr:$relayhost -v

@@ -1,5 +1,9 @@
 host spi3 10.245.83.81
 hostname 10.245.83.81
 
+host asb1 10.245.83.86
+hostname 10.245.83.86
+
 Match final host 10.245.83.81
 user pi
+

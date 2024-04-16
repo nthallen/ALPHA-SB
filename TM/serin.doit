@@ -1,6 +1,6 @@
-display scopexdisp -n disp
-#client [SI|RT] scopexclt -H srvr:$spi4 -X scopex.sat
-client [SI|RT] scopexclt
-#extraction scopexjsonext -n json
+display asbdisp -n disp
+#client [SI|RT] asbclt -H srvr:$spi4 -X alpha-sb.sat
+client [SI|RT] asbclt
+#extraction asbjsonext -n json
 memo
 batchfile runfile.serin

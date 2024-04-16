@@ -1,20 +1,6 @@
-# KK-SCoPEx: SCoPEx Flight Instrument Software
+# ALPHA-SB: Airborne Low-velocity Propelled High Altitude Stratospheric Balloon
 
-This project currently includes three different builds:
- - TM/scopex.spec: The full flight configuration
- - TM/scopexsim.spec: A version for realtime simulation of navigatoin control
+This project currently includes multiple different builds:
+ - TM/alpha-sb.spec: The full flight configuration
  - Charge/Charge.spec: For managing the battery systems
-
-While the Charge project is in a separate directory, scopex and scopexsim are
-located in the same directory. When shifting from one build to the other, the
-standard approach should be:
-
-```
-src/TM $ make clean-dist
-src/TM $ appgen scopexsim
-src/TM $ make all-dist
-...
-src/TM $ make clean-dist
-src/TM $ appgen scopex
-src/TM $ make all-dist
-```
+ - ICM20948/Test/ICMtest.spec: For testing the ICM20948 vibration sensor driver

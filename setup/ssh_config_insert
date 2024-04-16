@@ -1,9 +1,16 @@
-### Begin scopex ssh_config_insert ###
+### Begin alpha_sb ssh_config_insert ###
 # Match all is necessary to close any preceding host blocks
 Match all
-include /etc/monarch/scopex/ssh_config
+include /etc/monarch/alpha_sb/ssh_config
 
-# We are using a single account on the scopex flight computer
+# On the new flight computer, we will be using individual user accounts.
+# You will need to add an explicit username definition in your
+# ~/.ssh/config file outside this block.
+#
+#  hostname 10.245.83.86
+#  user my_username
+#
+# On the old flight computer, we were using a single account
 # with the username pi. This is configured in the file included
 # above. If you know what you're doing and need to use a different
 # username standard monarch tools (./doit, saverun, reduce, etc.)
@@ -12,4 +19,4 @@ include /etc/monarch/scopex/ssh_config
 #   hostname 10.245.83.81
 #   user my_username
 
-### End scopex ssh_config_insert ###
+### End alpha_sb ssh_config_insert ###

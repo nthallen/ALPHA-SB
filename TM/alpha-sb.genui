@@ -1,0 +1,7 @@
+HEADER ALPHA-SB Platform
+MNEMONIC asb
+HOMEDIR ALPHA_SB_DATA_DIR
+ROWS 11
+
+ 1 SWStat Main:System SWStat
+ 

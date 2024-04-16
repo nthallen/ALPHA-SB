@@ -1,13 +1,13 @@
 tmcbase = base.tmc
 Module Nav mode=types
-swsbase = scopex.sws
+swsbase = alpha-sb.sws
 swsbase = pmc.sws
-cmdbase = scopex.cmd
+cmdbase = alpha-sb.cmd
 cmdbase = B3MB_map.cmd
 cmdbase = cmd_tx.cmd
-genuibase = scopex.genui
+genuibase = alpha-sb.genui
 
-Module Version src=scopex.ver
+Module Version src=alpha-sb.ver
 Module TMbase mode=ignore Panel=Main:
 Module Command_SN Panel=Main:
 
@@ -61,7 +61,6 @@ Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB100B: \
 tmcbase = B3MB_cal.tmc
 extbase =  B3MB_conv.tmc
 
-# Module scopexsim
 Module PropMtrSim
 Module SerIn
 Module Sat
@@ -70,23 +69,24 @@ Module Ascender Panel=Main: mode=present
 # Module RFDio
 Module Nav
 
-TGTDIR = /home/scopex
+prefix = asb
+TGTDIR = /home/alpha-sb
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
 DISTRIB = interact services USB.id
 IGNORE = B3MB_gen_cal.asv
 IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 
-scopexcol : -lsubbuspp
-scopexsrvr : CAN.oui -lsubbuspp
-scopextxsrvr :
-scopexclt :
-scopexdisp : $extbase Summary.tbl scopex.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl SpatialDual.tbl Housekeeping.tbl
-scopexalgo : scopex.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
-scopexjsonext : $extbase $genuibase
+asbcol : -lsubbuspp
+asbsrvr : CAN.oui -lsubbuspp
+asbtxsrvr :
+asbclt :
+asbdisp : $extbase Summary.tbl alpha-sb.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl SpatialDual.tbl Housekeeping.tbl
+asbalgo : alpha-sb.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
+asbjsonext : $extbase $genuibase
 # B3MBrawext : B3MBraw.cdf
 # tmserioext : tmserio.tmc tmserio.cc tmserio.oui
-doit : scopex.doit
+doit : alpha-sb.doit
 #Simdoit : Sim.doit
 #SimSockdoit : SimSock.doit
 %%

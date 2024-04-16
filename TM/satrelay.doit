@@ -1,5 +1,5 @@
-display scopexdisp -n disp
-client [SI|RT] scopexclt -H srvr:$spi4
-extraction scopexjsonext -n json
+display asbdisp -n disp
+client [SI|RT] asbclt -H srvr:$spi4
+extraction asbjsonext -n json
 memo
 batchfile runfile.satrelay

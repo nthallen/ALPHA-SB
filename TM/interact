@@ -29,13 +29,13 @@ fi
   Launch      -      subbusd_CAN -n CAN
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
-  Launch      tm_gen scopexcol
-  Launch      cmd    scopexsrvr -H srvr: -S: -v
+  Launch      tm_gen asbcol
+  Launch      cmd    asbsrvr -H srvr: -S: -v
 [ -c "$tmrfx_port" ] &&
   Launch      -TMC-  tm_rf_export -d $tmrfx_port -b 115200 -v -f
   # Was 230400
 [ -n "$relay_ext" ] &&
-  Launch      -TMC-  tm_ip_export -H Relay:$relay_ext -E scopex.sat
+  Launch      -TMC-  tm_ip_export -H Relay:$relay_ext -E alpha-sb.sat
   Launch      -      tmdf
 [ -c "$propmtr_port" ] &&
   Launch      -      PropMtr -p $propmtr_port
@@ -43,4 +43,4 @@ fi
   Launch      -      SpatialDual -p $spatialdual_port -v
 [ -c "$ascender_port" ] &&
   Launch      -      Ascender -p $ascender_port -v
-  Launch      -TMC-  scopexalgo
+  Launch      -TMC-  asbalgo

@@ -1,5 +1,5 @@
 <package> CAN
-<include> "scopex_can.h"
+<include> "alpha-sb_can.h"
 
 <defs>
   subbuspp *CAN;
