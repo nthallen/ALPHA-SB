@@ -1,9 +1,0 @@
-display scopexdisp -n disp
-
-client scopexclt
-server [!PB] - scopexsim -H srvr:$FlightNode -p /dev/ttyS7 -b 115200
-extraction [!SI] scopexjsonext -n json
-
-memo
-batchfile runfile.sim
-

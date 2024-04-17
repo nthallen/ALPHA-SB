@@ -1,5 +1,5 @@
 *.o
 *.exe
 *oui.cc
-scopexsim
-scopexsimsock
+alpha-sb-sim
+alpha-sb-simsock

@@ -1,0 +1,9 @@
+display asbsimdisp -n disp
+
+client asbsimclt
+server [!PB] - asbsimsim -H srvr:$FlightNode -p /dev/ttyS7 -b 115200
+extraction [!SI] asbsimjsonext -n json
+
+memo
+batchfile runfile.sim
+

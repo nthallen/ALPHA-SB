@@ -1,4 +1,4 @@
-SCoPEx Charging Station
+ALPHA-SB Charging Station
 
 Components:
   Magna-Power SL Series Bench Power Supply (MPSL)
@@ -6,7 +6,7 @@ Components:
   Raspberry Pi computer with USB/Ethernet HAT
   Ethernet Switch
   CANable USB/CAN Adapter
-  SCoPEx Battery System
+  ALPHA-SB Battery System
 
 The Charging Station is currently powered via a single
 3-phase connector. The MPSL uses two 208 phases, and

@@ -1,6 +1,6 @@
 /* commandfile.cpp */
 #include <strings.h>
-#include "SCoPEx.h"
+#include "ALPHA-SB.h"
 #include "nl.h"
 #include "nl_assert.h"
 
@@ -9,7 +9,7 @@ variableDef::variableDef(dReal* ptr, const char *name) {
   this->name = name;
 }
 
-commandFile::commandFile(SCoPEx *model)
+commandFile::commandFile(ALPHA_SB *model)
   : DAS_IO::Cmd_reader("Cmd", IBUFLEN, "Sim"),
     model(model) {
 }

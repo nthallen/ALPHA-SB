@@ -1,9 +1,0 @@
-display scopexdisp -n disp
-
-client scopexclt
-server [!PB] - scopexsimsock -Ssrvr: -Snav:
-extraction [!SI] scopexjsonext -n json
-
-memo
-batchfile runfile.sim
-

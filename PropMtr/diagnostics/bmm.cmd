@@ -1,5 +1,5 @@
 %{
-  #include "scopex_can.h"
+  #include "alpha_sb_can.h"
 
   #ifdef SERVER
     subbuspp *CAN;

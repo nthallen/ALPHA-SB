@@ -1,0 +1,20 @@
+<package> alpha-sb-sim
+<include> msg oui
+<include> cmd_reader
+<follow> msg
+<include> "ALPHA-SB.h"
+
+<opts> "l:"
+<sort>
+  -l logfile Optional log for detailed position data
+
+<unsort>
+dualsim function nav: Where to find 'sdual' server
+
+<init>
+  alpha_sb_sim_init_options(argc, argv);
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("Sim", "ALPHA-SB Simulator", "V2.1");

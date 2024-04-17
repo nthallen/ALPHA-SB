@@ -1,5 +1,5 @@
 #! /bin/sh
-export Experiment=SCoPEx
+export Experiment=ALPHA-SB
 
 launch_error=''
 

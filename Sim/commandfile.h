@@ -4,7 +4,7 @@
 #include "dasio/cmd_reader.h"
 #include "ode/ode.h"
 
-class SCoPEx;
+class ALPHA_SB;
 
 class variableDef {
   public:
@@ -15,13 +15,13 @@ class variableDef {
 
 class commandFile : public DAS_IO::Cmd_reader {
   public:
-    commandFile(SCoPEx *model);
+    commandFile(ALPHA_SB *model);
     ~commandFile();
     void addVariable(dReal *ptr, const char *name);
   protected:
     bool app_input();
   private:
-    SCoPEx *model;
+    ALPHA_SB *model;
     std::list<variableDef> vars;
     static const int IBUFLEN = 80;
     char command[IBUFLEN];

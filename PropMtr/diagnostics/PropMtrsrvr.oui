@@ -1,6 +1,6 @@
 <package> PropMtrcmd
 <include> "dasio/appid.h"
-<include> "scopex_can.h"
+<include> "alpha_sb_can.h"
 <include> msg oui
 <follow> msg oui
 

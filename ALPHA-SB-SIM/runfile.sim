@@ -1,0 +1,40 @@
+  case `hostname` in
+    easwhlpt3425080)
+      # propmtrdev=/dev/ttyS3
+      # slcandev=/dev/ttyS5
+      # spatialdualdev=/dev/ttyS3
+      ;;
+    EASWHLPT3425022)
+      propmtrdev=
+      slcandev=/dev/ttyS12;;
+    spi2)
+      # propmtrdev=/dev/ttyUSB0
+      spatialdualdev=/dev/ttyUSB0
+      # tmseriodev=/dev/ttyUSB0
+      # slcandev=/dev/ttyACM0
+      ;;
+    *)
+      propmtrdev=/dev/ttyUSB0
+      slcandev=/dev/ttyACM0;;
+  esac
+
+  Launch      memo   memo -o $Experiment.log -l4
+              [ -z "$launch_err" ] &&
+                msg "Running script runfile.sim"
+#[ -c "$slcandev" ] &&
+# Launch      -      subbusd_slcan -n CAN -p $slcandev
+  Launch      tm_bfr bfr -H bfr: -S:
+  Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
+[ -c "$tmseriodev" ] &&
+  Launch      -TMC-  tmserioext -d $tmseriodev -b 230400 -v
+  Launch      tm_gen asbsimcol
+  Launch      cmd    asbsimsrvr -H srvr: -S:
+  Launch      -      tmdf
+  Launch      -      PropMtrSim -r 10
+if [ -c "$spatialdualdev" ]; then
+  Launch      -      SpatialDual -p $spatialdualdev -s -v
+else
+  Launch      sdual  SpatialDualSock
+fi
+# Launch      -      asbsimsock
+  Launch      -TMC-  asbsimalgo

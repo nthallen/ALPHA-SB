@@ -1,0 +1,15 @@
+Moduledef alpha-sb-sim {
+  This module provides the commands necessary to control the simulator
+  and ensures that the simulator is distributed
+}
+
+cmdbase = alpha-sb-sim.cmd
+swsbase = simthrust.tma
+DISTRIB = @MODDIR@/../alpha-sb-sim @MODDIR@/../alpha-sb-simsock 
+%%
+.PHONY : clean-alpha-sb-sim @MODDIR@/../alpha-sb-sim
+@MODDIR@/../alpha-sb-sim @MODDIR@/../alpha-sb-simsock :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-alpha-sb-sim
+clean-alpha-sb-sim :
+	$(MAKE) --directory=@MODDIR@/.. clean

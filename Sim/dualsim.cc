@@ -1,9 +1,9 @@
 #include <fcntl.h>
-#include "SCoPEx.h"
+#include "ALPHA-SB.h"
 #include "dualsim.h"
 #include "crc16ccitt_false.h"
 
-dualsim::dualsim(const char *port, int baud, SCoPEx *model)
+dualsim::dualsim(const char *port, int baud, ALPHA_SB *model)
   : DAS_IO::Serial("nav", 80, port, O_RDWR),
     model(model) {
   setup(baud, 8, 'n', 1, 1, 0);

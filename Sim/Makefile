@@ -3,27 +3,27 @@ MA_LDFLAGS=
 CXXFLAGS=-g -I../SpatialDual
 CXXLD=$(CXX)
 LIBTOOL=libtool
-OBJ = scopex.o commandfile.o model_atmos.o scopexsimoui.o dualsim.o
+OBJ = alpha-sb.o commandfile.o model_atmos.o alpha-sb-simoui.o dualsim.o
 OBJ += crc16ccitt_false.o
 
 .PHONY : all clean
-all : scopexsim scopexsimsock
+all : alpha-sb-sim alpha-sb-simsock
 
-scopexsim : $(OBJ)
-	$(CXXLD) -o scopexsim $(CXXFLAGS) $(OBJ) $(LDFLAGS)
-scopexsimoui.o : scopexsimoui.cc
-scopexsimoui.cc : scopexsim.oui
-	oui -o scopexsimoui.cc scopexsim.oui
+alpha-sb-sim : $(OBJ)
+	$(CXXLD) -o alpha-sb-sim $(CXXFLAGS) $(OBJ) $(LDFLAGS)
+alpha-sb-simoui.o : alpha-sb-simoui.cc
+alpha-sb-simoui.cc : alpha-sb-sim.oui
+	oui -o alpha-sb-simoui.cc alpha-sb-sim.oui
 crc16ccitt_false.o : ../SpatialDual/crc16ccitt_false.cc
 	$(CXX) $(CSSFLAGS) -c -o crc16ccitt_false.o ../SpatialDual/crc16ccitt_false.cc
 
-SOCKOBJ = scopexsock.o commandfile.o model_atmos.o scopexsimsockoui.o dualsimsock.o
+SOCKOBJ = alpha-sb-sock.o commandfile.o model_atmos.o alpha-sb-simsockoui.o dualsimsock.o
 SOCKOBJ += crc16ccitt_false.o
-scopexsimsock : $(SOCKOBJ)
-	$(CXXLD) -o scopexsimsock $(CXXFLAGS) $(SOCKOBJ) $(LDFLAGS)
-scopexsimsockoui.o : scopexsimsockoui.cc
-scopexsimsockoui.cc : scopexsimsock.oui
-	oui -o scopexsimsockoui.cc scopexsimsock.oui
+alpha-sb-simsock : $(SOCKOBJ)
+	$(CXXLD) -o alpha-sb-simsock $(CXXFLAGS) $(SOCKOBJ) $(LDFLAGS)
+alpha-sb-simsockoui.o : alpha-sb-simsockoui.cc
+alpha-sb-simsockoui.cc : alpha-sb-simsock.oui
+	oui -o alpha-sb-simsockoui.cc alpha-sb-simsock.oui
 
 clean :
-	rm -f *.o scopexsim scopexsimsock *oui.cc
+	rm -f *.o alpha-sb-sim alpha-sb-simsock *oui.cc

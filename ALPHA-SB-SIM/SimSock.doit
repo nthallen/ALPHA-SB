@@ -1,0 +1,9 @@
+display asbsimdisp -n disp
+
+client asbsimclt
+server [!PB] - asbsimsock -Ssrvr: -Snav:
+extraction [!SI] asbsimjsonext -n json
+
+memo
+batchfile runfile.sim
+

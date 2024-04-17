@@ -1,9 +1,9 @@
 #include <fcntl.h>
-#include "SCoPEx.h"
+#include "ALPHA-SB.h"
 #include "dualsimsock.h"
 #include "crc16ccitt_false.h"
 
-dualsim::dualsim(SCoPEx *model)
+dualsim::dualsim(ALPHA_SB *model)
   : DAS_IO::Client("nav", "nav", "sdual", 0, 80),
     model(model) {
 }

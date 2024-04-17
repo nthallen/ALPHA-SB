@@ -6,10 +6,10 @@
 
 class dualsim : public DAS_IO::Client {
   public:
-    dualsim(SCoPEx *model);
+    dualsim(ALPHA_SB *model);
     bool protocol_input();
   private:
-    SCoPEx *model;
+    ALPHA_SB *model;
     struct __attribute__((__packed__)) {
       struct __attribute__((__packed__)) {
         uint8_t LRC;

@@ -37,7 +37,7 @@ tmcbase = B3MB_cal.tmc
 extbase = B3MB_conv.tmc
 genuibase = B3MB_conv.genui
 
-TGTDIR = /home/scopex/charge
+TGTDIR = /home/alpha-sb/charge
 IGNORE = "*.asv" "*.o" "*.exe" "*.stackdump" Makefile
 IGNORE = BKd.genui BKd.tmc BKd.tbl
 OBJ = BKd.genui BKd.tmc BKd.tbl
