@@ -1,8 +1,11 @@
 host spi3 10.245.83.81
 hostname 10.245.83.81
+ForwardAgent yes
 
 host asb1 10.245.83.86
 hostname 10.245.83.86
+ForwardAgent yes
+SetEnv TERM=xterm-156color
 
 Match final host 10.245.83.81
 user pi
