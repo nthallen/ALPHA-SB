@@ -19,12 +19,12 @@ ICM_dev::ICM_dev()
       quit_requested(false),
       req_mode(0), req_fs(0), req_modefs(0),
       Gp(0), Gi(0),
-      rem_setpoint(0),
+      msec_setpoint(0),
+      rem_setpoint(100),
       nsync(0) {
   SB = new subbuspp(subbusd_service, "serusb"); // for now
   for (int i = 0; i < NS; ++i) {
     cmd_modefs[i] = rep_modefs[i] = 0;
-    set_cur_skip(i, 0);
     dev[i].skip_set = false;
     dev[i].nw = 0;
   }
@@ -45,8 +45,8 @@ void ICM_dev::set_fs(uint8_t fs) {
     req_fs = fs;
 }
 
-void ICM_dev::set_rem(uint8_t rem) {
-  rem_setpoint = rem;
+void ICM_dev::set_msec(uint16_t msec) {
+  msec_setpoint = msec;
 }
 
 void ICM_dev::set_nsync(int nsync) {
@@ -60,10 +60,14 @@ void ICM_dev::set_gain(char cmd, float val) {
       break;
     case 'I':
       ICM20948.Gi = Gi = val;
-      for (int i = 0; i < NS; ++i) {
-        dev[i].rem_err_sum = dev[i].cur_skip/Gi;
-      }
-      rem_err_sum_lim = max_skip/Gi;
+      // for (int i = 0; i < NS; ++i) {
+        // dev[i].msec_err_sum = (val < 1e-3 || val > -1e-3)
+          // ? 0.
+          // : dev[i].cur_skip/Gi;
+      // }
+      // msec_err_sum_lim =
+        // (val < 1e-3 || val > -1e-3)
+          // ? 0. : max_skip/Gi;
       break;
     case 'R':
     default:
@@ -75,36 +79,35 @@ void ICM_dev::Quit() {
   quit_requested = true;
 }
 
-void ICM_dev::set_cur_skip(int i, int skip) {
-  if (skip > max_skip)
-    skip = max_skip;
-  dev[i].cur_skip = skip;
-  dev[i].nrows_needed = samples_per_report + skip;
-  dev[i].nwords_needed = dev[i].nrows_needed*3;
-  // ICM20948.dev[i].samples_per_sec = dev[i].nrows_needed;
-}
+// void ICM_dev::set_cur_skip(int i, int skip) {
+  // if (skip > max_skip) skip = max_skip;
+  // else if (skip < 0) skip = 0;
+  // dev[i].cur_skip = skip;
+  // dev[i].nrows_needed = samples_per_report + skip;
+  // dev[i].nwords_needed = dev[i].nrows_needed*3;
+// }
 
 void ICM_dev::read_sensors() {
-  msg(MSG_DEBUG, "%s: read_sensors()", iname);
+  msg(MSG_DBG(1), "%s: read_sensors()", iname);
   uint16_t mask = (1<<NS)-1;
   std::chrono::system_clock::time_point Tstart =
     std::chrono::system_clock::now();
   while (mask && nsync == 0) {
-    msg(MSG_DEBUG, "%s: Preloop: nsync:%d", iname, nsync);
+    msg(MSG_DBG(1), "%s: Preloop: nsync:%d", iname, nsync);
     flags |= Fl_Timeout;
     ELoop->event_loop();
     flags &= ~Fl_Timeout;
-    msg(MSG_DEBUG, "%s: nsync:%d", iname, nsync);
+    msg(MSG_DBG(1), "%s: nsync:%d", iname, nsync);
     for (int i = 0; i < NS; ++i) {
       if (mask & (1<<i)) {
         uint16_t *udata = dev[i].udata;
         int nw = dev[i].nw;
         if (nsync == 0) {
           subbus_mread_req rm;
-          int n_fifo_reads = dev[i].nwords_needed - nw;
+          int n_fifo_reads = udata_size - nw;
           if (n_fifo_reads < 0) {
-            msg(MSG_FATAL, "%s: n_fifo_reads:%d needed:%d nw:%d",
-              iname, dev[i].nwords_needed, nw);
+            msg(MSG_FATAL, "%s: n_fifo_reads:%d nw:%d",
+              iname, n_fifo_reads, nw);
           }
           if (n_fifo_reads+2 > max_mread)
             n_fifo_reads = max_mread-2;
@@ -137,15 +140,18 @@ void ICM_dev::read_sensors() {
           ICM20948.dev[i].fs = mask_fs(modefs);
           uint16_t rem = udata[nw+1];
           if (!dev[i].skip_set) {
-            // Since we were last here, we have read
-            // dev[i].nwords_needed words, and an additional
-            // rem - dev[i].remainder words have arrived
-            set_cur_skip(i,
-              dev[i].nwords_needed +
-              rem - dev[i].remainder - samples_per_report);
-            dev[i].remainder = rem;
-            ICM20948.dev[i].remainder = rem;
+            // // Since we were last here, we have read
+            // // dev[i].nwords_needed words, and an additional
+            // // rem - dev[i].remainder words have arrived
+            // set_cur_skip(i,
+              // dev[i].nwords_needed +
+              // rem - dev[i].remainder - samples_per_report);
+            dev[i].remainder[0] = rem;
+            ICM20948.dev[i].remainder[0] = rem;
             dev[i].skip_set = true;
+          } else {
+            dev[i].remainder[1] = rem;
+            ICM20948.dev[i].remainder[1] = rem;
           }
           if (nw > 0) {
             udata[nw] = udata_save[0];
@@ -154,54 +160,21 @@ void ICM_dev::read_sensors() {
           if (nwords > 2) {
             dev[i].nw += nwords-2;
           }
-        } else { // nsync > 0
-          dev[i].nwords_needed = dev[i].nw;
+        // } else { // nsync > 0
+        //   dev[i].nwords_needed = dev[i].nw;
         }
-        if (dev[i].nw >= dev[i].nwords_needed) {
+        std::chrono::system_clock::time_point Tend =
+          std::chrono::system_clock::now();
+        auto dur =
+          std::chrono::duration_cast<std::chrono::milliseconds>(Tend-Tstart);
+        ICM20948.dev[i].msecs = dur.count();
+        msg(MSG_DEBUG, "%s: dev[%d].nw:%d .msecs=%d", iname, i, dev[i].nw, dur.count());
+        if (nsync || dur.count() >= msec_setpoint || ICM20948.dev[i].mode != 2) {
           mask &= ~(1<<i);
-          std::chrono::system_clock::time_point Tend =
-            std::chrono::system_clock::now();
-          auto dur =
-            std::chrono::duration_cast<std::chrono::milliseconds>(Tend-Tstart);
-          ICM20948.dev[i].msecs = dur.count();
-          double T_err = ICM20948.dev[i].remainder - rem_setpoint;
-          dev[i].rem_err_sum += rem_err;
-          if (dev[i].rem_err_sum > rem_err_sum_lim)
-            dev[i].rem_err_sum = rem_err_sum_lim;
-          else if (dev[i].rem_err_sum < -rem_err_sum_lim)
-            dev[i].rem_err_sum = -rem_err_sum_lim;
-          double new_skip = Gp * rem_err + Gi * dev[i].rem_err_sum;
-          if (new_skip > max_skip) new_skip = max_skip;
-          else if (new_skip < 0) new_skip = 0;
-          dev[i].cur_skip = (uint16_t)new_skip;
-          ICM20948.dev[i].samples_per_sec =
-            dev[i].cur_skip + samples_per_report;
-        } else if (ICM20948.dev[i].mode != 2) {
-          mask &= ~(1<<i);
-          break;
         }
       }
     }
   }
-  
-  // Update dev[i].cur_skip to try to maintain a small
-  // (probably non-zero) remainder
-  // if (Gp != 0 || Gi != 0) {
-    // for (int i = 0; i < NS; ++i) {
-      // double rem_err = ICM20948.dev[i].remainder - rem_setpoint;
-      // dev[i].rem_err_sum += rem_err;
-      // if (dev[i].rem_err_sum > rem_err_sum_lim)
-        // dev[i].rem_err_sum = rem_err_sum_lim;
-      // else if (dev[i].rem_err_sum < -rem_err_sum_lim)
-        // dev[i].rem_err_sum = -rem_err_sum_lim;
-      // double new_skip = Gp * rem_err + Gi * dev[i].rem_err_sum;
-      // if (new_skip > max_skip) new_skip = max_skip;
-      // else if (new_skip < 0) new_skip = 0;
-      // dev[i].cur_skip = (uint16_t)new_skip;
-      // ICM20948.dev[i].samples_per_sec =
-        // dev[i].cur_skip + samples_per_report;
-    // }
-  // }
   
   // Write out the raw data to MLF
   // Records are all int16_t
@@ -209,20 +182,20 @@ void ICM_dev::read_sensors() {
   //   followed by int16_t[N_rows][3]
   for (int i = 0; i < NS; ++i) {
     uint16_t hdr[3];
-    int n_rows = dev[i].nw/3;
-    ICM20948.dev[i].samples_per_sec = n_rows;
-    msg(MSG_DEBUG, "%s: Output: nw:%u nsync:%d",
+    dev[i].n_rows = dev[i].nw/3;
+    ICM20948.dev[i].samples_per_sec = dev[i].n_rows;
+    msg(MSG_DBG(1), "%s: Output: nw:%u nsync:%d",
         iname, dev[i].nw, nsync);
     hdr[0] = i;
     hdr[1] = mask_fs(rep_modefs[i]);
-    hdr[2] = n_rows;
+    hdr[2] = dev[i].n_rows;
     if (ofp == 0) {
       ofp = mlf_next_file(mlf);
       ICM20948.mlf_file = mlf->index;
     }
     fwrite(hdr, sizeof(uint16_t), 3, ofp);
     int16_t *data = (int16_t *)&dev[i].udata[2];
-    fwrite(data, sizeof(int16_t)*3, n_rows, ofp);
+    fwrite(data, sizeof(int16_t)*3, dev[i].n_rows, ofp);
   }
   if (++records_in_file >= records_per_file) {
     fclose(ofp);
@@ -234,10 +207,9 @@ void ICM_dev::read_sensors() {
   for (int i=0; i < NS; ++i) {
     int16_t (*data)[3];
     data = (int16_t(*)[3])&dev[i].udata[2];
-    int n_rows = dev[i].nw/3;
     uint32_t max_g2 = 0;
     int max_g_i = 0;
-    for (int j=0; j < n_rows; ++j) {
+    for (int j=0; j < dev[i].n_rows; ++j) {
       int32_t term;
       uint32_t sum = 0;
       for (int k=0; k < 3; ++k) {
@@ -255,7 +227,12 @@ void ICM_dev::read_sensors() {
 
   // Perform FFT and identify peaks
   for (int i=0; i < NS; ++i) {
-    dev[i].nw = 0;
+    int nrw = dev[i].n_rows*3;
+    int rem = dev[i].nw-nrw;
+    for (int j = 0; j < rem; ++j) {
+      dev[i].udata[j] = dev[i].udata[nrw+j];
+    }
+    dev[i].nw = rem;
     dev[i].skip_set = false;
     nsync = 0;
   }
@@ -353,6 +330,7 @@ ICM_cmd_t::ICM_cmd_t(ICM_dev *ICM)
  */
 bool ICM_cmd_t::app_input() {
   uint8_t MF_val;
+  uint16_t R_val;
   float PI_val;
   if (nc > 0) {
     unsigned char cmd = buf[cp];
@@ -364,8 +342,7 @@ bool ICM_cmd_t::app_input() {
         return true;
       case 'M':
       case 'F':
-      case 'R':
-        if (not_any("MFR") || not_uint8(MF_val) || not_str("\n")) {
+        if (not_any("MF") || not_uint8(MF_val) || not_str("\n")) {
           if (cp >= nc)
             report_err("%s: incomplete command", iname);
           consume(nc);
@@ -379,10 +356,18 @@ bool ICM_cmd_t::app_input() {
             case 'F':
               ICM->set_fs(MF_val);
               break;
-            case 'R':
-              ICM->set_rem(MF_val);
-              break;
           }
+          report_ok(nc);
+        }
+        return false;
+      case 'R':
+        if (not_str("R") || not_uint16(R_val) || not_str("\n")) {
+          if (cp >= nc)
+            report_err("%s: incomplete R command", iname);
+          consume(nc);
+        } else {
+          msg(MSG_DEBUG, "Received '%c' command %d", cmd, R_val);
+          ICM->set_msec(R_val);
           report_ok(nc);
         }
         return false;

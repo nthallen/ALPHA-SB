@@ -29,7 +29,7 @@ dfs.plot('icmhk', 'label', 'ICM HK', 'plots', {'icmhkmlf','icmhkm','icmhkr','icm
 dfs.plot('icmhkmlf','label','MLF','vars',{'ICM_mlf'});
 dfs.plot('icmhkm','label','Mode','vars',{'ICM_mode'});
 dfs.plot('icmhkr','label','Rate','vars',{'ICM_sps'});
-dfs.plot('icmhkremainder','label','Remainder','vars',{'ICM_rem'});
+dfs.plot('icmhkremainder','label','Remainder','vars',{'ICM_rem0','ICM_rem1'});
 dfs.plot('icmhkmsecs','label','msecs','vars',{'ICM_msecs'});
 dfs.plot('icmhks','label','Scale','vars',{'ICM_fs'});
 dfs.plot('icmhkstale','label','Stale','vars',{'ICM_stale'});

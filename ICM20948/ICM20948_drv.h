@@ -29,7 +29,7 @@ class ICM_dev : public Interface {
     /**
      * @param rem The target remainder value
      */
-    void set_rem(uint8_t rem);
+    void set_msec(uint16_t msec);
     /**
      * @param nsync The number of syncs that have been received
      */
@@ -43,7 +43,7 @@ class ICM_dev : public Interface {
     static const int NS = N_ICM20948_SENSORS;
     static const int samples_per_report = 512;
     static const int approx_samples_per_sec = 566;
-    static const int max_skip = 65; // arbitrary
+    static const int max_skip = approx_samples_per_sec; // arbitrary
     static const int max_mread = 497; // 497;
     static const int udata_size = (samples_per_report+max_skip)*3+2;
     static const char *mlf_config;
@@ -53,7 +53,7 @@ class ICM_dev : public Interface {
     void prep_multiread();
     void read_sensors();
     void read_modes();
-    void set_cur_skip(int i, int skip);
+    // void set_cur_skip(int i, int skip);
     subbuspp *SB;
     mlf_def_t *mlf;
     FILE *ofp;
@@ -61,13 +61,14 @@ class ICM_dev : public Interface {
     struct {
       uint16_t udata[udata_size];
       char rm_fifo_fmt[32];
-      uint16_t cur_skip;
       uint16_t nw;
-      uint16_t remainder;
-      double rem_err_sum;
-      int nrows_needed;
-      int nwords_needed;
+      uint16_t remainder[2];
       bool skip_set;
+      int n_rows;
+      // uint16_t cur_skip;
+      // double msec_err_sum;
+      // int nrows_needed;
+      // int nwords_needed;
     } dev[NS];
     subbus_mread_req *rm_idle[NS];
     subbus_mread_req *rm_fifo[NS];
@@ -78,8 +79,9 @@ class ICM_dev : public Interface {
     uint8_t cmd_modefs[NS]; ///< Commanded modefs
     uint8_t rep_modefs[NS]; ///< Reported modefs
     double Gp, Gi;
+    double msec_setpoint;
     double rem_setpoint;
-    double rem_err_sum_lim;
+    double msec_err_sum_lim;
     int nsync;
     static const uint16_t uDACS_cmd_addr = 0x30;
     static const uint16_t uDACS_mode_cmd_offset = 40;

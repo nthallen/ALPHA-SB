@@ -8,8 +8,8 @@
   : ICM Quit * { if_ICM20948.Turf("Q\n"); }
   : ICM Set Gain &icm_gain &icm_gain_val * {
       if_ICM20948.Turf("%c%10.3le\n", $4, $5); }
-  : ICM Set Target Remainder %d * {
-      if_ICM20948.Turf("R%d\n", $5); }
+  : ICM Set Target Sample Delay %d * {
+      if_ICM20948.Turf("R%d\n", $6); }
   ;
 
 &icm_mode <int>

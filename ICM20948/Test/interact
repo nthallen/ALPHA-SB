@@ -10,7 +10,7 @@ serusbdev=/dev/ttyS2
   Launch      tm_gen icmtcol
   Launch      cmd    icmtsrvr -H srvr: -S:
 [ -c "$serusbdev" ] &&
-  Launch      -      subbusd_serusb -q -p $serusbdev -b 115200
+  Launch      -      subbusd_serusb -q -p $serusbdev -b 380400
   Launch      -      tmdf
-  Launch      -      ICM20948 -N `mlf_find ICM` -v
+  Launch      -      ICM20948 -N `mlf_find ICM`
   Launch      -TMC-  icmtalgo

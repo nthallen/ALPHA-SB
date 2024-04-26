@@ -13,7 +13,7 @@ typedef struct {
     uint16_t amplitude;
   } peaks[N_ICM20948_PEAKS];
   uint16_t samples_per_sec;
-  uint16_t remainder;
+  uint16_t remainder[2];
   uint16_t msecs;
   uint8_t mode;
   uint8_t fs;
