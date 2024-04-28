@@ -6,10 +6,12 @@
 #include "oui.h"
 #include "subbuspp.h"
 #include "nl.h"
+#include "peak_finder.h"
 
 using namespace DAS_IO;
 
 ICM20948_t ICM20948;
+peak_finder pf(ICM_dev::samples_per_report, ICM_dev::n_peaks);
 const char *ICM_dev::subbusd_service = "subbusd";
 const char *ICM_dev::mlf_config;
 
@@ -30,6 +32,7 @@ ICM_dev::ICM_dev()
   }
   mlf = mlf_init(3,60,1,"ICM","dat",mlf_config);
   TO.Set(0, 0);
+  pf.setup();
 }
 
 void ICM_dev::set_mode(uint8_t mode) {
@@ -181,6 +184,7 @@ void ICM_dev::read_sensors() {
   // First row is: uint16_t[3]: dev_index, dev_fs, N_rows,
   //   followed by int16_t[N_rows][3]
   for (int i = 0; i < NS; ++i) {
+    dev[i].data = (int16_t (*)[3])&dev[i].udata[2];
     uint16_t hdr[3];
     dev[i].n_rows = dev[i].nw/3;
     ICM20948.dev[i].samples_per_sec = dev[i].n_rows;
@@ -194,8 +198,8 @@ void ICM_dev::read_sensors() {
       ICM20948.mlf_file = mlf->index;
     }
     fwrite(hdr, sizeof(uint16_t), 3, ofp);
-    int16_t *data = (int16_t *)&dev[i].udata[2];
-    fwrite(data, sizeof(int16_t)*3, dev[i].n_rows, ofp);
+    // int16_t *data = (int16_t *)&dev[i].udata[2];
+    fwrite(dev[i].data, sizeof(int16_t)*3, dev[i].n_rows, ofp);
   }
   if (++records_in_file >= records_per_file) {
     fclose(ofp);
@@ -205,15 +209,14 @@ void ICM_dev::read_sensors() {
   
   // Analyze max shock
   for (int i=0; i < NS; ++i) {
-    int16_t (*data)[3];
-    data = (int16_t(*)[3])&dev[i].udata[2];
+    // data = (int16_t(*)[3])&dev[i].udata[2];
     uint32_t max_g2 = 0;
     int max_g_i = 0;
     for (int j=0; j < dev[i].n_rows; ++j) {
       int32_t term;
       uint32_t sum = 0;
       for (int k=0; k < 3; ++k) {
-        term = data[j][k];
+        term = dev[i].data[j][k];
         sum += term*term;
       }
       if (sum > max_g2) {
@@ -221,11 +224,20 @@ void ICM_dev::read_sensors() {
       }
     }
     for (int k=0; k<3; ++k) {
-      ICM20948.dev[i].max_accel[k] = data[max_g_i][k];
+      ICM20948.dev[i].max_accel[k] = dev[i].data[max_g_i][k];
     }
   }
 
   // Perform FFT and identify peaks
+  for (int i=0; i < NS; ++i) {
+    if (dev[i].n_rows >= samples_per_report) {
+      pf.do_fft(&dev[i].data[dev[i].n_rows-samples_per_report][0]);
+      for (int j = 0; j < n_peaks; ++j) {
+        ICM20948.dev[i].peaks[j].freq_index = pf.peak_freq[j];
+        ICM20948.dev[i].peaks[j].amplitude = pf.peak_amp[j]*32768;
+      }
+    }
+  }
   for (int i=0; i < NS; ++i) {
     int nrw = dev[i].n_rows*3;
     int rem = dev[i].nw-nrw;

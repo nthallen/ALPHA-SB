@@ -48,6 +48,7 @@ class ICM_dev : public Interface {
     static const int udata_size = (samples_per_report+max_skip)*3+2;
     static const char *mlf_config;
     static const int records_per_file = 5;
+    static const int n_peaks = N_ICM20948_PEAKS;
   protected:
     bool protocol_timeout();
     void prep_multiread();
@@ -60,6 +61,7 @@ class ICM_dev : public Interface {
     int records_in_file;
     struct {
       uint16_t udata[udata_size];
+      int16_t (*data)[3];
       char rm_fifo_fmt[32];
       uint16_t nw;
       uint16_t remainder[2];
