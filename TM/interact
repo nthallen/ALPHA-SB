@@ -17,7 +17,7 @@ which ip >/dev/null 2>&1 &&
   socketcan0=can0
 which ip >/dev/null 2>&1 &&
   ip -br a | grep -q "^can1" &&
-  socketcan=can1
+  socketcan1=can1
 
 if [ -n "$socketcan0" -o -n "$socketcan1" ]; then
   sudo /usr/local/sbin/CAN_bring_up
