@@ -2,11 +2,11 @@ display asbdisp -n disp
 serin serin
 client [SI|RT] asbclt
 
-server [SI]  cmd asbtxsrvr
-server [SI]  -   RFDio -b 230400 -p /dev/ttyS3 -v
+#server [SI]  cmd asbtxsrvr
+#server [SI]  -   RFDio -b 230400 -p /dev/ttyS3 -v
 
-extraction [SI]  lgr -N `mlf_find LOG` -n lgr
-extraction [!SI] asbjsonext -n json
+#extraction [SI]  lgr -N `mlf_find LOG` -n lgr
+#extraction [!SI] asbjsonext -n json
 
 memo
 batchfile interact
