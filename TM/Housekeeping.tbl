@@ -1,6 +1,6 @@
 Input "pmc_Left.tbl";
 Input "pmc_Right.tbl";
-Input "Ascender.tbl";
+# Input "Ascender.tbl";
 Input "TMbase.tbl";
 
 PMC_Stale {
@@ -22,8 +22,8 @@ PMC_Stale {
       [PMC_Stale];
     };
     |+;
-    [AscGrp];
-    |+;
+#   [AscGrp];
+#   |+;
     [TMbaseB];
     |+;
   };

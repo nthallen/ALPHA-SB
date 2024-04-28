@@ -97,11 +97,6 @@ SpatialDual_col.tmc
 SpatialDual.genui
 SpatialDual_conv.tmc
 SpatialDual.tbl
-Ascender.tmc
-Ascender_col.tmc
-Ascender.genui
-Ascender_conv.tmc
-Ascender.tbl
 SWData.cmd
 SWData.h
 SWData.tmc
@@ -267,11 +262,6 @@ SpatialDual_col.tmc
 SpatialDual.genui
 SpatialDual_conv.tmc
 SpatialDual.tbl
-Ascender.tmc
-Ascender_col.tmc
-Ascender.genui
-Ascender_conv.tmc
-Ascender.tbl
 *.o
 *.exe
 *.stackdump

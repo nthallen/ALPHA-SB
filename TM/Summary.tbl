@@ -1,7 +1,7 @@
 # Summary.tbl
 Input "TMbase.tbl";
 Input "command_sn.tbl";
-Input "Ascender.tbl";
+# Input "Ascender.tbl";
 Input "B3MB_Summary.tbl";
 
 PMC_Full {
@@ -22,14 +22,14 @@ PMC_Full {
              HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
 }
 
-AscB3MB {
-  HBox { +-; Title: "Ascender B3MB"; -+ };
-  ""    >Status<  >Volts<   >Amps<;
-  "100V1:" {(AscSec1F,3) (AscSec1S,3)} (AscSec1_V,7) (AscSec1_I,7);
-  "100V2:" {(AscPri1F,3) (AscPri1S,3)} (AscPri1_V,7) (AscPri1_I,7);
-  "100V3:" {(AscPri2F,3) (AscPri2S,3)} (AscPri2_V,7) (AscPri2_I,7);
-  "100V4:" {(AscSec2F,3) (AscSec2S,3)} (AscSec2_V,7) (AscSec2_I,7);
-}
+# AscB3MB {
+  # HBox { +-; Title: "Ascender B3MB"; -+ };
+  # ""    >Status<  >Volts<   >Amps<;
+  # "100V1:" {(AscSec1F,3) (AscSec1S,3)} (AscSec1_V,7) (AscSec1_I,7);
+  # "100V2:" {(AscPri1F,3) (AscPri1S,3)} (AscPri1_V,7) (AscPri1_I,7);
+  # "100V3:" {(AscPri2F,3) (AscPri2S,3)} (AscPri2_V,7) (AscPri2_I,7);
+  # "100V4:" {(AscSec2F,3) (AscSec2S,3)} (AscSec2_V,7) (AscSec2_I,7);
+# }
 
 AHRS {
   HBox { +-; Title: "GNSS/AHRS"; -+ };
@@ -60,16 +60,16 @@ TMtime_hor {
   HBox { [Command_SN_hor]; [TMbase_htimes] };
 }
 
-Summary_Asc { HBox{ |+;
-    { HBox { [PMC_Full]; |;
-        { [Asc];
-          [AscB3MB]
-        }
-      };
-      HBox {[AHRS]; |+; [TMtime] }
-    }; |+ };
-  -;
-}
+# Summary_Asc { HBox{ |+;
+    # { HBox { [PMC_Full]; |;
+        # { [Asc];
+          # [AscB3MB]
+        # }
+      # };
+      # HBox {[AHRS]; |+; [TMtime] }
+    # }; |+ };
+  # -;
+# }
 
 Summary_NoAsc { HBox{ |+;
     { HBox { [PMC_Full]; |;

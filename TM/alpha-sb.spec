@@ -65,7 +65,7 @@ Module PropMtrSim
 Module SerIn
 Module Sat
 Module SpatialDual FAST=10 Panel=Main:
-Module Ascender Panel=Main: mode=present
+# Module Ascender Panel=Main: mode=present
 # Module RFDio
 Module Nav
 
