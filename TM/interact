@@ -16,8 +16,9 @@ which ip >/dev/null 2>&1 &&
   socketcan=can0
 
 if [ -n "$socketcan" ]; then
-  sudo ip link set $socketcan type can bitrate 50000
-  sudo ip link set up $socketcan
+  sudo /usr/local/sbin/CAN_bring_up
+  # sudo ip link set $socketcan type can bitrate 50000
+  # sudo ip link set up $socketcan
 fi
 
   Launch      memo   memo -o $Experiment.log -l4

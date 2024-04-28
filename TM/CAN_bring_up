@@ -1,0 +1,5 @@
+#! /bin/bash
+# CAN_bring_up
+socketcan=can0
+/usr/sbin/ip link set $socketcan type can bitrate 50000
+/usr/sbin/ip link set up $socketcan
