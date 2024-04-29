@@ -1,20 +1,24 @@
 ### Begin alpha_sb ssh_config_insert ###
 # Match all is necessary to close any preceding host blocks
+host spi3 10.245.83.81
+user pi
+
 Match all
 include /etc/monarch/alpha-sb/ssh_config
 
-# On the new flight computer, we will be using individual user accounts.
-# You will need to add an explicit username definition in your
-# ~/.ssh/config file outside this block.
+# On the new flight computer (asb1), we will be using individual
+# user accounts. You will need to add an explicit username definition
+# in your ~/.ssh/config file outside this block unless your username
+# on the local system matches your username on asb1.
 #
-#  hostname 10.245.83.86
+#  hostname 192.168.95.201
 #  user my_username
 #
 # On the old flight computer, we were using a single account
-# with the username pi. This is configured in the file included
-# above. If you know what you're doing and need to use a different
-# username standard monarch tools (./doit, saverun, reduce, etc.)
-# specify it outside this block using the following syntax or
+# with the username pi. This is configured above. If you know
+# what you're doing and need to use a different username with
+# standard monarch tools (./doit, saverun, reduce, etc.)
+# specify it before this block using the following syntax or
 # equivalent:
 #   hostname 10.245.83.81
 #   user my_username
