@@ -20,7 +20,7 @@ ICM_dev::ICM_dev()
       mlf(0), ofp(0), records_in_file(0),
       quit_requested(false),
       req_mode(0), req_fs(0), req_modefs(0),
-      Gp(0), Gi(0),
+      // Gp(0), Gi(0),
       msec_setpoint(0),
       rem_setpoint(100),
       nsync(0) {
@@ -56,13 +56,13 @@ void ICM_dev::set_nsync(int nsync) {
   this->nsync = nsync;
 }
 
-void ICM_dev::set_gain(char cmd, float val) {
-  switch (cmd) {
-    case 'P':
-      ICM20948.Gp = Gp = val;
-      break;
-    case 'I':
-      ICM20948.Gi = Gi = val;
+// void ICM_dev::set_gain(char cmd, float val) {
+  // switch (cmd) {
+    // case 'P':
+      // ICM20948.Gp = Gp = val;
+      // break;
+    // case 'I':
+      // ICM20948.Gi = Gi = val;
       // for (int i = 0; i < NS; ++i) {
         // dev[i].msec_err_sum = (val < 1e-3 || val > -1e-3)
           // ? 0.
@@ -71,12 +71,12 @@ void ICM_dev::set_gain(char cmd, float val) {
       // msec_err_sum_lim =
         // (val < 1e-3 || val > -1e-3)
           // ? 0. : max_skip/Gi;
-      break;
-    case 'R':
-    default:
-      msg(MSG_ERROR, "%s: Invalid gain code '%c'", iname, cmd);
-  }
-}
+      // break;
+    // case 'R':
+    // default:
+      // msg(MSG_ERROR, "%s: Invalid gain code '%c'", iname, cmd);
+  // }
+// }
 
 void ICM_dev::Quit() {
   quit_requested = true;
@@ -343,7 +343,7 @@ ICM_cmd_t::ICM_cmd_t(ICM_dev *ICM)
 bool ICM_cmd_t::app_input() {
   uint8_t MF_val;
   uint16_t R_val;
-  float PI_val;
+  // float PI_val;
   if (nc > 0) {
     unsigned char cmd = buf[cp];
     switch (cmd) {
@@ -383,22 +383,22 @@ bool ICM_cmd_t::app_input() {
           report_ok(nc);
         }
         return false;
-      case 'P':
-      case 'I':
-        if (not_any("PI") ||
-            not_whitespace() ||
-            not_float(PI_val) ||
-            not_str("\n")) {
-          if (cp >= nc)
-            report_err("%s: incomplete PI command", iname);
-          consume(nc);
-          return false;
-        } else {
-          msg(MSG_DEBUG, "Received '%c' command %.3e", cmd, PI_val);
-          ICM->set_gain(cmd, PI_val);
-          report_ok(nc);
-        }
-        return false;
+      // case 'P':
+      // case 'I':
+        // if (not_any("PI") ||
+            // not_whitespace() ||
+            // not_float(PI_val) ||
+            // not_str("\n")) {
+          // if (cp >= nc)
+            // report_err("%s: incomplete PI command", iname);
+          // consume(nc);
+          // return false;
+        // } else {
+          // msg(MSG_DEBUG, "Received '%c' command %.3e", cmd, PI_val);
+          // ICM->set_gain(cmd, PI_val);
+          // report_ok(nc);
+        // }
+        // return false;
     }
   }
   return false;

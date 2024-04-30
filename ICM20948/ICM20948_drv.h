@@ -25,7 +25,7 @@ class ICM_dev : public Interface {
      * @param cmd One of 'P' or 'I', for Gp or Gi
      * @param val The corresponding gain value
      */
-    void set_gain(char cmd, float val);
+    // void set_gain(char cmd, float val);
     /**
      * @param rem The target remainder value
      */

@@ -1,7 +1,5 @@
 State Init {
   > Telemetry Start
-  +2 > ICM Set Gain Gp 0.1
-  +2 > ICM Set Gain Gi 0.0
-  +2 > ICM Set Target Sample Delay 500
+  +2 > ICM Set Target Sample Delay 500 msec
   +2 > ICM Select Fast Mode
 }
