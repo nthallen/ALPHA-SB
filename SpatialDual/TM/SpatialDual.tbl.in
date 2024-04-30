@@ -29,11 +29,11 @@ Nav_Status {
 
 Nav_Position {
   HBox { +-; Title: Position; -+ };
-  Lat: (latitude,10)  "N rad";
-  Lon: (longitude,10) "E rad";
+  Lat: (latitude,10)  N;
+  Lon: (longitude,10) E;
   Alt: (height,9)     m;
-  N:   (north_m,8)    m;
-  E:   (north_m,8)    m;
+  N:   (north_m,10)   m;
+  E:   (east_m,10)    m;
 }
 
 Nav_Velocity {
