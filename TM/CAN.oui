@@ -1,4 +1,5 @@
 <package> CAN
+<follow> msg
 <include> "alpha-sb_can.h"
 
 <defs>
