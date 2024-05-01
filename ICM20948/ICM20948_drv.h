@@ -7,6 +7,14 @@
 #include "ICM20948.h"
 #include "mlf.h"
 
+#ifdef USING_CAN
+  #define ICM_MAX_MREAD 127
+  #define SUBBUS_FLAVOR "CAN"
+#else
+  #define ICM_MAX_MREAD SB_MAX_MREAD
+  #define SUBBUS_FLAVOR "serusb"
+#endif
+
 using namespace DAS_IO;
 
 class ICM_dev : public Interface {
@@ -44,7 +52,7 @@ class ICM_dev : public Interface {
     static const int samples_per_report = 512;
     static const int approx_samples_per_sec = 566;
     static const int max_skip = approx_samples_per_sec; // arbitrary
-    static const int max_mread = 497; // 497;
+    static const int max_mread = ICM_MAX_MREAD; // 497;
     static const int udata_size = (samples_per_report+max_skip)*3+2;
     static const char *mlf_config;
     static const int records_per_file = 5;

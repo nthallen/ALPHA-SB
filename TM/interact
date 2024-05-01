@@ -10,15 +10,17 @@
 [ -z "$tmrfx_port" -a $(hostname) = EAS-NALLEN1L ] &&
   tmrfx_port=/dev/ttyS6
 
-socketcan=''
+socketcan0=''
+socketcan1=''
 which ip >/dev/null 2>&1 &&
   ip -br a | grep -q "^can0" &&
-  socketcan=can0
+  socketcan0=can0
+which ip >/dev/null 2>&1 &&
+  ip -br a | grep -q "^can1" &&
+  socketcan=can1
 
-if [ -n "$socketcan" ]; then
+if [ -n "$socketcan0" -o -n "$socketcan1" ]; then
   sudo /usr/local/sbin/CAN_bring_up
-  # sudo ip link set $socketcan type can bitrate 50000
-  # sudo ip link set up $socketcan
 fi
 
   Launch      memo   memo -o $Experiment.log -l4
@@ -26,8 +28,10 @@ fi
                 msg "Running script interact"
 [ -c "$slcan_port" ] &&
   Launch      -      subbusd_slcan -n CAN -p $slcan_port
-[ -n "$socketcan" ] &&
-  Launch      -      subbusd_CAN -n CAN
+[ -n "$socketcan0" ] &&
+  Launch      -      subbusd_CAN -n CAN0 -s B3MB -I $socketcan0
+[ -n "$socketcan1" ] &&
+  Launch      -      subbusd_CAN -n CAN1 -s uDACS -I $socketcan1
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen asbcol

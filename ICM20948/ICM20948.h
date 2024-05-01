@@ -3,7 +3,14 @@
 #define ICM20948_H_INCLUDED
 #include <cstdint>
 
-#define N_ICM20948_SENSORS 1
+#define USING_CAN
+
+#ifdef USING_CAN
+  #define N_ICM20948_SENSORS 1
+#else
+  #define N_ICM20948_SENSORS 1
+#endif
+
 #define N_ICM20948_PEAKS 3
 
 typedef struct {

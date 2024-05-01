@@ -6,5 +6,8 @@ classdef icm_peaks < data_axis
       pks = pks@data_axis(dfs, parent, label, ts);
     end
 
+    function update(pks,rec_name)
+      
+    end
   end
 end

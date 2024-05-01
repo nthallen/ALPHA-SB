@@ -6,7 +6,7 @@
   bool CAN_Initialized = false;
   void CAN_init() {
     int subfunc;
-    CAN = new subbuspp("subbusd", "CAN");
+    CAN = new subbuspp("B3MB", "CAN");
     subfunc = CAN->load();
     if (subfunc > 0) {
       msg(0, "CAN subbusd reported subfunction %d", subfunc);

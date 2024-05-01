@@ -1,10 +1,26 @@
-serusbdev=/dev/ttyS2
+# serusbdev=/dev/ttyS2
+socketcan0=''
+socketcan1=''
+which ip >/dev/null 2>&1 &&
+  ip -br a | grep -q "^can0" &&
+  socketcan0=can0
+which ip >/dev/null 2>&1 &&
+  ip -br a | grep -q "^can1" &&
+  socketcan=can1
+
+if [ -n "$socketcan0" -o -n "$socketcan1" ]; then
+  sudo /usr/local/sbin/CAN_bring_up
+  # sudo ip link set $socketcan type can bitrate 50000
+  # sudo ip link set up $socketcan
+fi
 
   Launch      memo   memo -o $Experiment.log -l4
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
-[ "$cantactpro" = "yes" ] &&
-  Launch      -      subbusd_CAN -n CAN
+[ "$socketcan0" = "yes" ] &&
+  Launch      -      subbusd_CAN -n CAN0 -s B3MB
+[ "$socketcan1" = "yes" ] &&
+  Launch      -      subbusd_CAN -n CAN1 -s uDACS
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen icmtcol
@@ -12,5 +28,5 @@ serusbdev=/dev/ttyS2
 [ -c "$serusbdev" ] &&
   Launch      -      subbusd_serusb -q -p $serusbdev -b 380400
   Launch      -      tmdf
-  Launch      -      ICM20948 -N `mlf_find ICM`
+  Launch      -      ICM20948 -N `mlf_find ICM` -s uDACS
   Launch      -TMC-  icmtalgo
