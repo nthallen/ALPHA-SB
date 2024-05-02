@@ -48,4 +48,6 @@ fi
   Launch      -      SpatialDual -p $spatialdual_port -v
 [ -c "$ascender_port" ] &&
   Launch      -      Ascender -p $ascender_port -v
+[ -n "$socketcan1" ] &&
+  Launch      -      ICM20948 -N $(mlf_find ICM) -s uDACS
   Launch      -TMC-  asbalgo
