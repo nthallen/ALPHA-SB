@@ -5,11 +5,13 @@
  */
 %{
   #include "subbuspp.h"
+  #include "alpha-sb_can.h"
   #define disarm_sic()
   #define tick_sic()
 
-  subbuspp *CAN;
-  bool CAN_Initialized = false;
+  /* These have moved to CAN.oui */
+  /* subbuspp *CAN;
+     bool CAN_Initialized = false; */
   typedef struct {
     subbus_mread_req *req;
     uint16_t bdid;
@@ -36,7 +38,7 @@
     return mreq;
   }
 
-  subbus_mread_req *CAN_sequential_mread(subbuspp *P, uint16_t bdid,
+  subbus_mread_req *B3MB_sequential_mread(subbuspp *P, uint16_t bdid,
           uint16_t start, uint16_t n_reads) {
     uint16_t bdid_hi = bdid<<8;
     char mreqstr[30];
@@ -46,64 +48,65 @@
   }
 
   static B3MB_mread_t *B3MB_mread_init(uint16_t bdid, uint16_t start) {
-    B3MB_mread_t *B3MB = (B3MB_mread_t*)new_memory(sizeof(B3MB_mread_t));
-    B3MB->req = B3MB_mread_setup(CAN, bdid);
-    B3MB->bdid = bdid;
-    B3MB->start = start;
-    B3MB->nwords = B3MB->req->n_reads;
-    B3MB->saw_nack = false;
-    B3MB->reason = "success";
-    B3MB->rvals = (uint16_t*)new_memory(B3MB->nwords * sizeof(uint16_t));
-    return B3MB;
+    B3MB_mread_t *B3MBmr = (B3MB_mread_t*)new_memory(sizeof(B3MB_mread_t));
+    B3MBmr->req = B3MB_mread_setup(B3MB, bdid);
+    B3MBmr->bdid = bdid;
+    B3MBmr->start = start;
+    B3MBmr->nwords = B3MBmr->req->n_reads;
+    B3MBmr->saw_nack = false;
+    B3MBmr->reason = "success";
+    B3MBmr->rvals = (uint16_t*)new_memory(B3MBmr->nwords * sizeof(uint16_t));
+    return B3MBmr;
   }
   
-  static bool B3MB_mread(B3MB_mread_t *B3MB) {
-    if (!CAN_Initialized) return false;
+  static bool B3MB_mread(B3MB_mread_t *B3MBmr) {
+    if (!B3MB_Initialized) return false;
     uint16_t nwords;
-    int rv = CAN->mread_subbus_nw(B3MB->req, &(B3MB->rvals[0]), &nwords);
+    int rv = B3MB->mread_subbus_nw(B3MBmr->req, &(B3MBmr->rvals[0]), &nwords);
     if (rv < 0) {
-      if (!B3MB->saw_nack) {
-        msg(2, "mread_subbus_nw(B3MB%d) returned error %d", B3MB->bdid, rv);
-        B3MB->saw_nack = true;
+      if (!B3MBmr->saw_nack) {
+        msg(2, "mread_subbus_nw(B3MB%d) returned error %d", B3MBmr->bdid, rv);
+        B3MBmr->saw_nack = true;
       }
-      B3MB->reason = "error";
+      B3MBmr->reason = "error";
       return false;
     }
-    if (nwords != B3MB->nwords) {
-      if (!B3MB->saw_nack) {
+    if (nwords != B3MBmr->nwords) {
+      if (!B3MBmr->saw_nack) {
         msg(2, "mread_subbus_nw(B3MB%d) returned %d words, expected %d",
-          B3MB->bdid, nwords, B3MB->nwords);
-        B3MB->saw_nack = true;
+          B3MBmr->bdid, nwords, B3MBmr->nwords);
+        B3MBmr->saw_nack = true;
       }
-      B3MB->reason = "invalid wordcount";
+      B3MBmr->reason = "invalid wordcount";
       return false;
     }
     switch (rv) {
       case SBS_ACK:
-        if (B3MB->saw_nack) {
-          msg(0, "B3MB ID:%d recovered from %s", B3MB->bdid, B3MB->reason);
-          B3MB->saw_nack = false;
+        if (B3MBmr->saw_nack) {
+          msg(0, "B3MB ID:%d recovered from %s", B3MBmr->bdid, B3MBmr->reason);
+          B3MBmr->saw_nack = false;
         }
         return true;
       case SBS_NOACK:
-        if (!B3MB->saw_nack) {
+        if (!B3MBmr->saw_nack) {
           msg(2, "B3MB ID: %d reported NACK on read: %d-%d",
-              B3MB->bdid, B3MB->start, B3MB->start+B3MB->nwords-1);
-          B3MB->saw_nack = true;
-          B3MB->reason = "NACK";
+              B3MBmr->bdid, B3MBmr->start, B3MBmr->start+B3MBmr->nwords-1);
+          B3MBmr->saw_nack = true;
+          B3MBmr->reason = "NACK";
         }
         return true;
       default:
-        if (!B3MB->saw_nack) {
+        if (!B3MBmr->saw_nack) {
           msg(2, "B3MB ID:%d unexpected return code %d",
-              B3MB->bdid, rv);
-          B3MB->saw_nack = true;
+              B3MBmr->bdid, rv);
+          B3MBmr->saw_nack = true;
         }
-        B3MB->reason = "unexpected return";
+        B3MBmr->reason = "unexpected return";
         return true;
     }
   }
   
+  /*
   void CAN_init() {
     if (!CAN) {
       CAN = new subbuspp("B3MB", "CAN");
@@ -116,32 +119,33 @@
       }
     }
   }
+  */
 
   typedef struct {
     uint16_t n_words;
     char name[0x50];
   } device_name_t;
 
-  void CAN_identify_board(uint8_t bdid) {
-    if (!CAN_Initialized) {
-      msg(MSG_ERROR, "CAN ID %d not initialized", bdid);
+  void B3MB_identify_board(uint8_t bdid) {
+    if (!B3MB_Initialized) {
+      msg(MSG_ERROR, "B3MB CAN ID %d not initialized", bdid);
       return;
     }
     uint16_t bdid_hi = bdid<<8;
     // msg(0,"read_ack(0x%02X03)", bdid);
     uint16_t values[4];
     uint16_t nread;
-    subbus_mread_req *mreq = CAN_sequential_mread(CAN, bdid, 0x02, 4);
-    CAN->mread_subbus_nw(mreq, values, &nread);
+    subbus_mread_req *mreq = B3MB_sequential_mread(B3MB, bdid, 0x02, 4);
+    B3MB->mread_subbus_nw(mreq, values, &nread);
     // msg(0, "  Board ID:%d Build:%d S/N:%d Instrument:%d",
     //   values[0], values[1], values[2], values[3]);
     free_memory(mreq);
     
     char mreqstr[30];
     snprintf(mreqstr, 30, "%X|28@%X", bdid_hi|8, bdid_hi|9);
-    mreq = CAN->pack_mread_request(0x29, mreqstr);
+    mreq = B3MB->pack_mread_request(0x29, mreqstr);
     device_name_t devname;
-    int rv = CAN->mread_subbus_nw(mreq, (uint16_t*)&devname, &nread);
+    int rv = B3MB->mread_subbus_nw(mreq, (uint16_t*)&devname, &nread);
     if (rv < 0) {
       msg(2, "Error %d from mread", rv);
     } else {
@@ -161,4 +165,3 @@
   
   #define B3MB_update(LV,R,I) B3MB_update_int((uint16_t *)&LV,R,I)
 %}
-TM INITFUNC CAN_init();

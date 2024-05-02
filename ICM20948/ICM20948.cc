@@ -24,7 +24,7 @@ ICM_dev::ICM_dev()
       msec_setpoint(0),
       rem_setpoint(100),
       nsync(0) {
-  SB = new subbuspp(subbusd_service, SUBBUS_FLAVOR); // for now
+  SB = new subbuspp(subbusd_service, ICM_SUBBUS_FLAVOR);
   for (int i = 0; i < NS; ++i) {
     cmd_modefs[i] = rep_modefs[i] = 0;
     dev[i].skip_set = false;
@@ -277,7 +277,7 @@ void ICM_dev::prep_multiread() {
 
 uint16_t ICM_dev::base_addr[NS] =
 #ifdef USING_CAN
-  { 0x100 }; // , 0x200
+  { 0x200 }; // , 0x100
 #else
   { 0 };
 #endif

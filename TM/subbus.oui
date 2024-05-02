@@ -1,0 +1,31 @@
+<package> subbus
+<follow> msg
+<include> "alpha-sb_can.h"
+
+<defs>
+  subbuspp *B3MB;
+  bool B3MB_Initialized = false;
+  subbuspp *uDACS;
+  bool uDACS_Initialized = false;
+
+  subbuspp *subbus_load(const char *svc_name, const char *sub_svc, bool *Initialized) {
+    subbuspp *CAN;
+    int subfunc;
+    CAN = new subbuspp(svc_name, sub_svc);
+    subfunc = CAN->load();
+    if (subfunc > 0) {
+      msg(0, "%s/%s subbusd reported subfunction %d",
+            svc_name, sub_svc, subfunc);
+      *Initialized = true;
+    } else {
+      msg(MSG_ERROR, "%s/%s subbusd load failed: %d",
+        svc_name, sub_svc, subfunc);
+    }
+    return CAN;
+  }
+  void subbus_init() {
+    B3MB = subbus_load("B3MB", "CAN", &B3MB_Initialized);
+    uDACS = subbus_load("uDACS", ICM_SUBBUS_FLAVOR, &uDACS_Initialized);
+  }
+<init>
+  subbus_init();

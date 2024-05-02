@@ -2,7 +2,7 @@
 %}
 %INTERFACE <ICM20948>
 
-&command
+&^command
   : ICM Select &icm_mode * { if_ICM20948.Turf("M%d\n", $3); }
   : ICM Select Full Scale &icm_fs * { if_ICM20948.Turf("F%d\n", $5); }
   : ICM Quit * { if_ICM20948.Turf("Q\n"); }
