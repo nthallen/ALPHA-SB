@@ -5,5 +5,5 @@
     B3MB_mreq@CAN_ID@ = B3MB_mread_init(@CAN_ID@, 0x20);
   }
 %}
-TM INITFUNC CAN_identify_board(@CAN_ID@);
+TM INITFUNC B3MB_identify_board(@CAN_ID@);
 TM INITFUNC B3MB_mreq@CAN_ID@_init();

@@ -97,6 +97,8 @@ SpatialDual_col.tmc
 SpatialDual.genui
 SpatialDual_conv.tmc
 SpatialDual.tbl
+ICM20948.tbl
+ICM20948.genui
 SWData.cmd
 SWData.h
 SWData.tmc
@@ -262,6 +264,8 @@ SpatialDual_col.tmc
 SpatialDual.genui
 SpatialDual_conv.tmc
 SpatialDual.tbl
+ICM20948.tbl
+ICM20948.genui
 *.o
 *.exe
 *.stackdump

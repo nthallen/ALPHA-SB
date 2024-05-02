@@ -9,10 +9,8 @@
 
 #ifdef USING_CAN
   #define ICM_MAX_MREAD 127
-  #define SUBBUS_FLAVOR "CAN"
 #else
   #define ICM_MAX_MREAD SB_MAX_MREAD
-  #define SUBBUS_FLAVOR "serusb"
 #endif
 
 using namespace DAS_IO;

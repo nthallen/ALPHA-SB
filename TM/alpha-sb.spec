@@ -5,6 +5,7 @@ swsbase = pmc.sws
 cmdbase = alpha-sb.cmd
 cmdbase = B3MB_map.cmd
 cmdbase = cmd_tx.cmd
+cmdbase = subbus.cmd
 genuibase = alpha-sb.genui
 
 Module Version src=alpha-sb.ver
@@ -68,6 +69,7 @@ Module SpatialDual FAST=10 Panel=Main:
 # Module Ascender Panel=Main: mode=present
 # Module RFDio
 Module Nav
+Module ICM20948 Panel=Main: HKPanel=Main:
 
 prefix = asb
 TGTDIR = /home/alpha-sb
@@ -77,8 +79,8 @@ IGNORE = B3MB_gen_cal.asv
 IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 
-asbcol : -lsubbuspp
-asbsrvr : CAN.oui -lsubbuspp
+asbcol : subbus.oui -lsubbuspp
+asbsrvr : subbus.oui -lsubbuspp
 asbtxsrvr :
 asbclt :
 asbdisp : $extbase Summary.tbl alpha_sb.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl SpatialDual.tbl Housekeeping.tbl
