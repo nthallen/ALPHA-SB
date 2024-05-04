@@ -99,6 +99,8 @@ SpatialDual_conv.tmc
 SpatialDual.tbl
 ICM20948.tbl
 ICM20948.genui
+HALSA.tbl
+HALSA.genui
 SWData.cmd
 SWData.h
 SWData.tmc
@@ -266,6 +268,8 @@ SpatialDual_conv.tmc
 SpatialDual.tbl
 ICM20948.tbl
 ICM20948.genui
+HALSA.tbl
+HALSA.genui
 *.o
 *.exe
 *.stackdump

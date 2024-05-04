@@ -1,0 +1,7 @@
+<package> POPS
+<include> msg oui
+
+<package> appid_default
+<include> "dasio/appid.h"
+<defs>
+  DAS_IO::AppID_t DAS_IO::AppID("HALSA", "HALSA", "V1.0");

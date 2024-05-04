@@ -1,0 +1,32 @@
+TM typedef double HALSA_drift_t { text "%9.3lf"; }
+TM typedef int32_t HALSA_sec_t { text "%10.3lf"; }
+TM typedef float HALSA_deg_t { text "%8.3lf"; }
+TM typedef float HALSA_mps_t { text "%8.3lf"; }
+TM typedef float HALSA_C_t { text "%5.1lf"; }
+TM typedef uint8_t HALSA_ndet_t { text "%2u"; }
+TM typedef uint8_t HALSA_stale_t { text "%3u"; }
+
+TM 1 Hz HALSA_drift_t HALSA_drift;
+TM 1 Hz HALSA_sec_t HALSA_elapsed;
+TM 1 Hz HALSA_deg_t HALSA_deflection;
+TM 1 Hz HALSA_mps_t HALSA_velocity;
+TM 1 Hz HALSA_C_t HALSA_temperature;
+TM 1 Hz HALSA_deg_t HALSA_std_def;
+TM 1 Hz HALSA_ndet_t HALSA_n_detected;
+TM 1 Hz HALSA_stale_t HALSA_dev_stale;
+TM 1 Hz HALSA_stale_t HALSA_drv_stale;
+
+group HALSA (HALSA_drift, HALSA_elapsed, HALSA_deflection,
+             HALSA_velocity, HALSA_temperature, HALSA_std_def,
+             HALSA_n_detected, HALSA_dev_stale, HALSA_drv_stale) {
+  HALSA_drift = HALSA.Time - dtime();
+  HALSA_elapsed = HALSA.elapsed_msecs;
+  HALSA_deflection = HALSA.deflection;
+  HALSA_velocity = HALSA.velocity;
+  HALSA_temperature = HALSA.temperature;
+  HALSA_std_def = HALSA.std_def;
+  HALSA_n_detected = HALSA.n_detected;
+  HALSA_dev_stale = HALSA.Stale;
+  HALSA_drv_stale = HALSA_obj->Stale(255);
+}
+TM "Receive" HALSA 1;

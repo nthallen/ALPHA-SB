@@ -1,0 +1,4 @@
+%{
+  #include "HALSA.h"
+  HALSA_t HALSA;
+%}

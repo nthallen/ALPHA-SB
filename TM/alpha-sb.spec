@@ -70,6 +70,7 @@ Module SpatialDual FAST=10 Panel=Main:
 # Module RFDio
 Module Nav
 Module ICM20948 Panel=Main: HKPanel=Main:
+Module HALSA Panel=Main:
 
 prefix = asb
 TGTDIR = /home/alpha-sb

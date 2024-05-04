@@ -1,0 +1,9 @@
+ 1 HALSA_deflection  @Panel@HALSA    Def
+ 1 HALSA_velocity    @Panel@HALSA    Vel
+ 1 HALSA_temperature @Panel@HALSA    Temp
+ 1 HALSA_std_def     @Panel@HALSA_HK std_def
+ 1 HALSA_n_detected  @Panel@HALSA_HK N
+ 1 HALSA_dev_stale   @Panel@HALSA_HK Stale
+ 1 HALSA_drv_stale   @Panel@HALSA_HK Stale
+ 1 HALSA_drift       @Panel@HALSA_HK Drift   %.3lf
+ 1 HALSA_elapsed     @Panel@HALSA_HK Elapsed

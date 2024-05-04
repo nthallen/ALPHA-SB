@@ -1,0 +1,20 @@
+HALSA {
+    HBox { +-; "HALSA"; -+ };
+    { Def: (HALSA_deflection,10) "+/-" (HALSA_std_def,10)
+        HBox { "("; (HALSA_n_detected,2); ")" }};
+    -;
+    HBox { {
+        Vel: (HALSA_velocity,8)    "m/s";
+        Temp: (HALSA_temperature,5) C;
+      }; |; {
+        HBox { "Stale dev/drv: "; (HALSA_dev_stale,3); "/";
+                (HALSA_drv_stale,3); };
+        Drift:      (HALSA_drift,9) sec;
+        Elapsed: (HALSA_elapsed,10) sec;
+      }
+    }
+}
+@HALSA_WIN@ {
+  HBox { |+; [HALSA]; |+ };
+  -;
+}

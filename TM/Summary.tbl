@@ -4,6 +4,7 @@ Input "command_sn.tbl";
 # Input "Ascender.tbl";
 Input "B3MB_Summary.tbl";
 Input "ICM20948.tbl";
+Input "HALSA.tbl";
 
 PMC_Full {
   HBox { +-; Title: Propulsion; -+ };
@@ -73,12 +74,12 @@ TMtime_hor {
 # }
 
 Summary_NoAsc { HBox{ |+;
-    { HBox { [PMC_Full]; |;
-        { [ICM20948];
-          [ICM20948_Peaks_0]
+    { HBox { [PMC_Full]; |+;
+        { [HALSA];
+          [ICM20948]
         }
       };
-      { [AHRS];
+      { HBox { [AHRS]; |; [ICM20948_Peaks_0] };
         [B3MB_Summary2]
       };
       [TMtime_hor];

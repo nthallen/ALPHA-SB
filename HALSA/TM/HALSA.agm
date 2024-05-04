@@ -1,0 +1,25 @@
+ModuleDef HALSA [ Panel= HALSA_WIN=HALSA_boxed ] {
+  Set HALSA_WIN= to have a separate window for HALSA
+  Otherwise, [HALSA] can be used in the context of
+  a larger window
+  Panel, used in HALSA.genui must include a trailing colon
+}
+
+tmcbase = HALSA.tmc
+# tmcbase = HALSA_conv.tmc
+colbase = HALSA_col.tmc
+# cmdbase = HALSA.cmd
+genuibase = HALSA.genui:HALSA.genui.in
+- : HALSA.tbl:HALSA.tbl.in
+DISTRIB = @MODDIR@/../HALSA
+CPPFLAGS = -I @MODDIR@/..
+OBJ = HALSA.tbl HALSA.genui
+IGNORE = HALSA.tbl HALSA.genui
+
+%%
+.PHONY : clean-HALSA @MODDIR@/../HALSA
+@MODDIR@/../HALSA :
+	$(MAKE) --directory=@MODDIR@/.. HALSA
+clean-dist : clean-HALSA
+clean-HALSA :
+	$(MAKE) --directory=@MODDIR@/.. clean
