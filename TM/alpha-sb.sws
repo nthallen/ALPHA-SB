@@ -16,7 +16,7 @@ SW_Variable: <uint8_t,UCHAR> SWStat SW Status
 
 # SWS_SIM_START       18 Sim Init:            Validate Sim; break;
 
-  SWS_ASC_OFF         30 Ascender Power Down: AscenderPwrRequest = false; break;
-  SWS_ASC_ON          31 Ascender Power Up:   AscenderPwrRequest = true; break;
+# SWS_ASC_OFF         30 Ascender Power Down: AscenderPwrRequest = false; break;
+# SWS_ASC_ON          31 Ascender Power Up:   AscenderPwrRequest = true; break;
 
   SWS_SHUTDOWN       255 Shutdown Full:       Validate Shutdown; break;

@@ -36,14 +36,17 @@
   : Power Data System 28V &B3MB_On_Off * { B3MB_command(CAN_ID_28V1,B3MB_LOAD_4_CMD,$5); }
   : Power Starboard Engine 28V &B3MB_On_Off * { B3MB_command(CAN_ID_28V1,B3MB_LOAD_3_CMD,$5); }
   : Power Starboard Engine 100V &B3MB_On_Off * { B3MB_command(CAN_ID_100V4,B3MB_LOAD_3_CMD,$5); }
-  : Power Ascender Secondary N1 &B3MB_On_Off * { B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,$5); }
-  : Power Ascender Precharge N2 &B3MB_On_Off * { B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,$5); }
-  : Power Ascender Precharge N3 &B3MB_On_Off * { B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,$5); }
-  : Power Ascender Secondary N4 &B3MB_On_Off * { B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,$5); }
-  : Power Ascender All Off * {
-      B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,0);
-      B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,0);
-      B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,0);
-      B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,0);
-    }
+  : Power USB Hub &B3MB_On_Off * { B3MB_command(CAN_ID_28V3,B3MB_LOAD_2_CMD,$4); }
+  : Power HALSA &B3MB_On_Off * { B3MB_command(CAN_ID_28V3,B3MB_LOAD_3_CMD,$3); }
+  : Power POPS &B3MB_On_Off * { B3MB_command(CAN_ID_28V3,B3MB_LOAD_4_CMD,$3); }
+# : Power Ascender Secondary N1 &B3MB_On_Off * { B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,$5); }
+# : Power Ascender Precharge N2 &B3MB_On_Off * { B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,$5); }
+# : Power Ascender Precharge N3 &B3MB_On_Off * { B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,$5); }
+# : Power Ascender Secondary N4 &B3MB_On_Off * { B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,$5); }
+# : Power Ascender All Off * {
+#     B3MB_command(CAN_ID_100V1,B3MB_LOAD_4_CMD,0);
+#     B3MB_command(CAN_ID_100V2,B3MB_LOAD_2_CMD,0);
+#     B3MB_command(CAN_ID_100V3,B3MB_LOAD_2_CMD,0);
+#     B3MB_command(CAN_ID_100V4,B3MB_LOAD_4_CMD,0);
+#   }
   ;
