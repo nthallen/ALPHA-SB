@@ -72,10 +72,10 @@ bool UserPkts_UDP::protocol_input() {
       not_ndouble(elapsed_sec, 0) || not_str(",", 1) ||
       not_nfloat(&deflection, 9999.) || not_str(",", 1) ||
       not_nfloat(&velocity, 9999.)  || not_str(",", 1) ||
-      not_nfloat(&temperature, 9999.) ||
-        not_str(",", 1) || not_spaces() ||
-      not_uint8(n_detected) || not_str(",", 1) ||
+      not_nfloat(&temperature, 9999.) || not_str(",", 1) ||
       not_nfloat(&std_deflection, 9999.) ||
+         not_str(",", 1) || not_spaces() ||
+      not_uint8(n_detected) ||
       not_str("\n", 1)) {
     if (cp >= nc) {
       report_err("%s: Incomplete record", iname);
