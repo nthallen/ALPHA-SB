@@ -83,11 +83,13 @@ bool UserPkts_UDP::protocol_input() {
     consume(nc);
   } else {
     HALSA.Time = Time;
-    HALSA.elapsed_msecs = elapsed_sec >= 0 ?
-      floor(elapsed_sec*1000) : 0;
+    HALSA.elapsed_dsecs = elapsed_sec >= 0 ?
+      floor(elapsed_sec*10) : 0;
     HALSA.deflection = deflection;
     HALSA.velocity = velocity;
     HALSA.temperature = temperature;
+    HALSA.std_def = std_deflection;
+    HALSA.n_detected = n_detected;
     HALSA.Stale = 0;
     report_ok(nc);
   }

@@ -6,7 +6,7 @@
 
 typedef struct __attribute__((__packed__)) {
   double  Time;          // secs since 1970, msec resolution
-  int32_t elapsed_msecs; // Good for about 45 days
+  int32_t elapsed_dsecs; // Good for about 45 days
   float   deflection;    // degrees, resolution TBD
   float   velocity;      // m/s, resolution TBD
   float   temperature;   // Celcius, resolution TBD
