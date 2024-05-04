@@ -69,7 +69,7 @@ bool UserPkts_UDP::protocol_input() {
   cp = 0;
   if (not_str("HALSA,") || not_spaces() ||
       not_ISO8601(Time) || not_str(",", 1) ||
-      not_ndouble(elapsed_sec, 0) || not_str(",", 1) ||
+      not_ndouble(elapsed_sec, 9999.) || not_str(",", 1) ||
       not_nfloat(&deflection, 9999.) || not_str(",", 1) ||
       not_nfloat(&velocity, 9999.)  || not_str(",", 1) ||
       not_nfloat(&temperature, 9999.) || not_str(",", 1) ||
