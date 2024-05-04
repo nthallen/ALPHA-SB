@@ -50,4 +50,5 @@ fi
   Launch      -      Ascender -p $ascender_port -v
 [ -n "$socketcan1" ] &&
   Launch      -      ICM20948 -N $(mlf_find ICM) -s uDACS
+  Launch      -      HALSA
   Launch      -TMC-  asbalgo
