@@ -2,9 +2,8 @@
   #include "subbus_load.h"
 
   #if defined(SERVER) && !defined(TRANSMITTING)
-    /* Returns zero if both calls are successful */
     int subbus_quit() {
-      return(B3MB->subbus_quit() | uDACS->subbus_quit());
+      return(B3MB->subbus_quit());
     }
   #endif
 %}

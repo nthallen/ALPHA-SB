@@ -1,6 +1,6 @@
 %{
   /* Common B3MB Command Framework */
-  #include "alpha-sb_can.h"
+  #include "subbus_load.h"
 
   #define B3MB_LOAD_1_CMD 8
   #define B3MB_LOAD_2_CMD 10

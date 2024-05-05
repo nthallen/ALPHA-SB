@@ -25,7 +25,6 @@
   }
   void subbus_init() {
     B3MB = subbus_load("B3MB", "CAN", &B3MB_Initialized);
-    uDACS = subbus_load("uDACS", ICM_SUBBUS_FLAVOR, &uDACS_Initialized);
   }
 <init>
   subbus_init();

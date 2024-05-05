@@ -11,7 +11,7 @@ end
 if nargin >= 2
   f = ne_dialg(stream, 1);
 else
-  f = ne_dialg('SCoPEx B3MB Charging Station',1);
+  f = ne_dialg('ALPHA-SB B3MB Charging Station',1);
 end
 f = ne_dialg(f, 'newcol');
 f = ne_dialg(f, 'newtab', 'Plots');
