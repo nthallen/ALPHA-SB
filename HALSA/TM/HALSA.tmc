@@ -1,3 +1,6 @@
+%{
+  bool first_halsa_point = true;
+%}
 TM typedef double HALSA_drift_t { text "%9.3lf"; }
 TM typedef int32_t HALSA_sec_t { text "%10.1lf"; }
 TM typedef float HALSA_deg_t { text "%7.3lf"; }
@@ -20,8 +23,12 @@ group HALSA (HALSA_drift, HALSA_elapsed, HALSA_deflection,
              HALSA_velocity, HALSA_temperature, HALSA_std_def,
              HALSA_n_detected, HALSA_dev_stale, HALSA_drv_stale) {
   HALSA_drv_stale = HALSA_obj->Stale(255);
-  if (HALSA_drv_stale == 0)
-    HALSA_drift = HALSA.Time - dtime();
+  if (first_halsa_point) {
+    HALSA_drift = 0;
+    first_halsa_point = false;
+  } else if (HALSA_drv_stale == 0) {
+    HALSA_drift = dtime() - HALSA.Time;
+  }
   HALSA_elapsed = HALSA.elapsed_dsecs;
   HALSA_deflection = HALSA.deflection;
   HALSA_velocity = HALSA.velocity;
