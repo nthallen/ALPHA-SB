@@ -5,7 +5,8 @@ HALSA {
     -;
     HBox { {
         Vel: (HALSA_velocity,7)    "m/s";
-        Temp: (HALSA_temperature,5) C;
+        T:   (HALSA_temperature,5) C;
+        Pwr: (HALSAS,3);
       }; |; {
         HBox { "Stale dev/drv: "; (HALSA_dev_stale,3); "/";
                 (HALSA_drv_stale,3); };
