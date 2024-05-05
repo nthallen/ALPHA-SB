@@ -26,7 +26,7 @@ group HALSA (HALSA_drift, HALSA_elapsed, HALSA_deflection,
   if (first_halsa_point) {
     HALSA_drift = 0;
     first_halsa_point = false;
-  } else if (HALSA_drv_stale == 0) {
+  } else if (HALSA_drv_stale == 0 && HALSA.Stale == 0) {
     HALSA_drift = dtime() - HALSA.Time;
   }
   HALSA_elapsed = HALSA.elapsed_dsecs;
