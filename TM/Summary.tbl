@@ -45,7 +45,9 @@ AHRS {
       dThrust:  (Nav_dThrust_pct,4) "%";
       T_acc:    (Nav_T_acc,4)   sec;
       T_rot:    (Nav_T_rot,4)   sec;
-      { Status: (Nav_Status,8)}
+      { Nav:  (Nav_Status,8);
+        Dual: (Dual_Ant_active,8);
+      }
     }
   }
 }
@@ -80,9 +82,9 @@ Summary_NoAsc { HBox{ |+;
         }
       };
       { HBox { [AHRS]; |; [ICM20948_Peaks_0] };
-        [B3MB_Summary2]
+        HBox { [B3MB_Summary2]; |; [TMtime] }
       };
-      [TMtime_hor];
+      # [TMtime_hor];
     }; |+ };
   -;
 }

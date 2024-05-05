@@ -85,7 +85,7 @@ asbcol : subbus.oui -lsubbuspp
 asbsrvr : subbus.oui -lsubbuspp
 asbtxsrvr :
 asbclt :
-asbdisp : $extbase Summary.tbl alpha_sb.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl SpatialDual.tbl Housekeeping.tbl
+asbdisp : $extbase Summary.tbl SpatialDual.tbl Motors.tbl B3MB_28V.tbl B3MB_100V.tbl B3MB_100V_2.tbl
 asbalgo : alpha-sb.tma pmc.tma pmc_Left.tma pmc_Right.tma $swsbase
 asbjsonext : $extbase $genuibase
 # B3MBrawext : B3MBraw.cdf

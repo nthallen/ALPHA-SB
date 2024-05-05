@@ -26,6 +26,7 @@ B3MB_@ID@_S {
   HBox { +-; Title: "@ID@ Status"; -+ };
   "Fault/Cmd:" (B3MB_@ID@_Cmd_S,4);
   "LED etc:"   (B3MB_@ID@_LED_S,4);
+  {Bus: (B3MB_@ID@_Bus_V,7) V};
 }
 
 B3MB_@ID@_Col {
@@ -49,7 +50,7 @@ B3MB_@ID@_VIH {
 @RT3@B4:  (B3MB_@ID@B4S,3) (B3MB_@ID@B4F,3)  (B3MB_@ID@_Batt4_V,7) (B3MB_@ID@_Batt4_I,7)
 @RT4@""   ""               ""                ""                    ""
     "L4:" (@L4@S,3)        (@L4@F,3)         (@L4@_V,7)            (@L4@_I,7);
-    Bus:  ""               ""                (B3MB_@ID@_Bus_V,7);
+#   Bus:  ""               ""                (B3MB_@ID@_Bus_V,7);
 }
 
 B3MB_@ID@_Row {
