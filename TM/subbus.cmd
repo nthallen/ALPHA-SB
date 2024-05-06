@@ -1,5 +1,5 @@
 %{
-  #include "subbus_load.h"
+  #include "alpha-sb_can.h"
 
   #if defined(SERVER) && !defined(TRANSMITTING)
     /* Returns zero if both calls are successful */

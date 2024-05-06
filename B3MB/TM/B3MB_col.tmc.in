@@ -5,7 +5,7 @@
  */
 %{
   #include "subbuspp.h"
-  #include "subbus_load.h"
+  #include "alpha-sb_can.h"
   #define disarm_sic()
   #define tick_sic()
 

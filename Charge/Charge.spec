@@ -2,7 +2,6 @@
 # See README.txt for physical configuration
 tmcbase = base.tmc
 cmdbase = Charge.cmd
-cmdbase = subbus.cmd
 genuibase = Charge.genui
 swsbase = Charge.sws
 
@@ -53,8 +52,8 @@ OBJ = MPSLd.genui MPSLd.tmc MPSLd.tbl
 
 DISTRIB = interact services
 
-Chargecol : subbus.oui -lsubbuspp
-Chargesrvr : subbus.oui -lsubbuspp
+Chargecol : -lsubbuspp
+Chargesrvr : ../TM/CAN.oui -lsubbuspp
 Chargedisp : $extbase Charge.tbl B3MB_A.tbl B3MB_B.tbl B3MB_C.tbl
 Chargealgo : Charge.tma $swsbase
 Chargejsonext : $extbase $genuibase

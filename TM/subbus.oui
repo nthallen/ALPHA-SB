@@ -1,6 +1,6 @@
 <package> subbus
 <follow> msg
-<include> "subbus_load.h"
+<include> "alpha-sb_can.h"
 
 <defs>
   subbuspp *B3MB;

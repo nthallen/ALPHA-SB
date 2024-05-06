@@ -1,5 +1,5 @@
-#ifndef SUBBUS_LOAD_H_INCLUDED
-#define SUBBUS_LOAD_H_INCLUDED
+#ifndef ALPHA_SB_CAN_H_INCLUDED
+#define ALPHA_SB_CAN_H_INCLUDED
 #include "subbuspp.h"
 #include "ICM20948.h"
 
