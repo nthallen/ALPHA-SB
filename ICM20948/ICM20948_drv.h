@@ -8,7 +8,33 @@
 #include "mlf.h"
 
 #ifdef USING_CAN
-  #define ICM_MAX_MREAD 127
+  /* This is the maximum number of word reads allowed by the
+   * current implementation on the uDACS16. The limit is determined
+   * by the definition of CAN_MAX_TXFR (224) in can_control.h, which
+   * sets the maximum number of bytes in the reply message not
+   * counting any of the packet overhead. A multiread of the format
+   * <addr1>|<count>@<addr2> where <count> is 111 will read up to
+   * 112 words, or 224 bytes. Note that although the actual
+   * multiread format we use includes some additional reads, those
+   * don't count against this total, because the driver has to
+   * break the reads into separate requests. Hence:
+   *   <addr1>,<addr2>,<addr3>|<count>@<addr4>
+   * is implemented as two requests:
+   *   <addr1>,<addr2>
+   *   <addr3>|<count>@<addr4>
+   *
+   * The reason for selecting that particular value was not
+   * documented. It might have had something to do with trying
+   * not to have the sequence counter wrap too much, but I think
+   * 224 bytes requires 33 packets (6 + 31*7 + 1), so we are
+   * already wrapping by 1 packet.
+   *
+   * The risk from wrapping is that we could fail to recognize
+   * packet loss if exactly 31 packets were dropped.
+   * 5/7/2024. Details should be explored in the CAN Subbus Protocol
+   * Evernote.
+   */
+  #define ICM_MAX_MREAD 111
 #else
   #define ICM_MAX_MREAD SB_MAX_MREAD
 #endif
