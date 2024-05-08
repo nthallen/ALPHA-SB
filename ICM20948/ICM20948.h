@@ -25,7 +25,7 @@ typedef struct {
   uint16_t remainder[2];
   uint16_t msecs;
   uint8_t mode;
-  uint8_t fs;
+  uint8_t status;
 } ICM20948_dev;
 
 typedef struct {

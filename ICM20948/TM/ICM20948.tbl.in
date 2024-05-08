@@ -9,8 +9,8 @@ ICM20948 {
     }; |; {
       msecs: (ICM_msecs,5) msecs;
       MLF:     (ICM_mlf,5);
-      Mode:   (ICM_mode,3);
-      Scale:    (ICM_fs,7) g;
+      Mode: HBox{(ICM_nack,1); (ICM_mode,3)};
+      Scale:   (ICM_fsc,7) g;
       Stale: (ICM_stale,3);
     }
   }

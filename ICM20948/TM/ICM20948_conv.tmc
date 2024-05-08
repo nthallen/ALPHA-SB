@@ -3,12 +3,18 @@
   #define ICM_accel_squared(j) (ICM_max_accel[j] * (double)ICM_max_accel[j])
 %}
 
+icm_fs_t ICM_fsc; Invalidate ICM_fsc;
+{ ICM_fsc = ICM_fs & 0x3; Validate ICM_fsc; }
+
+icm_nack_t ICM_nack; Invalidate ICM_nack;
+{ ICM_nack = ICM_fsc; Validate ICM_nack; }
+
 ICM_g ICM_max_g; Invalidate ICM_max_g;
 { double sum;
   double term;
   term = ICM_max_accel[0]; sum  = term * term;
   term = ICM_max_accel[1]; sum += term * term;
   term = ICM_max_accel[2]; sum += term * term;
-  ICM_max_g = (sum==0) ? 9999.0 : sqrt(sum)*convert(ICM_fs)/32768;
+  ICM_max_g = (sum==0) ? 9999.0 : sqrt(sum)*convert(ICM_fsc)/32768;
   Validate ICM_max_g;
 }

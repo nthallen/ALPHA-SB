@@ -92,9 +92,12 @@ void ICM_dev::Quit() {
 
 void ICM_dev::read_sensors() {
   msg(MSG_DBG(1), "%s: read_sensors()", iname);
-  uint16_t mask = (1<<NS)-1;
   std::chrono::system_clock::time_point Tstart =
     std::chrono::system_clock::now();
+  uint16_t mask = (1<<NS)-1;
+  for (int i = 0; i < NS; ++i) {
+    ICM20948.dev[i].status &= ~4; // Clear the NACK bit
+  }
   while (mask && nsync == 0) {
     msg(MSG_DBG(1), "%s: Preloop: nsync:%d", iname, nsync);
     flags |= Fl_Timeout;
@@ -130,8 +133,10 @@ void ICM_dev::read_sensors() {
             msg(MSG_FATAL, "%s: Driver error %d", iname, rv);
             break;
           }
-          if (rv == SBS_NOACK)
-            report_err("%s: SBS_NOACK on sensor read", iname);
+          if (rv == SBS_NOACK) {
+            // report_err("%s: SBS_NOACK on sensor read", iname);
+            ICM20948.dev[i].status |= 4;
+          }
           if (nwords < 2)
             msg(MSG_ERROR, "%s: Expected at least 2 words: %u", iname, nwords);
           msg(MSG_DBG(1),
@@ -140,7 +145,8 @@ void ICM_dev::read_sensors() {
           uint16_t modefs = udata[nw];
           rep_modefs[i] = modefs;
           ICM20948.dev[i].mode = mask_mode(modefs);
-          ICM20948.dev[i].fs = mask_fs(modefs);
+          ICM20948.dev[i].status =
+            (ICM20948.dev[i].status & ~3) | mask_fs(modefs);
           uint16_t rem = udata[nw+1];
           if (!dev[i].skip_set) {
             // // Since we were last here, we have read
@@ -261,7 +267,7 @@ void ICM_dev::read_modes() {
     SB->mread_subbus(rm_idle[i], data);
     rep_modefs[i] = data[0];
     ICM20948.dev[i].mode = mask_mode(data[0]);
-    ICM20948.dev[i].fs = mask_fs(data[0]);
+    ICM20948.dev[i].status = mask_fs(data[0]);
   }
 }
 

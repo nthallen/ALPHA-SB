@@ -1,18 +1,19 @@
 # ICM20948.genui
- 1 ICM_max_g        @Panel@ICM Max
- 1 ICM_sps          @Panel@ICM Rate
-#1 ICM_max_accel    @HKPanel@ICM_HK Max
- 1 ICM_mlf          @HKPanel@ICM_HK MLF
- 1 ICM_mode         @HKPanel@ICM_HK Mode
- 1 ICM_sps          @HKPanel@ICM_HK Rate
- 1 ICM_rem0         @HKPanel@ICM_HK Remainder
- 1 ICM_rem1         @HKPanel@ICM_HK Remainder
- 1 ICM_msecs        @HKPanel@ICM_HK msecs
- 1 ICM_fs           @HKPanel@ICM_HK Scale
- 1 ICM_stale        @HKPanel@ICM_HK Stale
- 1 ICM_peak_f_0_0   @HKPanel@ICM_Peaks Freq
- 1 ICM_peak_f_0_1   @HKPanel@ICM_Peaks Freq
- 1 ICM_peak_f_0_2   @HKPanel@ICM_Peaks Freq
- 1 ICM_peak_amp_0_0 @HKPanel@ICM_Peaks Amp
- 1 ICM_peak_amp_0_1 @HKPanel@ICM_Peaks Amp
- 1 ICM_peak_amp_0_2 @HKPanel@ICM_Peaks Amp
+ 1 ICM_max_g         @Panel@ICM Max
+ 1 ICM_sps           @Panel@ICM Rate
+#1 ICM_max_accel     @HKPanel@ICM_HK Max
+ 1 ICM_mlf           @HKPanel@ICM_HK MLF
+ 1 ICM_mode          @HKPanel@ICM_HK Mode
+ 1 ICM_sps           @HKPanel@ICM_HK Rate
+ 1 ICM_rem0          @HKPanel@ICM_HK Remainder
+ 1 ICM_rem1          @HKPanel@ICM_HK Remainder
+ 1 ICM_msecs         @HKPanel@ICM_HK msecs
+ 1 ICM_fsc           @HKPanel@ICM_HK Scale
+ 1 ICM_nack:ICM_fs:2 @HKPanel@ICM_HK Status
+ 1 ICM_stale         @HKPanel@ICM_HK Stale
+ 1 ICM_peak_f_0_0    @HKPanel@ICM_Peaks Freq
+ 1 ICM_peak_f_0_1    @HKPanel@ICM_Peaks Freq
+ 1 ICM_peak_f_0_2    @HKPanel@ICM_Peaks Freq
+ 1 ICM_peak_amp_0_0  @HKPanel@ICM_Peaks Amp
+ 1 ICM_peak_amp_0_1  @HKPanel@ICM_Peaks Amp
+ 1 ICM_peak_amp_0_2  @HKPanel@ICM_Peaks Amp

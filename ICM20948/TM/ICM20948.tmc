@@ -1,8 +1,13 @@
 /* ICM20948.tmc */
+%{
+  #define icm_nack(x) ((x)?"*":" ")
+%}
 TM typedef double ICM_g { text "%7.3lf"; }
 TM typedef double ICM_gain { text "%10.3e"; }
 TM typedef uint8_t icm_mode_t { text "%3u"; }
+TM typedef uint8_t icm_status_t { text "%3u"; }
 TM typedef uint8_t icm_fs_t { text "%7.3lf"; Convert ICM_g; }
+TM typedef uint8_t icm_nack_t { text "%1u" icm_nack(); }
 TM typedef uint16_t icm_rate_t { text "%5u"; }
 TM typedef uint32_t icm_mlf_t { text "%5u"; }
 TM typedef int16_t icm_max_t { text "%6d"; }
@@ -23,7 +28,7 @@ TM 1 Hz icm_max_t ICM_max_accel[3]; /* Max acceleration */
 TM 1 Hz icm_mlf_t ICM_mlf;  /* MLF index number */
 
 TM 1 Hz icm_mode_t ICM_mode;
-TM 1 Hz icm_fs_t ICM_fs;
+TM 1 Hz icm_status_t ICM_fs;
 TM 1 Hz icm_rate_t ICM_sps; /* samples per second */
 TM 1 Hz icm_freq_t ICM_peak_f_0_0;
 TM 1 Hz icm_freq_t ICM_peak_f_0_1;
@@ -62,7 +67,7 @@ Group ICM20948 (ICM_max_accel, ICM_mlf, ICM_sps,
   ICM_rem1 = ICMsrc(0,remainder[1]);
   ICM_msecs = ICMsrc(0,msecs);
   ICM_mode = ICMsrc(0,mode);
-  ICM_fs = ICMsrc(0,fs);
+  ICM_fs = ICMsrc(0,status);
   ICM_stale = ICM20948_obj->Stale(255);
   ICM20948_obj->synch();
 }
