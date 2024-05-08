@@ -171,8 +171,9 @@ void ICM_dev::read_sensors() {
         auto dur =
           std::chrono::duration_cast<std::chrono::milliseconds>(Tend-Tstart);
         ICM20948.dev[i].msecs = dur.count();
-        msg(MSG_DEBUG, "%s: dev[%d].nw:%d .msecs=%d", iname, i, dev[i].nw, dur.count());
         if (nsync || dur.count() >= msec_setpoint || ICM20948.dev[i].mode != 2) {
+          msg(MSG_DEBUG, "%s: dev[%d].nw:%d .msecs=%d nsync=%d mode=%d", iname,
+            i, dev[i].nw, dur.count(), nsync, ICM20948.dev[i].mode);
           mask &= ~(1<<i);
         }
       }
