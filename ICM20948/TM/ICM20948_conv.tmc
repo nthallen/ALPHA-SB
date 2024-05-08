@@ -7,7 +7,7 @@ icm_fs_t ICM_fsc; Invalidate ICM_fsc;
 { ICM_fsc = ICM_fs & 0x3; Validate ICM_fsc; }
 
 icm_nack_t ICM_nack; Invalidate ICM_nack;
-{ ICM_nack = ICM_fsc; Validate ICM_nack; }
+{ ICM_nack = (ICM_fsc>>2)&1; Validate ICM_nack; }
 
 ICM_g ICM_max_g; Invalidate ICM_max_g;
 { double sum;
