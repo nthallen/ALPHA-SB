@@ -1,15 +1,15 @@
 TM typedef double uDACS_Celcius { text "%7.3lf"; }
 TM typedef int16_t uDACS_accel_t { text "%6d"; }
 TM typedef uint16_t uDACS_rate_t { text "%5u"; }
-TM typedef int16_t uDACS16_T30K75KU { text "%7d"; convert uDACS_Celcius; }
+TM typedef int16_t uDACS16_T30K75KU { text "%7.3lf"; convert uDACS_Celcius; }
 TM typedef double uDACS_maxg_t { text "%6.3lf"; }
 TM typedef uint8_t uDACS_status_t { text "%3u"; }
 
 TM 1 Hz uDACS16_T30K75KU uDstbd_T1;   /* addr offset 0x21 (J10) */
 TM 1 Hz uDACS16_T30K75KU uDstbd_T2;   /* addr offset 0x22 (J11) */
-TM 1 Hz uDACS_accel_t  uDstbd_x_g;    /* addr offset 0x61 */
-TM 1 Hz uDACS_accel_t  uDstbd_y_g;    /* addr offset 0x62 */
-TM 1 Hz uDACS_accel_t  uDstbd_z_g;    /* addr offset 0x63 */
+TM 1 Hz uDACS_accel_t  uDstbd_x_raw;  /* addr offset 0x61 */
+TM 1 Hz uDACS_accel_t  uDstbd_y_raw;  /* addr offset 0x62 */
+TM 1 Hz uDACS_accel_t  uDstbd_z_raw;  /* addr offset 0x63 */
 TM 1 Hz uDACS_status_t uDstbd_status; /* addr offset 0x64 */
 TM 1 Hz uDACS_rate_t   uDstbd_rate;   /* addr offset 0x67 */
 
@@ -19,15 +19,15 @@ TM 1 Hz uDACS_rate_t   uDstbd_rate;   /* addr offset 0x67 */
 %}
 
 group uDACS16 (uDstbd_T1, uDstbd_T2,
-               uDstbd_x_g, uDstbd_y_g, uDstbd_z_g,
+               uDstbd_x_raw, uDstbd_y_raw, uDstbd_z_raw,
                uDstbd_status, uDstbd_rate) {
   if (uDACS_Initialized) {
     read_uDACS(&uDACS_stbd);
     uDstbd_T1     =  stbd_int16(0);
     uDstbd_T2     =  stbd_int16(1);
-    uDstbd_x_g    =  stbd_int16(2);
-    uDstbd_y_g    =  stbd_int16(3);
-    uDstbd_z_g    =  stbd_int16(4);
+    uDstbd_x_raw  =  stbd_int16(2);
+    uDstbd_y_raw  =  stbd_int16(3);
+    uDstbd_z_raw  =  stbd_int16(4);
     uDstbd_status =  stbd_uint16(5);
     uDstbd_rate   =  stbd_uint16(6);
   }

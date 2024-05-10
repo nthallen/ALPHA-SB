@@ -5,6 +5,11 @@ uDACS16 {
       Rate: (uDstbd_rate,5)  Hz;
       T1:   (uDstbd_T1,7)    C;
       T2:   (uDstbd_T2,7)    C;
+    }; |; {
+      mode: HBox{ (uDstbd_mode,3); "/"; (uDstbd_fs,3) };
+      X: (uDstbd_x_g,6) g;
+      Y: (uDstbd_y_g,6) g;
+      Z: (uDstbd_z_g,6) g;
     }
   }
 }

@@ -1,12 +1,29 @@
+uDACS_status_t uDstbd_mode; Invalidate uDstbd_mode;
+{ uDstbd_mode = uDstbd_status & 0x7;
+  Validate uDstbd_mode;
+}
+
+uDACS_status_t uDstbd_fs; Invalidate uDstbd_fs;
+
 uDACS_maxg_t uDstbd_max_g; Invalidate uDstbd_max_g;
-{ double sum, term;
+uDACS_maxg_t uDstbd_x_g; Invalidate uDstbd_x_g;
+uDACS_maxg_t uDstbd_y_g; Invalidate uDstbd_y_g;
+uDACS_maxg_t uDstbd_z_g; Invalidate uDstbd_z_g;
+
+{ double sum, scale;
   sum = 0;
-  term = uDstbd_x_g;
-  sum += term*term;
-  term = uDstbd_y_g;
-  sum += term*term;
-  term = uDstbd_z_g;
-  sum += term*term;
+  uDstbd_fs = 2<<((uDstbd_status>>3)&3);
+  scale = uDstbd_fs/32768.;
+  uDstbd_x_g = uDstbd_x_raw * scale;
+  sum += uDstbd_x_g*uDstbd_x_g;
+  uDstbd_y_g = uDstbd_y_raw * scale;
+  sum += uDstbd_y_g*uDstbd_y_g;
+  uDstbd_z_g = uDstbd_z_raw * scale;
+  sum += uDstbd_z_g*uDstbd_z_g;
   uDstbd_max_g = sqrt(sum);
+  Validate uDstbd_fs;
+  Validate uDstbd_x_g;
+  Validate uDstbd_y_g;
+  Validate uDstbd_z_g;
   Validate uDstbd_max_g;
 }
