@@ -1,0 +1,12 @@
+uDACS_maxg_t uDstbd_max_g; Invalidate uDstbd_max_g;
+{ double sum, term;
+  sum = 0;
+  term = uDstbd_x_g;
+  sum += term*term;
+  term = uDstbd_y_g;
+  sum += term*term;
+  term = uDstbd_z_g;
+  sum += term*term;
+  uDstbd_max_g = sqrt(sum);
+  Validate uDstbd_max_g;
+}

@@ -1,0 +1,15 @@
+ModuleDef uDACS16 [ Panel= HKPanel= ] {
+  uDACS16 with ICM20948 Accelerometer
+}
+
+tmcbase = uDACS16.tmc
+tmcbase = T30K75KU_uDACS16.tmc
+colbase = uDACS16_col.tmc
+cmdbase = uDACS16.cmd
+extbase = uDACS16_conv.tmc
+genuibase = uDACS16.genui:uDACS16.genui.in
+- : uDACS16.tbl:uDACS16.tbl.in
+
+CPPFLAGS = -I @MODDIR@
+IGNORE = uDACS16.tbl uDACS16.genui
+OBJ = uDACS16.tbl uDACS16.genui

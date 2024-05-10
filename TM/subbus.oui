@@ -1,7 +1,6 @@
 <package> subbus
 <follow> msg
 <include> "alpha-sb_can.h"
-<include> "ICM20948.h"
 
 <defs>
   subbuspp *B3MB;

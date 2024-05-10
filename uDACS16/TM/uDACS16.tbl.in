@@ -1,0 +1,10 @@
+uDACS16 {
+  HBox { +-; "uDACS16"; -+ };
+  HBox {
+    { MaxG: (uDstbd_max_g,6) g;
+      Rate: (uDstbd_rate,5)  Hz;
+      T1:   (uDstbd_T1,7)    C;
+      T2:   (uDstbd_T2,7)    C;
+    }
+  }
+}

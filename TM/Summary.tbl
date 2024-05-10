@@ -3,8 +3,9 @@ Input "TMbase.tbl";
 Input "command_sn.tbl";
 # Input "Ascender.tbl";
 Input "B3MB_Summary.tbl";
-Input "ICM20948.tbl";
+# Input "ICM20948.tbl";
 Input "HALSA.tbl";
+Input "uDACS16.tbl";
 
 PMC_Full {
   HBox { +-; Title: Propulsion; -+ };
@@ -78,10 +79,10 @@ TMtime_hor {
 Summary_NoAsc { HBox{ |+;
     { HBox { [PMC_Full]; |+;
         { [HALSA];
-          [ICM20948]
+          [uDACS16]
         }
       };
-      { HBox { [AHRS]; |; [ICM20948_Peaks_0] };
+      { [AHRS];
         HBox { [B3MB_Summary2]; |; [TMtime] }
       };
       # [TMtime_hor];

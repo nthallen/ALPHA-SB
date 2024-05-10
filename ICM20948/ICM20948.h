@@ -3,16 +3,6 @@
 #define ICM20948_H_INCLUDED
 #include <cstdint>
 
-#define USING_CAN
-
-#ifdef USING_CAN
-  #define N_ICM20948_SENSORS 1
-  #define ICM_SUBBUS_FLAVOR "CAN"
-#else
-  #define N_ICM20948_SENSORS 1
-  #define ICM_SUBBUS_FLAVOR "serusb"
-#endif
-
 #define N_ICM20948_PEAKS 3
 
 typedef struct {

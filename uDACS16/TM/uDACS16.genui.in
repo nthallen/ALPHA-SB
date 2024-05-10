@@ -1,0 +1,4 @@
+ 1 uDstbd_max_g @Panel@uDACS MaxG
+ 1 uDstbd_rate  @Panel@uDACS Rate
+ 1 uDstbd_T1    @Panel@uDACS Temp
+ 1 uDstbd_T2    @Panel@uDACS Temp
