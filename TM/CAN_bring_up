@@ -1,5 +1,12 @@
 #! /bin/bash
 # CAN_bring_up
-socketcan=can0
-/usr/sbin/ip link set $socketcan type can bitrate 50000
-/usr/sbin/ip link set up $socketcan
+
+# B3MB interfaces are at 50KHz
+/usr/sbin/ip link set down can0
+/usr/sbin/ip link set can0 type can bitrate 50000
+/usr/sbin/ip link set up can0
+
+# uDACS interfaces are at 50KHz
+/usr/sbin/ip link set down can1
+/usr/sbin/ip link set can1 type can bitrate 50000
+/usr/sbin/ip link set up can1
