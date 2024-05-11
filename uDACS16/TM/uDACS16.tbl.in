@@ -1,11 +1,17 @@
 uDACS16 {
-  HBox { +-; "uDACS16"; -+ };
   HBox {
-    { MaxG: (uDstbd_max_g,6) g;
-      Rate: (uDstbd_rate,5)  Hz;
-      T1:   (uDstbd_T1,7)    C;
-      T2:   (uDstbd_T2,7)    C;
+    {
+      HBox { +-; "Port"; -+ };
+      MaxG: (uDport_max_g,6) g;
+      Rate: (uDport_rate,5)  Hz;
+      mode: HBox{ (uDport_mode,3); "/"; (uDport_fs,3) };
+      X: (uDport_x_g,6) g;
+      Y: (uDport_y_g,6) g;
+      Z: (uDport_z_g,6) g;
     }; |; {
+      HBox { +-; "Starboard"; -+ };
+      MaxG: (uDstbd_max_g,6) g;
+      Rate: (uDstbd_rate,5)  Hz;
       mode: HBox{ (uDstbd_mode,3); "/"; (uDstbd_fs,3) };
       X: (uDstbd_x_g,6) g;
       Y: (uDstbd_y_g,6) g;

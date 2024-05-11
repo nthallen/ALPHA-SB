@@ -67,9 +67,15 @@ dfs.plot('mhalsahks','label','Stale','vars',{'HALSA_dev_stale','HALSA_drv_stale'
 dfs.plot('mhalsahkd','label','Drift','vars',{'HALSA_drift'});
 dfs.plot('mhalsahke','label','Elapsed','vars',{'HALSA_elapsed'});
 dfs.plot('mdacs', 'label', 'uDACS', 'plots', {'mdacsmg','mdacsr','mdacst'});
-dfs.plot('mdacsmg','label','Max G','vars',{'uDstbd_max_g'});
-dfs.plot('mdacsr','label','Rate','vars',{'uDstbd_rate'});
-dfs.plot('mdacst','label','Temp','vars',{'uDstbd_T1','uDstbd_T2'});
+dfs.plot('mdacsmg','label','Max G','vars',{'uDport_max_g','uDstbd_max_g'});
+dfs.plot('mdacsr','label','Rate','vars',{'uDport_rate','uDstbd_rate'});
+dfs.plot('mdacst','label','Temp','vars',{'uDport_T1','uDport_T2','uDstbd_T1','uDstbd_T2'});
+dfs.end_col;
+dfs.start_col;
+dfs.plot('mdacshk', 'label', 'uDACS HK', 'plots', {'mdacshkm','mdacshks','mdacshka'});
+dfs.plot('mdacshkm','label','Mode','vars',{'uDport_mode','uDstbd_mode'});
+dfs.plot('mdacshks','label','Scale','vars',{'uDport_fs','uDstbd_fs'});
+dfs.plot('mdacshka','label','Axes g','vars',{'uDport_x_g','uDport_y_g','uDport_z_g','uDstbd_x_g','uDstbd_y_g','uDstbd_z_g'});
 dfs.end_tab;
 dfs.start_tab('Motors');
 dfs.start_col;

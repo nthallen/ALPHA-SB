@@ -5,6 +5,14 @@ TM typedef int16_t uDACS16_T30K75KU { text "%7.3lf"; convert uDACS_Celcius; }
 TM typedef double uDACS_maxg_t { text "%6.3lf"; }
 TM typedef uint8_t uDACS_status_t { text "%3u"; }
 
+TM 1 Hz uDACS16_T30K75KU uDport_T1;   /* addr offset 0x21 (J10) */
+TM 1 Hz uDACS16_T30K75KU uDport_T2;   /* addr offset 0x22 (J11) */
+TM 1 Hz uDACS_accel_t  uDport_x_raw;  /* addr offset 0x61 */
+TM 1 Hz uDACS_accel_t  uDport_y_raw;  /* addr offset 0x62 */
+TM 1 Hz uDACS_accel_t  uDport_z_raw;  /* addr offset 0x63 */
+TM 1 Hz uDACS_status_t uDport_status; /* addr offset 0x64 */
+TM 1 Hz uDACS_rate_t   uDport_rate;   /* addr offset 0x67 */
+
 TM 1 Hz uDACS16_T30K75KU uDstbd_T1;   /* addr offset 0x21 (J10) */
 TM 1 Hz uDACS16_T30K75KU uDstbd_T2;   /* addr offset 0x22 (J11) */
 TM 1 Hz uDACS_accel_t  uDstbd_x_raw;  /* addr offset 0x61 */
@@ -14,11 +22,28 @@ TM 1 Hz uDACS_status_t uDstbd_status; /* addr offset 0x64 */
 TM 1 Hz uDACS_rate_t   uDstbd_rate;   /* addr offset 0x67 */
 
 %{
+  #define port_int16(i) ((int16_t)uDACS_port.val[i])
+  #define port_uint16(i) (uDACS_port.val[i])
   #define stbd_int16(i) ((int16_t)uDACS_stbd.val[i])
   #define stbd_uint16(i) (uDACS_stbd.val[i])
 %}
 
-group uDACS16 (uDstbd_T1, uDstbd_T2,
+group uDACS16port (uDport_T1, uDport_T2,
+               uDport_x_raw, uDport_y_raw, uDport_z_raw,
+               uDport_status, uDport_rate) {
+  if (uDACS_Initialized) {
+    read_uDACS(&uDACS_port);
+    uDport_T1     =  port_int16(0);
+    uDport_T2     =  port_int16(1);
+    uDport_x_raw  =  port_int16(2);
+    uDport_y_raw  =  port_int16(3);
+    uDport_z_raw  =  port_int16(4);
+    uDport_status =  port_uint16(5);
+    uDport_rate   =  port_uint16(6);
+  }
+}
+
+group uDACS16stbd (uDstbd_T1, uDstbd_T2,
                uDstbd_x_raw, uDstbd_y_raw, uDstbd_z_raw,
                uDstbd_status, uDstbd_rate) {
   if (uDACS_Initialized) {

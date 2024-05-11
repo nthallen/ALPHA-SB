@@ -23,6 +23,8 @@ PMC_Full {
              {(EngStbd28S,3)         (EngStbd28F,3)};
   "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
              HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
+  MtrT:      (uDport_T1,7)           (uDstbd_T1,7)     C;
+  CtrlT:     (uDport_T2,7)           (uDstbd_T2,7)     C;
 }
 
 # AscB3MB {

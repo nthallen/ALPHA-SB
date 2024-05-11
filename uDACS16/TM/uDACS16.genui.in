@@ -1,4 +1,19 @@
+ 1 uDport_max_g @Panel@uDACS MaxG
+ 1 uDport_rate  @Panel@uDACS Rate
+ 1 uDport_T1    @Panel@uDACS Temp
+ 1 uDport_T2    @Panel@uDACS Temp
+ 1 uDport_mode  @Panel@uDACS_HK Mode
+ 1 uDport_fs    @Panel@uDACS_HK Scale
+ 1 uDport_x_g   @Panel@uDACS_HK Axes_g
+ 1 uDport_y_g   @Panel@uDACS_HK Axes_g
+ 1 uDport_z_g   @Panel@uDACS_HK Axes_g
+
  1 uDstbd_max_g @Panel@uDACS MaxG
  1 uDstbd_rate  @Panel@uDACS Rate
  1 uDstbd_T1    @Panel@uDACS Temp
  1 uDstbd_T2    @Panel@uDACS Temp
+ 1 uDstbd_mode  @Panel@uDACS_HK Mode
+ 1 uDstbd_fs    @Panel@uDACS_HK Scale
+ 1 uDstbd_x_g   @Panel@uDACS_HK Axes_g
+ 1 uDstbd_y_g   @Panel@uDACS_HK Axes_g
+ 1 uDstbd_z_g   @Panel@uDACS_HK Axes_g

@@ -6,16 +6,21 @@
     subbus_mread_req *req;
     uint16_t val[7];
   } uDACS_mreq;
+  uDACS_mreq uDACS_port;
   uDACS_mreq uDACS_stbd;
 
   void setup_uDACS_multiread() {
     nl_assert(uDACS);
     if (uDACS_Initialized) {
+      uDACS_port.req = uDACS->pack_mread_requests(
+        0x121, 0x122, 0x161, 0x162, 0x163, 0x164, 0x167, 0);
       uDACS_stbd.req = uDACS->pack_mread_requests(
         0x221, 0x222, 0x261, 0x262, 0x263, 0x264, 0x267, 0);
     }
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < 7; ++i) {
+      uDACS_port.val[i] = 0;
       uDACS_stbd.val[i] = 0;
+    }
   }
   void read_uDACS(uDACS_mreq *mreq) {
     if (uDACS_Initialized) {
