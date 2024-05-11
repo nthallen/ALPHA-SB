@@ -11,6 +11,13 @@ PMC_Stale {
   }
 }
 
+Motor_Temps {
+   +-+;
+   ""   >Motor<       >Ctrlr<;
+   P: (uDport_T1,7) (uDport_T2,7) C;
+   S: (uDstbd_T1,7) (uDstbd_T2,7) C;
+}
+
 { HBox {
     |;
     { HBox {
@@ -20,11 +27,12 @@ PMC_Stale {
           [PMC_Right_Full_Hdr];
 #         [PMC_Right_Stat];
         }; |+; {
-          HBox { +-; Title: "PMC Left Gains"; -+ };
+          HBox { +-; Title: "Port Gains"; -+ };
           [PMC_Left_Gain];
-          HBox { +-; Title: "PMC Right Gains"; -+ };
+          HBox { +-; Title: "Starboard Gains"; -+ };
           [PMC_Right_Gain];
         };  |+; {
+          [Motor_Temps];
           [PMC_Stale];
           [TMbaseB];
         }

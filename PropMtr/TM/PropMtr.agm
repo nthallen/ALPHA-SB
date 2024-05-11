@@ -1,5 +1,6 @@
-Moduledef PropMtr [ ID=Left ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> HOME=1700 RPMSGN= Panel= ] {
+Moduledef PropMtr [ ID=Left HDR=@ID@ ADDR=63 IDX=0 FAST=2 SLOW=1 RT1=/* RT2=*/ DAT=<uint8_t> HOME=1700 RPMSGN= Panel= ] {
   ID is a mnemonic for the motor
+  HDR what to show on the screen
   ADDR is the Modbus address of the motor controller
   IDX is the index into the PropMtr.Ctrl and PropMtr_fast.Ctrl arrays.
   FAST is the rate of the fast data

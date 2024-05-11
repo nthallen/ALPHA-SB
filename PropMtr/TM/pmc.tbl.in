@@ -15,7 +15,7 @@ PMC_@ID@_Full {
 }
 
 PMC_@ID@_Full_Hdr {
-  HBox { +-; @ID@; -+ };
+  HBox { +-; @HDR@; -+ };
   [PMC_@ID@_Full]
 }
 

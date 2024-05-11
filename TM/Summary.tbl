@@ -15,12 +15,12 @@ PMC_Full {
   BusV:      (PMC_Left_BusV,6)       (PMC_Right_BusV,6)       V;
   "100V V:"  (EngPort100_V,7)        (EngStbd100_V,7)   V;
   "100V I:"  (EngPort100_I,7)        (EngStbd100_I,7)   Amps;
-  "100V S:"  {(EngPort100S,3)        (EngPort100F,3)}
-             {(EngStbd100S,3)        (EngStbd100F,3)};
+  "100V S:"  {(EngPort100F,3)        (EngPort100S,3)}
+             {(EngStbd100F,3)        (EngStbd100S,3)};
   "28V V:"   (EngPort28_V,7)         (EngStbd28_V,7)    V;  
   "28V I:"   (EngPort28_I,7)         (EngStbd28_I,7)    Amps;
-  "28V S:"   {(EngPort28S,3)         (EngPort28F,3)}
-             {(EngStbd28S,3)         (EngStbd28F,3)};
+  "28V S:"   {(EngPort28F,3)         (EngPort28S,3)}
+             {(EngStbd28F,3)         (EngStbd28S,3)};
   "Brg/Brk:" HBox{(PMC_Left_Bridge,3);"/";(PMC_Left_Brake,3)}
              HBox{(PMC_Right_Bridge,3);"/";(PMC_Right_Brake,3)};
   MtrT:      (uDport_T1,7)           (uDstbd_T1,7)     C;
@@ -43,14 +43,15 @@ AHRS {
     # Track:    (Track,8)   deg;
       Heading:  (heading,8) deg;
       Rotation: (angular_velocity_z,8) "deg/s";
+    }; |; {
       Thrust:   (Nav_Thrust_pct,3)       "%";
+      { Nav:  (Nav_Status,8);
+        Dual: (Dual_Ant_active,8);
+      }
     }; |; {
       dThrust:  (Nav_dThrust_pct,4) "%";
       T_acc:    (Nav_T_acc,4)   sec;
       T_rot:    (Nav_T_rot,4)   sec;
-      { Nav:  (Nav_Status,8);
-        Dual: (Dual_Ant_active,8);
-      }
     }
   }
 }

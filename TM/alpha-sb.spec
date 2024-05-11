@@ -12,9 +12,9 @@ Module Version src=alpha-sb.ver
 Module TMbase mode=ignore Panel=Main:
 Module Command_SN Panel=Main:
 
-Module PropMtr ID=Left  IDX=0 ADDR=63 FAST=2 SLOW=1 HOME=700 mode=types Panel=Motors:
+Module PropMtr ID=Left HDR=Port IDX=0 ADDR=63 FAST=2 SLOW=1 HOME=700 mode=types Panel=Motors:
 # Will try  RPMSGN=:*(-1) to make RPM positive. Works for ui_, not for rt_ yet
-Module PropMtr ID=Right IDX=1 ADDR=62 FAST=2 SLOW=1 HOME=2830 DAT= Panel=Motors:
+Module PropMtr ID=Right HDR=Starboard IDX=1 ADDR=62 FAST=2 SLOW=1 HOME=2830 DAT= Panel=Motors:
 Module PropMtr mode=groups RT1= RT2= Panel=Motors:
 
 genuibase = B3MB_conv.genui
