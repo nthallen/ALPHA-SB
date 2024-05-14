@@ -78,6 +78,7 @@ prefix = asb
 TGTDIR = /home/alpha-sb
 IGNORE = "*.o" "*.exe" "*.stackdump" Makefile
 DISTRIB = interact services USB.id
+DISTRIB = services.alpha-sb.si services.alpha-sb.sat
 IGNORE = B3MB_gen_cal.asv
 IGNORE = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
 OBJ = SWData.cmd SWData.h SWData.tmc SWData_col.tmc
