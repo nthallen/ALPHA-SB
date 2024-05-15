@@ -6,6 +6,7 @@
  @FAST@ Int_GNSS_en:filter_status:9          @Panel@GNSS_HK Filters %.0lf
  @FAST@ dual_heading_active:filter_status:10 @Panel@GNSS_HK Filters %.0lf
  @FAST@ atm_alt_en:filter_status:12          @Panel@GNSS_HK Filters %.0lf
+ @FAST@ dual_heading_active:filter_status:10 @Panel@GNSS_HK Dual    %.0lf
 
  @FAST@ nav_drift           @Panel@GNSS_HK Drift
  @FAST@ latitude            @Panel@GNSS LatLon
