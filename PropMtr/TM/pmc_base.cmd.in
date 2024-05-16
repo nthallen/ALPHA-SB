@@ -66,9 +66,9 @@
            Rppv = 1??
            Cpk = 25A
        */
-      dvalue = $8 * (32768. * 10000. * 1) / (2*25.);
-      if (dvalue >= 32768 * 16384)
-        dvalue = 32768*16384-1;
+      dvalue = $8 * (65536. * 10000. * 1) / (2*25.);
+      if (dvalue >= 65536. * 32768.)
+        dvalue = 65536. * 32768. - 1;
       value = (int32_t)dvalue;
       PMC_holdreg_32($2, 251, (uint32_t)value);
     }
@@ -79,9 +79,9 @@
            Rppv = 1??
            Cpk = 25A
        */
-      dvalue = $8 < 0 ? 0 : $8 * (32768. * 32768. * 1) / (2*25.);
-      if (dvalue >= 32768 * 16384)
-        dvalue = 32768*16384-1;
+      dvalue = $8 < 0 ? 0 : $8 * (65536. * 65536. * 1) / (2*25.);
+      if (dvalue >= 65536. * 32768.)
+        dvalue = 65536. * 32768. - 1;
       value = (int32_t)dvalue;
       PMC_holdreg_32($2, 251, (uint32_t)value);
     }
@@ -93,9 +93,9 @@
            Rppv = 1??
            Cpk = 25A
        */
-      dvalue = $8 < 0 ? 0 : $8 * (32768. * 1e8 * 1) / (2*25.);
-      if (dvalue >= 32768 * 16384)
-        dvalue = 32768*16384-1;
+      dvalue = $8 < 0 ? 0 : $8 * (65536. * 1e8 * 1) / (2*25.);
+      if (dvalue >= 65536. * 32768.)
+        dvalue = 65536. * 32768. - 1;
       value = (int32_t)dvalue;
       PMC_holdreg_32($2, 253, (uint32_t)value);
     }
