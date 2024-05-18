@@ -297,8 +297,9 @@ dfs.plot('b3mb100b_b3mb_100v8_loads','label','Status','vars',{{'name','B3MB_100V
 dfs.plot('b3mb100b_b3mb_100v8_loadf','label','Fault','vars',{{'name','B3MB_100V8_Load1F','var_name','B3MB_100V8_Cmd_S','bit_number',12},{'name','B3MB_100V8_Load2F','var_name','B3MB_100V8_Cmd_S','bit_number',13},{'name','B3MB_100V8_Load3F','var_name','B3MB_100V8_Cmd_S','bit_number',14},{'name','B3MB_100V8_Load4F','var_name','B3MB_100V8_Cmd_S','bit_number',15}});
 dfs.end_tab;
 dfs.end_col;
-dfs.resize(context_level);
 dfs.set_connection('127.0.0.1', 1407);
 if nargout > 0
   dfs_out = dfs;
+else
+  dfs.resize(context_level);
 end

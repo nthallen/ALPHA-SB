@@ -169,7 +169,7 @@ end
 
 function chg = load_charge(run,Escale,Eoffsets,WarmupV)
 chg.run = run;
-chg.D = load(['C:\cygwin64\home\scopex\charge\MAT\' run '\chgeng_1.mat']);
+chg.D = load(['C:\cygwin64\home\alpha-sb\charge\MAT\' run '\chgeng_1.mat']);
 chg.T = time2d(chg.D.Tchgeng_1);
 chg.chgV = chg.D.MPSLd_V_disp;
 chg.chgI = chg.D.MPSLd_I_disp;
