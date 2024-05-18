@@ -73,6 +73,7 @@ Module Nav
 # Module ICM20948 Panel=Main: HKPanel=Main:
 Module HALSA Panel=Main:
 Module uDACS16 Panel=Main:
+Module tm_ipx
 
 prefix = asb
 TGTDIR = /home/alpha-sb
