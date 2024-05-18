@@ -68,6 +68,8 @@ B3MB_100V8.cmd
 B3MB_100V8_conv.tmc
 B3MB_100V8.genui
 B3MB_100V8.tbl
+doreport
+savelog.cmd
 BKd.genui
 BKd.tmc
 BKd.tbl
@@ -199,6 +201,9 @@ B3MB_100V8.cmd
 B3MB_100V8_conv.tmc
 B3MB_100V8.genui
 B3MB_100V8.tbl
+doreport
+account.pm
+savelog.cmd
 *.asv
 *.o
 *.exe

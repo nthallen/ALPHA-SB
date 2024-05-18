@@ -1,7 +1,7 @@
 %{
   /* Charge.cmd */
   #ifdef SERVER
-  
+  /*
     void write_savelog( char *s ) {
       FILE *fp;
       fp = fopen( "saverun.log", "a" );
@@ -20,7 +20,7 @@
         fclose(fp);
       }
     }
-
+  */
   #endif
 %}
 
@@ -30,7 +30,7 @@
   : &^command
   ;
 
-&command
-  : Savelog %s (Enter Log Message) * { write_savelog($2); }
+#&command
+#  : Savelog %s (Enter Log Message) * { write_savelog($2); }
 # : Request Restart * { write_restart(); }
-  ;
+#  ;
