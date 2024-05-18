@@ -34,7 +34,7 @@ Module B3MB mode=V100 ID=100V8 CAN_ID=8 Panel=B3MB100B: T2=# DT2= LT2="" T2L=/* 
                                                     T3=# DT3= LT3="" T3L=/* T3R=*/ \
                                                     T4=# DT4= LT4="" T4L=/* T4R=*/ \
                                                     T5=# DT5= LT5="" T5L=/* T5R=*/
-Module Email dest=/home/alpha-sb/bin/Email
+Module Email dest=/home/alpha-sb/charge/bin/Email
 Module savelog
 
 tmcbase = B3MB_cal.tmc

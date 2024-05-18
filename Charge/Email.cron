@@ -1,0 +1,2 @@
+# Mailer for alpha-sb-charge
+*/10 * * * * /home/alpha-sb/charge/bin/Email/doreport
