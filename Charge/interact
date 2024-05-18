@@ -28,9 +28,9 @@
               [ -z "$launch_err" ] &&
                 msg "Running script interact"
 [ -c "$slcandev" ] &&
-  Launch      -      subbusd_slcan -n CAN -p $slcandev
+  Launch      -      subbusd_slcan -n CAN -s B3MB -p $slcandev
 [ "$cantactpro" = "yes" ] &&
-  Launch      -      subbusd_CAN -n CAN
+  Launch      -      subbusd_CAN -n CAN -s B3MB
   Launch      tm_bfr bfr -H bfr: -S:
   Launch      -TMC-  lgr -N `mlf_find LOG` -n lgr
   Launch      tm_gen Chargecol
