@@ -3,55 +3,91 @@
   #include "dasio/msg.h"
   long initial_day = 0;
   
-  /* If HRS_BEHIND_UTC is set to 5, we will restart at 5 UTC or midnight EST,
-     ignoring daylight savings. We can increase this number in order
-     to restart earlier for testing. It is even possible to get clever:
-       if we define MINS_BEHIND_UTC (1800+HRS_BEHIND_UTC*3600)
-     then the restart will be half an hour before midnight.
-     defining MINS_BEHIND_UTC (3000+(HRS_BEHIND_UTC+7)*3600)
-     should restart at 4:50 PM
-   */
-  #define HRS_BEHIND_UTC 5
-  #define MINS_BEHIND_UTC (HRS_BEHIND_UTC*3600)
+  /* Targeting 7 AM EDT 5 AM MDT 11 AM UTC */
+  #define DAILY_SAVERUN_TIME_UTC_HOURS 11.0
 %}
 
 State Init {
-  > Telemetry Start
+      > Telemetry Start
+  +2  > Email Report Message Starting
+      Validate Daily_Saverun_Enable;
 }
 
-State Shutdown_Reduce_Restart {
-  > Savelog Automatic Restart
+State Daily_Saverun_Enable {
+#  +1 > Log Advancing to Daily_Saverun_Prepending
+#     > Email Report Message Automated Operation Initiated
+      Validate Daily_Saverun_Prepending;
+}
+
+State Daily_Saverun_Disable {
+   +1 > Email Report Message Automated Operation Disabled
+}
+
+State Daily_Saverun_Prepending NoLog {
+  # Wait until time is before the shutdown time
+  +10 { uint32_t unixtime;
+        uint32_t ssm;
+        unixtime = itime();
+        ssm = unixtime % 86400;
+
+        if (ssm < 3600*DAILY_SAVERUN_TIME_UTC_HOURS) {
+          msg(0, "Advancing to Daily_Saverun_Pending");
+          Validate Daily_Saverun_Pending;
+        } else {
+          Validate Daily_Saverun_Prepending;
+        }
+      }
+}
+
+State Daily_Saverun_Pending NoLog {
+  # Wait until time is after the shutdown time
+  +10 { uint32_t unixtime;
+        uint32_t ssm;
+        unixtime = itime();
+        ssm = unixtime % 86400;
+
+        if (ssm >= 3600*DAILY_SAVERUN_TIME_UTC_HOURS) {
+          Validate Daily_Saverun;
+        } else {
+          Validate Daily_Saverun_Pending;
+        }
+      }
+}
+
+State Daily_Saverun {
+  > SaveLog Daily Saverun
   Validate Shutdown;
 }
 
 State Shutdown {
       Hold until valid (Charge_28V_Idle, Charge_100V_Idle);
+  +1  > Email Report Message Shutting Down
   +5  > Quit
 }
 
 #--------------------------------------
-Partition
-
-State AutoLoop_disable {}
-
-State AutoLoop {
-    depending on (Charge_28V) { Validate AutoLoop_disable; }
-    depending on (Charge_100V) { Validate AutoLoop_disable; }
-    depending on (1 Hz) {
-      long cur_day;
-      cur_day = (itime()- MINS_BEHIND_UTC)/86400L;
-
-      if (initial_day == 0) {
-        initial_day = cur_day;
-        msg(0, "initial_day is %ld", initial_day);
-      } else if (initial_day != cur_day) {
-        msg(0, "cur_day is now %ld", cur_day);
-        Validate Shutdown_Reduce_Restart;
-        Validate AutoLoop_disable;
-      }
-    }
-}
-
+# Partition
+# 
+# State AutoLoop_disable {}
+# 
+# State AutoLoop {
+#     depending on (Charge_28V) { Validate AutoLoop_disable; }
+#     depending on (Charge_100V) { Validate AutoLoop_disable; }
+#     depending on (1 Hz) {
+#       long cur_day;
+#       cur_day = (itime()- MINS_BEHIND_UTC)/86400L;
+# 
+#       if (initial_day == 0) {
+#         initial_day = cur_day;
+#         msg(0, "initial_day is %ld", initial_day);
+#       } else if (initial_day != cur_day) {
+#         msg(0, "cur_day is now %ld", cur_day);
+#         Validate Shutdown_Reduce_Restart;
+#         Validate AutoLoop_disable;
+#       }
+#     }
+# }
+# 
 #--------------------------------------
 Partition
 
@@ -65,16 +101,20 @@ State Charge_28V_Off {
       else Validate Charge_28V_Off;
       
   +1  > BK Voltage Set 0
-      Hold Until (convert(BKd_V_set) < 1.0) or 30
+  +4  > BK Current Set 0
+      Hold Until (convert(BKd_V_set) < 1.0 && BKd_I_set == 0) or 30
       else Validate Charge_28V_Off;
       
   +1  Validate Charge_28V_Idle;
 }
 
-State Charge_28V_Idle {}
+State Charge_28V_Idle {
+      > Email Report Message 28V Charger is Idle
+}
 
 State Charge_28V {
       depending on (B3MB_Temp_Fail) { Validate Charge_28V_Off; }
+      depending on (Shutdown) { Validate Charge_28V_Off; }
       > BK Output Off
   +4  > BK Current Set 7.5
   +4  > BK Voltage Set 33.6
@@ -87,6 +127,8 @@ State Charge_28V {
   +1  > BK Output On
       Hold Until (convert(BKd_I_disp) > 7.0) or 10
       else Validate Charge_28V_Startup_Fail;
+  +1  > Email Report Message 28V Charging
+  
   +1  Hold Until (convert(BKd_I_disp) <= 6.0 ||
           (BKd_V_limit > 0 &&
            convert(BKd_V_disp) >= convert(BKd_V_limit)));
@@ -143,6 +185,7 @@ State Charge_100V_Suspend {
 
 State Charge_100V {
       depending on (B3MB_Temp_Fail) { Validate Charge_100V_Off; }
+      depending on (Shutdown) { Validate Charge_100V_Off; }
       depending on (ChgReq100_Charge_Suspend) { Validate Charge_100V_Off; }
       depending on (ChgReq100_Charge_Terminate) { Validate Charge_100V_Off; }
       > MPSL Output Off
