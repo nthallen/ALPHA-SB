@@ -1,4 +1,4 @@
-function pchgpmpsls(varargin);
+function pchgpmpsls(varargin)
 % pchgpmpsls( [...] );
 % MPS Ld Status
 h = ne_dstat({

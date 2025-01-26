@@ -1,4 +1,4 @@
-function pchgpbkstale(varargin);
+function pchgpbkstale(varargin)
 % pchgpbkstale( [...] );
 % B Kd Stale
 h = timeplot({'BKd_Stale'}, ...

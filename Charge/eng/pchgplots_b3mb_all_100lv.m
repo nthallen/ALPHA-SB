@@ -1,4 +1,4 @@
-function pchgplots_b3mb_all_100lv(varargin);
+function pchgplots_b3mb_all_100lv(varargin)
 % pchgplots_b3mb_all_100lv( [...] );
 % B3MB All 100 Load 100V
 h = timeplot({'B3MB_100V_Bus_V_mean','B3MB_100V1_Load1_V','B3MB_100V1_Load2_V','B3MB_100V1_Load3_V','B3MB_100V1_Load4_V','B3MB_100V2_Load1_V','B3MB_100V2_Load2_V','B3MB_100V2_Load3_V','B3MB_100V2_Load4_V','B3MB_100V3_Load1_V','B3MB_100V3_Load2_V','B3MB_100V3_Load3_V','B3MB_100V3_Load4_V','B3MB_100V4_Load1_V','B3MB_100V4_Load2_V','B3MB_100V4_Load3_V','B3MB_100V4_Load4_V','B3MB_100V5_Load1_V','B3MB_100V5_Load2_V','B3MB_100V5_Load3_V','B3MB_100V5_Load4_V','B3MB_100V6_Load1_V','B3MB_100V6_Load2_V','B3MB_100V6_Load3_V','B3MB_100V6_Load4_V','B3MB_100V7_Load1_V','B3MB_100V7_Load2_V','B3MB_100V7_Load3_V','B3MB_100V7_Load4_V','B3MB_100V8_Load1_V','B3MB_100V8_Load2_V','B3MB_100V8_Load3_V','B3MB_100V8_Load4_V'}, ...

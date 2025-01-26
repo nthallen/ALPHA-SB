@@ -1,4 +1,4 @@
-function pchgbmbbbmbvbf(varargin);
+function pchgbmbbbmbvbf(varargin)
 % pchgbmbbbmbvbf( [...] );
 % B3MB 100V5 Batt Fault
 h = ne_dstat({

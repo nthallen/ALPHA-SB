@@ -1,4 +1,4 @@
-function pchgpbmbsbus_28v(varargin);
+function pchgpbmbsbus_28v(varargin)
 % pchgpbmbsbus_28v( [...] );
 % B3MB Spread Bus 28V
 h = timeplot({'B3MB_28V_Bus_V_mean','B3MB_28V_Bus_V_min','B3MB_28V_Bus_V_max'}, ...

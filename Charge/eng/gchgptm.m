@@ -1,4 +1,4 @@
-function fig = gchgptm(varargin);
+function fig = gchgptm(varargin)
 % gchgptm(...)
 % T Mbase
 ffig = ne_group(varargin,'T Mbase','pchgptmtd','pchgptmcpu','pchgptmram','pchgptmd');

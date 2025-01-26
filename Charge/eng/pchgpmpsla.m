@@ -1,4 +1,4 @@
-function pchgpmpsla(varargin);
+function pchgpmpsla(varargin)
 % pchgpmpsla( [...] );
 % MPS Ld Amps
 h = timeplot({'MPSLd_I_set','MPSLd_I_disp'}, ...

@@ -1,4 +1,4 @@
-function pchgb3mb100b_b3mb_100v8_batts(varargin);
+function pchgb3mb100b_b3mb_100v8_batts(varargin)
 % pchgb3mb100b_b3mb_100v8_batts( [...] );
 % B3MB 100V8 Batt Status
 h = ne_dstat({

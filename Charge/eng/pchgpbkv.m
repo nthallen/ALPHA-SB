@@ -1,4 +1,4 @@
-function pchgpbkv(varargin);
+function pchgpbkv(varargin)
 % pchgpbkv( [...] );
 % B Kd Volts
 h = timeplot({'BKd_V_limit','BKd_V_set','BKd_V_disp'}, ...

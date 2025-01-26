@@ -1,7 +1,7 @@
 HEADER ALPHA-SB B3MB Charging Station
 MNEMONIC chg
 HOMEDIR CHARGE_DATA_DIR
-ROWS 11
+ROWS 25
 
  1 BKd_V_limit   Plots:BKd Volts
  1 MPSLd_V_limit Plots:MPSLd Volts

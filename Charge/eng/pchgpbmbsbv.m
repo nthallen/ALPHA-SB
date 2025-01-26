@@ -1,4 +1,4 @@
-function pchgpbmbsbv(varargin);
+function pchgpbmbsbv(varargin)
 % pchgpbmbsbv( [...] );
 % B3MB Spread Batt 28V
 h = timeplot({'B3MB_28V_Batt_V_mean','B3MB_28V_Batt_V_min','B3MB_28V_Batt_V_max'}, ...

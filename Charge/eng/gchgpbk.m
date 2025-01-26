@@ -1,4 +1,4 @@
-function fig = gchgpbk(varargin);
+function fig = gchgpbk(varargin)
 % gchgpbk(...)
 % B Kd
 ffig = ne_group(varargin,'B Kd','pchgpbkv','pchgpbka','pchgpbks','pchgpbkstale');

@@ -1,4 +1,4 @@
-function pchgbmbabmbvbtv(varargin);
+function pchgbmbabmbvbtv(varargin)
 % pchgbmbabmbvbtv( [...] );
 % B3MB 100V1 Batt Temp 100V1
 h = timeplot({'B3MB_100V1_T1','B3MB_100V1_T2','B3MB_100V1_T3','B3MB_100V1_T4'}, ...

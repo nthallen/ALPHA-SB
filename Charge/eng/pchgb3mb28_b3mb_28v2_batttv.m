@@ -1,4 +1,4 @@
-function pchgb3mb28_b3mb_28v2_batttv(varargin);
+function pchgb3mb28_b3mb_28v2_batttv(varargin)
 % pchgb3mb28_b3mb_28v2_batttv( [...] );
 % B3MB 28V2 Batt Temp 28V2
 h = timeplot({'B3MB_28V2_T1','B3MB_28V2_T2','B3MB_28V2_T3','B3MB_28V2_T4','B3MB_28V2_T5'}, ...

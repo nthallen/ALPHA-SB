@@ -1,4 +1,4 @@
-function fig = gchgbmbbmbvl(varargin);
+function fig = gchgbmbbmbvl(varargin)
 % gchgbmbbmbvl(...)
 % B3MB 28V1 Load
 ffig = ne_group(varargin,'B3MB 28V1 Load','pchgbmbbmbvlvv','pchgbmbbmbvlav','pchgbmbbmbvls','pchgbmbbmbvlf');

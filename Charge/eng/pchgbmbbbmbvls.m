@@ -1,4 +1,4 @@
-function pchgbmbbbmbvls(varargin);
+function pchgbmbbbmbvls(varargin)
 % pchgbmbbbmbvls( [...] );
 % B3MB 100V5 Load Status
 h = ne_dstat({

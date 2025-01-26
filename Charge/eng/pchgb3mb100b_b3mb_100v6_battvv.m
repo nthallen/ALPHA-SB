@@ -1,4 +1,4 @@
-function pchgb3mb100b_b3mb_100v6_battvv(varargin);
+function pchgb3mb100b_b3mb_100v6_battvv(varargin)
 % pchgb3mb100b_b3mb_100v6_battvv( [...] );
 % B3MB 100V6 Batt Volts 100V6
 h = timeplot({'B3MB_100V6_Batt1_V','B3MB_100V6_Bus_V'}, ...

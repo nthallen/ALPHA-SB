@@ -1,4 +1,4 @@
-function pchgpbks(varargin);
+function pchgpbks(varargin)
 % pchgpbks( [...] );
 % B Kd Status
 h = ne_dstat({

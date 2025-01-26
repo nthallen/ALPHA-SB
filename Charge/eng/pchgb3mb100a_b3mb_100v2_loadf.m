@@ -1,4 +1,4 @@
-function pchgb3mb100a_b3mb_100v2_loadf(varargin);
+function pchgb3mb100a_b3mb_100v2_loadf(varargin)
 % pchgb3mb100a_b3mb_100v2_loadf( [...] );
 % B3MB 100V2 Load Fault
 h = ne_dstat({

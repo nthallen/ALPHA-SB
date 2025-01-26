@@ -1,4 +1,4 @@
-function pchgpbka(varargin);
+function pchgpbka(varargin)
 % pchgpbka( [...] );
 % B Kd Amps
 h = timeplot({'BKd_I_set','BKd_I_disp'}, ...

@@ -1,4 +1,4 @@
-function pchgplots_b3mb_all_28bi(varargin);
+function pchgplots_b3mb_all_28bi(varargin)
 % pchgplots_b3mb_all_28bi( [...] );
 % B3MB All 28 Batt 28I
 h = timeplot({'B3MB_28V1_Batt1_I','B3MB_28V1_Batt2_I','B3MB_28V1_Batt3_I','B3MB_28V1_Batt4_I','B3MB_28V2_Batt1_I','B3MB_28V2_Batt2_I','B3MB_28V2_Batt3_I','B3MB_28V2_Batt4_I','B3MB_28V3_Batt1_I','B3MB_28V3_Batt2_I','B3MB_28V3_Batt3_I','B3MB_28V3_Batt4_I'}, ...

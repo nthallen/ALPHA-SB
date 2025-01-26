@@ -1,4 +1,4 @@
-function pchgb3mb28_b3mb_28v2_loadav(varargin);
+function pchgb3mb28_b3mb_28v2_loadav(varargin)
 % pchgb3mb28_b3mb_28v2_loadav( [...] );
 % B3MB 28V2 Load Amps 28V2
 h = timeplot({'B3MB_28V2_Load1_I','B3MB_28V2_Load2_I','B3MB_28V2_Load3_I','B3MB_28V2_Load4_I'}, ...

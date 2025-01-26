@@ -1,4 +1,4 @@
-function pchgbmbabmbvbav(varargin);
+function pchgbmbabmbvbav(varargin)
 % pchgbmbabmbvbav( [...] );
 % B3MB 100V1 Batt Amps 100V1
 h = timeplot({'B3MB_100V1_Batt1_I'}, ...

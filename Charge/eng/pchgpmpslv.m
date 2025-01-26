@@ -1,4 +1,4 @@
-function pchgpmpslv(varargin);
+function pchgpmpslv(varargin)
 % pchgpmpslv( [...] );
 % MPS Ld Volts
 h = timeplot({'MPSLd_V_limit','MPSLd_V_set','MPSLd_V_disp'}, ...

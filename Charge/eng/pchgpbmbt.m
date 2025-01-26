@@ -1,4 +1,4 @@
-function pchgpbmbt(varargin);
+function pchgpbmbt(varargin)
 % pchgpbmbt( [...] );
 % B3MB Temps
 h = timeplot({'B3MB_T_mean','B3MB_T_min','B3MB_T_max'}, ...

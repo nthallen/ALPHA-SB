@@ -1,4 +1,4 @@
-function pchgpbmbbmbv(varargin);
+function pchgpbmbbmbv(varargin)
 % pchgpbmbbmbv( [...] );
 % B3MB B3MB 28V
 h = timeplot({'B3MB_28V_Batt_V_mean','B3MB_28V_Bus_V_mean'}, ...

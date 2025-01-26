@@ -1,4 +1,4 @@
-function pchgb3mb28_b3mb_28v2_battf(varargin);
+function pchgb3mb28_b3mb_28v2_battf(varargin)
 % pchgb3mb28_b3mb_28v2_battf( [...] );
 % B3MB 28V2 Batt Fault
 h = ne_dstat({

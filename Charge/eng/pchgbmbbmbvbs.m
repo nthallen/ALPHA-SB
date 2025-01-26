@@ -1,4 +1,4 @@
-function pchgbmbbmbvbs(varargin);
+function pchgbmbbmbvbs(varargin)
 % pchgbmbbmbvbs( [...] );
 % B3MB 28V1 Batt Status
 h = ne_dstat({

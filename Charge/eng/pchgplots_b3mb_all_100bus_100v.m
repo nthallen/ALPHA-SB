@@ -1,4 +1,4 @@
-function pchgplots_b3mb_all_100bus_100v(varargin);
+function pchgplots_b3mb_all_100bus_100v(varargin)
 % pchgplots_b3mb_all_100bus_100v( [...] );
 % B3MB All 100 Bus 100V
 h = timeplot({'B3MB_100V1_Bus_V','B3MB_100V2_Bus_V','B3MB_100V3_Bus_V','B3MB_100V4_Bus_V','B3MB_100V5_Bus_V','B3MB_100V6_Bus_V','B3MB_100V7_Bus_V','B3MB_100V8_Bus_V'}, ...

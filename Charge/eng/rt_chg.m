@@ -4,7 +4,7 @@ function dfs_out = rt_chg(dfs)
 %   plots
 % dfs_out = rt_chg(dfs)
 %   Use the data_fields object and setup all the buttons for realtime plots
-if nargin < 1
+if nargin < 1 || isempty(dfs)
   dfs = data_fields('title', 'ALPHA-SB B3MB Charging Station', ...
     'Color', [.8 .8 1], ...
     'h_leading', 8, 'v_leading', 2, ...
@@ -26,8 +26,6 @@ dfs.plot('pmpslv','label','Volts','vars',{'MPSLd_V_limit','MPSLd_V_set','MPSLd_V
 dfs.plot('pmpsla','label','Amps','vars',{'MPSLd_I_set','MPSLd_I_disp'});
 dfs.plot('pmpsls','label','Status','vars',{{'name','MPSLd_SS','var_name','MPSLd_Status','bit_number',1},{'name','MPSLd_STBY','var_name','MPSLd_Status','bit_number',6},{'name','MPSLd_PWR','var_name','MPSLd_Status','bit_number',7},{'name','MPSLd_CV','var_name','MPSLd_Status','bit_number',8},{'name','MPSLd_CC','var_name','MPSLd_Status','bit_number',10},{'name','MPSLd_Output','var_name','MPSLd_Status','bit_number',13},{'name','MPSLd_Setpt','var_name','MPSLd_Status','bit_number',14}});
 dfs.plot('pmpslstale','label','Stale','vars',{'MPSLd_Stale'});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('ptm', 'label', 'T Mbase', 'plots', {'ptmtd','ptmcpu','ptmram','ptmd'});
 dfs.plot('ptmtd','label','T Drift','vars',{'SysTDrift'});
 dfs.plot('ptmcpu','label','CPU','vars',{'CPU_Pct'});
@@ -37,25 +35,21 @@ dfs.plot('pbmb', 'label', 'B3MB', 'plots', {'pbmbt','pbmbbmbv','pbmbb3mb_100v'})
 dfs.plot('pbmbt','label','Temps','vars',{'B3MB_T_mean','B3MB_T_min','B3MB_T_max'});
 dfs.plot('pbmbbmbv','label','B3MB 28V','vars',{'B3MB_28V_Batt_V_mean','B3MB_28V_Bus_V_mean'});
 dfs.plot('pbmbb3mb_100v','label','B3MB 100V','vars',{'B3MB_100V_Batt_V_mean','B3MB_100V_Bus_V_mean'});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('pbmbs', 'label', 'B3MB Spread', 'plots', {'pbmbsbv','pbmbsbus_28v','pbmbsbatt_100v','pbmbsbus_100v'});
 dfs.plot('pbmbsbv','label','Batt 28V','vars',{'B3MB_28V_Batt_V_mean','B3MB_28V_Batt_V_min','B3MB_28V_Batt_V_max'});
 dfs.plot('pbmbsbus_28v','label','Bus 28V','vars',{'B3MB_28V_Bus_V_mean','B3MB_28V_Bus_V_min','B3MB_28V_Bus_V_max'});
 dfs.plot('pbmbsbatt_100v','label','Batt 100V','vars',{'B3MB_100V_Batt_V_mean','B3MB_100V_Batt_V_min','B3MB_100V_Batt_V_max'});
 dfs.plot('pbmbsbus_100v','label','Bus 100V','vars',{'B3MB_100V_Bus_V_mean','B3MB_100V_Bus_V_min','B3MB_100V_Bus_V_max'});
-dfs.plot('pbmba', 'label', 'B3MB All', 'plots', {'pbmbat'});
-dfs.plot('pbmbat','label','Temps','vars',{'B3MB_100V1_T1','B3MB_100V1_T2','B3MB_100V1_T3','B3MB_100V1_T4','B3MB_100V2_T1','B3MB_100V2_T2','B3MB_100V2_T3','B3MB_100V2_T4','B3MB_100V3_T1','B3MB_100V3_T2','B3MB_100V3_T3','B3MB_100V3_T4','B3MB_100V4_T1','B3MB_100V4_T2','B3MB_100V4_T3','B3MB_100V4_T4','B3MB_100V5_T2','B3MB_100V6_T1','B3MB_100V7_T1','B3MB_100V8_T1','B3MB_28V1_T1','B3MB_28V1_T2','B3MB_28V1_T3','B3MB_28V1_T4','B3MB_28V2_T1','B3MB_28V2_T2','B3MB_28V2_T3','B3MB_28V2_T4','B3MB_28V2_T5','B3MB_28V3_T1','B3MB_28V3_T2','B3MB_28V3_T3','B3MB_28V3_T4'});
 dfs.end_col;
 dfs.start_col;
+dfs.plot('pbmba', 'label', 'B3MB All', 'plots', {'pbmbat'});
+dfs.plot('pbmbat','label','Temps','vars',{'B3MB_100V1_T1','B3MB_100V1_T2','B3MB_100V1_T3','B3MB_100V1_T4','B3MB_100V2_T1','B3MB_100V2_T2','B3MB_100V2_T3','B3MB_100V2_T4','B3MB_100V3_T1','B3MB_100V3_T2','B3MB_100V3_T3','B3MB_100V3_T4','B3MB_100V4_T1','B3MB_100V4_T2','B3MB_100V4_T3','B3MB_100V4_T4','B3MB_100V5_T2','B3MB_100V6_T1','B3MB_100V7_T1','B3MB_100V8_T1','B3MB_28V1_T1','B3MB_28V1_T2','B3MB_28V1_T3','B3MB_28V1_T4','B3MB_28V2_T1','B3MB_28V2_T2','B3MB_28V2_T3','B3MB_28V2_T4','B3MB_28V2_T5','B3MB_28V3_T1','B3MB_28V3_T2','B3MB_28V3_T3','B3MB_28V3_T4'});
 dfs.plot('plots_b3mb_all_28', 'label', 'B3MB All 28', 'plots', {'plots_b3mb_all_28bv','plots_b3mb_all_28bi','plots_b3mb_all_28bus_28v','plots_b3mb_all_28lv','plots_b3mb_all_28li'});
 dfs.plot('plots_b3mb_all_28bv','label','Batt 28V','vars',{'B3MB_28V1_Batt1_V','B3MB_28V1_Batt2_V','B3MB_28V1_Batt3_V','B3MB_28V1_Batt4_V','B3MB_28V2_Batt1_V','B3MB_28V2_Batt2_V','B3MB_28V2_Batt3_V','B3MB_28V2_Batt4_V','B3MB_28V3_Batt1_V','B3MB_28V3_Batt2_V','B3MB_28V3_Batt3_V','B3MB_28V3_Batt4_V'});
 dfs.plot('plots_b3mb_all_28bi','label','Batt 28I','vars',{'B3MB_28V1_Batt1_I','B3MB_28V1_Batt2_I','B3MB_28V1_Batt3_I','B3MB_28V1_Batt4_I','B3MB_28V2_Batt1_I','B3MB_28V2_Batt2_I','B3MB_28V2_Batt3_I','B3MB_28V2_Batt4_I','B3MB_28V3_Batt1_I','B3MB_28V3_Batt2_I','B3MB_28V3_Batt3_I','B3MB_28V3_Batt4_I'});
 dfs.plot('plots_b3mb_all_28bus_28v','label','Bus 28V','vars',{'B3MB_28V1_Bus_V','B3MB_28V2_Bus_V','B3MB_28V3_Bus_V'});
 dfs.plot('plots_b3mb_all_28lv','label','Load 28V','vars',{'B3MB_28V1_Load1_V','B3MB_28V1_Load2_V','B3MB_28V1_Load3_V','B3MB_28V1_Load4_V','B3MB_28V2_Load1_V','B3MB_28V2_Load2_V','B3MB_28V2_Load3_V','B3MB_28V2_Load4_V','B3MB_28V3_Load1_V','B3MB_28V3_Load2_V','B3MB_28V3_Load3_V','B3MB_28V3_Load4_V'});
 dfs.plot('plots_b3mb_all_28li','label','Load 28I','vars',{'B3MB_28V1_Load1_I','B3MB_28V1_Load2_I','B3MB_28V1_Load3_I','B3MB_28V1_Load4_I','B3MB_28V2_Load1_I','B3MB_28V2_Load2_I','B3MB_28V2_Load3_I','B3MB_28V2_Load4_I','B3MB_28V3_Load1_I','B3MB_28V3_Load2_I','B3MB_28V3_Load3_I','B3MB_28V3_Load4_I'});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('plots_b3mb_all_100', 'label', 'B3MB All 100', 'plots', {'plots_b3mb_all_100bv','plots_b3mb_all_100bi','plots_b3mb_all_100bus_100v','plots_b3mb_all_100lv','plots_b3mb_all_100li'});
 dfs.plot('plots_b3mb_all_100bv','label','Batt 100V','vars',{'B3MB_100V1_Batt1_V','B3MB_100V2_Batt1_V','B3MB_100V3_Batt1_V','B3MB_100V4_Batt1_V','B3MB_100V5_Batt1_V','B3MB_100V6_Batt1_V','B3MB_100V7_Batt1_V','B3MB_100V8_Batt1_V'});
 dfs.plot('plots_b3mb_all_100bi','label','Batt 100I','vars',{'B3MB_100V1_Batt1_I','B3MB_100V2_Batt1_I','B3MB_100V3_Batt1_I','B3MB_100V4_Batt1_I','B3MB_100V5_Batt1_I','B3MB_100V6_Batt1_I','B3MB_100V7_Batt1_I','B3MB_100V8_Batt1_I'});
@@ -76,8 +70,6 @@ dfs.plot('bmbbmbvlvv','label','Volts 28V1','vars',{'B3MB_28V1_Load1_V','B3MB_28V
 dfs.plot('bmbbmbvlav','label','Amps 28V1','vars',{'B3MB_28V1_Load1_I','B3MB_28V1_Load2_I','B3MB_28V1_Load3_I','B3MB_28V1_Load4_I'});
 dfs.plot('bmbbmbvls','label','Status','vars',{{'name','B3MB_28V1_Load1S','var_name','B3MB_28V1_Cmd_S','bit_number',4},{'name','B3MB_28V1_Load2S','var_name','B3MB_28V1_Cmd_S','bit_number',5},{'name','B3MB_28V1_Load3S','var_name','B3MB_28V1_Cmd_S','bit_number',6},{'name','B3MB_28V1_Load4S','var_name','B3MB_28V1_Cmd_S','bit_number',7}});
 dfs.plot('bmbbmbvlf','label','Fault','vars',{{'name','B3MB_28V1_Load1F','var_name','B3MB_28V1_Cmd_S','bit_number',12},{'name','B3MB_28V1_Load2F','var_name','B3MB_28V1_Cmd_S','bit_number',13},{'name','B3MB_28V1_Load3F','var_name','B3MB_28V1_Cmd_S','bit_number',14},{'name','B3MB_28V1_Load4F','var_name','B3MB_28V1_Cmd_S','bit_number',15}});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('b3mb28_b3mb_28v2_batt', 'label', 'B3MB 28V2 Batt', 'plots', {'b3mb28_b3mb_28v2_battvv','b3mb28_b3mb_28v2_battav','b3mb28_b3mb_28v2_batttv','b3mb28_b3mb_28v2_batts','b3mb28_b3mb_28v2_battf'});
 dfs.plot('b3mb28_b3mb_28v2_battvv','label','Volts 28V2','vars',{'B3MB_28V2_Batt1_V','B3MB_28V2_Batt2_V','B3MB_28V2_Batt3_V','B3MB_28V2_Batt4_V','B3MB_28V2_Bus_V'});
 dfs.plot('b3mb28_b3mb_28v2_battav','label','Amps 28V2','vars',{'B3MB_28V2_Batt1_I','B3MB_28V2_Batt2_I','B3MB_28V2_Batt3_I','B3MB_28V2_Batt4_I'});
@@ -116,8 +108,6 @@ dfs.plot('bmbabmbvlvv','label','Volts 100V1','vars',{'B3MB_100V1_Load1_V','B3MB_
 dfs.plot('bmbabmbvlav','label','Amps 100V1','vars',{'B3MB_100V1_Load1_I','B3MB_100V1_Load2_I','B3MB_100V1_Load3_I','B3MB_100V1_Load4_I'});
 dfs.plot('bmbabmbvls','label','Status','vars',{{'name','B3MB_100V1_Load1S','var_name','B3MB_100V1_Cmd_S','bit_number',4},{'name','B3MB_100V1_Load2S','var_name','B3MB_100V1_Cmd_S','bit_number',5},{'name','B3MB_100V1_Load3S','var_name','B3MB_100V1_Cmd_S','bit_number',6},{'name','B3MB_100V1_Load4S','var_name','B3MB_100V1_Cmd_S','bit_number',7}});
 dfs.plot('bmbabmbvlf','label','Fault','vars',{{'name','B3MB_100V1_Load1F','var_name','B3MB_100V1_Cmd_S','bit_number',12},{'name','B3MB_100V1_Load2F','var_name','B3MB_100V1_Cmd_S','bit_number',13},{'name','B3MB_100V1_Load3F','var_name','B3MB_100V1_Cmd_S','bit_number',14},{'name','B3MB_100V1_Load4F','var_name','B3MB_100V1_Cmd_S','bit_number',15}});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('b3mb100a_b3mb_100v2_batt', 'label', 'B3MB 100V2 Batt', 'plots', {'b3mb100a_b3mb_100v2_battvv','b3mb100a_b3mb_100v2_battav','b3mb100a_b3mb_100v2_batttv','b3mb100a_b3mb_100v2_batts','b3mb100a_b3mb_100v2_battf'});
 dfs.plot('b3mb100a_b3mb_100v2_battvv','label','Volts 100V2','vars',{'B3MB_100V2_Batt1_V','B3MB_100V2_Bus_V'});
 dfs.plot('b3mb100a_b3mb_100v2_battav','label','Amps 100V2','vars',{'B3MB_100V2_Batt1_I'});
@@ -142,8 +132,6 @@ dfs.plot('b3mb100a_b3mb_100v3_loadvv','label','Volts 100V3','vars',{'B3MB_100V3_
 dfs.plot('b3mb100a_b3mb_100v3_loadav','label','Amps 100V3','vars',{'B3MB_100V3_Load1_I','B3MB_100V3_Load2_I','B3MB_100V3_Load3_I','B3MB_100V3_Load4_I'});
 dfs.plot('b3mb100a_b3mb_100v3_loads','label','Status','vars',{{'name','B3MB_100V3_Load1S','var_name','B3MB_100V3_Cmd_S','bit_number',4},{'name','B3MB_100V3_Load2S','var_name','B3MB_100V3_Cmd_S','bit_number',5},{'name','B3MB_100V3_Load3S','var_name','B3MB_100V3_Cmd_S','bit_number',6},{'name','B3MB_100V3_Load4S','var_name','B3MB_100V3_Cmd_S','bit_number',7}});
 dfs.plot('b3mb100a_b3mb_100v3_loadf','label','Fault','vars',{{'name','B3MB_100V3_Load1F','var_name','B3MB_100V3_Cmd_S','bit_number',12},{'name','B3MB_100V3_Load2F','var_name','B3MB_100V3_Cmd_S','bit_number',13},{'name','B3MB_100V3_Load3F','var_name','B3MB_100V3_Cmd_S','bit_number',14},{'name','B3MB_100V3_Load4F','var_name','B3MB_100V3_Cmd_S','bit_number',15}});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('b3mb100a_b3mb_100v4_batt', 'label', 'B3MB 100V4 Batt', 'plots', {'b3mb100a_b3mb_100v4_battvv','b3mb100a_b3mb_100v4_battav','b3mb100a_b3mb_100v4_batttv','b3mb100a_b3mb_100v4_batts','b3mb100a_b3mb_100v4_battf'});
 dfs.plot('b3mb100a_b3mb_100v4_battvv','label','Volts 100V4','vars',{'B3MB_100V4_Batt1_V','B3MB_100V4_Bus_V'});
 dfs.plot('b3mb100a_b3mb_100v4_battav','label','Amps 100V4','vars',{'B3MB_100V4_Batt1_I'});
@@ -169,8 +157,6 @@ dfs.plot('bmbbbmbvlvv','label','Volts 100V5','vars',{'B3MB_100V5_Load1_V','B3MB_
 dfs.plot('bmbbbmbvlav','label','Amps 100V5','vars',{'B3MB_100V5_Load1_I','B3MB_100V5_Load2_I','B3MB_100V5_Load3_I','B3MB_100V5_Load4_I'});
 dfs.plot('bmbbbmbvls','label','Status','vars',{{'name','B3MB_100V5_Load1S','var_name','B3MB_100V5_Cmd_S','bit_number',4},{'name','B3MB_100V5_Load2S','var_name','B3MB_100V5_Cmd_S','bit_number',5},{'name','B3MB_100V5_Load3S','var_name','B3MB_100V5_Cmd_S','bit_number',6},{'name','B3MB_100V5_Load4S','var_name','B3MB_100V5_Cmd_S','bit_number',7}});
 dfs.plot('bmbbbmbvlf','label','Fault','vars',{{'name','B3MB_100V5_Load1F','var_name','B3MB_100V5_Cmd_S','bit_number',12},{'name','B3MB_100V5_Load2F','var_name','B3MB_100V5_Cmd_S','bit_number',13},{'name','B3MB_100V5_Load3F','var_name','B3MB_100V5_Cmd_S','bit_number',14},{'name','B3MB_100V5_Load4F','var_name','B3MB_100V5_Cmd_S','bit_number',15}});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('b3mb100b_b3mb_100v6_batt', 'label', 'B3MB 100V6 Batt', 'plots', {'b3mb100b_b3mb_100v6_battvv','b3mb100b_b3mb_100v6_battav','b3mb100b_b3mb_100v6_batttv','b3mb100b_b3mb_100v6_batts','b3mb100b_b3mb_100v6_battf'});
 dfs.plot('b3mb100b_b3mb_100v6_battvv','label','Volts 100V6','vars',{'B3MB_100V6_Batt1_V','B3MB_100V6_Bus_V'});
 dfs.plot('b3mb100b_b3mb_100v6_battav','label','Amps 100V6','vars',{'B3MB_100V6_Batt1_I'});
@@ -195,8 +181,6 @@ dfs.plot('b3mb100b_b3mb_100v7_loadvv','label','Volts 100V7','vars',{'B3MB_100V7_
 dfs.plot('b3mb100b_b3mb_100v7_loadav','label','Amps 100V7','vars',{'B3MB_100V7_Load1_I','B3MB_100V7_Load2_I','B3MB_100V7_Load3_I','B3MB_100V7_Load4_I'});
 dfs.plot('b3mb100b_b3mb_100v7_loads','label','Status','vars',{{'name','B3MB_100V7_Load1S','var_name','B3MB_100V7_Cmd_S','bit_number',4},{'name','B3MB_100V7_Load2S','var_name','B3MB_100V7_Cmd_S','bit_number',5},{'name','B3MB_100V7_Load3S','var_name','B3MB_100V7_Cmd_S','bit_number',6},{'name','B3MB_100V7_Load4S','var_name','B3MB_100V7_Cmd_S','bit_number',7}});
 dfs.plot('b3mb100b_b3mb_100v7_loadf','label','Fault','vars',{{'name','B3MB_100V7_Load1F','var_name','B3MB_100V7_Cmd_S','bit_number',12},{'name','B3MB_100V7_Load2F','var_name','B3MB_100V7_Cmd_S','bit_number',13},{'name','B3MB_100V7_Load3F','var_name','B3MB_100V7_Cmd_S','bit_number',14},{'name','B3MB_100V7_Load4F','var_name','B3MB_100V7_Cmd_S','bit_number',15}});
-dfs.end_col;
-dfs.start_col;
 dfs.plot('b3mb100b_b3mb_100v8_batt', 'label', 'B3MB 100V8 Batt', 'plots', {'b3mb100b_b3mb_100v8_battvv','b3mb100b_b3mb_100v8_battav','b3mb100b_b3mb_100v8_batttv','b3mb100b_b3mb_100v8_batts','b3mb100b_b3mb_100v8_battf'});
 dfs.plot('b3mb100b_b3mb_100v8_battvv','label','Volts 100V8','vars',{'B3MB_100V8_Batt1_V','B3MB_100V8_Bus_V'});
 dfs.plot('b3mb100b_b3mb_100v8_battav','label','Amps 100V8','vars',{'B3MB_100V8_Batt1_I'});
@@ -210,8 +194,9 @@ dfs.plot('b3mb100b_b3mb_100v8_loads','label','Status','vars',{{'name','B3MB_100V
 dfs.plot('b3mb100b_b3mb_100v8_loadf','label','Fault','vars',{{'name','B3MB_100V8_Load1F','var_name','B3MB_100V8_Cmd_S','bit_number',12},{'name','B3MB_100V8_Load2F','var_name','B3MB_100V8_Cmd_S','bit_number',13},{'name','B3MB_100V8_Load3F','var_name','B3MB_100V8_Cmd_S','bit_number',14},{'name','B3MB_100V8_Load4F','var_name','B3MB_100V8_Cmd_S','bit_number',15}});
 dfs.end_tab;
 dfs.end_col;
-dfs.resize(context_level);
 dfs.set_connection('127.0.0.1', 1080);
 if nargout > 0
   dfs_out = dfs;
+else
+  dfs.resize(context_level);
 end

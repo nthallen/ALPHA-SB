@@ -1,4 +1,4 @@
-function fig = gchgb3mb100a_b3mb_100v2_load(varargin);
+function fig = gchgb3mb100a_b3mb_100v2_load(varargin)
 % gchgb3mb100a_b3mb_100v2_load(...)
 % B3MB 100V2 Load
 ffig = ne_group(varargin,'B3MB 100V2 Load','pchgb3mb100a_b3mb_100v2_loadvv','pchgb3mb100a_b3mb_100v2_loadav','pchgb3mb100a_b3mb_100v2_loads','pchgb3mb100a_b3mb_100v2_loadf');

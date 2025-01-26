@@ -1,4 +1,4 @@
-function pchgb3mb28_b3mb_28v3_loadf(varargin);
+function pchgb3mb28_b3mb_28v3_loadf(varargin)
 % pchgb3mb28_b3mb_28v3_loadf( [...] );
 % B3MB 28V3 Load Fault
 h = ne_dstat({

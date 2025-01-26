@@ -1,4 +1,4 @@
-function pchgb3mb100b_b3mb_100v7_loadav(varargin);
+function pchgb3mb100b_b3mb_100v7_loadav(varargin)
 % pchgb3mb100b_b3mb_100v7_loadav( [...] );
 % B3MB 100V7 Load Amps 100V7
 h = timeplot({'B3MB_100V7_Load1_I','B3MB_100V7_Load2_I','B3MB_100V7_Load3_I','B3MB_100V7_Load4_I'}, ...

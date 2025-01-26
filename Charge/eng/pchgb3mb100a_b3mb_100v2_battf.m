@@ -1,4 +1,4 @@
-function pchgb3mb100a_b3mb_100v2_battf(varargin);
+function pchgb3mb100a_b3mb_100v2_battf(varargin)
 % pchgb3mb100a_b3mb_100v2_battf( [...] );
 % B3MB 100V2 Batt Fault
 h = ne_dstat({

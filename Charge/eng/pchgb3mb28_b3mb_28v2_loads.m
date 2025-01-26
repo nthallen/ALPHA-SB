@@ -1,4 +1,4 @@
-function pchgb3mb28_b3mb_28v2_loads(varargin);
+function pchgb3mb28_b3mb_28v2_loads(varargin)
 % pchgb3mb28_b3mb_28v2_loads( [...] );
 % B3MB 28V2 Load Status
 h = ne_dstat({
